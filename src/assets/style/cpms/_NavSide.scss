@@ -1,2 +1,9 @@
 .nav-side {
+    background-color: blue;
+    width: 25vw;
+
+    @include for-narrow-layout {
+        // background-color: yellow;
+        display: none;
+    }
 }

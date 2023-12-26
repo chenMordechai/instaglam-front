@@ -1,35 +1,32 @@
 /* Media queries Breakpoint mixins */
 
+// 0 - 700
 @mixin for-mobile-layout {
     @media (max-width: $break-narrow) {
         @content;
     }
 }
 
+// 700 - 1000 (normal)
 @mixin for-narrow-layout {
-    @media (min-width: $break-narrow) {
+    @media (max-width: $break-normal) {
         @content;
     }
 }
 
+// 1000 - 1920 (wide)
 @mixin for-normal-layout {
     @media (min-width: $break-normal) {
         @content;
     }
 }
 
+// 1920 -
 @mixin for-wide-layout {
     @media (min-width: $break-wide) {
         @content;
     }
 }
-
-// @mixin layoutGTC($max) {
-//     grid-template-columns:
-//         minmax($layoutPadding, 1fr)
-//         minmax(auto, $max)
-//         minmax($layoutPadding, 1fr);
-// }
 
 /* Media  Mixins */
 
@@ -99,60 +96,38 @@
 // Buttons
 
 @mixin btn($type: regular) {
-    display: inline-flex;
-    align-items: center;
-    gap: $pad1;
-    text-decoration: none;
-    // text-transform: uppercase;
-    line-height: 1.25;
-    font-size: em(16px);
-    border: none;
-    cursor: pointer;
+    // display: inline-flex;
+    // align-items: center;
+    // gap: $pad1;
+    // text-decoration: none;
+    // // text-transform: uppercase;
+    // line-height: 1.25;
+    // font-size: em(16px);
+    // border: none;
+    // cursor: pointer;
 
-    transition: background-color 0.2s;
+    // transition: background-color 0.2s;
 
-    @if $type == dark {
-        background-color: $clr6;
-        color: $clr1;
-        border-radius: 10px;
-        padding: 10px 20px;
-        // &:hover {
-        //     background-color: $clr1;
-        //     color: $clr3;
-        // }
-    } @else if $type == light {
-        background-color: transparent;
-        color: $clr7;
-        border: 1px solid $clr7;
-        border-radius: 30px;
-        padding: 6px;
-        // background-color: red;
-        // color: $clr2;
-        // &:hover {
-        //     background-color: $clr1;
-        //     color: $clr3;
-        // }
-    }
+    // @if $type == dark {
+    //     background-color: $clr6;
+    //     color: $clr1;
+    //     border-radius: 10px;
+    //     padding: 10px 20px;
+    //     // &:hover {
+    //     //     background-color: $clr1;
+    //     //     color: $clr3;
+    //     // }
+    // } @else if $type == light {
+    //     background-color: transparent;
+    //     color: $clr7;
+    //     border: 1px solid $clr7;
+    //     border-radius: 30px;
+    //     padding: 6px;
+    //     // background-color: red;
+    //     // color: $clr2;
+    //     // &:hover {
+    //     //     background-color: $clr1;
+    //     //     color: $clr3;
+    //     // }
+    // }
 }
-
-// Type
-
-// @mixin type($type: bold) {
-//     // type options:
-//     // 1.bold
-//     // 2.boldCondensed
-//     // 3.condensed
-//     @if $type == bold {
-//         font-variation-settings: "wght" 430;
-//     } @else if $type == boldCondensed {
-//         font-variation-settings:
-//             "wght" 430,
-//             "wdth" 80;
-//         letter-spacing: em(6.72px);
-//     } @else if $type == condensed {
-//         font-variation-settings: "wdth" 80;
-//         letter-spacing: em(6.72px);
-//     } @else if $type == light {
-//         font-variation-settings: "wght" 200;
-//     }
-// }

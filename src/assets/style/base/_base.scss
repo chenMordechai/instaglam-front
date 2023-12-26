@@ -1,6 +1,6 @@
 ::selection {
-  background-color: $clr1;
-  color: $clr3;
+  // background-color: $clr1;
+  // color: $clr3;
 }
 
 * {
@@ -9,7 +9,6 @@
 
 html {
   font-family: Bahnschrift, sans-serif;
-  color: $clr5;
   line-height: 1.8;
   line-height: lh(26px);
 
@@ -28,7 +27,7 @@ html {
 
 body {
   margin: 0;
-  background-color: $clr3;
+  background-color: $clr-white;
 
   // @include for-normal-layout {
   //   &.sidebar-open {
@@ -44,9 +43,9 @@ h4,
 h5,
 h6 {
   font-weight: 500;
-  margin: 0 0;
+  margin: 0;
   line-height: lh(40px, 29px);
-  color: $clr7;
+  color: $clr-black;
 }
 
 h1 {
@@ -54,19 +53,11 @@ h1 {
 }
 
 h2 {
-  // font-size: em(16px);
-  // margin: em(63px) 0;
-  // grid-area: title;
-  // text-transform: uppercase;
-  // @include type(boldCondensed);
-}
-
-h3 {
-  font-size: em(29px);
+  font-size: em(20px);
 }
 
 img {
-  width: 100%;
+  // width: 100%;
 }
 
 p {
@@ -78,27 +69,28 @@ button {
 }
 
 .btn {
-  @include btn;
+  // @include btn;
 
-  &.dark {
-    @include btn($type: dark);
-  }
+  // &.dark {
+  //   @include btn($type: dark);
+  // }
 
-  &.light {
-    @include btn($type: light);
-  }
+  // &.light {
+  //   @include btn($type: light);
+  // }
 }
 
 // links
 a {
-  color: darken($clr5, 10%);
   text-decoration: none;
-  font-size: 1.3rem;
+  // color: darken($clr5, 10%);
+  // text-decoration: none;
+  // font-size: 1.3rem;
 
-  &.active {
-    text-decoration: underline;
-    color: $clr6;
-  }
+  // &.active {
+  //   text-decoration: underline;
+  //   color: $clr6;
+  // }
 }
 ul {
   padding: 0;

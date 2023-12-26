@@ -1,2 +1,9 @@
 .nav-links {
+    background-color: red;
+    width: 20vw;
+
+    @include for-narrow-layout {
+        background-color: yellow;
+        // display: none;
+    }
 }

@@ -1,24 +1,24 @@
 // COLOR PALETTE
-$clr1: rgb(255 255 255);
-$clr2: rgb(243 244 244);
-$clr3: rgb(209 211 216);
-$clr4: rgb(242 249 255);
-$clr5: rgb(178 178 178);
-$clr6: rgb(5 5 5);
-$clr7: rgb(17 39 227);
-$clr-success: rgb(66, 227, 17);
-$clr-danger: rgb(227, 45, 17);
+$clr-white: #ffffff;
+$clr-black: #000000;
+$clr-grey1: #efefef;
+$clr-grey2: #dbdbdb;
+$clr-grey3: #a3a3a3;
+
+$gradient: linear-gradient(115deg, rgb(249, 206, 52), rgb(238, 42, 123), rgb(98, 40, 215));
+
+// $clr-success: rgb(66, 227, 17);
+// $clr-danger: rgb(227, 45, 17);
 // $clr4: darken($clr3, 40%);
 
 // LAYOUT
 $pad1: 10px;
 $pad2: 15px;
 $pad3: 25px;
-// $layoutPadding: 20px;
 
 // LAYOUT BREAKPOINTS
 $break-narrow: 700px;
-$break-normal: 1360px;
+$break-normal: 1000px;
 $break-wide: 1920px;
 
 // $padded-break-narrow: $break-narrow + $layoutPadding * 2;
