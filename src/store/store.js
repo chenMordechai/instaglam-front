@@ -3,6 +3,7 @@ import { combineReducers, compose, legacy_createStore as createStore } from "red
 import { userReducer } from "./reducers/user.reducer.js"
 import { postReducer } from "./reducers/post.reducer.js"
 import { msgReducer } from "./reducers/msg.reducer.js"
+import { storyReducer } from "./reducers/story.reducer.js"
 
 
 
