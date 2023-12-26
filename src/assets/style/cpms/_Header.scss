@@ -1,0 +1,12 @@
+.header {
+    background-color: purple;
+    display: none;
+
+    @include for-mobile-layout {
+        display: block;
+        position: sticky;
+        top: 0;
+        height: 70px;
+        width: 100vw;
+    }
+}

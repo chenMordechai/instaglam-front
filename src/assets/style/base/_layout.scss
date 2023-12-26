@@ -2,12 +2,22 @@
   display: flex;
   height: 100vh;
 
+  @include for-mobile-layout {
+    flex-direction: column;
+  }
+
   main {
     width: 55vw;
     background-color: pink;
-    // min-height: calc(100vh - 70px);
-    // padding: $pad1;
-    // padding-top: 0;
+
+    @include for-narrow-layout {
+      width: calc(100vw - 80px);
+    }
+
+    @include for-mobile-layout {
+      width: 100vw;
+      height: 100%;
+    }
   }
 
   // .screen {

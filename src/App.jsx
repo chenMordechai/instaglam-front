@@ -8,6 +8,7 @@ import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { NavLinks } from './cpms/NavLinks'
 import { NavSide } from './cpms/NavSide'
+import { Header } from './cpms/Header'
 
 
 export function App() {
@@ -16,6 +17,7 @@ export function App() {
     <Provider store={store}>
       <Router>
         <section className="main-layout">
+          <Header />
           <NavLinks />
           <main>
             <Routes>
