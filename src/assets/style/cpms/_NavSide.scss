@@ -1,9 +1,16 @@
 .nav-side {
-    background-color: blue;
+    // background-color: blue;
     width: 25vw;
+    padding: $pad3;
+    padding-top: 50px;
+    @include flex(column, start, start, $pad2);
 
     @include for-narrow-layout {
         // background-color: yellow;
         display: none;
+    }
+
+    div {
+        @include flex(row, center, space-between);
     }
 }
