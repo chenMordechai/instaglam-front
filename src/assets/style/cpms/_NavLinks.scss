@@ -1,18 +1,21 @@
 .nav-links {
     // background-color: red;
     width: 20vw;
-
-    @include flex(column, center, space-between);
-    padding: $pad1;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    @include flex(column, end, space-between);
+    padding: $pad2;
 
     @include for-narrow-layout {
-        // background-color: yellow;
-        // display: none;
+        @include flex(column, center, space-between);
+        span {
+            display: none;
+        }
         width: 80px;
     }
 
     @include for-mobile-layout {
-        // background-color: rgb(43, 0, 255);
         position: fixed;
         bottom: 0;
         width: 100vw;
@@ -20,30 +23,63 @@
     }
 
     a {
-        color: $clr-black;
-        @include flex(row, center, center);
+        @include flex(row, center, start, $pad2);
+        width: 100%;
+        padding: $pad1;
 
-        height: 48px;
-        width: 48px;
+        @include for-narrow-layout {
+            height: 48px;
+            width: 48px;
+            justify-content: center;
+        }
+
+        color: $clr-black;
         border-radius: 5px;
-        transition: 0.5s;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &.disable {
+            cursor: not-allowed;
+        }
 
         &:first-child {
             margin: 20px 0;
+            // height: 40px;
+            img.icon {
+                display: none;
+                @include for-narrow-layout {
+                    display: inline-block;
+                }
+            }
+            img.logo {
+                display: inline-block;
+                @include for-narrow-layout {
+                    display: none;
+                }
+            }
         }
 
         img {
             height: 28px;
             filter: grayscale(1);
             transition: 0.4s;
+
+            &.logo {
+                height: 38px;
+            }
         }
 
-        &:hover {
+        &:hover:not(:first-child, .active) {
             background-color: $clr-grey1;
             // background-color: red;
-            img {
+            img:not(.logo) {
                 scale: 1.1;
             }
+        }
+
+        &.active {
+            background-color: $clr-grey1;
+            font-weight: 700;
         }
     }
 }

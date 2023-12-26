@@ -1,6 +1,6 @@
 .main-layout {
   display: flex;
-  height: 100vh;
+  // height: 100vh;
 
   @include for-mobile-layout {
     flex-direction: column;

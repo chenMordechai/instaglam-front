@@ -9,14 +9,15 @@
 
 html {
   font-family: Bahnschrift, sans-serif;
-  line-height: 1.8;
+  // line-height: 1.8;
   line-height: lh(26px);
+  font-weight: 320;
+  font-size: 18px;
 
   // @media (max-width: 1300px) {
   //   font-size: 13px;
   // }
   // @media (min-width: 1300px) {
-  font-size: 13px;
   // }
   // @media (max-width: 700px) {
   //   font-size: 11px;
