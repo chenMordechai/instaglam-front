@@ -1,6 +1,10 @@
 .nav-links {
     background-color: red;
     width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $pad2;
 
     @include for-narrow-layout {
         background-color: yellow;
