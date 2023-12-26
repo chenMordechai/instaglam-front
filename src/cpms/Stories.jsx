@@ -2,10 +2,13 @@ import { Story } from "./Story";
 
 
 export function Stories() {
+    const stories = [{},{},{},{}]
     return (
         <section className="stories">
             <h1>Stories</h1>
-            <Story/>
+            {stories.forEach(story => {
+                <Story/>
+            })}
         </section>
     )
 }

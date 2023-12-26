@@ -1,12 +1,26 @@
 .header {
-    background-color: purple;
+    // background-color: purple;
     display: none;
 
     @include for-mobile-layout {
         display: block;
         position: sticky;
         top: 0;
-        height: 70px;
-        width: 100vw;
+        height: 55px;
+        width: 100%;
+
+        @include flex(row, center, space-between);
+
+        img {
+            height: 25px;
+            margin-right: 10px;
+            &.logo {
+                height: 30px;
+            }
+        }
+
+        section {
+            @include flex(row, center, center, $pad1);
+        }
     }
 }

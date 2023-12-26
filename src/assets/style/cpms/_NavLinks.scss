@@ -17,15 +17,19 @@
 
     @include for-mobile-layout {
         position: fixed;
-        bottom: 0;
-        width: 100vw;
-        height: 50px;
+        flex-direction: row;
+        width: 100%;
+        background-color: $clr-white;
+        height: 55px;
+        top: calc(100vh - 55px);
     }
 
     a {
-        @include flex(row, center, start, $pad2);
         width: 100%;
         padding: $pad1;
+        color: $clr-black;
+        border-radius: 5px;
+        transition: 0.3s;
 
         @include for-narrow-layout {
             height: 48px;
@@ -33,10 +37,17 @@
             justify-content: center;
         }
 
-        color: $clr-black;
-        border-radius: 5px;
-        transition: 0.3s;
-        cursor: pointer;
+        @include for-mobile-layout {
+            &.not-mobile {
+                display: none;
+            }
+            &[title="Reels"] {
+                order: 1;
+            }
+            &[title="Profile"] {
+                order: 2;
+            }
+        }
 
         &.disable {
             cursor: not-allowed;
@@ -61,6 +72,9 @@
 
         img {
             height: 28px;
+            @include for-mobile-layout {
+                height: 25px;
+            }
             filter: grayscale(1);
             transition: 0.4s;
 
