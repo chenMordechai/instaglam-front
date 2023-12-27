@@ -1,4 +1,11 @@
 .post {
     // width: 75%;
     // border: 1px solid black;
+    padding-bottom: $pad2;
+    border-bottom: 1px solid $clr-grey2;
+
+    @include for-mobile-layout {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
 }

@@ -1,4 +1,5 @@
 .post-controls {
+    padding: 0 10px;
     .btns-container {
         @include flex(row, center, space-between);
         margin: 10px 0;

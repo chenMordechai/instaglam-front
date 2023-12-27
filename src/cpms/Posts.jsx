@@ -2,7 +2,8 @@ import { Post } from "./Post";
 
 
 export function Posts() {
-    const posts = [{ _id: '2398', name: 'moshe', title: 'lala naa', profileImg: '', media: '', likesNumber: 260, comments: ['lala', 'jaja', 'baba'], date: 'now', description:'mfwledjw feijf dwkfj 😋 !!!' }]
+    const posts = [{ _id: '2398', name: 'moshe', title: 'lala naa', profileImg: '', media: '', likesNumber: 260, comments: ['lala', 'jaja', 'baba'], date: 'now', description:'mfwledjw feijf dwkfj 😋 !!!' },
+    { _id: '2798', name: 'moshe', title: 'lala naa', profileImg: '', media: '', likesNumber: 260, comments: ['lala', 'jaja', 'baba'], date: 'now', description:'mfwledjw feijf dwkfj 😋 !!!' }]
     return (
         <section className="posts">
             <ul className="posts-container">
