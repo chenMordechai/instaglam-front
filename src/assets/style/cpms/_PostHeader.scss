@@ -1,8 +1,36 @@
 .post-header {
-    height: 100px;
+    @include flex(row, center, space-between);
+    padding: $pad1 0;
 
-    div.img-container {
-        height: 50px;
-        width: 50px;
+    @include for-mobile-layout {
+        padding: $pad1;
+    }
+    .user-info-container {
+        @include flex(row, center, start, $pad1);
+
+        div.img-container {
+            height: 50px;
+            width: 50px;
+        }
+
+        div.text-container {
+            height: 28px;
+            div.name-comtainer {
+                @include flex(row, center, start, 7px);
+                height: 10px;
+                img {
+                    height: 4px;
+                    width: 4px;
+                    filter: contrast(0);
+                }
+                span {
+                    color: $clr-grey3;
+                }
+            }
+            span.more-info {
+                font-size: 0.8em;
+                font-weight: 200;
+            }
+        }
     }
 }

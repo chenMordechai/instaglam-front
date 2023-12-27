@@ -1,17 +1,24 @@
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import { Img } from './Img'
+import circle from '../assets/icons/circle-solid.svg'
+
 
 export function PostHeader({ name, title, img, date }) {
     return (
         <section className="post-header">
-            {/* <div className="gradient">
-                <img src="https://cdn.pixabay.com/photo/2020/10/11/19/51/cat-5646889_1280.jpg" />
-            </div> */}
-            <div className="img-container">
-                <Img />
+            <div className="user-info-container">
+                <div className="img-container">
+                    <Img />
+                </div>
+                <div className="text-container">
+                    <div className="name-comtainer">
+                        <h3>{name}</h3>
+                        <img src={circle} />
+                        <span>{date}</span>
+                    </div>
+                    <span className='more-info'>{title}</span>
+                </div>
             </div>
-            <h3>{name} <span>{date}</span></h3>
-            <span>{title}</span>
             <button>
                 <img src={ellipsis} />
             </button>
