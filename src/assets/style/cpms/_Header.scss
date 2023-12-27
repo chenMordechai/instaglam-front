@@ -3,11 +3,13 @@
     display: none;
 
     @include for-mobile-layout {
+        background-color: $clr-white;
         display: block;
         position: sticky;
         top: 0;
         height: 55px;
         width: 100%;
+        z-index: 1;
 
         @include flex(row, center, space-between);
 
