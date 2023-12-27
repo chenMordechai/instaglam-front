@@ -20,10 +20,12 @@ export function App() {
           <Header />
           <NavLinks />
           <main>
+            <div className="main-container">
             <Routes>
               <Route element={<Home />} path="/" />
               <Route element={<Profile />} path="/profile" />
             </Routes>
+            </div>
           </main>
           <NavSide />
         </section>
