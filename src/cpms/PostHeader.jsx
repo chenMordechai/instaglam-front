@@ -11,12 +11,12 @@ export function PostHeader({ name, title, img, date }) {
                     <Img />
                 </div>
                 <div className="text-container">
-                    <div className="name-comtainer">
+                    {/* <div className="name-comtainer"> */}
                         <h3>{name}</h3>
                         <img src={circle} />
                         <span>{date}</span>
-                    </div>
-                    <span className='more-info'>{title}</span>
+                    {/* </div> */}
+                    {/* <span className='more-info'>{title}</span> */}
                 </div>
             </div>
             <button>
