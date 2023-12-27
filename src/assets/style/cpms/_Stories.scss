@@ -38,9 +38,18 @@
             justify-items: center;
             gap: 15px;
             overflow: hidden;
+            scroll-behavior: smooth;
 
             @include for-mobile-layout {
                 grid-auto-columns: calc((100% / 4) - 10px);
+            }
+
+            &.dragging {
+                // scroll-snap-type: none;
+                scroll-behavior: auto;
+                .card {
+                    user-select: none;
+                }
             }
         }
     }
