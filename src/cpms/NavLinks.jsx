@@ -1,4 +1,4 @@
-import { NavLink , Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import instagram from '../assets/icons/instagram.svg'
 import compass from '../assets/icons/compass-regular.svg'
@@ -17,45 +17,45 @@ export function NavLinks() {
 
         <section className="nav-links">
             <Link to={'/'} title="Instaglam" className="not-mobile">
-            <img className="icon" src={instagram} />
-            <img className="logo" src={logo} />
+                <img className="icon" src={instagram} />
+                <img className="logo" src={logo} />
             </Link>
             <NavLink to={'/'} title="Home" >
-            <img src={house} />
-            <span>Home</span>
+                <img src={house} />
+                <span>Home</span>
             </NavLink>
             <a className="disable" title="Search" >
-            <img src={glass} />
-            <span>Search</span>
+                <img src={glass} />
+                <span>Search</span>
             </a>
             <a className="disable not-mobile" title="Explore" >
-            <img src={compass} />
-            <span>Explore</span>
+                <img src={compass} />
+                <span>Explore</span>
             </a>
             <a className="disable" title="Reels" >
-            <img src={film} />
-            <span>Reels</span>
+                <img src={film} />
+                <span>Reels</span>
             </a>
             <a className="disable not-mobile" title="Messages"  >
-            <img src={message} />
-            <span>Messages</span>
+                <img src={message} />
+                <span>Messages</span>
             </a>
             <a className="disable not-mobile" title="Notifications" >
-            <img src={heart} />
-            <span>Notifications</span>
+                <img src={heart} />
+                <span>Notifications</span>
             </a>
             <a className="disable" title="New Post" >
-            <img src={plus} />
-            <span>Create</span>
+                <img src={plus} />
+                <span>Create</span>
             </a>
             <NavLink to={'/profile'} title="Profile">
-            {/* <span>img</span> */}
-            <span>Profile</span>
+                {/* <span>img</span> */}
+                <span>Profile</span>
             </NavLink>
-            <a className="disable" title="More" className="not-mobile" >
-            <img src={bars} />
-            <span>More</span>
-            </a>               
+            <a className="disable not-mobile" title="More"  >
+                <img src={bars} />
+                <span>More</span>
+            </a>
         </section>
     )
 }

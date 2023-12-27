@@ -1,4 +1,11 @@
 .posts {
-    background-color: red;
-    min-height: 100vh;
+    margin-top: 30px;
+    ul.posts-container {
+        width: 100%;
+        @include flex(column, center, start, $pad1);
+
+        li {
+            width: 75%;
+        }
+    }
 }
