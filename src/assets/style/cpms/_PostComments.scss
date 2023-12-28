@@ -3,16 +3,25 @@
     h3,
     input::placeholder {
         margin-top: 5px;
-        color: $clr-grey3;
+        color: $clr-grey4;
         font-weight: 350;
-        font-size: 17px;
+        font-size: 1em;
+        @include for-mobile-layout {
+            margin-top: 0px;
+            font-size: 1.2em;
+            font-weight: 100;
+        }
     }
+    // input::placeholder {
+    //     font-size: 17px;
+    // }
     input {
         border: none;
         cursor: pointer;
         padding: 0;
-        font-size: 17px;
+        font-size: 1em;
         font-weight: 100;
+        margin-top: 4px;
     }
     input:focus {
         outline: none;

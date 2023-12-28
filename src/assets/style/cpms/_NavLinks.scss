@@ -33,12 +33,13 @@
         transition: 0.3s;
 
         @include for-narrow-layout {
-            height: 48px;
-            width: 48px;
+            height: em(48px);
+            width: em(48px);
             justify-content: center;
         }
 
         @include for-mobile-layout {
+            padding: 0;
             &.not-mobile {
                 display: none;
             }
@@ -73,11 +74,11 @@
             }
         }
         img {
-            height: 28px;
-            width: 28px;
-            @include for-mobile-layout {
-                height: 25px;
-            }
+            height: em(28px);
+            width: em(28px);
+            // @include for-mobile-layout {
+            //     // height: 25px;
+            // }
             transition: 0.4s;
             &:not(.regular img) {
                 filter: grayscale(1);
@@ -102,11 +103,13 @@
         }
 
         .img-container {
-            width: 28px;
-            height: 28px;
+            width: em(28px);
+            height: em(28px);
             img {
                 outline: 1px solid $clr-grey2;
                 border: none;
+                width: 100%;
+                height: 100%;
             }
         }
     }

@@ -14,10 +14,10 @@
         @include flex(row, center, space-between);
 
         img {
-            height: 25px;
+            height: em(25px);
             margin-right: 10px;
             &.logo {
-                height: 30px;
+                height: em(30px);
                 margin-left: $pad1;
             }
         }

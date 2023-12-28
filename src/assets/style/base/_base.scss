@@ -15,6 +15,11 @@ html {
   font-weight: 350;
   font-size: 18px;
 
+  @include for-mobile-layout {
+    font-size: 13px;
+    line-height: lh(20px);
+  }
+
   // @media (max-width: 1300px) {
   //   font-size: 13px;
   // }
@@ -58,9 +63,14 @@ h2 {
   font-size: em(20px);
 }
 
-h3 {
-  font-size: em(15px);
+h3,
+span {
+  font-size: 1em;
   font-weight: 400;
+
+  @include for-mobile-layout {
+    font-size: 1.2em;
+  }
 }
 
 img {
