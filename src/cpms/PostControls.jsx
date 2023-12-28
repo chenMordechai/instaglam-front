@@ -1,3 +1,4 @@
+import 'animate.css';
 
 import heart from '../assets/icons/heart-regular.svg'
 import msg from '../assets/icons/comment-regular.svg'
@@ -11,11 +12,12 @@ export function PostControls({ by, likesNumber, txt }) {
     const [isLiked, setIsLiked] = useState()
     return (
         <section className="post-controls">
+            <h1 class="animate__animated animate__bounce">An animated element</h1>
             <div className="icons-container">
                 <div>
                     <a onClick={() => setIsLiked(prev => !prev)} className={isLiked ? 'red-heart' : ''}>
                         <img src={heart} />
-                        <FontAwesomeIcon icon={faHeart} />
+                        <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
                     </a>
                     <a>
                         <img src={msg} />
