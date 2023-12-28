@@ -1,2 +1,15 @@
 .home {
+    display: flex;
+    justify-content: space-between;
+
+    @include for-mobile-layout {
+        display: block;
+    }
+
+    div.main-content {
+        width: 663px;
+        @include for-mobile-layout {
+            width: 100%;
+        }
+    }
 }

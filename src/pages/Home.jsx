@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 
 import { Users } from "../cpms/Users";
 import { Posts } from "../cpms/Posts";
+import { NavSide } from '../cpms/NavSide'
 import { loadPosts } from '../store/actions/post.actions.js'
 import { loadUsers } from '../store/actions/user.actions.js'
-
 
 export function Home() {
     const { posts } = useSelector(storeState => storeState.postModule)
@@ -23,9 +23,11 @@ export function Home() {
     }, [])
     return (
         <section className="home">
-            <Users users={users} />
-            <Posts posts={posts} />
-
+            <div className="main-content">
+                <Users users={users} />
+                <Posts posts={posts} />
+            </div>
+            <NavSide />
         </section>
     )
 }
