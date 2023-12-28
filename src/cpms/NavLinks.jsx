@@ -11,6 +11,8 @@ import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
+import {Img} from './Img'
+
 export function NavLinks() {
     return (
         // <NavLink to={'/'} >Home</NavLink>
@@ -49,7 +51,9 @@ export function NavLinks() {
                 <span>Create</span>
             </a>
             <NavLink to={'/profile'} title="Profile">
-                {/* <span>img</span> */}
+             <div className="img-container">
+                <Img isGradient={false}/>
+            </div>
                 <span>Profile</span>
             </NavLink>
             <a className="disable not-mobile" title="More"  >

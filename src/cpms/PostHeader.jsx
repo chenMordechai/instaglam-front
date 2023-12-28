@@ -8,7 +8,7 @@ export function PostHeader({ name, title, img, date }) {
         <section className="post-header">
             <div className="user-info-container">
                 <div className="img-container">
-                    <Img />
+                    <Img isGradient={true} />
                 </div>
                 <div className="text-container">
                     {/* <div className="name-comtainer"> */}

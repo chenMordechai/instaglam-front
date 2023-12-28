@@ -1,14 +1,19 @@
-div.gradient {
-    @include flex(row, center, center);
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    background: $gradient;
-
-    img {
+div {
+    .gradient,
+    .regular {
+        @include flex(row, center, center);
+        height: 100%;
+        width: 100%;
         border-radius: 50%;
-        height: 93%;
-        width: 93%;
-        border: 3px solid white;
+        img {
+            border-radius: 50%;
+            height: 93%;
+            width: 93%;
+            border: 3px solid white;
+            filter: none;
+        }
+    }
+    .gradient {
+        background: $gradient;
     }
 }
