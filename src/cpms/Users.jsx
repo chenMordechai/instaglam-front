@@ -1,12 +1,12 @@
-import { Story } from "./Story";
+import { User } from "./User";
 import arrowRight from '../assets/icons/caret-right-solid.svg'
 import arrowLeft from '../assets/icons/caret-left-solid.svg'
 import { useEffect, useRef, useState } from "react";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
 
-export function Stories() {
-    const stories = [{ name: 'mosheddddddd' }, { name: 'david' }, { name: 'Puki.mkfe' }, { name: 'shuki.g.w3ef' }, { name: 'momo.lalal' }, { name: 'nono' }, { name: 'lolo' }, { name: 'dfdf' }, { name: 'mosheddddd' }, { name: 'daviddd' }]
+export function Users({ users }) {
+    // const stories = [{ name: 'mosheddddddd' }, { name: 'david' }, { name: 'Puki.mkfe' }, { name: 'shuki.g.w3ef' }, { name: 'momo.lalal' }, { name: 'nono' }, { name: 'lolo' }, { name: 'dfdf' }, { name: 'mosheddddd' }, { name: 'daviddd' }]
     // console.log('stories:', stories)
     const [isDragging, setIsDragging] = useState()
     const [startX, setStartX] = useState()
@@ -46,8 +46,8 @@ export function Stories() {
                 <ul ref={carousel} className={`carousel ${isDragging ? 'dragging' : ''}`}
                     onMouseDown={dragStart} onMouseMove={dragging}
                     onTouchStart={dragStart} onTouchMove={dragging}>
-                    {stories.map(story => <li className="card" key={story.name}>
-                        <Story story={story} isDragging={isDragging} />
+                    {users.map(user => <li className="card" key={user._id}>
+                        <User user={user} isDragging={isDragging} />
                     </li>
                     )}
                 </ul>

@@ -12,7 +12,6 @@ export function PostControls({ by, likesNumber, txt }) {
     const [isLiked, setIsLiked] = useState()
     return (
         <section className="post-controls">
-            <h1 class="animate__animated animate__bounce">An animated element</h1>
             <div className="icons-container">
                 <div>
                     <a onClick={() => setIsLiked(prev => !prev)} className={isLiked ? 'red-heart' : ''}>

@@ -3,13 +3,11 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import './assets/style/main.scss'
 
-
 import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { NavLinks } from './cpms/NavLinks'
 import { NavSide } from './cpms/NavSide'
 import { Header } from './cpms/Header'
-
 
 export function App() {
 
@@ -21,10 +19,10 @@ export function App() {
           <NavLinks />
           <main>
             <div className="main-container">
-            <Routes>
-              <Route element={<Home />} path="/" />
-              <Route element={<Profile />} path="/profile" />
-            </Routes>
+              <Routes>
+                <Route element={<Home />} path="/" />
+                <Route element={<Profile />} path="/profile" />
+              </Routes>
             </div>
           </main>
           <NavSide />
