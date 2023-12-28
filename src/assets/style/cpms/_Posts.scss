@@ -1,5 +1,6 @@
 .posts {
     margin-top: 10px;
+    margin-bottom: 50px;
     ul.posts-container {
         width: 100%;
         @include flex(column, center, start, $pad1);

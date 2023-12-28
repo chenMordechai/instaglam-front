@@ -7,6 +7,7 @@
     @include flex(column, end, space-between);
     padding: $pad2;
     border-right: 1px solid $clr-grey2;
+    z-index: 1;
 
     @include for-narrow-layout {
         @include flex(column, center, space-between);
@@ -80,9 +81,9 @@
             //     // height: 25px;
             // }
             transition: 0.4s;
-            &:not(.regular img) {
-                filter: grayscale(1);
-            }
+            // &:not(.regular img) {
+            //     filter: grayscale(1);
+            // }
 
             &.logo {
                 height: 38px;

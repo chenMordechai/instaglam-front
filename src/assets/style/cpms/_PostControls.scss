@@ -1,6 +1,6 @@
 .post-controls {
     padding: 0 10px;
-    .btns-container {
+    .icons-container {
         @include flex(row, center, space-between);
         margin: em(10px) 0;
         div {
@@ -23,6 +23,7 @@
 
         span {
             font-weight: 100;
+            font-size: inherit;
         }
     }
 }

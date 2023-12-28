@@ -8,21 +8,21 @@ import bookmark from '../assets/icons/bookmark-regular.svg'
 export function PostControls({name,likesNumber , description }) {
     return (
         <section className="post-controls">
-            <div className="btns-container">
+            <div className="icons-container">
                 <div>
-                    <button>
+                    <a>
                      <img src={heart} />
-                    </button>
-                    <button>
+                    </a>
+                    <a>
                     <img src={msg} />
-                    </button>
-                    <button>
+                    </a>
+                    <a>
                     <img src={arrow} />
-                    </button>
+                    </a>
                 </div>
-                <button>
+                <a>
                     <img className="last" src={bookmark} />
-                </button>
+                </a>
             </div>
             <h3>{likesNumber} likes</h3>
             <h3>{name} <span>{description}</span></h3>
