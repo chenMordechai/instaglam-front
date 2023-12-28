@@ -1,4 +1,4 @@
-import {CLOUD_NAME , UPLOAD_PRESET} from '../../dist/pass.js'
+// import { CLOUD_NAME, UPLOAD_PRESET } from '../../dist/pass.js'
 
 export const utilService = {
     makeId,
@@ -11,6 +11,7 @@ export const utilService = {
     getAssetSrc,
     getRandomColor,
     uploadImgToCloudinary,
+    timeDifference
 }
 
 function makeId(length = 6) {
@@ -49,8 +50,6 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
-
-
 function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
@@ -58,8 +57,6 @@ function debounce(func, timeout = 300) {
         timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
-
-
 
 // In our utilService
 function animateCSS(el, animation) {
@@ -89,31 +86,65 @@ function getRandomColor() {
     return color;
 }
 
-async function uploadImgToCloudinary(ev){
-        //Defining our variables
-        console.log('CLOUD_NAME:', CLOUD_NAME)
-        console.log('UPLOAD_PRESET:', UPLOAD_PRESET)
+async function uploadImgToCloudinary(ev) {
+    //Defining our variables
+    // console.log('CLOUD_NAME:', CLOUD_NAME)
+    // console.log('UPLOAD_PRESET:', UPLOAD_PRESET)
 
-        const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-        const FORM_DATA = new FormData()
-      
-        // //Bulding the request body
-        FORM_DATA.append('file', ev.target.files[0])
-        FORM_DATA.append('upload_preset', UPLOAD_PRESET)
-      
-        // // Sending a post method request to Cloudinarys API
-      
-        try {
-          const res = await fetch(UPLOAD_URL, {
+    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+    const FORM_DATA = new FormData()
+
+    // //Bulding the request body
+    FORM_DATA.append('file', ev.target.files[0])
+    FORM_DATA.append('upload_preset', UPLOAD_PRESET)
+
+    // // Sending a post method request to Cloudinarys API
+
+    try {
+        const res = await fetch(UPLOAD_URL, {
             method: 'POST',
             body: FORM_DATA,
-          })
+        })
         //   const elImg = document.createElement('img')
-          const { url } = await res.json()
-          return url
+        const { url } = await res.json()
+        return url
         //   elImg.src = url
         //   document.body.append(elImg)
-        } catch (err) {
-          console.error(err)
-        }
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+function timeDifference(current, previous) {
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+        return Math.round(elapsed / 1000) + ' seconds ago';
+    }
+
+    else if (elapsed < msPerHour) {
+        return Math.round(elapsed / msPerMinute) + ' minutes ago';
+    }
+
+    else if (elapsed < msPerDay) {
+        return Math.round(elapsed / msPerHour) + ' hours ago';
+    }
+
+    else if (elapsed < msPerMonth) {
+        return Math.round(elapsed / msPerDay) + ' days ago';
+    }
+
+    else if (elapsed < msPerYear) {
+        return Math.round(elapsed / msPerMonth) + ' months ago';
+    }
+
+    else {
+        return Math.round(elapsed / msPerYear) + ' years ago';
+    }
 }
