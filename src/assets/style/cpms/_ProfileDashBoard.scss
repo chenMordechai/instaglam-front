@@ -1,0 +1,21 @@
+.profile-dash-board {
+    display: none;
+
+    @include for-mobile-layout {
+        // display: block;
+        margin-top: $pad3;
+        border-top: 1px solid $clr-grey2;
+        border-bottom: 1px solid $clr-grey2;
+        padding: $pad2;
+
+        @include flex(row, center, center);
+        div {
+            width: 33%;
+            @include flex(column, center, center);
+
+            span {
+                color: $clr-grey4;
+            }
+        }
+    }
+}

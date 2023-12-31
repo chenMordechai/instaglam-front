@@ -1,6 +1,15 @@
 .highlight-preview {
-    @include flex(column, center, start);
+    @include flex(column, center, start, 5px);
     .img-container {
         height: 50px;
+    }
+    span {
+        font-size: 13px;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        direction: rtl;
     }
 }
