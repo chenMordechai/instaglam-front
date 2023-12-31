@@ -2,7 +2,8 @@ import { Outlet, NavLink } from 'react-router-dom'
 import grid from '../assets/icons/table-cells-solid.svg'
 import image from '../assets/icons/image-regular.svg'
 
-export function PostList({userId}) {
+export function PostList({userId , postsMini}) {
+    // console.log('postsMini:', postsMini)
     return (
         <section className="post-list">
             <nav>
@@ -16,7 +17,7 @@ export function PostList({userId}) {
                     </NavLink>
             </nav>
             <section>
-                <Outlet />
+                <Outlet context={postsMini} />
             </section>
         </section>
     )

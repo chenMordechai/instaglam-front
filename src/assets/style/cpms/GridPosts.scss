@@ -1,0 +1,12 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+
+    li {
+        @include flex(row, center, center);
+        img {
+            width: 100%;
+        }
+    }
+}

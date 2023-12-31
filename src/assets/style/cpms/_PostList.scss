@@ -10,7 +10,7 @@
         a {
             @include flex(row, center, center);
             width: 50%;
-            padding: $pad1;
+            padding: $pad2;
             &.active {
                 border-top: 1px solid $clr-grey4;
                 img {
