@@ -6,6 +6,11 @@
             .img-container {
                 height: 100px;
                 width: 100px;
+
+                @include for-mobile-layout {
+                    height: 60px;
+                    width: 60px;
+                }
             }
         }
     }

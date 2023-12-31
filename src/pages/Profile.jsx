@@ -22,7 +22,6 @@ export function Profile() {
     async function init() {
         try {
             const user = await userService.getById(userId)
-            console.log('user', user)
             setUser(user)
         } catch (err) {
             console.log('user action -> Cannot load user', err)
@@ -35,8 +34,9 @@ export function Profile() {
         <section className="profile">
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsIdxs.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
-            {/* <ProfileDashBoard />
-            <PostList /> */}
+            {/* <ProfileDashBoard /> */}
+            <PostList userId={userId} />
+            
         </section>
     )
 }

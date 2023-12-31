@@ -4,7 +4,6 @@ import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
 
 export function ProfileInfo( { username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
-    console.log(' postsLength, followersLength ,followingLength:',  postsLength, followersLength ,followingLength)
     return (
         <section className="profile-info">
             <div className="left-container">

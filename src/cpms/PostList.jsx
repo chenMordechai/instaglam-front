@@ -1,10 +1,15 @@
+import { Outlet, Link } from 'react-router-dom'
 
-
-
-export function PostList() {
+export function PostList({userId}) {
     return (
         <section className="post-list">
-            <h1>PostList</h1>
+            <nav>
+                <Link to={`/profile/${userId}/posts`}>Posts</Link>
+                <Link to={`/profile/${userId}/tagged`}>Tagged</Link>
+            </nav>
+            <section>
+                <Outlet />
+            </section>
         </section>
     )
 }

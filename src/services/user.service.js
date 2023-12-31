@@ -24,7 +24,6 @@ async function query() {
 }
 
 async function getById(userId) {
-    console.log('BASE_URL_USER + userId:', BASE_URL_USER + userId)
     const user = await httpService.get(BASE_URL_USER + userId)
     return user
 }

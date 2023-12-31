@@ -1,7 +1,6 @@
 import { Img } from './Img'
 
 export function HighlightPreview ({item}){
-    console.log('highlight:', item)
 
     return (
         <section className="highlight-preview">
