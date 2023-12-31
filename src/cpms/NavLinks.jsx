@@ -50,7 +50,7 @@ export function NavLinks() {
                 <img src={plus} />
                 <span>Create</span>
             </a>
-            <NavLink to={'/profile/658dee34df19d32496f22f64'} title="Profile">
+            <NavLink to={'/profile/65914569df19d32496f22f70'} title="Profile">
                 <div className="img-container">
                     <Img isGradient={false} />
                 </div>

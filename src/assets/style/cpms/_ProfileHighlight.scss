@@ -1,0 +1,12 @@
+.profile-highlight {
+    margin-top: $pad3;
+    ul {
+        display: flex;
+        li {
+            .img-container {
+                height: 100px;
+                width: 100px;
+            }
+        }
+    }
+}

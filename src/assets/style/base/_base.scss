@@ -78,7 +78,8 @@ img {
   // width: 100%;
 }
 
-img:not(.regular img) {
+a img:not(.regular img),
+button img:not(.regular img) {
   filter: grayscale(1);
 }
 

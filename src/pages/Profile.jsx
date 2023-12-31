@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { PostList } from "../cpms/PostList";
 import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
-import { ProfileHighLight } from "../cpms/ProfileHighLight";
+import { ProfileHighlight } from "../cpms/ProfileHighlight";
 import { ProfileInfo } from "../cpms/ProfileInfo";
 import { userService } from "../services/user.service.js";
 
@@ -30,13 +30,13 @@ export function Profile() {
         }
     }
     if(!user) return
-    const { username, fullname, imgUrl, description  , postsIdxs , followers , following} = user
+    const { username, fullname, imgUrl, description  , postsIdxs , followers , following , highlights} = user
     return (
         <section className="profile">
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsIdxs.length} followingLength={following.length} followersLength={followers.length} />
-            <ProfileHighLight />
-            <ProfileDashBoard />
-            <PostList />
+            <ProfileHighlight highlights={highlights} />
+            {/* <ProfileDashBoard />
+            <PostList /> */}
         </section>
     )
 }
