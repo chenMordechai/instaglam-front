@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-between;
 
+    @include for-narrow-layout {
+        justify-content: center;
+    }
+
     @include for-mobile-layout {
         display: block;
     }

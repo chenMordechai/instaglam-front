@@ -1,0 +1,106 @@
+.profile-info {
+    padding-top: 20px;
+    @include flex(row, center, start, 50px);
+    @include for-mobile-layout {
+        position: relative;
+        @include flex(column, start, start);
+        .user-info-header {
+            position: absolute;
+            top: 0;
+            left: 130px;
+        }
+    }
+    .left-container {
+        width: 30%;
+        @include flex(row, center, center);
+        @include for-mobile-layout {
+            width: max-content;
+            display: block;
+        }
+        .img-container {
+            height: 200px;
+            width: 200px;
+            min-width: 200px;
+            img {
+                border-width: 6px;
+            }
+            @include for-mobile-layout {
+                height: 100px;
+                width: 100px;
+                min-width: 100px;
+                img {
+                    border-width: em(3px);
+                }
+            }
+        }
+    }
+    // .user-info {
+    .user-info-header {
+        @include flex(row, center, start, $pad3, wrap);
+        h2 {
+            font-size: 23px;
+        }
+        @include for-mobile-layout {
+            gap: $pad1;
+            margin-top: 26px;
+        }
+        .btn-container {
+            @include flex(row, center, start, $pad1);
+            button {
+                font-size: 16px;
+            }
+
+            button:last-child img {
+                width: 20px;
+                margin-left: 10px;
+            }
+            @include for-mobile-layout {
+                button:last-child {
+                    display: none;
+                }
+            }
+        }
+    }
+    .user-info-dash-board {
+        @include flex(row, center, start, $pad3);
+        margin-top: $pad3;
+        h3 {
+            font-weight: 300;
+        }
+        span {
+            font-weight: 400;
+        }
+
+        @include for-mobile-layout {
+            display: none;
+        }
+    }
+
+    .user-description {
+        margin-top: $pad2;
+        @include flex(column, start, start, $pad1);
+        h3 {
+            font-size: 16px;
+        }
+        pre {
+            font-size: 16px;
+            width: max-content;
+            margin: 0;
+            font-weight: 100;
+            line-height: normal;
+        }
+
+        pre.he {
+            text-align: right;
+        }
+        h4 {
+            font-size: 14px;
+            font-weight: 400;
+            color: $clr-grey4;
+            span {
+                color: $clr-black;
+            }
+        }
+    }
+    // }
+}

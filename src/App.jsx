@@ -20,7 +20,7 @@ export function App() {
             <div className="main-container">
               <Routes>
                 <Route element={<Home />} path="/" />
-                <Route element={<Profile />} path="/profile" />
+                <Route element={<Profile />} path="/profile/:userId" />
               </Routes>
             </div>
           </main>

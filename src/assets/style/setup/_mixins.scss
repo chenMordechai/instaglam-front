@@ -96,10 +96,13 @@
 // Buttons
 
 @mixin btn($type: regular) {
-    // display: inline-flex;
-    // align-items: center;
-    // gap: $pad1;
-    // text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: $pad1;
+    text-decoration: none;
+    background-color: $clr-grey1;
+    padding: $pad1;
+    border-radius: 10px;
     // // text-transform: uppercase;
     // line-height: 1.25;
     // font-size: em(16px);
