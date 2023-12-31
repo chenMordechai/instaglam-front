@@ -35,7 +35,7 @@ export function Profile() {
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsIdxs.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard  postsLength={postsIdxs.length} followingLength={following.length} followersLength={followers.length}  />
-            {/* <PostList userId={userId} /> */}
+            <PostList userId={userId} />
             
         </section>
     )

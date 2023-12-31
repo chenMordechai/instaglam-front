@@ -1,5 +1,5 @@
 .profile-info {
-    padding-top: 20px;
+    padding: $pad1;
     @include flex(row, center, start, 50px);
     @include for-mobile-layout {
         position: relative;

@@ -5,7 +5,7 @@
         // display: block;
         margin-top: $pad3;
         border-top: 1px solid $clr-grey2;
-        border-bottom: 1px solid $clr-grey2;
+        // border-bottom: 1px solid $clr-grey2;
         padding: $pad2;
 
         @include flex(row, center, center);

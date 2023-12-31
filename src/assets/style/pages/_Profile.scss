@@ -1,6 +1,6 @@
 .profile {
     padding: $pad3;
     @include for-mobile-layout {
-        padding: 0 $pad1;
+        padding: 0;
     }
 }

@@ -1,0 +1,31 @@
+.post-list {
+    @include flex(column, center, center);
+    border-top: 1px solid $clr-grey2;
+    nav {
+        @include flex(row, center, center);
+        width: 250px;
+        @include for-mobile-layout {
+            width: 100%;
+        }
+        a {
+            @include flex(row, center, center);
+            width: 50%;
+            padding: $pad1;
+            &.active {
+                border-top: 1px solid $clr-grey4;
+                img {
+                    filter: brightness(3);
+                }
+            }
+            img {
+                height: 25px;
+            }
+            span {
+                margin-left: 15px;
+                @include for-mobile-layout {
+                    display: none;
+                }
+            }
+        }
+    }
+}
