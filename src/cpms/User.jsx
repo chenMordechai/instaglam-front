@@ -1,12 +1,12 @@
 import { Img } from "./Img"
 
-export function User({ user, isDragging }) {
+export function User({ item, isDragging }) {
     return (
-        <section className="story">
+        <section className="user">
             <div className="img-container">
-                <Img imgUrl={user.imgUrl} isGradient={true} />
+                <Img imgUrl={item.imgUrl} className="gradient" />
             </div>
-            <span>{user.username}</span>
+            <span>{item.username}</span>
         </section>
     )
 }

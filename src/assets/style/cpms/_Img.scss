@@ -1,19 +1,30 @@
-div {
-    .gradient,
-    .regular {
-        @include flex(row, center, center);
-        height: 100%;
-        width: 100%;
+// div {
+.gradient,
+.regular,
+.grey {
+    @include flex(row, center, center);
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    img {
         border-radius: 50%;
-        img {
-            border-radius: 50%;
-            height: 93%;
-            width: 93%;
-            border: em(3px) solid white;
-            filter: none;
-        }
-    }
-    .gradient {
-        background: $gradient;
+        height: 95%;
+        width: 95%;
+        border: em(3px) solid white;
+        filter: none;
     }
 }
+.gradient {
+    background: $gradient;
+}
+.regular {
+    background: none;
+}
+.grey {
+    background: $clr-grey2;
+    img {
+        height: 97%;
+        width: 97%;
+    }
+}
+// }

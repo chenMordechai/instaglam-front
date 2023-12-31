@@ -38,7 +38,7 @@ export function Users({ users }) {
 
     return (
         <section className="users">
-            <Carousel items={users} Comp={User}/>
+            <Carousel items={users} Comp1={User}/>
             {/* <div className="wrapper">
                 <button onClick={() => moveCarousel('left')} className="arrow">
                     <img src={arrowLeft} />

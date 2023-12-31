@@ -13,7 +13,7 @@ export function PostHeader({ by, byImgUrl, createdAt }) {
         <section className="post-header">
             <div className="user-info-container">
                 <div className="img-container">
-                    <Img imgUrl={byImgUrl} isGradient={true} />
+                    <Img imgUrl={byImgUrl} className="gradient" />
                 </div>
                 <div className="text-container">
                     <h3>{by}</h3>

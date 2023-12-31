@@ -10,7 +10,7 @@ export function ProfileInfo( { username, fullname, imgUrl, description, postsLen
             <div className="left-container">
 
                 <div className="img-container">
-                <Img imgUrl={imgUrl} isGradient={true}/>
+                <Img imgUrl={imgUrl} className="gradient"/>
                 </div>
             </div>
             <div className="user-info">
