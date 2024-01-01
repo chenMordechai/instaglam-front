@@ -42,7 +42,7 @@
         }
         @include for-mobile-layout {
             gap: $pad1;
-            margin-top: 26px;
+            margin-top: 18px;
         }
         .btn-container {
             @include flex(row, center, start, $pad1);

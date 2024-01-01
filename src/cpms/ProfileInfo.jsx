@@ -2,8 +2,16 @@
 import { Img } from './Img'
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
+import { utilService } from '../services/util.service'
+
 
 export function ProfileInfo( { username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
+    function getClass(){
+       const res =  utilService.isHebrew(description.charAt(0))
+        if(res) return 'rtl'
+        else ''
+    }
+    
     return (
         <section className="profile-info">
             <div className="left-container">
@@ -32,7 +40,7 @@ export function ProfileInfo( { username, fullname, imgUrl, description, postsLen
             </div>
             <div className="user-description">
                 <h3>{fullname}</h3>
-                <pre>{description}</pre>
+                <pre className={getClass()}>{description}</pre>
                 <h4>followed by <span> some name שהם חברים משותפים</span></h4>
             </div>
             </div>

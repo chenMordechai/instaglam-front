@@ -11,7 +11,8 @@ export const utilService = {
     getAssetSrc,
     getRandomColor,
     uploadImgToCloudinary,
-    timeDifference
+    timeDifference,
+    isHebrew
 }
 
 function makeId(length = 6) {
@@ -147,4 +148,9 @@ function timeDifference(current, previous) {
     else {
         return Math.round(elapsed / msPerYear) + ' years ago';
     }
+}
+
+function isHebrew(letter){
+   const hebrewLeters = 'אבגדהוזחטיכלמנסעפצקרשת'
+    return hebrewLeters.includes(letter)
 }

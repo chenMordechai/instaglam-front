@@ -78,7 +78,6 @@ async function changeScore(by) {
 
 
 function getLoggedinUser() {
-    console.log(JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)))
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 

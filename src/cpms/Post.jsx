@@ -6,7 +6,7 @@ import { PostControls } from "./PostControls"
 export function Post({ post }) {
     return (
         <section className="post">
-            <PostHeader by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
+            <PostHeader byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} />
             <PostControls by={post.by.username} likesNumber={post.likedBy.length} txt={post.txt} />
             <PostComments comments={post.comments} />

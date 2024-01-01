@@ -64,7 +64,8 @@ h2 {
 }
 
 h3,
-span {
+span,
+a {
   font-size: 1em;
   @include for-mobile-layout {
     font-size: 1.2em;
@@ -114,6 +115,8 @@ a {
   text-decoration: none;
   @include flex(row, center, start, $pad2);
   cursor: pointer;
+  color: black;
+
   // color: darken($clr5, 10%);
 
   // &.active {
@@ -129,4 +132,8 @@ ul {
 
 .he {
   direction: rtl;
+}
+.rtl {
+  direction: rtl;
+  text-align: right;
 }

@@ -13,7 +13,6 @@ import { userService } from "../services/user.service.js";
 export function Profile() {
     const [user, setUser] = useState(null)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    console.log('loggedinUser:', loggedinUser)
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -25,7 +24,6 @@ export function Profile() {
     async function init() {
         try {
             const user = await userService.getById(userId)
-            console.log('user:', user)
             setUser(user)
         } catch (err) {
             console.log('user action -> Cannot load user', err)
