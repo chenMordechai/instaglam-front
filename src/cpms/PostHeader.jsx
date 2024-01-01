@@ -17,7 +17,7 @@ export function PostHeader({byId, by, byImgUrl, createdAt }) {
                     <Img imgUrl={byImgUrl} className="gradient" />
                 </div>
                 <div className="text-container">
-                    <Link to={'/profile/'+byId} title="Instaglam" className="not-mobile">
+                    <Link to={'/profile/'+byId+'/posts'} title="Instaglam" className="not-mobile">
                       {by}
                   </Link>
                     <img src={circle} />

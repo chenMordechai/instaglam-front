@@ -30,15 +30,20 @@ export function Profile() {
             navigate('/')
         }
     }
+
+    function isLoggedinUserProfile(){
+        return loggedinUser.username === username
+    }
+
     if (!user) return
     const { username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
-            <ProfileHeader loggedinUser={loggedinUser} username={username} />
+            <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} username={username} />
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
-            <PostList userId={userId} postsMini={postsMini} />
+            <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />
 
         </section>
     )

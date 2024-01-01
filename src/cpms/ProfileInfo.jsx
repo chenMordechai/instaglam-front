@@ -7,7 +7,8 @@ import { utilService } from '../services/util.service'
 
 export function ProfileInfo( { username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
     function getClass(){
-       const res =  utilService.isHebrew(description.charAt(0))
+        if(!description) return ''
+       const res =  utilService.isHebrew(description.charAt(1))
         if(res) return 'rtl'
         else ''
     }
