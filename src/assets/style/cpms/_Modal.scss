@@ -1,0 +1,27 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 1;
+
+    @include flex(column, stretch, start);
+    width: 400px;
+
+    @include for-mobile-layout {
+        width: 260px;
+    }
+    background-color: $clr-white;
+
+    // cancel when screen
+    border: 1px solid black;
+    border-radius: 10px;
+
+    button {
+        @include flex(row, center, center);
+        border-bottom: 1px solid $clr-grey2;
+        height: 50px;
+        font-weight: 300;
+        font-size: 16px;
+    }
+}

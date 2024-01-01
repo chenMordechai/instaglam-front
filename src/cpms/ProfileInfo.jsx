@@ -3,9 +3,10 @@ import { Img } from './Img'
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
 import { utilService } from '../services/util.service'
+import gear from '../assets/icons/gear-solid.svg'
 
 
-export function ProfileInfo( { username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
+export function ProfileInfo( {onToggleModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
     function getClass(){
         if(!description) return ''
        const res =  utilService.isHebrew(description.charAt(1))
@@ -31,7 +32,7 @@ export function ProfileInfo( { username, fullname, imgUrl, description, postsLen
                 {/* <button className="btn">Follow</button>  */}
                 <button className="btn">Message</button>
                 <button className="btn"><img src={user} /></button>
-                <button><img src={ellipsis} /></button>
+                <button onClick={onToggleModal}><img src={gear} /></button>
                 </div>
             </div>
             <div className="user-info-dash-board">

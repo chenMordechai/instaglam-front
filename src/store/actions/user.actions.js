@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js";
-import { ADD_USER, REMOVE_USER, SET_USERS, UPDATE_USER, SET_IS_LOADING, SET_USER } from "../reducers/user.reducer.js";
+import {SET_USERS,SET_USER, ADD_USER, REMOVE_USER, UPDATE_USER, SET_IS_LOADING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
@@ -26,4 +26,15 @@ export async function loadUsers() {
         console.log('user action -> Cannot load users', err)
         throw err
     }
+}
+
+export async function logout() {
+    try {
+        await userService.logout()
+        store.dispatch({ type: SET_USER, user: null })
+    } catch (err) {
+        console.error('user actions -> Cannot logout:', err)
+        throw err
+    }
+
 }
