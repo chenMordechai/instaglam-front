@@ -82,16 +82,15 @@ function getLoggedinUser() {
 }
 
 function _setLoggedinUser(user) {
-    const { _id, fullname, isAdmin } = user
-    const userToSave = { _id, fullname, isAdmin }
+    const { _id, fullname, username } = user
+    const userToSave = { _id, fullname, username }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }
 
 function getEmptyCredentials() {
     return {
-        fullname: '',
-        username: 'chen',
+        username: 'chen_mordechai1',
         password: '123',
     }
 }

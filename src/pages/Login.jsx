@@ -1,25 +1,55 @@
 
-import {useEffect } from "react"
+import {useEffect,useState } from "react"
 import {useParams } from "react-router-dom"
+import { useDispatch,useSelector } from 'react-redux'
+
 
 import logo from '../assets/icons/logo.svg'
 import facebook from '../assets/icons/facebook-logo.png'
+import { userService } from '../services/user.service.js';
+import { login } from '../store/actions/user.actions.js'
+
+
 
 export function Login ({setNavLinksDisplay}){
+    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
+    const [isSignupState, setIsSignupState] = useState(false)
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+console.log('loggedinUser:', loggedinUser)
     useEffect(()=>{
         setNavLinksDisplay('none')
         return ()=>{
             setNavLinksDisplay('')
         }
     },[])
+
+    function handleCredentialsChange(ev) {
+        const field = ev.target.name
+        const value = ev.target.value
+        setCredentials(credentials => ({ ...credentials, [field]: value }))
+    }
+
+    async function onSubmit(ev) {
+        ev.preventDefault()
+        try {
+            const user = await login(credentials)
+            console.log('success login', user)
+            // showSuccessMsg(`Hi again ${user.fullname}`)
+        } catch (err) {
+            // showErrorMsg('Cannot login')
+        }
+    }
+
+    const { username, password} = credentials
     return (
         <section className="login">
             <div className="login-container">
 
             <img className="logo" src={logo} />
-            <form>
-            <input type="text" placeholder="Phone numbers, username, or email" />
-            <input type="text" placeholder="Password" />
+
+            <form onSubmit={onSubmit}>
+            <input onChange={handleCredentialsChange} value={username}  type="text" placeholder="Phone numbers, username, or email" />
+            <input onChange={handleCredentialsChange} value={password} type="text" placeholder="Password" />
             <button>Log in</button>
             </form>
 
