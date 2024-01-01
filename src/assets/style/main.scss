@@ -16,7 +16,7 @@
 /* Components */
 @import "cpms/NavSide";
 @import "cpms/NavLinks";
-@import "cpms/Header";
+@import "cpms/HomeHeader";
 @import "cpms/Users";
 @import "cpms/User";
 
@@ -30,6 +30,7 @@
 @import "cpms/PostControls";
 @import "cpms/PostComments";
 
+@import "cpms/ProfileHeader";
 @import "cpms/ProfileInfo";
 @import "cpms/ProfileHighlight";
 @import "cpms/HighlightPreview";

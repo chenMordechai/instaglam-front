@@ -1,6 +1,7 @@
 import { Outlet, NavLink } from 'react-router-dom'
 import grid from '../assets/icons/table-cells-solid.svg'
 import image from '../assets/icons/image-regular.svg'
+import bookmark from '../assets/icons/bookmark-regular.svg'
 
 export function PostList({userId , postsMini}) {
     // console.log('postsMini:', postsMini)
@@ -14,6 +15,10 @@ export function PostList({userId , postsMini}) {
                 <NavLink to={`/profile/${userId}/tagged`}>
                     <img src={image} />
                     <span>Tagged</span>
+                    </NavLink>
+                <NavLink to={`/profile/${userId}/saved`}>
+                    <img src={bookmark} />
+                    <span>Saved</span>
                     </NavLink>
             </nav>
             <section>

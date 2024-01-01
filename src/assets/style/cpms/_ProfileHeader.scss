@@ -1,0 +1,17 @@
+.profile-header {
+    display: none;
+    @include for-mobile-layout {
+        @include flex(row, center, space-between);
+        height: 50px;
+        border-bottom: 1px solid $clr-grey2;
+        padding: $pad1 $pad2;
+
+        h2 {
+            font-size: 1.4em;
+            font-weight: 400;
+        }
+        img:not(h2 img) {
+            height: 22px;
+        }
+    }
+}

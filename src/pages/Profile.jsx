@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import { PostList } from "../cpms/PostList";
-import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
-import { ProfileHighlight } from "../cpms/ProfileHighlight";
+import { ProfileHeader } from "../cpms/ProfileHeader";
 import { ProfileInfo } from "../cpms/ProfileInfo";
+import { ProfileHighlight } from "../cpms/ProfileHighlight";
+import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
+import { PostList } from "../cpms/PostList";
 import { userService } from "../services/user.service.js";
 
 
@@ -33,6 +34,7 @@ export function Profile() {
     const { username, fullname, imgUrl, description  , followers , following , highlights , postsMini} = user
     return (
         <section className="profile">
+            <ProfileHeader username={username}/>
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard  postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length}  />

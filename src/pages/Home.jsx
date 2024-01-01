@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from 'react-redux'
 
-
+import { HomeHeader } from '../cpms/HomeHeader'
 import { Users } from "../cpms/Users";
 import { Posts } from "../cpms/Posts";
 import { NavSide } from '../cpms/NavSide'
@@ -23,6 +23,7 @@ export function Home() {
     }, [])
     return (
         <section className="home">
+            <HomeHeader />
             <div className="main-content">
                 <Users users={users} />
                 <Posts posts={posts} />

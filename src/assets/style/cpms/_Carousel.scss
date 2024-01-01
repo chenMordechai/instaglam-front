@@ -31,11 +31,23 @@
         grid-auto-columns: calc((100% / 7) - 13px);
         justify-items: center;
         gap: 15px;
-        overflow: hidden;
+        // overflow: hidden;
         scroll-behavior: smooth;
+
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: 0;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         @include for-mobile-layout {
             grid-auto-columns: calc((100% / 4) - 10px);
+        }
+
+        .card {
+            // scroll-snap-align: start;
         }
 
         &.dragging {
