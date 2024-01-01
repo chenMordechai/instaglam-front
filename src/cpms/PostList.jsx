@@ -12,13 +12,13 @@ export function PostList({userId , postsMini}) {
                     <img src={grid} />
                    <span>Posts</span>
                     </NavLink>
-                <NavLink to={`/profile/${userId}/tagged`}>
-                    <img src={image} />
-                    <span>Tagged</span>
-                    </NavLink>
                 <NavLink to={`/profile/${userId}/saved`}>
                     <img src={bookmark} />
                     <span>Saved</span>
+                    </NavLink>
+                <NavLink to={`/profile/${userId}/tagged`}>
+                    <img src={image} />
+                    <span>Tagged</span>
                     </NavLink>
             </nav>
             <section>

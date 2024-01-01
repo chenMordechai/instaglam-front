@@ -1,0 +1,84 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    @include flex(column, center, center);
+
+    .login-container,
+    .signup-container {
+        text-align: center;
+        width: 350px;
+        padding: $pad3;
+        border: 1px solid $clr-grey2;
+        @include for-mobile-layout {
+            border: none;
+        }
+
+        img.logo {
+            height: 55px;
+            margin: $pad3;
+        }
+
+        form {
+            padding: 0 $pad1;
+            @include flex(column, stretch, center, 7px);
+
+            input {
+                height: 40px;
+                padding: $pad1;
+                border-radius: 3px;
+                border: 1px solid $clr-grey2;
+                background-color: $clr-grey0;
+                font-weight: 100;
+            }
+            button {
+                margin: 7px 0;
+                background-color: $clr-blue;
+                padding: $pad1;
+                border-radius: 10px;
+                color: $clr-white;
+                @include flex(row, center, center);
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+        .or-container {
+            @include flex(row, center, center, $pad3);
+            padding: $pad1;
+            div.line {
+                border-top: 1px solid $clr-grey2;
+                display: inline-block;
+                width: 45%;
+            }
+            h3 {
+                color: $clr-grey4;
+            }
+        }
+        .fb-container {
+            @include flex(row, center, center, $pad1);
+            padding: $pad2 0 $pad3 0;
+            img.fb {
+                height: 19px;
+            }
+            h3 {
+                color: #395185;
+                cursor: pointer;
+            }
+        }
+        span {
+            font-size: 13px;
+            font-weight: 100;
+            cursor: pointer;
+        }
+    }
+    .signup-container {
+        margin-top: $pad2;
+        h2 {
+            font-weight: 300;
+            span {
+                color: $clr-blue;
+                font-weight: 400;
+                font-size: 16px;
+            }
+        }
+    }
+}

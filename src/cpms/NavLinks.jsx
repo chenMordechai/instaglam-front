@@ -13,16 +13,16 @@ import logo from '../assets/icons/logo.svg'
 
 import { Img } from './Img'
 
-export function NavLinks() {
-    return (
-        // <NavLink to={'/'} >Home</NavLink>
+export function NavLinks({navLinksDisplay}) {
 
-        <section className="nav-links">
-            <Link to={'/'} title="Instaglam" className="not-mobile">
+    return (
+
+        <section className="nav-links" style={{'display':navLinksDisplay}}>
+            <Link to={'/home'} title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
                 <img className="logo" src={logo} />
             </Link>
-            <NavLink to={'/'} title="Home" >
+            <NavLink to={'/home'} title="Home" >
                 <img src={house} />
                 <span>Home</span>
             </NavLink>
@@ -52,7 +52,7 @@ export function NavLinks() {
             </a>
             <NavLink to={'/profile/65914569df19d32496f22f70/posts'} title="Profile">
                 <div className="img-container">
-                    <Img className="gradient" />
+                    <Img className="regular" />
                 </div>
                 <span>Profile</span>
             </NavLink>

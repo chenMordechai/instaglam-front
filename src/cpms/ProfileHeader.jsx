@@ -2,6 +2,7 @@ import user from '../assets/icons/user-plus-solid.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
 import gear from '../assets/icons/gear-solid.svg'
 import chevron from '../assets/icons/chevron-left-solid.svg'
+import {Link } from 'react-router-dom'
 
 
 export function ProfileHeader ({username}){
@@ -15,7 +16,10 @@ export function ProfileHeader ({username}){
 
         // not my profile
         <section className="profile-header">
+        <Link to="/home">
         <img src={chevron} />
+        </Link>
+     
             <h2>{username} </h2>
             <span></span>
         </section>
