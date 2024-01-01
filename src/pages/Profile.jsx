@@ -12,7 +12,9 @@ import { userService } from "../services/user.service.js";
 
 export function Profile() {
     const [user, setUser] = useState(null)
-    // const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    console.log('loggedinUser:', loggedinUser)
+
     const { userId } = useParams()
     const navigate = useNavigate()
 
@@ -30,16 +32,16 @@ export function Profile() {
             navigate('/')
         }
     }
-    if(!user) return
-    const { username, fullname, imgUrl, description  , followers , following , highlights , postsMini} = user
+    if (!user) return
+    const { username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
-            <ProfileHeader username={username}/>
+            <ProfileHeader loggedinUser={loggedinUser} username={username} />
             <ProfileInfo username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
-            <ProfileDashBoard  postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length}  />
+            <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList userId={userId} postsMini={postsMini} />
-            
+
         </section>
     )
 }

@@ -78,12 +78,13 @@ async function changeScore(by) {
 
 
 function getLoggedinUser() {
+    console.log(JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN)))
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
 
 function _setLoggedinUser(user) {
-    const { _id, fullname, username } = user
-    const userToSave = { _id, fullname, username }
+    const { _id, fullname, username, imgUrl } = user
+    const userToSave = { _id, fullname, username, imgUrl }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave
 }

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from 'react-redux'
-import {useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { HomeHeader } from '../cpms/HomeHeader'
 import { Users } from "../cpms/Users";
@@ -13,7 +14,11 @@ export function Home() {
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
     // console.log('users:', users)
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    // console.log('loggedinUser:', loggedinUser)
+    const navigate = useNavigate()
     useEffect(() => {
+        if (!loggedinUser) navigate('/')
         try {
             loadPosts()
             loadUsers()
