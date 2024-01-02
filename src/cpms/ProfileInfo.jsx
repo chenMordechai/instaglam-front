@@ -4,21 +4,23 @@ import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
 import { utilService } from '../services/util.service'
 import gear from '../assets/icons/gear-solid.svg'
+import userImg from '../assets/icons/user.jpg'
 
 
-export function ProfileInfo( {onToggleModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
+export function ProfileInfo( {onToggleChangeImgModal,onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
     function getClass(){
         if(!description) return ''
        const res =  utilService.isHebrew(description.charAt(1))
         if(res) return 'rtl'
         else ''
     }
+
     
     return (
         <section className="profile-info">
             <div className="left-container">
 
-                <div className="img-container">
+                <div onClick={onToggleChangeImgModal} className="img-container">
                 <Img imgUrl={imgUrl} className="gradient"/>
                 </div>
             </div>
@@ -32,7 +34,7 @@ export function ProfileInfo( {onToggleModal, username, fullname, imgUrl, descrip
                 {/* <button className="btn">Follow</button>  */}
                 <button className="btn">Message</button>
                 <button className="btn"><img src={user} /></button>
-                <button onClick={onToggleModal}><img src={gear} /></button>
+                <button onClick={onTogglePreferencesModal}><img src={gear} /></button>
                 </div>
             </div>
             <div className="user-info-dash-board">

@@ -18,10 +18,31 @@
     border-radius: 10px;
 
     button {
-        @include flex(row, center, center);
+        @include flex(column, center, center);
         border-bottom: 1px solid $clr-grey2;
-        height: 50px;
+        padding: 15px;
         font-weight: 300;
-        font-size: 16px;
+        font-size: 18px;
+
+        img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            border: 1px solid $clr-grey3;
+            margin-bottom: $pad1;
+        }
+
+        span {
+            color: $clr-grey4;
+            font-size: 16px;
+        }
+
+        &.bold {
+            font-weight: 500;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
     }
 }

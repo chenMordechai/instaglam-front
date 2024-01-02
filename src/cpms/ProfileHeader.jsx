@@ -6,11 +6,11 @@ import gear from '../assets/icons/gear-solid.svg'
 import chevron from '../assets/icons/chevron-left-solid.svg'
 import { Link } from 'react-router-dom'
 
-export function ProfileHeader({ isLoggedinUserProfile, username , onToggleModal }) {
+export function ProfileHeader({ isLoggedinUserProfile, username , onTogglePreferencesModal }) {
     return (
         <div>
             {isLoggedinUserProfile && <section className="profile-header">
-                <button onClick={onToggleModal}><img src={gear} /></button>
+                <button onClick={onTogglePreferencesModal}><img src={gear} /></button>
                 <h2>{username}
                     <button>
                         <img src={arrow} />

@@ -26,7 +26,6 @@ export function Login({ setNavLinksDisplay }) {
     }, [])
 
     function handleCredentialsChange(ev) {
-        console.log('hi')
         const field = ev.target.name
         const value = ev.target.value
         setCredentials(credentials => ({ ...credentials, [field]: value }))

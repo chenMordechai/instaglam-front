@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js";
-import {SET_USERS,SET_USER, ADD_USER, REMOVE_USER, UPDATE_USER, SET_IS_LOADING } from "../reducers/user.reducer.js";
+import {SET_USERS,SET_USER, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
@@ -47,5 +47,19 @@ export async function signup(credentials) {
     } catch (err) {
         console.log('user actions -> Cannot signup', err)
         throw err
+    }
+}
+
+export async function saveUser(user) {
+    console.log('user:', user)
+    // const type = toy._id ? UPDATE_TOY : ADD_TOY
+    try {
+        const userToSave = await userService.update(user)
+        store.dispatch({type: UPDATE_USER, user: userToSave })
+        return userToSave
+    } catch (err) {
+        console.log('user action -> Cannot save user', err)
+        throw err
+
     }
 }

@@ -1,4 +1,4 @@
-// import { CLOUD_NAME, UPLOAD_PRESET } from '../../dist/pass.js'
+import { CLOUD_NAME, UPLOAD_PRESET } from '../../dist/pass.js'
 
 export const utilService = {
     makeId,

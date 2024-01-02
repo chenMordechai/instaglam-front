@@ -8,15 +8,19 @@ import { ProfileHighlight } from "../cpms/ProfileHighlight";
 import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
 import { PostList } from "../cpms/PostList";
 import { userService } from "../services/user.service.js";
-import {Modal} from '../cpms/Modal'
-import { logout } from '../store/actions/user.actions.js'
+import { utilService } from "../services/util.service.js";
+import {PreferenceModal} from '../cpms/PreferenceModal'
+import {ChangeImgModal} from '../cpms/ChangeImgModal'
+import { logout , saveUser } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
     const [user, setUser] = useState(null)
+    // console.log('user:', user)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
-    const [openModal, setOpenModal] = useState(false)
+    const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
+    const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -40,8 +44,12 @@ export function Profile() {
         return loggedinUser.username === username
     }
 
-    function onToggleModal() {
-        setOpenModal(prev => !prev)
+    function onTogglePreferencesModal() {
+        setOpenPreferenceModal(prev => !prev)
+    }
+
+    function onToggleChangeImgModal(){
+        setOpenChangeImgModal(prev=>!prev)
     }
 
   async function onLogout(){
@@ -58,13 +66,36 @@ export function Profile() {
         }
     }
 
+    async  function onChangeImg(ev) {
+        console.log(user)
+        const imgUrl = await utilService.uploadImgToCloudinary(ev)
+        // console.log('imgUrl:', imgUrl)
+        try {
+            setUser(prevUser => ({ ...user, imgUrl: imgUrl }))
+            const savedUser = await saveUser({ ...user, imgUrl: imgUrl })
+            console.log('savedUser:', savedUser)
+            // showSuccessMsg('Save Toy: ' + savedToy._id)
+            // navigate('/toy')
+        } catch (err) {
+            console.log('err:', err)
+            // showErrorMsg('Cannot Save Toy')
+        }
+     }
+
+    function onRemoveImg(){
+
+    }
+
+   
+
     if (!user) return
     const { username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
-              {openModal && <Modal onToggleModal={onToggleModal} onLogout={onLogout} />}
-            <ProfileHeader onToggleModal={onToggleModal} isLoggedinUserProfile={isLoggedinUserProfile()} username={username} />
-            <ProfileInfo onToggleModal={onToggleModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+              {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
+              {openChangeImgModal && <ChangeImgModal onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal}  imgUrl={imgUrl}/>}
+            <ProfileHeader onTogglePreferencesModal={onTogglePreferencesModal} isLoggedinUserProfile={isLoggedinUserProfile()} username={username} />
+            <ProfileInfo onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />

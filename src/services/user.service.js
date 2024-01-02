@@ -9,10 +9,12 @@ const STORAGE_KEY_LOGGEDIN = 'loggedinUser'
 
 export const userService = {
     query,
+    getById,
+    remove,
+    update,
     login,
     logout,
     signup,
-    getById,
     getLoggedinUser,
     changeScore,
     getEmptyCredentials
@@ -38,7 +40,6 @@ async function update(user) {
     if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
     return user
 }
-
 
 async function login(userCred) {
     const user = await httpService.post(BASE_URL_AUTH + 'login', userCred)
@@ -66,17 +67,6 @@ async function logout() {
 
 }
 
-
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
-}
-
-
-
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN))
 }
@@ -97,6 +87,14 @@ function getEmptyCredentials() {
     }
 }
 
+
+async function changeScore(by) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('Not loggedin')
+    user.score = user.score + by || by
+    await update(user)
+    return user.score
+}
 
 
 
