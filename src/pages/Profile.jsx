@@ -11,7 +11,7 @@ import { userService } from "../services/user.service.js";
 import { utilService } from "../services/util.service.js";
 import {PreferenceModal} from '../cpms/PreferenceModal'
 import {ChangeImgModal} from '../cpms/ChangeImgModal'
-import { logout , saveUser } from '../store/actions/user.actions.js'
+import { logout , saveUserImg } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
@@ -72,8 +72,9 @@ export function Profile() {
         // console.log('imgUrl:', imgUrl)
         try {
             setUser(prevUser => ({ ...user, imgUrl: imgUrl }))
-            const savedUser = await saveUser({ ...user, imgUrl: imgUrl })
-            console.log('savedUser:', savedUser)
+            const savedUser = await saveUserImg({ ...user, imgUrl: imgUrl })
+            // console.log('savedUser:', savedUser)
+            onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)
             // navigate('/toy')
         } catch (err) {

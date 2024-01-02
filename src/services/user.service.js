@@ -12,6 +12,7 @@ export const userService = {
     getById,
     remove,
     update,
+    updateImg,
     login,
     logout,
     signup,
@@ -35,7 +36,13 @@ async function remove(userId) {
 }
 
 async function update(user) {
-    user = await httpService.put(BASE_URL_USER + user._Id, user)
+    user = await httpService.put(BASE_URL_USER + user._Id , user)
+    // Handle case in which admin updates other user's details
+    if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
+    return user
+}
+async function updateImg(user) {
+    user = await httpService.put(BASE_URL_USER + user._Id +'/img', user)
     // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
     return user

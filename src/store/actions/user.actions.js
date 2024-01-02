@@ -50,11 +50,10 @@ export async function signup(credentials) {
     }
 }
 
-export async function saveUser(user) {
-    console.log('user:', user)
+export async function saveUserImg(user) {
     // const type = toy._id ? UPDATE_TOY : ADD_TOY
     try {
-        const userToSave = await userService.update(user)
+        const userToSave = await userService.updateImg(user)
         store.dispatch({type: UPDATE_USER, user: userToSave })
         return userToSave
     } catch (err) {
