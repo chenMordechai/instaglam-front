@@ -1,19 +1,71 @@
 .user-edit {
-    @include flex(column, center, start);
+    @include flex(column, center, center);
     height: 100vh;
+    @include for-mobile-layout {
+        justify-content: start;
+    }
 
     .edit-container {
         text-align: center;
         width: 350px;
-        padding: $pad3;
+        padding: $pad3 $pad1;
         border: 1px solid $clr-grey2;
 
         @include for-mobile-layout {
             border: none;
+            width: 100vw;
         }
 
         h2 {
             font-size: 20px;
+            @include for-mobile-layout {
+                display: none;
+            }
+        }
+
+        form {
+            @include flex(column, center, center, $pad2);
+
+            .change-photo-container {
+                @include flex(column, center, center, $pad2);
+                img {
+                    height: 70px;
+                    border-radius: 50%;
+                    border: 1px solid $clr-grey3;
+                }
+                label {
+                    font-weight: 400;
+                }
+                input {
+                    display: none;
+                }
+            }
+            label {
+                @include flex(column, start, center, $pad1);
+                width: 100%;
+                font-weight: 100;
+
+                input,
+                textarea {
+                    width: 100%;
+                    border: none;
+                    border-bottom: 1px solid $clr-grey3;
+                    outline: none;
+                    font-size: 18px;
+                    font-weight: 350;
+                }
+            }
+            button {
+                margin: 7px 0;
+                background-color: $clr-blue;
+                padding: $pad1;
+                border-radius: 10px;
+                color: $clr-white;
+                @include flex(row, center, center);
+                font-size: 18px;
+                font-weight: 400;
+                width: 100%;
+            }
         }
     }
 }

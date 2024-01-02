@@ -65,7 +65,9 @@ h2 {
 
 h3,
 span,
-a {
+a,
+label,
+button {
   font-size: 1em;
   @include for-mobile-layout {
     font-size: 1.2em;

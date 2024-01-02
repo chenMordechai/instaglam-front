@@ -9,9 +9,9 @@ import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
 import { PostList } from "../cpms/PostList";
 import { userService } from "../services/user.service.js";
 import { utilService } from "../services/util.service.js";
-import {PreferenceModal} from '../cpms/PreferenceModal'
-import {ChangeImgModal} from '../cpms/ChangeImgModal'
-import { logout , saveUserImg } from '../store/actions/user.actions.js'
+import { PreferenceModal } from '../cpms/PreferenceModal'
+import { ChangeImgModal } from '../cpms/ChangeImgModal'
+import { logout, saveUserImg } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
@@ -39,8 +39,8 @@ export function Profile() {
         }
     }
 
-    function isLoggedinUserProfile(){
-        if(!loggedinUser) return false
+    function isLoggedinUserProfile() {
+        if (!loggedinUser) return false
         return loggedinUser.username === username
     }
 
@@ -48,11 +48,11 @@ export function Profile() {
         setOpenPreferenceModal(prev => !prev)
     }
 
-    function onToggleChangeImgModal(){
-        setOpenChangeImgModal(prev=>!prev)
+    function onToggleChangeImgModal() {
+        setOpenChangeImgModal(prev => !prev)
     }
 
-  async function onLogout(){
+    async function onLogout() {
         try {
             await logout()
             console.log('Success Logout')
@@ -65,12 +65,12 @@ export function Profile() {
         }
     }
 
-    async  function onChangeImg(ev) {
+    async function onChangeImg(ev) {
         console.log(user)
         const imgUrl = await utilService.uploadImgToCloudinary(ev)
         try {
-            setUser(prevUser => ({ ...user, imgUrl: imgUrl }))
-            const savedUser = await saveUserImg({ ...user, imgUrl: imgUrl })
+            setUser(() => ({ ...user, imgUrl: imgUrl }))
+            await saveUserImg({ ...user, imgUrl: imgUrl })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)
             // navigate('/toy')
@@ -78,21 +78,21 @@ export function Profile() {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')
         }
-     }
+    }
 
-    function onRemoveImg(){
+    function onRemoveImg() {
 
     }
 
-   
+
 
     if (!user) return
-    const {_id, username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
+    const { _id, username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
-              {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
-              {openChangeImgModal && <ChangeImgModal onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal}  imgUrl={imgUrl}/>}
-            <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal}  username={username} />
+            {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
+            {openChangeImgModal && <ChangeImgModal onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
+            <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
             <ProfileInfo userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
