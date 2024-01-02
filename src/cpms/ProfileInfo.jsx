@@ -7,7 +7,9 @@ import gear from '../assets/icons/gear-solid.svg'
 import userImg from '../assets/icons/user.jpg'
 
 
-export function ProfileInfo( {onToggleChangeImgModal,onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
+export function ProfileInfo( {isLoggedinUserProfile,onToggleChangeImgModal,onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
+   console.log('isLoggedinUserProfile:', isLoggedinUserProfile)
+   
     function getClass(){
         if(!description) return ''
        const res =  utilService.isHebrew(description.charAt(1))
@@ -19,7 +21,6 @@ export function ProfileInfo( {onToggleChangeImgModal,onTogglePreferencesModal, u
     return (
         <section className="profile-info">
             <div className="left-container">
-
                 <div onClick={onToggleChangeImgModal} className="img-container">
                 <Img imgUrl={imgUrl} className="gradient"/>
                 </div>
@@ -28,14 +29,18 @@ export function ProfileInfo( {onToggleChangeImgModal,onTogglePreferencesModal, u
                 {/* אם מישו נכנס לפרופיך שלו ישפה דברים שונים */}
             <div className="user-info-header">
                 <h2>{username}</h2>
-                <div className="btn-container">
+               {!isLoggedinUserProfile && <div className="btn-container">
                 {/* תלןי אם הם חברים או לא */}
                 <button className="btn">Following</button> 
                 {/* <button className="btn">Follow</button>  */}
                 <button className="btn">Message</button>
                 <button className="btn"><img src={user} /></button>
-                <button onClick={onTogglePreferencesModal}><img src={gear} /></button>
-                </div>
+                <button className="gear" onClick={onTogglePreferencesModal}><img src={gear} /></button>
+                </div>}
+              {isLoggedinUserProfile &&  <div className="btn-container">
+                <button className="btn">Edit profile</button> 
+                <button className="btn">View archive</button>
+                </div>}
             </div>
             <div className="user-info-dash-board">
                 <h3><span>{postsLength}</span> posts</h3>

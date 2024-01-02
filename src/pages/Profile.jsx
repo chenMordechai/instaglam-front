@@ -40,6 +40,8 @@ export function Profile() {
     }
 
     function isLoggedinUserProfile(){
+        console.log('loggedinUser:', loggedinUser)
+        console.log('username:', username)
         if(!loggedinUser) return false
         return loggedinUser.username === username
     }
@@ -53,7 +55,6 @@ export function Profile() {
     }
 
   async function onLogout(){
-        console.log('onLogout')
         try {
             await logout()
             console.log('Success Logout')
@@ -95,8 +96,8 @@ export function Profile() {
         <section className="profile">
               {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
               {openChangeImgModal && <ChangeImgModal onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal}  imgUrl={imgUrl}/>}
-            <ProfileHeader onTogglePreferencesModal={onTogglePreferencesModal} isLoggedinUserProfile={isLoggedinUserProfile()} username={username} />
-            <ProfileInfo onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+            <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal}  username={username} />
+            <ProfileInfo isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />
