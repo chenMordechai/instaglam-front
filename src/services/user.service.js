@@ -47,14 +47,14 @@ async function login(userCred) {
     }
 }
 
-async function signup({ username, password, fullname }) {
+async function signup({ username, password, fullname  , email}) {
     const userToSave = {
         username,
         password,
         fullname,
-        isAdmin: false,
+        email
     }
-
+    // console.log('userToSave:', userToSave)
     const user = await httpService.post(BASE_URL_AUTH + 'signup', userToSave)
     return _setLoggedinUser(user)
 
@@ -92,6 +92,8 @@ function getEmptyCredentials() {
     return {
         username: 'chen_mordechai1',
         password: '123',
+        fullname:'',
+        email:''
     }
 }
 
