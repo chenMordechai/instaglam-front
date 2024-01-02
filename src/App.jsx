@@ -7,6 +7,7 @@ import './assets/style/main.scss'
 import { Login } from './pages/Login'
 import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
+import { UserEdit } from './pages/UserEdit'
 import { NavLinks } from './cpms/NavLinks'
 // import { Header } from './cpms/Header'
 import { UserPosts } from './cpms/UserPosts'
@@ -34,6 +35,7 @@ export function App() {
                             {/* <Route path="/profile/:userId/reals" element={} /> */}
                             {/* <Route path="/profile/:userId/saved" element={} /> */}
                  </Route>
+                <Route element={<UserEdit />} path="/user/edit/:userId" />
               </Routes>
             </div>
           </main>

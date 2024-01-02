@@ -47,7 +47,8 @@
         }
         .btn-container {
             @include flex(row, center, start, $pad1);
-            button {
+            button,
+            a {
                 font-size: 16px;
             }
 

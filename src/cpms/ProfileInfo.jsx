@@ -1,14 +1,14 @@
+import { NavLink, Link } from "react-router-dom";
 
-import { Img } from './Img'
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
-import { utilService } from '../services/util.service'
 import gear from '../assets/icons/gear-solid.svg'
 import userImg from '../assets/icons/user.jpg'
+import { Img } from './Img'
+import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo( {isLoggedinUserProfile,onToggleChangeImgModal,onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
-   console.log('isLoggedinUserProfile:', isLoggedinUserProfile)
+export function ProfileInfo( {userId,isLoggedinUserProfile,onToggleChangeImgModal,onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength ,followingLength}) {
    
     function getClass(){
         if(!description) return ''
@@ -38,7 +38,11 @@ export function ProfileInfo( {isLoggedinUserProfile,onToggleChangeImgModal,onTog
                 <button className="gear" onClick={onTogglePreferencesModal}><img src={gear} /></button>
                 </div>}
               {isLoggedinUserProfile &&  <div className="btn-container">
-                <button className="btn">Edit profile</button> 
+                <button className="btn">                  
+                    <Link to={'/user/edit/'+userId} >
+                    Edit profile
+                   </Link>
+                    </button> 
                 <button className="btn">View archive</button>
                 </div>}
             </div>

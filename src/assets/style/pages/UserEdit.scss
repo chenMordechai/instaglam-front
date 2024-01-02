@@ -1,0 +1,19 @@
+.user-edit {
+    @include flex(column, center, start);
+    height: 100vh;
+
+    .edit-container {
+        text-align: center;
+        width: 350px;
+        padding: $pad3;
+        border: 1px solid $clr-grey2;
+
+        @include for-mobile-layout {
+            border: none;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+    }
+}

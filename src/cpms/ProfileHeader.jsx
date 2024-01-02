@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState , Fragment } from "react"
 
 import user from '../assets/icons/user-plus-solid.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 
 export function ProfileHeader({ isLoggedinUserProfile, username , onTogglePreferencesModal }) {
     return (
-        <div>
-            {isLoggedinUserProfile && <section className="profile-header">
+        <Fragment>
+            {isLoggedinUserProfile && <section className="header">
                 <button onClick={onTogglePreferencesModal}><img src={gear} /></button>
                 <h2>{username}
                     <button>
@@ -19,14 +19,14 @@ export function ProfileHeader({ isLoggedinUserProfile, username , onTogglePrefer
                 <button> <img src={user} /></button>
             </section>}
 
-            {!isLoggedinUserProfile && <section className="profile-header">
+            {!isLoggedinUserProfile && <section className="header">
                 <Link to="/home">
                     <img src={chevron} />
                 </Link>
                 <h2>{username} </h2>
                 <span></span>
             </section>}
-        </div>
+        </Fragment>
     )
 
 
