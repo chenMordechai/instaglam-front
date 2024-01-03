@@ -1,0 +1,35 @@
+.post-edit {
+    height: 100vh;
+    width: 100vw;
+    @include flex(column, center, start);
+
+    .post-edit-container {
+        @include flex(column, center, start, $pad1);
+        text-align: center;
+        width: 350px;
+        // padding: $pad3;
+        border: 1px solid $clr-grey2;
+        @include for-mobile-layout {
+            border: none;
+            width: 100%;
+            h2 {
+                display: none;
+            }
+        }
+
+        .img-container {
+            height: 300px;
+            img {
+                height: 100%;
+            }
+            img.placeholder {
+                filter: opacity(0.2);
+            }
+        }
+
+        .img-filter-container {
+            width: 100%;
+            margin-top: 30px;
+        }
+    }
+}

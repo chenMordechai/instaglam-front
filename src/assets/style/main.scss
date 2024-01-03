@@ -14,6 +14,7 @@
 @import "pages/Profile";
 @import "pages/Login";
 @import "pages/UserEdit";
+@import "pages/PostEdit";
 
 /* Components */
 @import "cpms/NavSide";
@@ -42,4 +43,6 @@
 @import "cpms/UserPosts";
 @import "cpms/GridPosts";
 
-@import "cpms/modal";
+@import "cpms/Modal";
+
+@import "cpms/ImgFilter";

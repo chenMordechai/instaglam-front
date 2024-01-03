@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState ,useRef} from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { UPDATE_POST } from "../store/reducers/post.reducer";
@@ -6,16 +6,18 @@ import { savePost } from '../store/actions/post.actions.js'
 import { utilService } from "../services/util.service"
 import { postService } from "../services/post.service"
 import { PostEditHeader } from "../cpms/PostEditHeader.jsx";
+import { PostEditImg } from "../cpms/PostEditImg.jsx";
+
 
 export function PostEdit() {
     const [postToEdit, setPostToEdit] = useState(postService.getEmptyPost())
-
     const { postId } = useParams()
 
     useEffect(() => {
         // if (postId) loadPost()
+        console.log('postToEdit:', postToEdit)
 
-    }, [postId])
+    }, [postId,postToEdit])
 
     async function loadPost() {
         try {
@@ -52,12 +54,30 @@ export function PostEdit() {
         setPostToEdit(prevPost => ({ ...prevPost, imgUrl: imgUrl }))
     }
 
+    async function onChangeImg(ev) {
+        const imgUrl = await utilService.uploadImgToCloudinary(ev)
+        try {
+            setPostToEdit(() => ({ ...postToEdit, imgUrl: imgUrl }))
+            // await saveUserImg({ ...user, imgUrl: imgUrl })
+            // showSuccessMsg('Save Toy: ' + savedToy._id)
+            // navigate('/toy')
+        } catch (err) {
+            console.log('err:', err)
+            // showErrorMsg('Cannot Save Toy')
+        }
+    }
+   function onSetImgFilter(imgFilter){
+    setPostToEdit(prevPost => ({ ...prevPost, imgFilter }))
+   }
     return (
         <section className="post-edit">
             <PostEditHeader isEdit={postId ? true : false} />
-            <h1>Post Edit</h1>
-            <form onSubmit={onSubmitForm}>
-            </form>
+           <div className="post-edit-container">
+            <h2>Post Edit</h2>
+
+           <PostEditImg imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>
+            
+            </div>
 
 
         </section>

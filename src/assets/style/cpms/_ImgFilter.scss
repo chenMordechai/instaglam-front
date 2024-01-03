@@ -1,0 +1,11 @@
+.img-filter {
+    // height: 100px;
+    // width: 100px;
+
+    img {
+        height: 100px;
+        filter: blur(0.5);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}

@@ -13,6 +13,7 @@ export const postService = {
     save,
     remove,
     getEmptyPost,
+    getFilters
     // getDefaultFilter,
     // getLabels,
     // getDefaultSort,
@@ -105,13 +106,19 @@ async function save(post) {
 
 function getEmptyPost() {
     return {
-        name: '',
-        inStock: true,
-        price: 0,
-        labels: [],
-        msgs: []
-
+        txt: '',
+        imgUrl: '',
+        createdAt: '',
+        by: null,
+        loc: null,
+        comments:[],
+        likedBy:[],
+        tags:[]
     }
+}
+
+function getFilters(){
+    return [{name:'none', prop:'none'},{name:'saturate',prop:'saturate(2)'},{name:'grayscale',prop:'grayscale(1)'},{name:'hue-rotate',prop:'hue-rotate(115deg)'},{name:'invert',prop:'invert(1)'},{name:'blur',prop:'blur(1px)'},{name:'brightness',prop:'brightness(0.5)'},{name:'contrast',prop:'contrast(0.5)'},{name:'opacity',prop:'opacity(0.5)'},{name:'sepia',prop:'sepia(1)'}]
 }
 
 // function getEmptyMsg() {
