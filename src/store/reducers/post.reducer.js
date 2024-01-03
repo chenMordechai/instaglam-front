@@ -17,6 +17,7 @@ const initialState = {
 }
 
 export function postReducer(state = initialState, action = {}) {
+    let posts
     switch (action.type) {
         case SET_POSTS:
             return { ...state, posts: action.posts }
