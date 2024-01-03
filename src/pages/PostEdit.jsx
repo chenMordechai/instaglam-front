@@ -7,15 +7,17 @@ import { utilService } from "../services/util.service"
 import { postService } from "../services/post.service"
 import { PostEditHeader } from "../cpms/PostEditHeader.jsx";
 import { PostEditImg } from "../cpms/PostEditImg.jsx";
+import { PostEditTxt } from "../cpms/PostEditTxt.jsx";
 
 
 export function PostEdit() {
     const [postToEdit, setPostToEdit] = useState(postService.getEmptyPost())
     const { postId } = useParams()
+    const [pageNum, setPageNum] = useState(1)
 
     useEffect(() => {
         // if (postId) loadPost()
-        console.log('postToEdit:', postToEdit)
+        // console.log('postToEdit.txt:', postToEdit.txt)
 
     }, [postId,postToEdit])
 
@@ -30,11 +32,10 @@ export function PostEdit() {
     }
 
     function handleChange(ev) {
-        let { value, name, type } = ev.target
-        if (type === 'number') value = +value
-        else if (type === 'checkbox') value = ev.target.checked
+        let { value, name } = ev.target
         setPostToEdit(prevPost => ({ ...prevPost, [name]: value }))
     }
+  
 
     async function onSubmitForm(ev) {
         ev.preventDefault()
@@ -69,13 +70,18 @@ export function PostEdit() {
    function onSetImgFilter(imgFilter){
     setPostToEdit(prevPost => ({ ...prevPost, imgFilter }))
    }
+   
+   function onChangePageNum(diff){
+    setPageNum(prev => prev +diff)
+   }
     return (
         <section className="post-edit">
-            <PostEditHeader isEdit={postId ? true : false} />
+            <PostEditHeader isEdit={postId ? true : false} onChangePageNum={onChangePageNum} />
            <div className="post-edit-container">
             <h2>Post Edit</h2>
 
-           <PostEditImg imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>
+         { pageNum === 1 && <PostEditImg imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>}
+         { pageNum === 2 && <PostEditTxt imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm}/>}
             
             </div>
 

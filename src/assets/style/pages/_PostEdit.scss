@@ -1,13 +1,13 @@
 .post-edit {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     @include flex(column, center, start);
 
     .post-edit-container {
-        @include flex(column, center, start, $pad1);
         text-align: center;
-        width: 350px;
-        // padding: $pad3;
+        width: 100%;
+        // width: 350px;
+        padding: $pad1;
         border: 1px solid $clr-grey2;
         @include for-mobile-layout {
             border: none;
@@ -17,19 +17,121 @@
             }
         }
 
-        .img-container {
-            height: 300px;
-            img {
-                height: 100%;
+        .post-edit-img {
+            width: 100%;
+            .img-container {
+                margin-top: $pad2;
+                height: 300px;
+                img {
+                    height: 100%;
+                }
+                img.placeholder {
+                    filter: opacity(0.2);
+                }
             }
-            img.placeholder {
-                filter: opacity(0.2);
+            label {
+                margin-top: $pad2;
+            }
+
+            .img-filter-container {
+                // width: 100%;
+                margin-top: 30px;
             }
         }
 
-        .img-filter-container {
-            width: 100%;
-            margin-top: 30px;
+        .post-edit-txt {
+            margin-bottom: 55px;
+            .img-container {
+                margin-top: $pad1;
+                height: 200px;
+
+                img {
+                    height: 100%;
+                }
+            }
+            form {
+                @include flex(column, center, start, $pad3);
+                margin-top: $pad2;
+
+                label {
+                    @include flex(column, start, center, $pad1);
+                    width: 100%;
+                    font-weight: 100;
+                }
+                textarea {
+                    width: 100%;
+                    border: none;
+                    border-bottom: 1px solid $clr-grey3;
+                    outline: none;
+                    font-size: 18px;
+                    font-weight: 350;
+                }
+                button.share {
+                    @include blue-btn;
+                }
+                button {
+                    @include flex(row, center, space-between);
+                    width: 100%;
+                    font-weight: 330;
+                    padding: 0 $pad1;
+
+                    div {
+                        @include flex(row, start, start, $pad1);
+                    }
+
+                    img[src*="chevron"] {
+                        filter: opacity(0.5);
+                    }
+                }
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                }
+                .switch-input {
+                    display: none;
+                }
+                .switch-label {
+                    display: block;
+                    width: 40px;
+                    height: 20px;
+                    text-indent: -150%;
+                    clip: rect(0 0 0 0);
+                    color: transparent;
+                    user-select: none;
+                }
+                .switch-label::before,
+                .switch-label::after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    cursor: pointer;
+                }
+                .switch-label::before {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #dedede;
+                    border-radius: 9999em;
+                    -webkit-transition: background-color 0.25s ease;
+                    transition: background-color 0.25s ease;
+                }
+                .switch-label::after {
+                    top: 0;
+                    left: 0;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: #fff;
+                    box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+                    -webkit-transition: left 0.25s ease;
+                    transition: left 0.25s ease;
+                }
+                .switch-input:checked + .switch-label::before {
+                    background-color: $clr-blue;
+                }
+                .switch-input:checked + .switch-label::after {
+                    left: 20px;
+                }
+            }
         }
     }
 }

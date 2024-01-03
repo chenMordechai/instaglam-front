@@ -3,7 +3,7 @@ import xmark from '../assets/icons/xmark-solid.svg'
 import check from '../assets/icons/check-solid.svg'
 import { Fragment } from 'react'
 
-export function PostEditHeader({ isEdit }) {
+export function PostEditHeader({ isEdit , onChangePageNum}) {
     return (
         <section className="header">
             <section>
@@ -18,8 +18,9 @@ export function PostEditHeader({ isEdit }) {
             </section>
 
             {!isEdit &&
-                <button className='blue bold'>Next</button>}
-
+                <button onClick={()=>onChangePageNum(1)} className='blue bold'>
+                    Next
+                    </button>}
             {isEdit &&
                 <button>
                     <img src={check} />

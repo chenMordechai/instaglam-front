@@ -5,8 +5,7 @@ import { ImgFilter } from "../cpms/ImgFilter.jsx";
 
 export function PostEditImg ({imgUrl ,style , onChangeImg , filters , onSetImgFilter}){
     return (
-        <section>
-
+        <section className="post-edit-img">
         <div className="img-container">
         {imgUrl &&  <img src={imgUrl} style={style}  />}
         {!imgUrl &&  <img className="placeholder" src={image}  />}

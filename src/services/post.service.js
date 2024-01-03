@@ -106,7 +106,7 @@ async function save(post) {
 
 function getEmptyPost() {
     return {
-        txt: '',
+        txt: 'hi',
         imgUrl: '',
         createdAt: '',
         by: null,
