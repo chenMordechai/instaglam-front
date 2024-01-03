@@ -22,6 +22,7 @@ export function Profile() {
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
 
+
     const { userId } = useParams()
     const navigate = useNavigate()
 
@@ -51,6 +52,8 @@ export function Profile() {
     function onToggleChangeImgModal() {
         setOpenChangeImgModal(prev => !prev)
     }
+
+
 
     async function onLogout() {
         try {

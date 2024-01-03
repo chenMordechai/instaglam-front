@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 import { utilService } from "../services/util.service.js";
-import { logout, saveUserImg, saveUser } from '../store/actions/user.actions.js'
+import { saveUserImg, saveUser } from '../store/actions/user.actions.js'
 
 import { userService } from "../services/user.service.js";
 import { UserEditHeader } from "../cpms/UserEditHeader";

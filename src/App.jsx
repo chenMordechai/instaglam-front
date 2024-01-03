@@ -8,6 +8,8 @@ import { Login } from './pages/Login'
 import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { UserEdit } from './pages/UserEdit'
+import { PostEdit } from './pages/PostEdit'
+
 import { NavLinks } from './cpms/NavLinks'
 // import { Header } from './cpms/Header'
 import { UserPosts } from './cpms/UserPosts'
@@ -22,20 +24,22 @@ export function App() {
     <Provider store={store}>
       <Router>
         <section className="main-layout">
-          <NavLinks navLinksDisplay={navLinksDisplay}/>
+          <NavLinks navLinksDisplay={navLinksDisplay} />
           <main>
             <div className="main-container">
               <Routes>
                 <Route element={<Login setNavLinksDisplay={setNavLinksDisplay} />} path="/" />
                 <Route element={<Home />} path="/home" />
                 <Route element={<Profile />} path="/profile/:userId" >
-                            <Route path="/profile/:userId/posts" element={<UserPosts />} />
-                            <Route path="/profile/:userId/tagged" element={<UserTagged />} />
-                            <Route path="/profile/:userId/saved" element={<UserSaved />} />
-                            {/* <Route path="/profile/:userId/reals" element={} /> */}
-                            {/* <Route path="/profile/:userId/saved" element={} /> */}
-                 </Route>
+                  <Route path="/profile/:userId/posts" element={<UserPosts />} />
+                  <Route path="/profile/:userId/tagged" element={<UserTagged />} />
+                  <Route path="/profile/:userId/saved" element={<UserSaved />} />
+                  {/* <Route path="/profile/:userId/reals" element={} /> */}
+                  {/* <Route path="/profile/:userId/saved" element={} /> */}
+                </Route>
                 <Route element={<UserEdit />} path="/user/edit/:userId" />
+                <Route element={<PostEdit />} path="/post/edit/" />
+                <Route element={<PostEdit />} path="/post/edit/:postId" />
               </Routes>
             </div>
           </main>

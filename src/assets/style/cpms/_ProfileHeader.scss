@@ -4,7 +4,7 @@
         @include flex(row, center, space-between);
         height: 50px;
         border-bottom: 1px solid $clr-grey2;
-        padding: $pad1 $pad2;
+        padding: $pad1;
         position: sticky;
         top: 0;
         background-color: $clr-white;
@@ -14,11 +14,17 @@
             height: 22px;
         }
         h2 {
+            @include flex(row, center, center, 7px);
             font-size: 1.4em;
             font-weight: 400;
             img {
-                height: 18px;
+                height: 14px;
+                // margin-left: 5px;
             }
+        }
+
+        div {
+            @include flex(row, center, center, $pad1);
         }
     }
 }

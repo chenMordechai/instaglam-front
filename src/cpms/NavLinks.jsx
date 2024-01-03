@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
 
 import instagram from '../assets/icons/instagram.svg'
 import compass from '../assets/icons/compass-regular.svg'
@@ -16,7 +17,8 @@ import { Img } from './Img'
 
 export function NavLinks({ navLinksDisplay }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    // console.log('loggedinUser:', loggedinUser)
+
+
     if (!loggedinUser) return ''
     return (
 
@@ -49,10 +51,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={heart} />
                 <span>Notifications</span>
             </a>
-            <a className="disable" title="New Post" >
+            <Link to={'/post/edit'} title="New Post">
                 <img src={plus} />
-                <span>Create</span>
-            </a>
+                <span >Create</span>
+            </Link>
             <NavLink to={`/profile/${loggedinUser._id}/posts`} title="Profile">
                 <div className="img-container">
                     <Img imgUrl={loggedinUser.imgUrl} className="regular" />
