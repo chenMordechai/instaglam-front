@@ -5,15 +5,29 @@ import { useEffect, useRef, useState } from "react";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
 
-export function Carousel({ items , Comp1 , Comp2,imgUrl, onSetImgFilter}) {
+export function Carousel({ items , Comp1 , Comp2,imgUrl}) {
     const [isDragging, setIsDragging] = useState()
     const [startX, setStartX] = useState()
     const [startScrollLeft, setStartScrollLeft] = useState()
+    const [startOfScroll, setStartOfScroll] = useState(true)
+    const [endOfScroll, setEndOfScroll] = useState(true)
     let carousel = useRef()
 
     useEffect(() => {
+        startEndScroll()
         document.addEventListener('mouseup', dragStop)
+        carousel.current.addEventListener("scroll", startEndScroll)
+
+    return ()=>{
+            document.removeEventListener('mouseup', dragStop)
+        }
     }, [])
+
+    function startEndScroll(){
+        setStartOfScroll(carousel.current.scrollLeft === 0)
+        setEndOfScroll(Math.abs(carousel.current.scrollWidth - carousel.current.scrollLeft - carousel.current.clientWidth) < 1)
+        }
+    
 
     function dragStart(ev) {
         setIsDragging(true)
@@ -38,21 +52,21 @@ export function Carousel({ items , Comp1 , Comp2,imgUrl, onSetImgFilter}) {
     if(!items) return ''
     return (
             <div className="wrapper">
-                <button onClick={() => moveCarousel('left')} className="arrow">
+               {!startOfScroll && <button onClick={() => moveCarousel('left')} className="arrow">
                     <img src={arrowLeft} />
-                </button>
+                </button>}
                 <ul ref={carousel} className={`carousel ${isDragging ? 'dragging' : ''}`}
                     onMouseDown={dragStart} onMouseMove={dragging}
                     onTouchStart={dragStart} onTouchMove={dragging}>
                     {items.map((item,i) => <li className="card" key={item._id || i}>
-                        <Comp1 item={item} isDragging={isDragging} imgUrl={imgUrl} onSetImgFilter={onSetImgFilter} />
+                        <Comp1 item={item} isDragging={isDragging} imgUrl={imgUrl} />
                     </li>
                     )}
                  {Comp2 && <Comp2/>}
                 </ul>
-                <button onClick={() => moveCarousel('right')} className="arrow">
+               {!endOfScroll && <button onClick={() => moveCarousel('right')} className="arrow">
                     <img src={arrowRight} />
-                </button  >
+                </button  >}
             </div>
     )
 }

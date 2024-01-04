@@ -1,7 +1,7 @@
 .grid-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 33.33333333%);
+    grid-template-columns: repeat(3, calc(100% / 3 - 4px));
     // grid-auto-rows: 200px; // from js
     gap: 5px;
 
