@@ -16,9 +16,9 @@ import { logout, saveUserImg } from '../store/actions/user.actions.js'
 
 export function Profile() {
     const [user, setUser] = useState(null)
+    const [isLoading, setIsLoading] = useState()
     // console.log('user:', user)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
 
@@ -69,11 +69,27 @@ export function Profile() {
     }
 
     async function onChangeImg(ev) {
-        console.log(user)
-        const imgUrl = await utilService.uploadImgToCloudinary(ev)
         try {
+            setIsLoading(true)
+            const imgUrl = await utilService.uploadImgToCloudinary(ev)
             setUser(() => ({ ...user, imgUrl: imgUrl }))
             await saveUserImg({ ...user, imgUrl: imgUrl })
+            onToggleChangeImgModal()
+            // showSuccessMsg('Save Toy: ' + savedToy._id)
+            // navigate('/toy')
+        } catch (err) {
+            console.log('err:', err)
+            // showErrorMsg('Cannot Save Toy')
+        } finally{
+            setIsLoading(false)
+        }
+    }
+
+ async function onRemoveImg() {
+        const defaultImgUrl = 'https://res.cloudinary.com/dnluclrao/image/upload/v1704182274/user_afklid.jpg'
+        try {
+            setUser(() => ({ ...user, imgUrl: defaultImgUrl }))
+            await saveUserImg({ ...user, imgUrl: defaultImgUrl })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)
             // navigate('/toy')
@@ -83,10 +99,6 @@ export function Profile() {
         }
     }
 
-    function onRemoveImg() {
-
-    }
-
 
 
     if (!user) return
@@ -94,7 +106,7 @@ export function Profile() {
     return (
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
-            {openChangeImgModal && <ChangeImgModal onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
+            {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
             <ProfileInfo userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />

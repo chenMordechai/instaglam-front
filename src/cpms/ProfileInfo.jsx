@@ -22,7 +22,7 @@ export function ProfileInfo({ userId, isLoggedinUserProfile, onToggleChangeImgMo
         <section className="profile-info">
             <div className="left-container">
                 <div onClick={onToggleChangeImgModal} className="img-container">
-                    <Img imgUrl={imgUrl} className="gradient" />
+                        <Img imgUrl={imgUrl} className="gradient" />
                 </div>
             </div>
             <div className="user-info">

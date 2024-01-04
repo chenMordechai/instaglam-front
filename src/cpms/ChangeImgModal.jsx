@@ -1,10 +1,15 @@
+import loader from '../assets/icons/loader.gif'
 
 
-export function ChangeImgModal ({onChangeImg, onRemoveImg, onToggleChangeImgModal, imgUrl }){
+export function ChangeImgModal ({isLoading,onChangeImg, onRemoveImg, onToggleChangeImgModal, imgUrl }){
+  
+   
+   
     return (
         <section className="modal">
             <button className="regular">
-                <img  src={imgUrl } />
+             { isLoading &&  <img className="loader"  src={loader } />}
+               {!isLoading && <img  src={imgUrl } />}
                 <h2>Synced profile photo</h2>
                 <span>Instaglam, Faceboob</span>
             </button>
@@ -14,9 +19,15 @@ export function ChangeImgModal ({onChangeImg, onRemoveImg, onToggleChangeImgModa
                 <input type="file" id="imgFile" onChange={onChangeImg} />
                 </label>
                 </button>
-            <button>Manage sync settings</button>
-            <button className="red bold" onClick={onRemoveImg}>Remove Current Photo</button>
-            <button onClick={onToggleChangeImgModal} >Cancel</button>
+            <button>
+                Manage sync settings
+                </button>
+            <button className="red bold" onClick={onRemoveImg}>
+                Remove Current Photo
+                </button>
+            <button onClick={onToggleChangeImgModal} >
+                Cancel
+                </button>
         </section>
     )
 }
