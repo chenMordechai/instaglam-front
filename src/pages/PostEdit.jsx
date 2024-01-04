@@ -13,6 +13,7 @@ import { PostEditTxt } from "../cpms/PostEditTxt.jsx";
 export function PostEdit() {
     const [postToEdit, setPostToEdit] = useState(postService.getEmptyPost())
     const [pageNum, setPageNum] = useState(1)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { postId } = useParams()
     const navigate = useNavigate()
@@ -53,12 +54,15 @@ export function PostEdit() {
     }
 
     async function onChangeImg(ev) {
-        const imgUrl = await utilService.uploadImgToCloudinary(ev)
         try {
+            setIsLoading(true)
+            const imgUrl = await utilService.uploadImgToCloudinary(ev)
             setPostToEdit(() => ({ ...postToEdit, imgUrl: imgUrl }))
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')
+        }    finally{
+            setIsLoading(false)
         }
     }
 
@@ -75,7 +79,7 @@ export function PostEdit() {
            <div className="post-edit-container">
             <h2>Post Edit</h2>
 
-         { pageNum === 1 && <PostEditImg imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>}
+         { pageNum === 1 && <PostEditImg  isLoading={isLoading} imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>}
          { pageNum === 2 && <PostEditTxt imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm}/>}
             
             </div>

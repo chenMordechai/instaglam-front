@@ -20,6 +20,7 @@
         .post-edit-img {
             width: 100%;
             .img-container {
+                @include flex(column, center, center);
                 margin-top: $pad2;
                 height: 300px;
                 img {
@@ -27,6 +28,9 @@
                 }
                 img.placeholder {
                     filter: opacity(0.2);
+                }
+                img.loader {
+                    height: 50px;
                 }
             }
             label {

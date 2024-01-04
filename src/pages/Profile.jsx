@@ -16,7 +16,7 @@ import { logout, saveUserImg } from '../store/actions/user.actions.js'
 
 export function Profile() {
     const [user, setUser] = useState(null)
-    const [isLoading, setIsLoading] = useState()
+    const [isLoading, setIsLoading] = useState(false)
     // console.log('user:', user)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)

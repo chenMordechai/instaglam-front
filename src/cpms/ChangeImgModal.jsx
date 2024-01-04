@@ -1,9 +1,6 @@
 import loader from '../assets/icons/loader.gif'
 
-
 export function ChangeImgModal ({isLoading,onChangeImg, onRemoveImg, onToggleChangeImgModal, imgUrl }){
-  
-   
    
     return (
         <section className="modal">

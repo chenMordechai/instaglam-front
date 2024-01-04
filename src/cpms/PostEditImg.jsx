@@ -1,14 +1,16 @@
 import image from '../assets/icons/image-regular.svg'
 import { Carousel } from "../cpms/Carousel.jsx";
 import { ImgFilter } from "../cpms/ImgFilter.jsx";
+import loader from '../assets/icons/loader.gif'
 
 
-export function PostEditImg ({imgUrl ,style , onChangeImg , filters , onSetImgFilter}){
+export function PostEditImg ({isLoading,imgUrl ,style , onChangeImg , filters , onSetImgFilter}){
     return (
         <section className="post-edit-img">
         <div className="img-container">
-        {imgUrl &&  <img src={imgUrl} style={style}  />}
-        {!imgUrl &&  <img className="placeholder" src={image}  />}
+        {!imgUrl && !isLoading &&  <img className="placeholder" src={image}  />}
+        { isLoading &&  <img className="loader"  src={loader } />}
+        {imgUrl && !isLoading  &&<img src={imgUrl} style={style}  />}
       </div>
 
       <button className="blue bold">
