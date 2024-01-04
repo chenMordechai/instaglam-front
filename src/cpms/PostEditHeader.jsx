@@ -1,15 +1,22 @@
+import { useNavigate } from "react-router-dom"
 
 import xmark from '../assets/icons/xmark-solid.svg'
 import check from '../assets/icons/check-solid.svg'
+import arrow from '../assets/icons/arrow-left-long-solid.svg'
 import { Fragment } from 'react'
 
-export function PostEditHeader({ isEdit , onChangePageNum}) {
+export function PostEditHeader({ pageNum, isEdit , onChangePageNum}) {
+    const navigate = useNavigate()
     return (
-        <section className="header">
+        <section className="post-edit-header">
             <section>
-                <button>
-                    <img src={xmark} />
-                </button>
+            { pageNum === 1 &&<button onClick={()=>navigate(-1)}>
+                  <img src={xmark} />
+                </button>}
+                { pageNum === 2 &&  
+                <button onClick={()=>onChangePageNum(-1)}>
+                  <img src={arrow} />
+                </button>}
                 {!isEdit &&
                     <h2>New post</h2>}
 
@@ -17,7 +24,7 @@ export function PostEditHeader({ isEdit , onChangePageNum}) {
                     <h2>Edit info</h2>}
             </section>
 
-            {!isEdit &&
+            {!isEdit && pageNum === 1 &&
                 <button onClick={()=>onChangePageNum(1)} className='blue bold'>
                     Next
                     </button>}
@@ -25,9 +32,6 @@ export function PostEditHeader({ isEdit , onChangePageNum}) {
                 <button>
                     <img src={check} />
                 </button>}
-
-
-
         </section>
     )
 }

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePreferencesModal }) {
     return (
         <Fragment>
-            {isLoggedinUserProfile && <section className="header">
+            {isLoggedinUserProfile && <section className="profile-header">
                 <h2>{username}
                     <button >
                         <img src={arrow} />

@@ -4,7 +4,7 @@ import message from '../assets/icons/message-regular.svg'
 
 export function HomeHeader() {
     return (
-        <section className="header">
+        <section className="home-header">
             <button>
             <img className="logo" src={logo} />
             </button>

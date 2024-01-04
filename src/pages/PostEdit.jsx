@@ -75,10 +75,8 @@ export function PostEdit() {
    }
     return (
         <section className="post-edit">
-            <PostEditHeader isEdit={postId ? true : false} onChangePageNum={onChangePageNum} />
+            <PostEditHeader pageNum={pageNum} isEdit={postId ? true : false} onChangePageNum={onChangePageNum} />
            <div className="post-edit-container">
-            <h2>Post Edit</h2>
-
          { pageNum === 1 && <PostEditImg  isLoading={isLoading} imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>}
          { pageNum === 2 && <PostEditTxt imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm}/>}
             

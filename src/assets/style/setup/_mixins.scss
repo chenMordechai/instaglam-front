@@ -146,3 +146,40 @@
     //     // }
     // }
 }
+
+@mixin header {
+    width: 100%;
+    @include flex(row, center, space-between);
+    height: 50px;
+    border-bottom: 1px solid $clr-grey2;
+    padding: $pad1;
+    position: sticky;
+    top: 0;
+    background-color: $clr-white;
+    z-index: 1;
+
+    img {
+        height: 22px;
+        height: em(25px);
+        margin-right: 10px;
+
+        &.logo {
+            height: em(35px);
+            margin-left: $pad1;
+        }
+    }
+    h2 {
+        @include flex(row, center, center, 7px);
+        font-size: 1.4em;
+        font-weight: 400;
+        img {
+            height: 14px;
+            // margin-left: 5px;
+        }
+    }
+
+    div,
+    section {
+        @include flex(row, center, center, $pad1);
+    }
+}

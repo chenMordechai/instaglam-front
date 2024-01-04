@@ -4,17 +4,17 @@
     @include flex(column, center, start);
 
     .post-edit-container {
+        @include flex(row, start, center);
+
         text-align: center;
         width: 100%;
         // width: 350px;
         padding: $pad1;
-        border: 1px solid $clr-grey2;
+        // border: 1px solid $clr-grey2;
+
         @include for-mobile-layout {
             border: none;
             width: 100%;
-            h2 {
-                display: none;
-            }
         }
 
         .post-edit-img {
@@ -44,7 +44,15 @@
         }
 
         .post-edit-txt {
-            margin-bottom: 55px;
+            width: 400px;
+            // border: 1px solid $clr-grey3;
+            @include for-mobile-layout {
+                width: 100%;
+            }
+            margin-bottom: 0;
+            @include for-mobile-layout {
+                margin-bottom: 55px;
+            }
             .img-container {
                 margin-top: $pad1;
                 height: 200px;

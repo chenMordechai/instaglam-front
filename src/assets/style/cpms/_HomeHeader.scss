@@ -1,29 +1,6 @@
-.header {
-    // background-color: purple;
+.home-header {
     display: none;
-
     @include for-mobile-layout {
-        background-color: $clr-white;
-        display: block;
-        position: sticky;
-        top: 0;
-        height: 55px;
-        width: 100%;
-        z-index: 1;
-
-        @include flex(row, center, space-between);
-
-        img {
-            height: em(25px);
-            margin-right: 10px;
-            &.logo {
-                height: em(35px);
-                margin-left: $pad1;
-            }
-        }
-
-        section {
-            @include flex(row, center, center, $pad1);
-        }
+        @include header;
     }
 }
