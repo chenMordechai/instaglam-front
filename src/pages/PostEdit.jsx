@@ -12,8 +12,10 @@ import { PostEditTxt } from "../cpms/PostEditTxt.jsx";
 
 export function PostEdit() {
     const [postToEdit, setPostToEdit] = useState(postService.getEmptyPost())
-    const { postId } = useParams()
     const [pageNum, setPageNum] = useState(1)
+
+    const { postId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         // if (postId) loadPost()
@@ -43,30 +45,23 @@ export function PostEdit() {
             const savedPost = await savePost({ ...postToEdit })
             console.log('savedPost:', savedPost)
             // showSuccessMsg('Save Post: ' + savedPost._id)
-            // navigate('/post')
+            navigate('/home')
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Post')
         }
     }
 
-    async function uploadImg(ev) {
-        const imgUrl = await utilService.uploadImgToCloudinary(ev)
-        setPostToEdit(prevPost => ({ ...prevPost, imgUrl: imgUrl }))
-    }
-
     async function onChangeImg(ev) {
         const imgUrl = await utilService.uploadImgToCloudinary(ev)
         try {
             setPostToEdit(() => ({ ...postToEdit, imgUrl: imgUrl }))
-            // await saveUserImg({ ...user, imgUrl: imgUrl })
-            // showSuccessMsg('Save Toy: ' + savedToy._id)
-            // navigate('/toy')
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')
         }
     }
+
    function onSetImgFilter(imgFilter){
     setPostToEdit(prevPost => ({ ...prevPost, imgFilter }))
    }

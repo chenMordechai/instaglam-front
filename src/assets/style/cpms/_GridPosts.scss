@@ -1,12 +1,15 @@
 .grid-container {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33.33333333%);
+    // grid-auto-rows: 200px; // from js
     gap: 5px;
 
     li {
         @include flex(row, center, center);
-        img {
-            width: 100%;
-        }
+        background-color: teal;
+        // img {
+        //     width: 100%;
+        // }
     }
 }

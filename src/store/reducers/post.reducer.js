@@ -40,8 +40,6 @@ export function postReducer(state = initialState, action = {}) {
         case SET_IS_LOADING:
             return { ...state, isLoading: action.isLoading }
 
-
-
         default:
             return state;
     }
