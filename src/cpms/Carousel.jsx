@@ -10,11 +10,10 @@ export function Carousel({ items , Comp1 , Comp2,imgUrl , onSetImgFilter}) {
     const [startX, setStartX] = useState()
     const [startScrollLeft, setStartScrollLeft] = useState()
     const [startOfScroll, setStartOfScroll] = useState(true)
-    const [endOfScroll, setEndOfScroll] = useState(true)
+    const [endOfScroll, setEndOfScroll] = useState(false)
     let carousel = useRef()
 
     useEffect(() => {
-        startEndScroll()
         document.addEventListener('mouseup', dragStop)
         carousel.current.addEventListener("scroll", startEndScroll)
 
@@ -23,11 +22,23 @@ export function Carousel({ items , Comp1 , Comp2,imgUrl , onSetImgFilter}) {
         }
     }, [])
 
+    useEffect(() => {
+        if(!carousel) return
+        checkIfHasScroll()       
+    }, [carousel?.current?.scrollWidth])
+
     function startEndScroll(){
         setStartOfScroll(carousel.current.scrollLeft === 0)
         setEndOfScroll(Math.abs(carousel.current.scrollWidth - carousel.current.scrollLeft - carousel.current.clientWidth) < 1)
         }
-    
+
+    function checkIfHasScroll(){
+        if(carousel.current.scrollWidth === carousel.current.clientWidth){
+            setEndOfScroll(true)
+        }else{
+            setEndOfScroll(false)
+        }
+    }
 
     function dragStart(ev) {
         setIsDragging(true)

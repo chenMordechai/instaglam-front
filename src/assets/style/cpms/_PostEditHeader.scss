@@ -1,3 +1,4 @@
 .post-edit-header {
     @include header;
+    border-bottom: 1px solid $clr-grey2;
 }

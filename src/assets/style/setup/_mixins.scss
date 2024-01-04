@@ -151,7 +151,7 @@
     width: 100%;
     @include flex(row, center, space-between);
     height: 50px;
-    border-bottom: 1px solid $clr-grey2;
+
     padding: $pad1;
     position: sticky;
     top: 0;

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { useSelector } from 'react-redux'
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -11,6 +11,7 @@ import { loadPosts } from '../store/actions/post.actions.js'
 import { loadUsers } from '../store/actions/user.actions.js'
 
 export function Home() {
+
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
     // console.log('users:', users)
@@ -27,12 +28,16 @@ export function Home() {
         }
 
     }, [])
+
+  
+
+   
     return (
         <section className="home">
             <HomeHeader />
             <div className="main-content">
                 <Users users={users} />
-                <Posts posts={posts} />
+                <Posts posts={posts} loggedinUser={loggedinUser}  />
             </div>
             <NavSide />
         </section>

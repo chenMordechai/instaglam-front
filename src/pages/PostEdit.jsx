@@ -16,17 +16,19 @@ export function PostEdit() {
     const [isLoading, setIsLoading] = useState(false)
 
     const { postId } = useParams()
+    console.log('postId:', postId)
     const navigate = useNavigate()
 
     useEffect(() => {
-        // if (postId) loadPost()
+        if (postId) loadPost()
         // console.log('postToEdit.txt:', postToEdit.txt)
 
-    }, [postId,postToEdit])
+    }, [postId])
 
     async function loadPost() {
         try {
             const post = await postService.getById(postId)
+            console.log('post:', post)
             setPostToEdit(post)
         } catch (err) {
             console.log('Had issues in post details', err)
@@ -44,7 +46,7 @@ export function PostEdit() {
         ev.preventDefault()
         try {
             const savedPost = await savePost({ ...postToEdit })
-            console.log('savedPost:', savedPost)
+            // console.log('savedPost:', savedPost)
             // showSuccessMsg('Save Post: ' + savedPost._id)
             navigate('/home')
         } catch (err) {

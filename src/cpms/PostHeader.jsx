@@ -6,10 +6,11 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function PostHeader({byId, by, byImgUrl, createdAt }) {
+export function PostHeader({byId, by, byImgUrl, createdAt,onToggleOptionsModal }) {
     function getRelativeDate() {
         return utilService.timeDifference(Date.now(), createdAt)
     }
+    
     return (
         <section className="post-header">
             <div className="user-info-container">
@@ -24,7 +25,7 @@ export function PostHeader({byId, by, byImgUrl, createdAt }) {
                     <span>{getRelativeDate()}</span>
                 </div>
             </div>
-            <button>
+            <button onClick={onToggleOptionsModal} className="ellipsis">
                 <img src={ellipsis} />
             </button>
         </section>

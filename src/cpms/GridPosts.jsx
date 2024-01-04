@@ -1,7 +1,6 @@
 import {useRef , useEffect} from 'react'
 
 export function GridPosts ({posts}){
-    console.log('posts:', posts)
     const square = useRef()
     const grid = useRef()
 
@@ -26,12 +25,13 @@ export function GridPosts ({posts}){
         grid.current.style.gridAutoRows = width +'px'
     }
 
-    function getStyle(postImgUrl){
+    function getStyle(postImgUrl, postImgFilter){
         
         return {
             backgroundImage:`url(${postImgUrl})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
+            filter:postImgFilter
         }
     }
 
@@ -40,7 +40,7 @@ export function GridPosts ({posts}){
             {posts.map(post=> <li 
             ref={square} className="square" 
             key={post._id}
-            style={getStyle(post.imgUrl)}>
+            style={getStyle(post.imgUrl,post.imgFilter?.filter)}>
 
         </li>)}</ul>
     )

@@ -3,13 +3,16 @@
     .icons-container {
         @include flex(row, center, space-between);
         margin: em(10px) 0;
+        img,
+        svg {
+            height: em(25px);
+        }
         div {
             @include flex(row, center, center);
             a {
                 position: relative;
                 img,
                 svg {
-                    height: em(25px);
                     &:not(.last) {
                         margin-right: 20px;
                     }

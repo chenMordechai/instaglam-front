@@ -34,4 +34,11 @@
             }
         }
     }
+    .ellipsis {
+        img {
+            @include for-mobile-layout {
+                transform: rotate(90deg);
+            }
+        }
+    }
 }
