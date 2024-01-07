@@ -14,8 +14,10 @@ export const postService = {
     remove,
     getEmptyPost,
     getFilters,
-    saveLikePost,
-    removeLikePost
+    addLikePost,
+    removeLikePost,
+    getEmptyComment,
+    addComment
     // getDefaultFilter,
     // getLabels,
     // getDefaultSort,
@@ -98,8 +100,12 @@ async function save(post) {
     }
 }
 
-async function saveLikePost(postId) {
+async function addLikePost(postId) {
     return httpService.post(BASE_URL + postId + '/like')
+}
+
+async function addComment(comment,postId) {
+    return httpService.post(BASE_URL + postId + '/comment',comment)
 }
 
 async function removeLikePost(postId, likeById) {
@@ -123,11 +129,14 @@ function getFilters() {
     return [{ name: 'none', prop: 'none' }, { name: 'saturate', prop: 'saturate(2)' }, { name: 'grayscale', prop: 'grayscale(1)' }, { name: 'hue-rotate', prop: 'hue-rotate(115deg)' }, { name: 'invert', prop: 'invert(1)' }, { name: 'blur', prop: 'blur(1px)' }, { name: 'brightness', prop: 'brightness(0.5)' }, { name: 'contrast', prop: 'contrast(0.5)' }, { name: 'opacity', prop: 'opacity(0.5)' }, { name: 'sepia', prop: 'sepia(1)' }]
 }
 
-// function getEmptyMsg() {
-//     return {
-//         txt: ''
-//     }
-// }
+function getEmptyComment() {
+    return {
+        txt: '',
+        createdAt:'',
+        by:'',
+        likedBy:[]
+    }
+}
 
 // function getDefaultFilter() {
 //     return { name: '', inStock: 'all', labels: [], price: '' }

@@ -53,19 +53,19 @@ export async function savePost(post) {
 
     }
 }
-export async function saveLikeByPost(postId) {
+
+export async function addLikeByPost(postId) {
     try {
-        const likedBy = await postService.saveLikePost(postId)
+        const likedBy = await postService.addLikePost(postId)
         store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy })
         return likedBy
     } catch (err) {
         console.log('post action -> Cannot save post', err)
         throw err
-
     }
 }
 
-export async function saveLikeByPostOptimistic(postId, likedByUser) {
+export async function addLikeByPostOptimistic(postId, likedByUser) {
     try {
         store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy: likedByUser })
         const likedBy = await postService.saveLikePost(postId)
@@ -103,4 +103,17 @@ export async function removeLikeByPostOptimistic(postId, likedByUser) {
 
     }
 
+}
+
+export async function addComment(comment,postId){
+    // console.log('txt,postId:', txt,postId)
+    try {
+        const addedComment = await postService.addComment(comment,postId)
+        // // // store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy })
+        return addedComment
+    } catch (err) {
+        console.log('post action -> Cannot save post', err)
+        throw err
+
+    }
 }

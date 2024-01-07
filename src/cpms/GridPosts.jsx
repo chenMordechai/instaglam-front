@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react'
 
 export function GridPosts({ posts }) {
-    console.log('posts:', posts)
     const square = useRef()
     const grid = useRef()
 

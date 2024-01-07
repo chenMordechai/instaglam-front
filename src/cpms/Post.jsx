@@ -5,10 +5,11 @@ import { PostHeader } from "./PostHeader"
 import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
-import { removeLikeByPostOptimistic, saveLikeByPostOptimistic, removePost } from '../store/actions/post.actions.js'
+import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment } from '../store/actions/post.actions.js'
 
 export function Post({ post, loggedinUser }) {
     const [openOptionsModal, setOpenOptionsModal] = useState(false)
+    const [newComment, setNewComment] = useState(null)
 
     function onToggleOptionsModal() {
         setOpenOptionsModal(prev => !prev)
@@ -20,12 +21,20 @@ export function Post({ post, loggedinUser }) {
     }
 
     function onUpdateLikePost(isLike) {
-        if (isLike) saveLikeByPostOptimistic(post._id, loggedinUser)
+        if (isLike) addLikeByPostOptimistic(post._id, loggedinUser)
         else removeLikeByPostOptimistic(post._id, loggedinUser)
     }
 
     function onRemovePost() {
         removePost(post._id)
+    }
+  async  function onAddCommentToPost(comment){
+        console.log('comment:', comment)
+        const addedComment = await addComment(comment,post._id)
+    console.log('addedComment:', addedComment)
+
+        // setNewComment(addedComment)
+
     }
 
     return (
@@ -35,7 +44,7 @@ export function Post({ post, loggedinUser }) {
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} filter={post.imgFilter} />
             <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} by={post.by.username} txt={post.txt} />
-            <PostComments comments={post.comments} />
+            <PostComments comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost}/>
         </section>
     )
 }

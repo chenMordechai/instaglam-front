@@ -1,13 +1,14 @@
 .post-comments {
     padding: 0 10px;
-    h3,
-    input::placeholder {
+    position: relative;
+    h3 {
+        // input::placeholder {
         margin-top: 5px;
         color: $clr-grey4;
         font-weight: 350;
         font-size: 1em;
         @include for-mobile-layout {
-            margin-top: 0px;
+            // margin-top: 0px;
             font-size: 1.2em;
             font-weight: 100;
         }
@@ -15,15 +16,26 @@
     // input::placeholder {
     //     font-size: 17px;
     // }
-    input {
+    input,
+    input::placeholder {
         border: none;
         cursor: pointer;
         padding: 0;
         font-size: 1em;
         font-weight: 100;
-        margin-top: 4px;
+        margin-top: 8px;
+        width: 100%;
+        @include for-mobile-layout {
+            font-size: 18px;
+        }
     }
     input:focus {
         outline: none;
+    }
+
+    button.post {
+        position: absolute;
+        right: 10px;
+        bottom: 0;
     }
 }

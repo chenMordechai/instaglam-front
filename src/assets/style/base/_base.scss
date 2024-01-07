@@ -16,7 +16,7 @@ html {
   font-size: 18px;
 
   @include for-mobile-layout {
-    font-size: 13px;
+    font-size: 15px;
     line-height: lh(20px);
   }
 
