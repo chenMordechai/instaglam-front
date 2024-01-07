@@ -22,7 +22,8 @@ export function GridPosts({ posts }) {
     }
 
     function updateWidth() {
-        const width = square.current.offsetWidth
+       
+        const width = square?.current?.offsetWidth
         grid.current.style.gridAutoRows = width + 'px'
     }
 
@@ -43,6 +44,7 @@ export function GridPosts({ posts }) {
                 key={post._id}
                 style={getStyle(post.imgUrl, post.imgFilter?.filter)}>
 
-            </li>)}</ul>
+            </li>)}
+            </ul>
     )
 }

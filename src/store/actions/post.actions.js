@@ -30,6 +30,7 @@ export async function loadPost(postId) {
 }
 
 export async function removePost(postId) {
+    console.log('removePost', postId)
     try {
         await postService.remove(postId)
         store.dispatch({ type: REMOVE_POST, postId })
@@ -63,7 +64,6 @@ export async function saveLikeByPost(postId) {
 
     }
 }
-
 
 export async function saveLikeByPostOptimistic(postId, likedByUser) {
     try {

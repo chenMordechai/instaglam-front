@@ -99,7 +99,6 @@ async function save(post) {
 }
 
 async function saveLikePost(postId) {
-    console.log('service saveLikePost', BASE_URL + postId + '/like')
     return httpService.post(BASE_URL + postId + '/like')
 }
 

@@ -9,26 +9,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 export function PostControls({ onUpdateLikePost, loggedinUser, by, likedBy, txt }) {
-    // console.log('likedBy:', likedBy)
     const [isLiked, setIsLiked] = useState()
 
     useEffect(() => {
-        // console.log('hi')
         isLoggedinUserLikePost()
 
     }, [likedBy])
 
     function isLoggedinUserLikePost() {
-        // console.log('isLoggedinUserLikePost')
         if (!loggedinUser) return false
         const res = likedBy.some(user => user._id === loggedinUser._id)
-        // if (res) return true
         if (res) setIsLiked(true)
         else setIsLiked(false)
     }
 
     function onLikePost() {
-        // setIsLiked(prev => !prev)
         onUpdateLikePost(!isLiked)
     }
     return (
