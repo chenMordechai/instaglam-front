@@ -1,7 +1,7 @@
-import { useEffect, useState ,useRef} from "react"
+import { useEffect, useState, useRef } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import { UPDATE_POST } from "../store/reducers/post.reducer";
+// import { UPDATE_POST } from "../store/reducers/post.reducer";
 import { savePost } from '../store/actions/post.actions.js'
 import { utilService } from "../services/util.service"
 import { postService } from "../services/post.service"
@@ -40,13 +40,13 @@ export function PostEdit() {
         let { value, name } = ev.target
         setPostToEdit(prevPost => ({ ...prevPost, [name]: value }))
     }
-  
+
 
     async function onSubmitForm(ev) {
         ev.preventDefault()
         try {
             const savedPost = await savePost({ ...postToEdit })
-            // console.log('savedPost:', savedPost)
+            console.log('savedPost:', savedPost)
             // showSuccessMsg('Save Post: ' + savedPost._id)
             navigate('/home')
         } catch (err) {
@@ -63,25 +63,25 @@ export function PostEdit() {
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')
-        }    finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
-   function onSetImgFilter(imgFilter){
-    setPostToEdit(prevPost => ({ ...prevPost, imgFilter }))
-   }
-   
-   function onChangePageNum(diff){
-    setPageNum(prev => prev +diff)
-   }
+    function onSetImgFilter(imgFilter) {
+        setPostToEdit(prevPost => ({ ...prevPost, imgFilter }))
+    }
+
+    function onChangePageNum(diff) {
+        setPageNum(prev => prev + diff)
+    }
     return (
         <section className="post-edit">
             <PostEditHeader pageNum={pageNum} isEdit={postId ? true : false} onChangePageNum={onChangePageNum} />
-           <div className="post-edit-container">
-         { pageNum === 1 && <PostEditImg  isLoading={isLoading} imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter}/>}
-         { pageNum === 2 && <PostEditTxt imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm}/>}
-            
+            <div className="post-edit-container">
+                {pageNum === 1 && <PostEditImg isLoading={isLoading} imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter} />}
+                {pageNum === 2 && <PostEditTxt isEdit={postId ? true : false} imgUrl={postToEdit.imgUrl} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm} />}
+
             </div>
 
 

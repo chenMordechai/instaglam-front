@@ -1,47 +1,48 @@
-import {useRef , useEffect} from 'react'
+import { useRef, useEffect } from 'react'
 
-export function GridPosts ({posts}){
+export function GridPosts({ posts }) {
+    console.log('posts:', posts)
     const square = useRef()
     const grid = useRef()
 
-    useEffect(()=>{
+    useEffect(() => {
         updateWidth()
         addResizeListener()
-       
-        return ()=>{
+
+        return () => {
             removeResizeListener()
         }
-    },[])
+    }, [])
 
-    function addResizeListener(){
-        window.addEventListener('resize',updateWidth)
+    function addResizeListener() {
+        window.addEventListener('resize', updateWidth)
     }
-    function removeResizeListener(){
-        window.removeEventListener('resize',updateWidth)
+    function removeResizeListener() {
+        window.removeEventListener('resize', updateWidth)
     }
 
-    function updateWidth(){
+    function updateWidth() {
         const width = square.current.offsetWidth
-        grid.current.style.gridAutoRows = width +'px'
+        grid.current.style.gridAutoRows = width + 'px'
     }
 
-    function getStyle(postImgUrl, postImgFilter){
-        
+    function getStyle(postImgUrl, postImgFilter) {
+
         return {
-            backgroundImage:`url(${postImgUrl})`,
+            backgroundImage: `url(${postImgUrl})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter:postImgFilter
+            filter: postImgFilter
         }
     }
 
     return (
         <ul ref={grid} className="grid-container">
-            {posts.map(post=> <li 
-            ref={square} className="square" 
-            key={post._id}
-            style={getStyle(post.imgUrl,post.imgFilter?.filter)}>
+            {posts.map(post => <li
+                ref={square} className="square"
+                key={post._id}
+                style={getStyle(post.imgUrl, post.imgFilter?.filter)}>
 
-        </li>)}</ul>
+            </li>)}</ul>
     )
 }

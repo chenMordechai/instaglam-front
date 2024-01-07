@@ -4,7 +4,10 @@ export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST = 'SET_POST'
+export const UPDATE_POSTS = 'UPDATE_POSTS'
 export const UPDATE_POST = 'UPDATE_POST'
+export const UPDATE_POST_LIKED_BY = 'UPDATE_POST_LIKED_BY'
+export const REMOVE_POST_LIKED_BY = 'REMOVE_POST_LIKED_BY'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 
@@ -33,8 +36,26 @@ export function postReducer(state = initialState, action = {}) {
             posts = [...state.posts, action.post]
             return { ...state, posts }
 
-        case UPDATE_POST:
+        case UPDATE_POSTS:
             posts = state.posts.map(post => post._id === action.post._id ? action.post : post)
+            return { ...state, posts }
+
+        case UPDATE_POST_LIKED_BY:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.likedBy = [...post.likedBy, action.likedBy]
+                }
+                return post
+            })
+            return { ...state, posts }
+
+        case REMOVE_POST_LIKED_BY:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.likedBy = post.likedBy.filter(lb => lb._id !== action.likeById)
+                }
+                return post
+            })
             return { ...state, posts }
 
         case SET_IS_LOADING:

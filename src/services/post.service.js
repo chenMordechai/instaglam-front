@@ -13,7 +13,9 @@ export const postService = {
     save,
     remove,
     getEmptyPost,
-    getFilters
+    getFilters,
+    saveLikePost,
+    removeLikePost
     // getDefaultFilter,
     // getLabels,
     // getDefaultSort,
@@ -96,13 +98,14 @@ async function save(post) {
     }
 }
 
-// async function saveMsg(msg, postId) {
-//     return httpService.post(BASE_URL + postId + '/msg', msg)
-// }
+async function saveLikePost(postId) {
+    console.log('service saveLikePost', BASE_URL + postId + '/like')
+    return httpService.post(BASE_URL + postId + '/like')
+}
 
-// async function removeMsg(msgId, postId) {
-//     return httpService.delete(BASE_URL + postId + '/msg/' + msgId, msgId)
-// }
+async function removeLikePost(postId, likeById) {
+    return httpService.delete(BASE_URL + postId + '/like/' + likeById, likeById)
+}
 
 function getEmptyPost() {
     return {
@@ -111,14 +114,14 @@ function getEmptyPost() {
         createdAt: '',
         by: null,
         loc: null,
-        comments:[],
-        likedBy:[],
-        tags:[]
+        comments: [],
+        likedBy: [],
+        tags: []
     }
 }
 
-function getFilters(){
-    return [{name:'none', prop:'none'},{name:'saturate',prop:'saturate(2)'},{name:'grayscale',prop:'grayscale(1)'},{name:'hue-rotate',prop:'hue-rotate(115deg)'},{name:'invert',prop:'invert(1)'},{name:'blur',prop:'blur(1px)'},{name:'brightness',prop:'brightness(0.5)'},{name:'contrast',prop:'contrast(0.5)'},{name:'opacity',prop:'opacity(0.5)'},{name:'sepia',prop:'sepia(1)'}]
+function getFilters() {
+    return [{ name: 'none', prop: 'none' }, { name: 'saturate', prop: 'saturate(2)' }, { name: 'grayscale', prop: 'grayscale(1)' }, { name: 'hue-rotate', prop: 'hue-rotate(115deg)' }, { name: 'invert', prop: 'invert(1)' }, { name: 'blur', prop: 'blur(1px)' }, { name: 'brightness', prop: 'brightness(0.5)' }, { name: 'contrast', prop: 'contrast(0.5)' }, { name: 'opacity', prop: 'opacity(0.5)' }, { name: 'sepia', prop: 'sepia(1)' }]
 }
 
 // function getEmptyMsg() {

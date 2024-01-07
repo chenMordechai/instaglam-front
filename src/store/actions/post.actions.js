@@ -1,6 +1,6 @@
 
 import { postService } from "../../services/post.service.js";
-import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST } from "../reducers/post.reducer.js";
+import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY } from "../reducers/post.reducer.js";
 import { store } from "../store.js";
 
 
@@ -41,10 +41,36 @@ export async function removePost(postId) {
 }
 
 export async function savePost(post) {
-    const type = post._id ? UPDATE_POST : ADD_POST
+    const type = post._id ? UPDATE_POSTS : ADD_POST
     try {
         const postToSave = await postService.save(post)
         store.dispatch({ type, post: postToSave })
+        return postToSave
+    } catch (err) {
+        console.log('post action -> Cannot save post', err)
+        throw err
+
+    }
+}
+export async function saveLikeByPost(postId) {
+    console.log('action saveLikeByPost')
+    // const type = post._id ? UPDATE_POST : ADD_POST
+    try {
+        const likedBy = await postService.saveLikePost(postId)
+        store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy })
+        return likedBy
+    } catch (err) {
+        console.log('post action -> Cannot save post', err)
+        throw err
+
+    }
+}
+export async function removeLikeByPost(postId, likeById) {
+    // const type = post._id ? UPDATE_POST : ADD_POST
+    try {
+        const postToSave = await postService.removeLikePost(postId, likeById)
+        console.log('postToSave:', postToSave)
+        store.dispatch({ type: REMOVE_POST_LIKED_BY, postId, likeById })
         return postToSave
     } catch (err) {
         console.log('post action -> Cannot save post', err)

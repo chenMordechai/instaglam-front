@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import 'animate.css';
 
 import heart from '../assets/icons/heart-regular.svg'
@@ -6,15 +7,35 @@ import arrow from '../assets/icons/arrow-up-right.svg'
 import bookmark from '../assets/icons/bookmark-regular.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
 
-export function PostControls({ by, likesNumber, txt }) {
+export function PostControls({ onUpdateLikePost, loggedinUser, by, likedBy, txt }) {
+    // console.log('likedBy:', likedBy)
     const [isLiked, setIsLiked] = useState()
+
+    useEffect(() => {
+        // console.log('hi')
+        isLoggedinUserLikePost()
+
+    }, [likedBy])
+
+    function isLoggedinUserLikePost() {
+        // console.log('isLoggedinUserLikePost')
+        if (!loggedinUser) return false
+        const res = likedBy.some(user => user._id === loggedinUser._id)
+        // if (res) return true
+        if (res) setIsLiked(true)
+        else setIsLiked(false)
+    }
+
+    function onLikePost() {
+        // setIsLiked(prev => !prev)
+        onUpdateLikePost(!isLiked)
+    }
     return (
         <section className="post-controls">
             <div className="icons-container">
                 <div>
-                    <a onClick={() => setIsLiked(prev => !prev)} className={isLiked ? 'red-heart' : ''}>
+                    <a onClick={onLikePost} className={isLiked ? 'red-heart' : ''}>
                         <img src={heart} />
                         <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
                     </a>
@@ -29,7 +50,7 @@ export function PostControls({ by, likesNumber, txt }) {
                     <img className="last" src={bookmark} />
                 </a>
             </div>
-            <h3>{likesNumber} likes</h3>
+            <h3>{likedBy.length} likes</h3>
             <h3>{by} <span>{txt}</span></h3>
         </section>
     )

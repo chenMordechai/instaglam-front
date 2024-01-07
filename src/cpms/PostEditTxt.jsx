@@ -8,7 +8,7 @@ import chevron from '../assets/icons/chevron-right-solid.svg'
 
 
 
-export function PostEditTxt ({imgUrl, style,postToEdit, setPostToEdit,handleChange,onSubmitForm}){
+export function PostEditTxt ({isEdit,imgUrl, style,postToEdit, setPostToEdit,handleChange,onSubmitForm}){
 
   
     return (
@@ -71,7 +71,9 @@ export function PostEditTxt ({imgUrl, style,postToEdit, setPostToEdit,handleChan
         </button>
 
 
-        <button className="share" type="submit">Share</button>
+        <button className="share" type="submit">
+           {isEdit?'Save':'Share'} 
+            </button>
           </form>
         </section>
     )

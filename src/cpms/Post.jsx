@@ -1,12 +1,13 @@
-import { useState} from "react";
+import { useState } from "react";
 
 import { PostComments } from "./PostComments"
 import { PostHeader } from "./PostHeader"
 import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
+import { removeLikeByPost, saveLikeByPost } from '../store/actions/post.actions.js'
 
-export function Post({ post,loggedinUser }) {
+export function Post({ post, loggedinUser }) {
     console.log('post:', post)
     const [openOptionsModal, setOpenOptionsModal] = useState(false)
 
@@ -18,14 +19,27 @@ export function Post({ post,loggedinUser }) {
         if (!loggedinUser) return false
         return loggedinUser.username === post.by.username
     }
-    // console.log('post:', post)
+
+    function onUpdateLikePost(isLike) {
+        console.log('isLike:', isLike)
+        if (isLike) saveLikeByPost(post._id)
+        else removeLikeByPost(post._id, loggedinUser._id)
+        // console.log('post:', post)
+        // console.log('loggedinUser:',loggedinUser)
+        // const postToSave = { ...post }
+        // if (isLike) postToSave.likedBy = [...postToSave.likedBy, loggedinUser]
+        // else postToSave.likedBy = postToSave.likedBy.filter(u => u._id !== loggedinUser._id)
+        // savePost({...post, })
+        // console.log('postToSave:', postToSave)
+
+    }
     return (
         <section className="post">
             {openOptionsModal && <PostOptionsModal postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} filter={post.imgFilter} />
-            <PostControls by={post.by.username} likesNumber={post.likedBy.length} txt={post.txt} />
+            <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} by={post.by.username} txt={post.txt} />
             <PostComments comments={post.comments} />
         </section>
     )
