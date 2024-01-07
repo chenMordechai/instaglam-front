@@ -5,7 +5,7 @@ import { PostHeader } from "./PostHeader"
 import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
-import { removeLikeByPost, saveLikeByPost } from '../store/actions/post.actions.js'
+import { removeLikeByPostOptimistic, saveLikeByPostOptimistic } from '../store/actions/post.actions.js'
 
 export function Post({ post, loggedinUser }) {
     console.log('post:', post)
@@ -22,8 +22,8 @@ export function Post({ post, loggedinUser }) {
 
     function onUpdateLikePost(isLike) {
         console.log('isLike:', isLike)
-        if (isLike) saveLikeByPost(post._id)
-        else removeLikeByPost(post._id, loggedinUser._id)
+        if (isLike) saveLikeByPostOptimistic(post._id, loggedinUser)
+        else removeLikeByPostOptimistic(post._id, loggedinUser)
         // console.log('post:', post)
         // console.log('loggedinUser:',loggedinUser)
         // const postToSave = { ...post }
