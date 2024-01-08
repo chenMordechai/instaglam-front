@@ -1,7 +1,7 @@
 import {CommentPreview} from './CommentPreview'
 import {AddComment} from './AddComment'
 
-export function PostCommentModal ({comments}){
+export function PostCommentModal ({comments,loggedinUserImg,username,onAddCommentToPost}){
     // console.log('comments:', comments)
     return (
         <section className="modal comment-modal">
@@ -12,7 +12,7 @@ export function PostCommentModal ({comments}){
                 </li>)}
             </ul>
 
-            <AddComment/>
+            <AddComment loggedinUserImg={loggedinUserImg} username={username} onAddCommentToPost={onAddCommentToPost}/>
         </section>
     )
 }

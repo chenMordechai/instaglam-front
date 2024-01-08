@@ -1,0 +1,55 @@
+.add-comment {
+    // background-color: red;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding-bottom: $pad1;
+
+    .emoji-container {
+        padding: $pad1;
+        font-size: 21px;
+        @include flex(row, center, space-between);
+        border-top: 1px solid $clr-grey2;
+        span {
+            cursor: pointer;
+        }
+    }
+
+    .form-container {
+        border-top: 1px solid $clr-grey2;
+        @include flex(row, center, space-between);
+        .side-left-container {
+            width: 14%;
+            @include flex(row, center, center);
+            .img-container {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        form {
+            width: 72%;
+            input {
+                width: 100%;
+                font-size: 14px;
+                font-weight: 400;
+                // background-color: unset;
+            }
+
+            input::placeholder {
+                color: $clr-grey3;
+                font-weight: 350;
+            }
+        }
+
+        button {
+            width: 10%;
+            img.gif {
+                border-radius: 0;
+                border: none;
+                height: 23px;
+                width: 23px;
+                margin: 0;
+            }
+        }
+    }
+}

@@ -140,3 +140,12 @@ label {
 input[type="file"] {
   display: none;
 }
+
+input,
+textarea {
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
