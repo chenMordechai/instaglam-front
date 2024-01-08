@@ -10,14 +10,25 @@
 
     @include for-mobile-layout {
         width: 260px;
+        &.comment-modal {
+            width: 100%;
+            height: 70%;
+            top: 30%;
+            bottom: 0;
+            left: 0;
+            translate: 0 0;
+            // border: none;
+        }
     }
+
     background-color: $clr-white;
 
     // cancel when screen
     border: 1px solid black;
     border-radius: 10px;
 
-    button {
+    button,
+    h3 {
         @include flex(column, center, center);
         border-bottom: 1px solid $clr-grey2;
         padding: 15px;

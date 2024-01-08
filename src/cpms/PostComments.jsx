@@ -2,7 +2,7 @@ import {useState} from 'react'
 
 import {postService} from '../services/post.service'
 
-export function PostComments({comments ,myNewComment, onAddCommentToPost}) {
+export function PostComments({onToggleCommentModal,comments ,myNewComment, onAddCommentToPost, by, likedBy, txt}) {
     const [comment, setComment] = useState(postService.getEmptyComment())
     
     function handleChange(ev) {
@@ -18,8 +18,10 @@ export function PostComments({comments ,myNewComment, onAddCommentToPost}) {
     }
     return (
         <section className="post-comments">
-            <h3>View all {comments.length} comments</h3>
-           { myNewComment &&<h2>{myNewComment.by.username} <span>{myNewComment.txt}</span> </h2>}
+            <h3>{likedBy.length} likes</h3>
+            <h3>{by} <span>{txt}</span></h3>
+            <button onClick={onToggleCommentModal} className="color-grey">View all {comments.length} comments</button>
+           { myNewComment &&<h3>{myNewComment.by.username} <span>{myNewComment.txt}</span> </h3>}
             <form onSubmit={onSubmitForm}>
             <input onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
             {/* if input have value add button post */}

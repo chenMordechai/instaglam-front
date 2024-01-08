@@ -1,0 +1,44 @@
+.comment-preview {
+    @include flex(row, start, space-between);
+    padding: $pad1 0;
+    width: 100%;
+    .side-left-container {
+        width: 14%;
+        // background-color: red;
+        @include flex(row, center, center);
+        .img-container {
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .content-container {
+        width: 77%;
+        @include flex(column, start, center);
+
+        h3 {
+            font-weight: 400;
+            font-size: 14px;
+            width: 100%;
+            @include flex(row, center, start, $pad1);
+            padding: 0;
+            border: none;
+        }
+        p {
+            width: 100%;
+        }
+        button {
+            font-size: 14px;
+            padding: 0;
+            border: none;
+            font-weight: 350;
+            color: $clr-grey4;
+        }
+    }
+    .heart-container {
+        @include flex(row, center, center);
+        width: 10%;
+        padding-top: 3px;
+
+        filter: opacity(0.6);
+    }
+}

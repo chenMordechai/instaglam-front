@@ -1,21 +1,21 @@
 .post-comments {
     padding: 0 10px;
     position: relative;
+    @include flex(column, start, start, 7px);
     h3 {
-        // input::placeholder {
-        margin-top: 5px;
-        color: $clr-grey4;
-        font-weight: 350;
+        font-weight: 550;
         font-size: 1em;
         @include for-mobile-layout {
-            // margin-top: 0px;
             font-size: 1.2em;
-            font-weight: 100;
+        }
+        span {
+            font-size: inherit;
         }
     }
-    // input::placeholder {
-    //     font-size: 17px;
-    // }
+    button,
+    span {
+        font-weight: 100;
+    }
     input,
     input::placeholder {
         border: none;
@@ -23,7 +23,6 @@
         padding: 0;
         font-size: 1em;
         font-weight: 100;
-        margin-top: 8px;
         width: 100%;
         @include for-mobile-layout {
             font-size: 18px;

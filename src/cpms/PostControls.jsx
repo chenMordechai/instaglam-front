@@ -8,7 +8,7 @@ import bookmark from '../assets/icons/bookmark-regular.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
-export function PostControls({ onUpdateLikePost, loggedinUser, by, likedBy, txt }) {
+export function PostControls({ onUpdateLikePost, loggedinUser , likedBy }) {
     const [isLiked, setIsLiked] = useState()
 
     useEffect(() => {
@@ -45,8 +45,7 @@ export function PostControls({ onUpdateLikePost, loggedinUser, by, likedBy, txt 
                     <img className="last" src={bookmark} />
                 </a>
             </div>
-            <h3>{likedBy.length} likes</h3>
-            <h3>{by} <span>{txt}</span></h3>
+            
         </section>
     )
 }
