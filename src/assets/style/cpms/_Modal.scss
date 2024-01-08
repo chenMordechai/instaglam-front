@@ -17,6 +17,25 @@
             bottom: 0;
             left: 0;
             translate: 0 0;
+
+            .header {
+                @include flex(column, center, center);
+                width: 100%;
+                border-bottom: 1px solid $clr-grey2;
+
+                img.line {
+                    height: 30px;
+                    cursor: pointer;
+                }
+                h3 {
+                    border: none;
+                }
+            }
+
+            ul {
+                overflow-y: scroll;
+                height: 67%;
+            }
             // border: none;
         }
     }

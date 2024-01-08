@@ -1,6 +1,6 @@
 
 import { postService } from "../../services/post.service.js";
-import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY } from "../reducers/post.reducer.js";
+import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY , UPDATE_POST_COMMENT } from "../reducers/post.reducer.js";
 import { store } from "../store.js";
 
 
@@ -106,10 +106,11 @@ export async function removeLikeByPostOptimistic(postId, likedByUser) {
 }
 
 export async function addComment(comment,postId){
+    // console.log('comment:', comment)
     // console.log('txt,postId:', txt,postId)
     try {
         const addedComment = await postService.addComment(comment,postId)
-        // // // store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy })
+        store.dispatch({ type: UPDATE_POST_COMMENT, postId, comment:addedComment })
         return addedComment
     } catch (err) {
         console.log('post action -> Cannot save post', err)
