@@ -3,7 +3,7 @@
     position: absolute;
     width: 100%;
     bottom: 0;
-    padding-bottom: $pad1;
+    // padding-bottom: $pad1;
 
     .emoji-container {
         padding: $pad1;
@@ -43,6 +43,7 @@
 
         button {
             width: 10%;
+            border: none;
             img.gif {
                 border-radius: 0;
                 border: none;

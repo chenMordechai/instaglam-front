@@ -19,12 +19,16 @@
             font-weight: 400;
             font-size: 14px;
             width: 100%;
-            @include flex(row, center, start, $pad1);
+            @include flex(row, end, start, $pad1);
             padding: 0;
             border: none;
         }
         p {
             width: 100%;
+        }
+        .controls-container {
+            height: 22px;
+            @include flex(row, center, start, $pad2);
         }
         button {
             font-size: 14px;
@@ -33,6 +37,15 @@
             font-weight: 350;
             color: $clr-grey4;
         }
+        img.ellipsis {
+            border: none;
+            height: 22px;
+            width: 22px;
+            filter: opacity(0.5);
+            cursor: pointer;
+            margin: 0;
+            display: none;
+        }
     }
     .heart-container {
         @include flex(row, center, center);
@@ -40,5 +53,8 @@
         padding-top: 3px;
 
         filter: opacity(0.6);
+    }
+    &:hover img.ellipsis {
+        display: inline-block;
     }
 }

@@ -109,7 +109,7 @@ async function addComment(comment,postId) {
 }
 
 async function removeLikePost(postId, likeById) {
-    return httpService.delete(BASE_URL + postId + '/like/' + likeById, likeById)
+    return httpService.delete(BASE_URL + postId + '/like/' + likeById)
 }
 
 function getEmptyPost() {

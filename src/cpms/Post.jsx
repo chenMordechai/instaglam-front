@@ -20,7 +20,7 @@ export function Post({ post, loggedinUser }) {
     function onToggleCommentModal() {
         setOpenCommentModal(prev => !prev)
     }
-
+  
     function isLoggedinUserPost() {
         if (!loggedinUser) return false
         return loggedinUser.username === post.by.username
@@ -45,7 +45,7 @@ export function Post({ post, loggedinUser }) {
     return (
         <section className="post">
             {openOptionsModal && <PostOptionsModal onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
-            {openCommentModal && <PostCommentModal comments={post.comments} loggedinUserImg={loggedinUser.imgUrl} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} />}
+            {openCommentModal && <PostCommentModal comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal}  />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} filter={post.imgFilter}  />
