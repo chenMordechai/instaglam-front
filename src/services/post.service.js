@@ -18,7 +18,9 @@ export const postService = {
     removeLikePost,
     getEmptyComment,
     addComment,
-    removeComment
+    removeComment,
+    addLikeComment,
+    removeLikeComment
     // getDefaultFilter,
     // getLabels,
     // getDefaultSort,
@@ -105,16 +107,24 @@ async function addLikePost(postId) {
     return httpService.post(BASE_URL + postId + '/like')
 }
 
-async function addComment(comment,postId) {
-    return httpService.post(BASE_URL + postId + '/comment',comment)
-}
-
 async function removeLikePost(postId, likeById) {
     return httpService.delete(BASE_URL + postId + '/like/' + likeById)
 }
 
+async function addComment(comment,postId) {
+    return httpService.post(BASE_URL + postId + '/comment',comment)
+}
+
 async function removeComment(commentId,postId) {
     return httpService.delete(BASE_URL + postId + '/comment/' + commentId)
+}
+
+async function addLikeComment(postId,commentId) {
+    return httpService.post(BASE_URL + postId + '/comment/like/'+commentId)
+}
+
+async function removeLikeComment(postId,commentId, likeById) {
+    return httpService.delete(BASE_URL + postId + '/comment/like/' + commentId+'/'+likeById)
 }
 
 function getEmptyPost() {

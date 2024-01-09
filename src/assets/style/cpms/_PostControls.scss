@@ -10,38 +10,8 @@
         div {
             @include flex(row, center, center);
             a {
-                position: relative;
-                img,
-                svg {
-                    &:not(.last) {
-                        margin-right: 20px;
-                    }
-                }
-
-                svg {
-                    color: red;
-                    left: 0px;
-                    position: absolute;
-                    display: none;
-                }
-
-                &.red-heart svg {
-                    display: block;
-                }
+                margin-right: 20px;
             }
         }
     }
-    // h3 {
-    //     margin-top: 5px;
-    //     @include for-mobile-layout {
-    //         &:first-of-type {
-    //             display: none;
-    //         }
-    //     }
-
-    //     span {
-    //         font-weight: 100;
-    //         font-size: inherit;
-    //     }
-    // }
 }

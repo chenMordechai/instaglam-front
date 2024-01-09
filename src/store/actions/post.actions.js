@@ -1,6 +1,6 @@
 
 import { postService } from "../../services/post.service.js";
-import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY , UPDATE_POST_COMMENT,REMOVE_POST_COMMENT } from "../reducers/post.reducer.js";
+import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY , UPDATE_POST_COMMENT,REMOVE_POST_COMMENT,UPDATE_COMMENT_LIKED_BY ,REMOVE_COMMENT_LIKED_BY} from "../reducers/post.reducer.js";
 import { store } from "../store.js";
 
 
@@ -129,4 +129,33 @@ export async function removeComment(commentId,postId){
         throw err
 
     }
+}
+
+export async function addLikeByCommentOptimistic(postId,commentId, likedByUser) {
+    console.log('addLikeByCommentOptimistic:')
+    try {
+        store.dispatch({ type: UPDATE_COMMENT_LIKED_BY, postId, commentId, likedBy: likedByUser })
+        const likedBy = await postService.addLikeComment(postId,commentId)
+        return likedBy
+    } catch (err) {
+        store.dispatch({ type: REMOVE_COMMENT_LIKED_BY, postId,commentId, likeById: likedByUser._id })
+        console.log('post action -> Cannot save like comment', err)
+        throw err
+
+    }
+
+}
+
+export async function removeLikeByCommentOptimistic(postId,commentId, likedByUser) {
+    try {
+        store.dispatch({ type: REMOVE_COMMENT_LIKED_BY, postId,commentId, likeById: likedByUser._id })
+        const likedBy = await postService.removeLikeComment(postId , commentId, likedByUser._id)
+        return likedBy
+    } catch (err) {
+        store.dispatch({ type: UPDATE_COMMENT_LIKED_BY, postId,commentId, likedBy: likedByUser })
+        console.log('post action -> Cannot remove like comment', err)
+        throw err
+
+    }
+
 }

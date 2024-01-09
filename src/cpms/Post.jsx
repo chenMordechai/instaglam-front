@@ -6,7 +6,7 @@ import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
 import { PostCommentModal } from "../cpms/PostCommentModal";
-import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment ,removeComment} from '../store/actions/post.actions.js'
+import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment ,removeComment,addLikeByCommentOptimistic,removeLikeByCommentOptimistic} from '../store/actions/post.actions.js'
 
 export function Post({ post, loggedinUser }) {
     // console.log('post:', post)
@@ -31,6 +31,11 @@ export function Post({ post, loggedinUser }) {
         else removeLikeByPostOptimistic(post._id, loggedinUser)
     }
 
+    function onUpdateLikeComment(isLike , commentId) {
+        if (isLike) addLikeByCommentOptimistic(post._id,commentId, loggedinUser)
+        else removeLikeByCommentOptimistic(post._id,commentId, loggedinUser)
+    }
+
     function onRemovePost() {
         removePost(post._id)
     }
@@ -43,15 +48,12 @@ export function Post({ post, loggedinUser }) {
     }
       async function onRemoveCommentFromPost(commentId){
         await removeComment(commentId,post._id)
-
-        // setNewComment(addedComment)
-
     }
 
     return (
         <section className="post">
             {openOptionsModal && <PostOptionsModal onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
-            {openCommentModal && <PostCommentModal comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
+            {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} filter={post.imgFilter}  />

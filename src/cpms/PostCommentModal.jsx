@@ -2,8 +2,8 @@ import {CommentPreview} from './CommentPreview'
 import {AddComment} from './AddComment'
 import line from '../assets/icons/line.png'
 
-export function PostCommentModal ({comments,loggedinUser,username,onAddCommentToPost,onToggleCommentModal,onToggleRemoveCommentModal,onRemoveCommentFromPost}){
-  
+export function PostCommentModal ({onUpdateLikeComment,comments,loggedinUser,username,onAddCommentToPost,onToggleCommentModal,onToggleRemoveCommentModal,onRemoveCommentFromPost}){
+  console.log('comments:', comments)
     return (
         <section className="modal comment-modal">
             <div className="header">
@@ -12,7 +12,7 @@ export function PostCommentModal ({comments,loggedinUser,username,onAddCommentTo
             </div>
             <ul >
                 {comments.map(comment => <li key={comment._id}>
-                    <CommentPreview comment={comment} loggedinUser={loggedinUser} onRemoveCommentFromPost={onRemoveCommentFromPost} />
+                    <CommentPreview onUpdateLikeComment={onUpdateLikeComment} comment={comment} loggedinUser={loggedinUser} onRemoveCommentFromPost={onRemoveCommentFromPost} />
                 </li>)}
             </ul>
 

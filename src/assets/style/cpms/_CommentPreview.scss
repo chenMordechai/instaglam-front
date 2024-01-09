@@ -51,8 +51,6 @@
         @include flex(row, center, center);
         width: 10%;
         padding-top: 3px;
-
-        filter: opacity(0.6);
     }
     &:hover img.ellipsis {
         display: inline-block;

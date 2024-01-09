@@ -1,39 +1,20 @@
-import { useState, useEffect } from 'react'
-import 'animate.css';
 
-import heart from '../assets/icons/heart-regular.svg'
 import msg from '../assets/icons/comment-regular.svg'
 import arrow from '../assets/icons/arrow-up-right.svg'
 import bookmark from '../assets/icons/bookmark-regular.svg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import {Heart} from './Heart'
 
 export function PostControls({ onUpdateLikePost, loggedinUser , likedBy }) {
-    const [isLiked, setIsLiked] = useState()
-
-    useEffect(() => {
-        isLoggedinUserLikePost()
-
-    }, [likedBy])
-
-    function isLoggedinUserLikePost() {
-        if (!loggedinUser) return false
-        const res = likedBy.some(user => user._id === loggedinUser._id)
-        if (res) setIsLiked(true)
-        else setIsLiked(false)
-    }
-
-    function onLikePost() {
-        onUpdateLikePost(!isLiked)
-    }
+  
     return (
         <section className="post-controls">
             <div className="icons-container">
                 <div>
-                    <a onClick={onLikePost} className={isLiked ? 'red-heart' : ''}>
+                    <Heart onUpdateLike={onUpdateLikePost} loggedinUser={loggedinUser} likedBy={likedBy}/>
+                    {/* <a onClick={onLikePost} className={isLiked ? 'red-heart' : ''}>
                         <img src={heart} />
                         <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
-                    </a>
+                    </a> */}
                     <a>
                         <img src={msg} />
                     </a>
