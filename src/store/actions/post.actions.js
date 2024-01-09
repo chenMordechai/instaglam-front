@@ -1,6 +1,6 @@
 
 import { postService } from "../../services/post.service.js";
-import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY , UPDATE_POST_COMMENT } from "../reducers/post.reducer.js";
+import { ADD_POST, REMOVE_POST, SET_POSTS, UPDATE_POSTS, UPDATE_POST, SET_IS_LOADING, SET_POST, UPDATE_POST_LIKED_BY, REMOVE_POST_LIKED_BY , UPDATE_POST_COMMENT,REMOVE_POST_COMMENT } from "../reducers/post.reducer.js";
 import { store } from "../store.js";
 
 
@@ -85,7 +85,7 @@ export async function removeLikeByPost(postId, likeById) {
         store.dispatch({ type: REMOVE_POST_LIKED_BY, postId, likeById })
         return updatedPostId
     } catch (err) {
-        console.log('post action -> Cannot save post', err)
+        console.log('post action -> Cannot remove like', err)
         throw err
 
     }
@@ -114,6 +114,18 @@ export async function addComment(comment,postId){
         return addedComment
     } catch (err) {
         console.log('post action -> Cannot save post', err)
+        throw err
+
+    }
+}
+
+export async function removeComment(commentId,postId){
+    try {
+        const updatedPostId = await postService.removeComment(commentId,postId)
+        store.dispatch({ type: REMOVE_POST_COMMENT, postId, commentId })
+        return updatedPostId
+    } catch (err) {
+        console.log('post action -> Cannot remove comment', err)
         throw err
 
     }

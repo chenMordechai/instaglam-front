@@ -9,7 +9,7 @@ import {Img} from './Img'
 import { utilService } from '../services/util.service'
 import { RemoveCommentModal } from "../cpms/RemoveCommentModal";
 
-export function CommentPreview ({comment,onToggleRemoveCommentModal ,loggedinUser}){
+export function CommentPreview ({comment,onToggleRemoveCommentModal ,loggedinUser,onRemoveCommentFromPost}){
     // console.log('comment:', comment)
     const [isLiked, setIsLiked] = useState()
     const [openRemoveCommentModal, setOpenRemoveCommentModal] = useState(false)
@@ -35,6 +35,10 @@ export function CommentPreview ({comment,onToggleRemoveCommentModal ,loggedinUse
         if (res) return 'rtl'
         else ''
     }
+    function onRemoveComment(){
+        onRemoveCommentFromPost(comment._id)
+        onToggleRemoveCommentModal()
+    }
 
     return (
         <section className="comment-preview">
@@ -59,7 +63,7 @@ export function CommentPreview ({comment,onToggleRemoveCommentModal ,loggedinUse
                         {/* <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} /> */}
             </a>
              </div>
-             {openRemoveCommentModal && <RemoveCommentModal isLoggdinUserComment={isLoggdinUserComment()} onToggleRemoveCommentModal={onToggleRemoveCommentModal}/>}
+             {openRemoveCommentModal && <RemoveCommentModal isLoggdinUserComment={isLoggdinUserComment()} onToggleRemoveCommentModal={onToggleRemoveCommentModal} onRemoveComment={onRemoveComment}/>}
 
         </section>
     )

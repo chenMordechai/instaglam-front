@@ -6,7 +6,7 @@ import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
 import { PostCommentModal } from "../cpms/PostCommentModal";
-import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment } from '../store/actions/post.actions.js'
+import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment ,removeComment} from '../store/actions/post.actions.js'
 
 export function Post({ post, loggedinUser }) {
     // console.log('post:', post)
@@ -41,11 +41,17 @@ export function Post({ post, loggedinUser }) {
         setNewComment(addedComment)
 
     }
+      async function onRemoveCommentFromPost(commentId){
+        await removeComment(commentId,post._id)
+
+        // setNewComment(addedComment)
+
+    }
 
     return (
         <section className="post">
             {openOptionsModal && <PostOptionsModal onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
-            {openCommentModal && <PostCommentModal comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal}  />}
+            {openCommentModal && <PostCommentModal comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia media={post.imgUrl} filter={post.imgFilter}  />

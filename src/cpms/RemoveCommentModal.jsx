@@ -1,10 +1,13 @@
 
 
-export function RemoveCommentModal ({isLoggdinUserComment,onToggleRemoveCommentModal}){
+export function RemoveCommentModal ({isLoggdinUserComment,onToggleRemoveCommentModal,onRemoveComment}){
     return (
         <section className="modal">
            
-            <button className="red bold"> {(isLoggdinUserComment)? 'Delete' :'Report'}</button>
+            {(isLoggdinUserComment)? 
+             <button onClick={onRemoveComment} className="red bold">Delete</button> : 
+             <button className="red bold">Report</button>}
+          
             <button onClick={onToggleRemoveCommentModal}>Cancel</button>
         </section>
     )

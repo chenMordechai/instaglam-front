@@ -9,6 +9,7 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_POST_LIKED_BY = 'UPDATE_POST_LIKED_BY'
 export const REMOVE_POST_LIKED_BY = 'REMOVE_POST_LIKED_BY'
 export const UPDATE_POST_COMMENT = 'UPDATE_POST_COMMENT'
+export const REMOVE_POST_COMMENT = 'REMOVE_POST_COMMENT'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 
@@ -67,6 +68,15 @@ export function postReducer(state = initialState, action = {}) {
                     return post
                 })
                 return { ...state, posts }
+
+                case REMOVE_POST_COMMENT:
+                    posts = state.posts.map(post => {
+                        if (post._id === action.postId) {
+                            post.comments = post.comments.filter(c => c._id !== action.commentId)
+                        }
+                        return post
+                    })
+                    return { ...state, posts }
 
         case SET_IS_LOADING:
             return { ...state, isLoading: action.isLoading }

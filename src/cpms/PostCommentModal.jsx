@@ -2,7 +2,7 @@ import {CommentPreview} from './CommentPreview'
 import {AddComment} from './AddComment'
 import line from '../assets/icons/line.png'
 
-export function PostCommentModal ({comments,loggedinUser,username,onAddCommentToPost,onToggleCommentModal,onToggleRemoveCommentModal}){
+export function PostCommentModal ({comments,loggedinUser,username,onAddCommentToPost,onToggleCommentModal,onToggleRemoveCommentModal,onRemoveCommentFromPost}){
   
     return (
         <section className="modal comment-modal">
@@ -12,7 +12,7 @@ export function PostCommentModal ({comments,loggedinUser,username,onAddCommentTo
             </div>
             <ul >
                 {comments.map(comment => <li key={comment._id}>
-                    <CommentPreview comment={comment} loggedinUser={loggedinUser} />
+                    <CommentPreview comment={comment} loggedinUser={loggedinUser} onRemoveCommentFromPost={onRemoveCommentFromPost} />
                 </li>)}
             </ul>
 
