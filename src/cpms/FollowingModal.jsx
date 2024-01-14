@@ -5,17 +5,18 @@ import chevron from '../assets/icons/chevron-right-solid.svg'
 import xmark from '../assets/icons/xmark-solid.svg'
 
 
-export function FollowingModal ({username,imgUrl,onRemoveFollowing}){
+export function FollowingModal ({username,imgUrl,onRemoveFollowing,onToggleFollowingModal}){
    
     return (
-        <section className="modal">
+        <section className="modal following-modal">
             <header>
-            <img src={xmark} />
+            <img className="x-mark" onClick={onToggleFollowingModal} src={xmark} />
                 <div className="img-container">
                 <Img imgUrl={imgUrl}></Img>
                 </div>
                 <h3>{username}</h3>
             </header>
+            <div className="actions-container">
             <div>
                 <span>Add to Close Frinds list</span>
                 <span><img src={star1} /></span></div>
@@ -34,6 +35,7 @@ export function FollowingModal ({username,imgUrl,onRemoveFollowing}){
             <div onClick={onRemoveFollowing}>
                <span>Unfollow</span>
                <span></span>
+                </div>
                 </div>
         </section>
     )

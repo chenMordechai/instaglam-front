@@ -153,7 +153,7 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
             {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
-            {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} />}
+            {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} onToggleFollowingModal={onToggleFollowingModal} />}
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
             <ProfileInfo onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
