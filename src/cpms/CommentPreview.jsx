@@ -1,18 +1,13 @@
 import {useState} from 'react'
 
-import ellipsis from '../assets/icons/ellipsis-solid.svg'
+import trash from '../assets/icons/trash-solid.svg'
 import {Img} from './Img'
 import { utilService } from '../services/util.service'
-import { RemoveCommentModal } from "../cpms/RemoveCommentModal";
 import {Heart} from './Heart'
 
 export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveCommentModal ,loggedinUser,onRemoveCommentFromPost}){
     const [isLiked, setIsLiked] = useState()
-    const [openRemoveCommentModal, setOpenRemoveCommentModal] = useState(false)
 
-    function onToggleRemoveCommentModal() {
-        setOpenRemoveCommentModal(prev => !prev)
-    }
     function isLoggdinUserComment(){
         return comment.by.username === loggedinUser.username
     }
@@ -32,7 +27,6 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
     }
     function onRemoveComment(){
         onRemoveCommentFromPost(comment._id)
-        onToggleRemoveCommentModal()
     }
 
     return (
@@ -47,19 +41,14 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
                 <p className={getClass()}>{comment.txt}</p>
                 <div className="controls-container">
                 <button>Reply</button>
-                 <button onClick={onToggleRemoveCommentModal}>
-                <img className="ellipsis" src={ellipsis} />
+                 <button onClick={onRemoveComment}>
+                <img className="trash" src={trash} />
                  </button>
                 </div>
              </div>
              <div className="heart-container">
                 <Heart onUpdateLike={onUpdateLike} loggedinUser={loggedinUser} likedBy={comment.likedBy}/>
-             {/* <a onClick={onLikeComment} className={isLiked ? 'red-heart' : ''}>
-                        <img src={heart} />
-                        <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
-            </a> */}
              </div>
-             {openRemoveCommentModal && <RemoveCommentModal isLoggdinUserComment={isLoggdinUserComment()} onToggleRemoveCommentModal={onToggleRemoveCommentModal} onRemoveComment={onRemoveComment}/>}
 
         </section>
     )

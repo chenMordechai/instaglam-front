@@ -37,9 +37,9 @@
             font-weight: 350;
             color: $clr-grey4;
         }
-        img.ellipsis {
+        img.trash {
             border: none;
-            height: 22px;
+            height: 14px;
             width: 22px;
             filter: opacity(0.5);
             cursor: pointer;
@@ -52,7 +52,7 @@
         width: 10%;
         padding-top: 3px;
     }
-    &:hover img.ellipsis {
+    &:hover img.trash {
         display: inline-block;
     }
 }
