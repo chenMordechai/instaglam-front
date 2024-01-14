@@ -21,7 +21,4 @@ export const store = createStore(rootReducer, composeEnhancers())
 
 
 
-// store.subscribe(() => {
-//     console.log('Current state is:', store.getState())
-// })
 

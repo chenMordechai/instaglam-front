@@ -1,15 +1,12 @@
 .post-comments {
     padding: 0 10px;
-    position: relative;
+
     @include flex(column, start, start, 7px);
     font-size: 16.5;
     a {
         font-weight: 450;
-        // font-size: 1em;
-
         gap: 5px;
         @include for-mobile-layout {
-            // font-size: 1.2em;
         }
         span {
             font-size: inherit;
@@ -20,36 +17,33 @@
     button,
     span {
         font-weight: 100;
-        // font-size: 1.1em;
     }
 
     form {
-        @include flex(row, center, start, 5px);
+        width: 100%;
+        @include flex(row, center, space-between);
         .img-container {
             height: 40px;
             width: 40px;
-            // margin-right: 10px;
         }
+
         input,
         input::placeholder {
-            // border: none;
+            width: calc(100% - 90px);
             cursor: pointer;
             padding: 0;
             font-size: 1em;
             font-weight: 100;
-            // width: 100%;
             @include for-mobile-layout {
                 font-size: 16.5px;
             }
         }
     }
-    // input:focus {
-    //     outline: none;
-    // }
 
-    button.post {
-        position: absolute;
-        right: 10px;
-        bottom: 0;
+    button.post,
+    span.post {
+        width: 40px;
+        border: none;
+        padding: 0;
     }
 }

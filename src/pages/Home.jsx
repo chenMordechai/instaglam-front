@@ -34,7 +34,7 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
    
     return (
         <section className="home">
-            <HomeHeader />
+            <HomeHeader loggedinUserId={loggedinUser._id} />
             <div className="main-content">
                 <Users users={users} />
                 <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser}  />

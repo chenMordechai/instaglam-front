@@ -13,11 +13,20 @@ import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
+import {Notification} from '../pages/Notification'
+
 import { Img } from './Img'
 
 export function NavLinks({ navLinksDisplay }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const [openNotificationModal, setOpenNotificationModal] = useState(false)
 
+
+        
+    function onToggleNotificationModal() {
+        setOpenNotificationModal(prev => !prev)
+    }
+  
 
     if (!loggedinUser) return ''
     return (
@@ -47,7 +56,7 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={message} />
                 <span>Messages</span>
             </a>
-            <a className="disable not-mobile" title="Notifications" >
+            <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
                 <img src={heart} />
                 <span>Notifications</span>
             </a>
@@ -65,6 +74,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={bars} />
                 <span>More</span>
             </a>
+
+
+
+           {openNotificationModal && <Notification/>}
         </section>
     )
 }

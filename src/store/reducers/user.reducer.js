@@ -23,12 +23,13 @@ export function userReducer(state = initialState, action = {}) {
         case SET_USERS:
             return { ...state, users: action.users }
         case SET_USER:
+            console.log('action.user:', action.user)
             return { ...state, currUser: action.user }
         case SET_LOGGEDIN_USER:
             return { ...state, loggedinUser: action.user }
-        case UPDATE_USER_IMG:
-            users = state.users.map(user => user._id === action.user._id ? { ...user, ...action.user } : user)
-            return { ...state, users }
+        // case UPDATE_USER_IMG:
+        //     users = state.users.map(user => user._id === action.user._id ? { ...user, ...action.user } : user)
+        //     return { ...state, users }
         case ADD_FOLLOWING:
                       return { ...state, currUser: { ...state.currUser, followers: [...state.currUser.followers, action.loggedinUser] } }
         case REMOVE_FOLLOWING:

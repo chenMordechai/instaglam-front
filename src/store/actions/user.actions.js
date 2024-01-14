@@ -76,7 +76,7 @@ export async function saveUser(user) {
 export async function saveUserImg(user) {
     try {
         const userToSave = await userService.updateImg(user)
-        store.dispatch({ type: UPDATE_USER_IMG, user: userToSave })
+        store.dispatch({ type: SET_USER, user })
         return userToSave
     } catch (err) {
         console.log('user action -> Cannot save user', err)

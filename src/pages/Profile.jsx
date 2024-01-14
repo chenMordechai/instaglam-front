@@ -107,6 +107,8 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         try {
             await logout()
             console.log('Success Logout')
+            // onTogglePreferencesModal()
+            onCloseScreen()
             navigate('/')
             // showSuccessMsg('Logout successfully')
 
@@ -120,7 +122,7 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         try {
             setIsLoading(true)
             const imgUrl = await utilService.uploadImgToCloudinary(ev)
-            setUser(() => ({ ...user, imgUrl: imgUrl }))
+            // setUser(() => ({ ...user, imgUrl: imgUrl }))
             await saveUserImg({ ...user, imgUrl: imgUrl })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)

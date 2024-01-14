@@ -5,6 +5,12 @@
         justify-content: start;
     }
 
+    .edit-header {
+        @include flex(row, center, space-between);
+        width: 100%;
+        padding: $pad1;
+    }
+
     .edit-container {
         text-align: center;
         width: 350px;

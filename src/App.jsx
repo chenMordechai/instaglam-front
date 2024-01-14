@@ -9,9 +9,9 @@ import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { UserEdit } from './pages/UserEdit'
 import { PostEdit } from './pages/PostEdit'
+import { Notification } from './pages/Notification'
 
 import { NavLinks } from './cpms/NavLinks'
-// import { Header } from './cpms/Header'
 import { UserPosts } from './cpms/UserPosts'
 import { UserTagged } from './cpms/UserTagged'
 import { UserSaved } from './cpms/UserSaved'
@@ -50,6 +50,7 @@ export function App() {
                 <Route element={<UserEdit />} path="/user/edit/:userId" />
                 <Route element={<PostEdit />} path="/post/edit/" />
                 <Route element={<PostEdit />} path="/post/edit/:postId" />
+                <Route element={<Notification />} path="/notification/:userId" />
               </Routes>
             </div>
           </main>

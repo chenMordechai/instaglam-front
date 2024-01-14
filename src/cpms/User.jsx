@@ -1,3 +1,5 @@
+import { NavLink, Link } from "react-router-dom";
+
 import { Img } from "./Img"
 
 export function User({ item, isDragging }) {
@@ -6,7 +8,10 @@ export function User({ item, isDragging }) {
             <div className="img-container">
                 <Img imgUrl={item.imgUrl} className="gradient" />
             </div>
+            <Link to={`/profile/${item._id}/posts`}>
             <span>{item.username}</span>
+              {/* {item.username} */}
+            </Link>
         </section>
     )
 }

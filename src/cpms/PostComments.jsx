@@ -36,6 +36,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
                 <input onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
                 {/* if input have value add button post */}
                 {comment.txt && <button className="blue bold post">Post</button>}
+                {!comment.txt && <span className="post"></span>}
             </form>
         </section>
     )
