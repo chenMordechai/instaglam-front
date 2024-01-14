@@ -17,13 +17,12 @@ import { addFollowing, loadUser } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
-    // const [user, setUser] = useState(null)
-    const { currUser: user } = useSelector(storeState => storeState.userModule)
     const [isLoading, setIsLoading] = useState(false)
-    console.log('user?.followers:', user?.followers)
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
+   
+    const { currUser: user } = useSelector(storeState => storeState.userModule)
+    const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -35,7 +34,7 @@ export function Profile() {
     async function init() {
         try {
             await loadUser(userId)
-            console.log('user', user)
+            // console.log('user', user)
         } catch (err) {
             console.log('user action -> Cannot load user', err)
             navigate('/')
@@ -50,25 +49,20 @@ export function Profile() {
     function isFollowing() {
         if (!user) return
         if (isLoggedinUserProfile()) return
-        // console.log('user:', user)
-        // console.log('user.followers:', user.followers)
         const foundUser = user.followers.find(u => u.username === loggedinUser.username)
         if (foundUser) return true
         else return false
 
     }
 
- async   function onAddFollowing(){
+    async function onAddFollowing(){
         const miniUser = {
             _id:user._id,
             username: user.username,
             fullname:user.fullname,
             imgUrl:user.imgUrl
-
         }
        const updatedUser = await addFollowing(miniUser,loggedinUser)
-       console.log('updatedUser:', updatedUser)
-
     }
 
 
@@ -79,7 +73,6 @@ export function Profile() {
     function onToggleChangeImgModal() {
         setOpenChangeImgModal(prev => !prev)
     }
-
 
     async function onLogout() {
         try {
@@ -125,11 +118,8 @@ export function Profile() {
         }
     }
 
-
-
     if (!user) return
     const { _id, username, fullname, imgUrl, bio, followers, following, highlights, postsMini } = user
-    console.log('followers, following:', followers, following)
     return (
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
