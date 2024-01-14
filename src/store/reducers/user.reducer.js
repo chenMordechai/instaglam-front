@@ -9,6 +9,7 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USER_IMG = 'UPDATE_USER_IMG'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 export const ADD_FOLLOWING = 'ADD_FOLLOWING'
+export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING'
 
 const initialState = {
     loggedinUser: userService.getLoggedinUser(),
@@ -29,7 +30,9 @@ export function userReducer(state = initialState, action = {}) {
             users = state.users.map(user => user._id === action.user._id ? { ...user, ...action.user } : user)
             return { ...state, users }
         case ADD_FOLLOWING:
-            return { ...state, currUser: { ...state.currUser, followers: [...state.currUser.followers, action.loggedinUser] } }
+                      return { ...state, currUser: { ...state.currUser, followers: [...state.currUser.followers, action.loggedinUser] } }
+        case REMOVE_FOLLOWING:
+            return { ...state, currUser: { ...state.currUser, followers: state.currUser.followers.filter(f=>f._id !== action.loggedinUserId) } }
         default:
             return state;
     }

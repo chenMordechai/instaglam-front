@@ -7,6 +7,7 @@ import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
 import { PostCommentModal } from "../cpms/PostCommentModal";
 import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost, addComment, removeComment, addLikeByCommentOptimistic, removeLikeByCommentOptimistic } from '../store/actions/post.actions.js'
+import { removeFollowing} from '../store/actions/user.actions.js'
 
 export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUser }) {
     const [openOptionsModal, setOpenOptionsModal] = useState(false)
@@ -66,9 +67,16 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
         await removeComment(commentId, post._id)
     }
 
+    function isFollowing() {
+        if (isLoggedinUserPost()) return
+        // const foundUser = loggedinUser.following.find(u => u.username === post.by.username)
+        // if (foundUser) return true
+        // else return false
+    }
+
     return (
         <section className="post">
-            {openOptionsModal && <PostOptionsModal onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
+            {openOptionsModal && <PostOptionsModal isFollowing={isFollowing()} onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />

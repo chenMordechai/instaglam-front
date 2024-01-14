@@ -11,15 +11,17 @@ import { userService } from "../services/user.service.js";
 import { utilService } from "../services/util.service.js";
 import { PreferenceModal } from '../cpms/PreferenceModal'
 import { ChangeImgModal } from '../cpms/ChangeImgModal'
+import { FollowingModal } from '../cpms/FollowingModal'
 import { logout, saveUserImg } from '../store/actions/user.actions.js'
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import { addFollowing, loadUser } from '../store/actions/user.actions.js'
+import { addFollowing,removeFollowing, loadUser } from '../store/actions/user.actions.js'
 
 
 export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
     const [isLoading, setIsLoading] = useState(false)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
+    const [openFollowingModal, setOpenFollowingModal] = useState(false)
    
     const { currUser: user } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
@@ -42,18 +44,19 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
     }
 
     useEffect(() => {
-        if (openPreferenceModal || openChangeImgModal ) {
+        if (openPreferenceModal || openChangeImgModal || openFollowingModal ) {
             onOpenScreen()
         } else {
             onCloseScreen()
         }
 
-    }, [openPreferenceModal, openChangeImgModal])
+    }, [openPreferenceModal, openChangeImgModal,openFollowingModal])
 
     useEffect(() => {
         if (!isScreenOpen) {
             setOpenPreferenceModal(false)
             setOpenChangeImgModal(false)
+            setOpenFollowingModal(false)
         }
 
     }, [isScreenOpen])
@@ -67,6 +70,9 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         setOpenChangeImgModal(prev => !prev)
     }
 
+    function onToggleFollowingModal() {
+        setOpenFollowingModal(prev => !prev)
+    }
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false
@@ -92,7 +98,10 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
        const updatedUser = await addFollowing(miniUser,loggedinUser)
     }
 
-
+    async function onRemoveFollowing(){
+       await removeFollowing(user._id,loggedinUser._id)
+       onToggleFollowingModal()
+    }
 
     async function onLogout() {
         try {
@@ -144,8 +153,9 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
             {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
+            {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} />}
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
-            <ProfileInfo onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+            <ProfileInfo onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />

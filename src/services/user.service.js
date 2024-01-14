@@ -19,7 +19,8 @@ export const userService = {
     getLoggedinUser,
     // changeScore,
     getEmptyCredentials,
-    addFollowing
+    addFollowing,
+    removeFollowing
 }
 
 
@@ -108,5 +109,8 @@ function getEmptyCredentials() {
 
 async function addFollowing(miniUser) {
     return httpService.post(BASE_URL_USER + miniUser._id + '/following',miniUser)
+}
+async function removeFollowing(miniUserId) {
+    return httpService.delete(BASE_URL_USER + miniUserId + '/following')
 }
 

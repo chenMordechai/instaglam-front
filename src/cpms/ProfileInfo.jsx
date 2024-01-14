@@ -10,7 +10,7 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo({onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
+export function ProfileInfo({onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
     function getClass() {
         if (!bio) return ''
         const res = utilService.isHebrew(bio.charAt(1))
@@ -30,7 +30,8 @@ export function ProfileInfo({onAddFollowing, isFollowing, userId, isLoggedinUser
                 <div className="user-info-header">
                     <h2>{username}</h2>
                     {!isLoggedinUserProfile && <div className="btn-container">
-                        {isFollowing && <button className="btn">
+                        {isFollowing && <button onClick={onToggleFollowingModal}
+                        className="btn">
                             Following
                             <img src={arrow} />
                         </button>}
