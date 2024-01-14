@@ -40,13 +40,14 @@ export function Post({ post, loggedinUser }) {
         removePost(post._id)
     }
 
-      async function onAddCommentToPost(comment){
+    async function onAddCommentToPost(comment){
         const addedComment = await addComment(comment,post._id)
 
         setNewComment(addedComment)
 
     }
-      async function onRemoveCommentFromPost(commentId){
+    
+    async function onRemoveCommentFromPost(commentId){
         await removeComment(commentId,post._id)
     }
 

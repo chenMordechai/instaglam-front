@@ -17,8 +17,9 @@ export const userService = {
     logout,
     signup,
     getLoggedinUser,
-    changeScore,
-    getEmptyCredentials
+    // changeScore,
+    getEmptyCredentials,
+    addFollowing
 }
 
 
@@ -41,11 +42,12 @@ async function update(user) {
     if (getLoggedinUser()._id === user._id) _setLoggedinUser({...getLoggedinUser(),...user})
     return user
 }
+
 async function updateImg(user) {
     user = await httpService.put(BASE_URL_USER + user._Id +'/img', user)
     // Handle case in which admin updates other user's details
-    console.log('update img user service!!:', {...getLoggedinUser(),...user})
-if (getLoggedinUser()._id === user._id) _setLoggedinUser({...getLoggedinUser(),...user})
+    // console.log('update img user service!!:', {...getLoggedinUser(),...user})
+    if (getLoggedinUser()._id === user._id) _setLoggedinUser({...getLoggedinUser(),...user})
     // if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
     return user
 }
@@ -96,20 +98,15 @@ function getEmptyCredentials() {
     }
 }
 
+// async function changeScore(by) {
+//     const user = getLoggedinUser()
+//     if (!user) throw new Error('Not loggedin')
+//     user.score = user.score + by || by
+//     await update(user)
+//     return user.score
+// }
 
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
+async function addFollowing(miniUser) {
+    return httpService.post(BASE_URL_USER + miniUser._id + '/following',miniUser)
 }
-
-
-
-// Test Data
-// userService.signup({username: 'muki', password: '123', fullname: 'Muki M'})
-// userService.login({username: 'muki', password: '123'})
-
-
 

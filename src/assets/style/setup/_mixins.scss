@@ -115,36 +115,6 @@
     background-color: $clr-grey1;
     padding: $pad1;
     border-radius: 10px;
-    // // text-transform: uppercase;
-    // line-height: 1.25;
-    // font-size: em(16px);
-    // border: none;
-    // cursor: pointer;
-
-    // transition: background-color 0.2s;
-
-    // @if $type == dark {
-    //     background-color: $clr6;
-    //     color: $clr1;
-    //     border-radius: 10px;
-    //     padding: 10px 20px;
-    //     // &:hover {
-    //     //     background-color: $clr1;
-    //     //     color: $clr3;
-    //     // }
-    // } @else if $type == light {
-    //     background-color: transparent;
-    //     color: $clr7;
-    //     border: 1px solid $clr7;
-    //     border-radius: 30px;
-    //     padding: 6px;
-    //     // background-color: red;
-    //     // color: $clr2;
-    //     // &:hover {
-    //     //     background-color: $clr1;
-    //     //     color: $clr3;
-    //     // }
-    // }
 }
 
 @mixin header {

@@ -1,7 +1,4 @@
-// div {
-.gradient,
-.regular,
-.grey {
+.circle-img {
     @include flex(row, center, center);
     height: 100%;
     width: 100%;
@@ -27,4 +24,3 @@
         width: 97%;
     }
 }
-// }

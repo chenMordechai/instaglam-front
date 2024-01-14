@@ -12,6 +12,8 @@ import { utilService } from "../services/util.service.js";
 import { PreferenceModal } from '../cpms/PreferenceModal'
 import { ChangeImgModal } from '../cpms/ChangeImgModal'
 import { logout, saveUserImg } from '../store/actions/user.actions.js'
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import { addFollowing } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
@@ -28,7 +30,7 @@ export function Profile() {
 
     useEffect(() => {
         init()
-    }, [])
+    }, [userId])
 
     async function init() {
         try {
@@ -42,8 +44,32 @@ export function Profile() {
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false
-        return loggedinUser.username === username
+        return loggedinUser.username === user.username
     }
+
+    function isFollowing() {
+        if (!user) return
+        if (isLoggedinUserProfile()) return
+        const x = user.following.find(u => u.username === loggedinUser.username)
+        console.log('x:', x)
+        if (x) return true
+        else return false
+
+    }
+
+    function onAddFollowing(){
+        const miniUser = {
+            _id:user._id,
+            username: user.username,
+            fullname:user.fullname,
+            imgUrl:user.imgUrl
+
+        }
+       const x = addFollowing(miniUser)
+    //    console.log('x:', x)
+
+    }
+
 
     function onTogglePreferencesModal() {
         setOpenPreferenceModal(prev => !prev)
@@ -52,7 +78,6 @@ export function Profile() {
     function onToggleChangeImgModal() {
         setOpenChangeImgModal(prev => !prev)
     }
-
 
 
     async function onLogout() {
@@ -80,12 +105,12 @@ export function Profile() {
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')
-        } finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
- async function onRemoveImg() {
+    async function onRemoveImg() {
         const defaultImgUrl = 'https://res.cloudinary.com/dnluclrao/image/upload/v1704182274/user_afklid.jpg'
         try {
             setUser(() => ({ ...user, imgUrl: defaultImgUrl }))
@@ -102,13 +127,13 @@ export function Profile() {
 
 
     if (!user) return
-    const { _id, username, fullname, imgUrl, description, followers, following, highlights, postsMini } = user
+    const { _id, username, fullname, imgUrl, bio, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
             {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
-            <ProfileInfo userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} description={description} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+            <ProfileInfo onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />

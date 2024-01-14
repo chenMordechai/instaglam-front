@@ -12,7 +12,12 @@
 
     div.main-content {
         padding-top: 20px;
-        width: 663px;
+        // width: 663px;
+        width: 65%;
+
+        @include for-narrow-layout {
+            width: 75%;
+        }
         @include for-mobile-layout {
             width: 100%;
             padding-top: 0;

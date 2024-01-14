@@ -1,17 +1,12 @@
 import {useState} from 'react'
-// import 'animate.css';
 
-// import heart from '../assets/icons/heart-regular.svg'
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import {Img} from './Img'
 import { utilService } from '../services/util.service'
 import { RemoveCommentModal } from "../cpms/RemoveCommentModal";
 import {Heart} from './Heart'
 
 export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveCommentModal ,loggedinUser,onRemoveCommentFromPost}){
-    // console.log('comment:', comment)
     const [isLiked, setIsLiked] = useState()
     const [openRemoveCommentModal, setOpenRemoveCommentModal] = useState(false)
 
@@ -22,14 +17,7 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
         return comment.by.username === loggedinUser.username
     }
 
-    // function onLikeComment() {
-    //     // onUpdateLikePost(!isLiked)
-    // }
-
     function onUpdateLike(isLike){
-        // console.log('onUpdateLike')
-        // console.log('comment:', comment)
-        console.log('isLike,comment._id:', isLike,comment._id)
         onUpdateLikeComment(isLike,comment._id)
     }
 
@@ -38,7 +26,6 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
     }
 
     function getClass() {
-        // if (!description) return ''
         const res = utilService.isHebrew(comment.txt.charAt(1))
         if (res) return 'rtl'
         else ''

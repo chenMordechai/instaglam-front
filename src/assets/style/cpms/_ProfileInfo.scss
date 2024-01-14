@@ -40,6 +40,7 @@
         @include flex(row, center, start, $pad3, wrap);
         h2 {
             font-size: 23px;
+            margin-right: 20px;
         }
         @include for-mobile-layout {
             gap: $pad1;
@@ -47,8 +48,12 @@
         }
         .btn-container {
             @include flex(row, center, start, $pad1);
+            .follow {
+                @include blue-btn;
+            }
             button,
-            a {
+            a,
+            .follow {
                 font-size: 16px;
             }
 
@@ -56,6 +61,7 @@
                 width: 20px;
                 margin-left: 10px;
             }
+
             @include for-mobile-layout {
                 button.gear {
                     display: none;

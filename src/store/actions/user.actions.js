@@ -74,3 +74,18 @@ export async function saveUserImg(user) {
 
     }
 }
+
+export async function addFollowing(miniUser){
+    // מי שעוקבים אחריו
+    console.log('miniUser:', miniUser)
+    try {
+        const addedUser = await userService.addFollowing(miniUser)
+        // store.dispatch({ type: UPDATE_POST_COMMENT, postId, comment:addedComment })
+        return addedUser
+    } catch (err) {
+        console.log('post action -> Cannot save user', err)
+        throw err
+
+    }
+}
+

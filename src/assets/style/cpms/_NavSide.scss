@@ -1,6 +1,7 @@
 .nav-side {
     // background-color: blue;
-    width: 380px;
+    // width: 380px;
+    width: 30%;
     padding: $pad3;
     padding-top: 50px;
     @include flex(column, start, start, $pad2);

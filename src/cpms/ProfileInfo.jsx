@@ -3,26 +3,27 @@ import { NavLink, Link } from "react-router-dom";
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
 import gear from '../assets/icons/gear-solid.svg'
+import arrow from '../assets/icons/angle-down-solid.svg'
+
 import userImg from '../assets/icons/user.jpg'
 import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo({ userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, description, postsLength, followersLength, followingLength }) {
-
+export function ProfileInfo({onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
+    console.log('isFollowing:', isFollowing)
     function getClass() {
-        if (!description) return ''
-        const res = utilService.isHebrew(description.charAt(1))
+        if (!bio) return ''
+        const res = utilService.isHebrew(bio.charAt(1))
         if (res) return 'rtl'
         else ''
     }
-
 
     return (
         <section className="profile-info">
             <div className="left-container">
                 <div onClick={onToggleChangeImgModal} className="img-container">
-                        <Img imgUrl={imgUrl} className="gradient" />
+                    <Img imgUrl={imgUrl} className="gradient" />
                 </div>
             </div>
             <div className="user-info">
@@ -30,9 +31,14 @@ export function ProfileInfo({ userId, isLoggedinUserProfile, onToggleChangeImgMo
                 <div className="user-info-header">
                     <h2>{username}</h2>
                     {!isLoggedinUserProfile && <div className="btn-container">
-                        {/* תלןי אם הם חברים או לא */}
-                        <button className="btn">Following</button>
-                        {/* <button className="btn">Follow</button>  */}
+                        {isFollowing && <button className="btn">
+                            Following
+                            <img src={arrow} />
+                        </button>}
+                        {!isFollowing && <button onClick={onAddFollowing}
+                         className="btn follow">
+                            Follow
+                        </button>}
                         <button className="btn">Message</button>
                         <button className="btn"><img src={user} /></button>
 
@@ -54,7 +60,7 @@ export function ProfileInfo({ userId, isLoggedinUserProfile, onToggleChangeImgMo
                 </div>
                 <div className="user-description">
                     <h3>{fullname}</h3>
-                    <pre className={getClass()}>{description}</pre>
+                    <pre className={getClass()}>{bio}</pre>
                     <h4>followed by <span> some name שהם חברים משותפים</span></h4>
                 </div>
             </div>
