@@ -2,30 +2,45 @@
     padding: 0 10px;
     position: relative;
     @include flex(column, start, start, 7px);
-    h3 {
-        font-weight: 550;
-        font-size: 1em;
+    font-size: 16.5;
+    a {
+        font-weight: 450;
+        // font-size: 1em;
+
+        gap: 5px;
         @include for-mobile-layout {
-            font-size: 1.2em;
+            // font-size: 1.2em;
         }
         span {
             font-size: inherit;
+            font-weight: 400;
+            font-family: system-ui;
         }
     }
     button,
     span {
         font-weight: 100;
+        // font-size: 1.1em;
     }
-    input,
-    input::placeholder {
-        // border: none;
-        cursor: pointer;
-        padding: 0;
-        font-size: 1em;
-        font-weight: 100;
-        width: 100%;
-        @include for-mobile-layout {
-            font-size: 18px;
+
+    form {
+        @include flex(row, center, start, 5px);
+        .img-container {
+            height: 40px;
+            width: 40px;
+            // margin-right: 10px;
+        }
+        input,
+        input::placeholder {
+            // border: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1em;
+            font-weight: 100;
+            // width: 100%;
+            @include for-mobile-layout {
+                font-size: 16.5px;
+            }
         }
     }
     // input:focus {

@@ -10,7 +10,7 @@ import { NavSide } from '../cpms/NavSide'
 import { loadPosts } from '../store/actions/post.actions.js'
 import { loadUsers } from '../store/actions/user.actions.js'
 
-export function Home() {
+export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
 
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
@@ -37,7 +37,7 @@ export function Home() {
             <HomeHeader />
             <div className="main-content">
                 <Users users={users} />
-                <Posts posts={posts} loggedinUser={loggedinUser}  />
+                <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser}  />
             </div>
             <NavSide />
         </section>

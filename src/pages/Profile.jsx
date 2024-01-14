@@ -16,7 +16,7 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 import { addFollowing, loadUser } from '../store/actions/user.actions.js'
 
 
-export function Profile() {
+export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
     const [isLoading, setIsLoading] = useState(false)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
@@ -40,6 +40,33 @@ export function Profile() {
             navigate('/')
         }
     }
+
+    useEffect(() => {
+        if (openPreferenceModal || openChangeImgModal ) {
+            onOpenScreen()
+        } else {
+            onCloseScreen()
+        }
+
+    }, [openPreferenceModal, openChangeImgModal])
+
+    useEffect(() => {
+        if (!isScreenOpen) {
+            setOpenPreferenceModal(false)
+            setOpenChangeImgModal(false)
+        }
+
+    }, [isScreenOpen])
+
+    
+    function onTogglePreferencesModal() {
+        setOpenPreferenceModal(prev => !prev)
+    }
+
+    function onToggleChangeImgModal() {
+        setOpenChangeImgModal(prev => !prev)
+    }
+
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false
@@ -66,13 +93,6 @@ export function Profile() {
     }
 
 
-    function onTogglePreferencesModal() {
-        setOpenPreferenceModal(prev => !prev)
-    }
-
-    function onToggleChangeImgModal() {
-        setOpenChangeImgModal(prev => !prev)
-    }
 
     async function onLogout() {
         try {

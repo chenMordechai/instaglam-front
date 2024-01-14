@@ -19,18 +19,28 @@ import { UserSaved } from './cpms/UserSaved'
 export function App() {
 
   const [navLinksDisplay, setNavLinksDisplay] = useState('')
+  const [isScreenOpen, setIsScreenOpen] = useState(false)
+
+  function onOpenScreen(){
+    setIsScreenOpen(true)
+  }
+
+  function onCloseScreen(){
+    setIsScreenOpen(false)
+  }
 
   return (
     <Provider store={store}>
       <Router>
-        <section className="main-layout">
-          <NavLinks navLinksDisplay={navLinksDisplay} />
+        <section className={'main-layout ' + (isScreenOpen?'screen-open':'')}>
+        <section className="screen" onClick={onCloseScreen}></section>
+          <NavLinks  navLinksDisplay={navLinksDisplay} />
           <main>
             <div className="main-container">
               <Routes>
                 <Route element={<Login setNavLinksDisplay={setNavLinksDisplay} />} path="/" />
-                <Route element={<Home />} path="/home" />
-                <Route element={<Profile />} path="/profile/:userId" >
+                <Route element={<Home isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen}/>} path="/home" />
+                <Route element={<Profile isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />} path="/profile/:userId" >
                   <Route path="/profile/:userId/posts" element={<UserPosts />} />
                   <Route path="/profile/:userId/tagged" element={<UserTagged />} />
                   <Route path="/profile/:userId/saved" element={<UserSaved />} />

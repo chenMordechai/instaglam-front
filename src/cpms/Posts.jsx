@@ -1,12 +1,12 @@
 import { Post } from "./Post";
 
 
-export function Posts({ posts,loggedinUser }) {
+export function Posts({isScreenOpen,onOpenScreen,onCloseScreen, posts,loggedinUser }) {
     return (
         <section className="posts">
             <ul className="posts-container">
                 {posts.map(post => <li key={post._id}>
-                    <Post post={post} loggedinUser={loggedinUser} />
+                    <Post isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} post={post} loggedinUser={loggedinUser} />
                 </li>)}
             </ul>
         </section>

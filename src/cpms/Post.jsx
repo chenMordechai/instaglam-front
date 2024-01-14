@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import { PostComments } from "./PostComments"
 import { PostHeader } from "./PostHeader"
@@ -6,12 +6,30 @@ import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
 import { PostOptionsModal } from "../cpms/PostOptionsModal";
 import { PostCommentModal } from "../cpms/PostCommentModal";
-import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment ,removeComment,addLikeByCommentOptimistic,removeLikeByCommentOptimistic} from '../store/actions/post.actions.js'
+import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost, addComment, removeComment, addLikeByCommentOptimistic, removeLikeByCommentOptimistic } from '../store/actions/post.actions.js'
 
-export function Post({ post, loggedinUser }) {
+export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUser }) {
     const [openOptionsModal, setOpenOptionsModal] = useState(false)
     const [openCommentModal, setOpenCommentModal] = useState(false)
     const [newComment, setNewComment] = useState(null)
+
+    useEffect(() => {
+        if (openOptionsModal || openCommentModal ) {
+            onOpenScreen()
+        } else {
+            onCloseScreen()
+        }
+
+    }, [openOptionsModal, openCommentModal])
+
+    useEffect(() => {
+        if (!isScreenOpen) {
+            setOpenOptionsModal(false)
+            setOpenCommentModal(false)
+        }
+
+    }, [isScreenOpen])
+
 
     function onToggleOptionsModal() {
         setOpenOptionsModal(prev => !prev)
@@ -19,7 +37,7 @@ export function Post({ post, loggedinUser }) {
     function onToggleCommentModal() {
         setOpenCommentModal(prev => !prev)
     }
-  
+
     function isLoggedinUserPost() {
         if (!loggedinUser) return false
         return loggedinUser.username === post.by.username
@@ -30,22 +48,22 @@ export function Post({ post, loggedinUser }) {
         else removeLikeByPostOptimistic(post._id, loggedinUser)
     }
 
-    function onUpdateLikeComment(isLike , commentId) {
-        if (isLike) addLikeByCommentOptimistic(post._id,commentId, loggedinUser)
-        else removeLikeByCommentOptimistic(post._id,commentId, loggedinUser)
+    function onUpdateLikeComment(isLike, commentId) {
+        if (isLike) addLikeByCommentOptimistic(post._id, commentId, loggedinUser)
+        else removeLikeByCommentOptimistic(post._id, commentId, loggedinUser)
     }
 
     function onRemovePost() {
         removePost(post._id)
     }
 
-    async function onAddCommentToPost(comment){
-        const addedComment = await addComment(comment,post._id)
+    async function onAddCommentToPost(comment) {
+        const addedComment = await addComment(comment, post._id)
         setNewComment(addedComment)
     }
-    
-    async function onRemoveCommentFromPost(commentId){
-        await removeComment(commentId,post._id)
+
+    async function onRemoveCommentFromPost(commentId) {
+        await removeComment(commentId, post._id)
     }
 
     return (
@@ -54,9 +72,9 @@ export function Post({ post, loggedinUser }) {
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
-            <PostMedia media={post.imgUrl} filter={post.imgFilter}  />
+            <PostMedia media={post.imgUrl} filter={post.imgFilter} />
             <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} />
-            <PostComments onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost}  likedBy={post.likedBy} by={post.by.username} txt={post.txt} />
+            <PostComments loggeginUserImgUrl={loggedinUser.imgUrl} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
         </section>
     )
 }

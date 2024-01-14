@@ -6,11 +6,11 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function PostHeader({byId, by, byImgUrl, createdAt,onToggleOptionsModal }) {
+export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal }) {
     function getRelativeDate() {
         return utilService.timeDifference(Date.now(), createdAt)
     }
-    
+
     return (
         <section className="post-header">
             <div className="user-info-container">
@@ -18,9 +18,9 @@ export function PostHeader({byId, by, byImgUrl, createdAt,onToggleOptionsModal }
                     <Img imgUrl={byImgUrl} className="gradient" />
                 </div>
                 <div className="text-container">
-                    <Link to={'/profile/'+byId+'/posts'} title="Instaglam" className="not-mobile">
-                      {by}
-                  </Link>
+                    <Link to={'/profile/' + byId + '/posts'} >
+                        {by}
+                    </Link>
                     <img src={circle} />
                     <span>{getRelativeDate()}</span>
                 </div>
