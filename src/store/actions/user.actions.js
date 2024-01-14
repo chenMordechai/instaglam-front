@@ -1,12 +1,12 @@
 import { userService } from "../../services/user.service.js";
-import { SET_USERS, SET_USER, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING } from "../reducers/user.reducer.js";
+import { SET_USERS, SET_USER,SET_LOGGEDIN_USER, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING,ADD_FOLLOWING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
 export async function login(credentials) {
     try {
         const user = await userService.login(credentials)
-        store.dispatch({ type: SET_USER, user })
+        store.dispatch({ type: SET_LOGGEDIN_USER, user })
         return user
     } catch (err) {
         console.log('user actions -> Cannot login', err)
@@ -28,10 +28,20 @@ export async function loadUsers() {
     }
 }
 
+export async function loadUser(userId) {
+    try {
+        const user = await userService.getById(userId)
+        store.dispatch({ type: SET_USER, user })
+    } catch (err) {
+        console.log('toy action -> Cannot load user', err)
+        throw err
+    } 
+}
+
 export async function logout() {
     try {
         await userService.logout()
-        store.dispatch({ type: SET_USER, user: null })
+        store.dispatch({ type: SET_LOGGEDIN_USER, user: null })
     } catch (err) {
         console.error('user actions -> Cannot logout:', err)
         throw err
@@ -75,15 +85,13 @@ export async function saveUserImg(user) {
     }
 }
 
-export async function addFollowing(miniUser){
-    // מי שעוקבים אחריו
-    console.log('miniUser:', miniUser)
+export async function addFollowing(miniUser,loggedinUser){
     try {
         const addedUser = await userService.addFollowing(miniUser)
-        // store.dispatch({ type: UPDATE_POST_COMMENT, postId, comment:addedComment })
+        store.dispatch({ type: ADD_FOLLOWING, miniUser, loggedinUser })
         return addedUser
     } catch (err) {
-        console.log('post action -> Cannot save user', err)
+        console.log('user action -> Cannot add following user', err)
         throw err
 
     }

@@ -13,17 +13,17 @@ import { PreferenceModal } from '../cpms/PreferenceModal'
 import { ChangeImgModal } from '../cpms/ChangeImgModal'
 import { logout, saveUserImg } from '../store/actions/user.actions.js'
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import { addFollowing } from '../store/actions/user.actions.js'
+import { addFollowing, loadUser } from '../store/actions/user.actions.js'
 
 
 export function Profile() {
-    const [user, setUser] = useState(null)
+    // const [user, setUser] = useState(null)
+    const { currUser: user } = useSelector(storeState => storeState.userModule)
     const [isLoading, setIsLoading] = useState(false)
-    // console.log('user:', user)
+    console.log('user?.followers:', user?.followers)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
-
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -34,8 +34,8 @@ export function Profile() {
 
     async function init() {
         try {
-            const user = await userService.getById(userId)
-            setUser(user)
+            await loadUser(userId)
+            console.log('user', user)
         } catch (err) {
             console.log('user action -> Cannot load user', err)
             navigate('/')
@@ -50,14 +50,15 @@ export function Profile() {
     function isFollowing() {
         if (!user) return
         if (isLoggedinUserProfile()) return
-        const x = user.following.find(u => u.username === loggedinUser.username)
-        console.log('x:', x)
-        if (x) return true
+        // console.log('user:', user)
+        // console.log('user.followers:', user.followers)
+        const foundUser = user.followers.find(u => u.username === loggedinUser.username)
+        if (foundUser) return true
         else return false
 
     }
 
-    function onAddFollowing(){
+ async   function onAddFollowing(){
         const miniUser = {
             _id:user._id,
             username: user.username,
@@ -65,8 +66,8 @@ export function Profile() {
             imgUrl:user.imgUrl
 
         }
-       const x = addFollowing(miniUser)
-    //    console.log('x:', x)
+       const updatedUser = await addFollowing(miniUser,loggedinUser)
+       console.log('updatedUser:', updatedUser)
 
     }
 
@@ -128,6 +129,7 @@ export function Profile() {
 
     if (!user) return
     const { _id, username, fullname, imgUrl, bio, followers, following, highlights, postsMini } = user
+    console.log('followers, following:', followers, following)
     return (
         <section className="profile">
             {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}

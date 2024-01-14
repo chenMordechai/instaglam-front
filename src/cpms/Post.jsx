@@ -9,7 +9,8 @@ import { PostCommentModal } from "../cpms/PostCommentModal";
 import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost , addComment ,removeComment,addLikeByCommentOptimistic,removeLikeByCommentOptimistic} from '../store/actions/post.actions.js'
 
 export function Post({ post, loggedinUser }) {
-    // console.log('post:', post)
+    console.log('post:', post)
+    console.log('post.comments:', post.comments)
     const [openOptionsModal, setOpenOptionsModal] = useState(false)
     const [openCommentModal, setOpenCommentModal] = useState(false)
     const [newComment, setNewComment] = useState(null)
