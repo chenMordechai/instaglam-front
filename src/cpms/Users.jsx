@@ -1,6 +1,5 @@
 import { User } from "./User";
 import { Carousel } from "./Carousel";
-// import { MiniPlus } from "./MiniPlus";
 
 export function Users({ users }) {
     return (
