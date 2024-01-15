@@ -119,8 +119,8 @@ async function removeComment(commentId,postId) {
     return httpService.delete(BASE_URL + postId + '/comment/' + commentId)
 }
 
-async function addLikeComment(postId,commentId) {
-    return httpService.post(BASE_URL + postId + '/comment/like/'+commentId)
+async function addLikeComment(postId,comment) {
+    return httpService.post(BASE_URL + postId + '/comment/like/'+comment._id,comment)
 }
 
 async function removeLikeComment(postId,commentId, likeById) {

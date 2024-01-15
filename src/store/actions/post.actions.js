@@ -131,14 +131,13 @@ export async function removeComment(commentId,postId){
     }
 }
 
-export async function addLikeByCommentOptimistic(postId,commentId, likedByUser) {
-    console.log('addLikeByCommentOptimistic:')
+export async function addLikeByCommentOptimistic(postId,comment, likedByUser) {
     try {
-        store.dispatch({ type: UPDATE_COMMENT_LIKED_BY, postId, commentId, likedBy: likedByUser })
-        const likedBy = await postService.addLikeComment(postId,commentId)
+        store.dispatch({ type: UPDATE_COMMENT_LIKED_BY, postId, commentId:comment._id, likedBy: likedByUser })
+        const likedBy = await postService.addLikeComment(postId,comment)
         return likedBy
     } catch (err) {
-        store.dispatch({ type: REMOVE_COMMENT_LIKED_BY, postId,commentId, likeById: likedByUser._id })
+        store.dispatch({ type: REMOVE_COMMENT_LIKED_BY, postId,commentId:comment._id, likeById: likedByUser._id })
         console.log('post action -> Cannot save like comment', err)
         throw err
 

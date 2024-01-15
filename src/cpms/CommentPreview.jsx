@@ -13,7 +13,7 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
     }
 
     function onUpdateLike(isLike){
-        onUpdateLikeComment(isLike,comment._id)
+        onUpdateLikeComment(isLike,comment)
     }
 
     function getRelativeDate() {

@@ -29,6 +29,12 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
 
     }, [])
 
+        function getOrderedUsers(){
+            console.log('users:', users)
+            const currUser = users.find(user=> user._id === loggedinUser._id)
+            const orderedUsers = [currUser , ...users.filter(user=> user._id !== loggedinUser._id)]
+            return orderedUsers
+        }
   
 
    
@@ -36,7 +42,7 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
         <section className="home">
             <HomeHeader loggedinUserId={loggedinUser._id} />
             <div className="main-content">
-                <Users users={users} />
+              {users.length &&  <Users users={getOrderedUsers()} />}
                 <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser}  />
             </div>
             <NavSide />

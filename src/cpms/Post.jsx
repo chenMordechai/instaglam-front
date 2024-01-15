@@ -49,9 +49,9 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
         else removeLikeByPostOptimistic(post._id, loggedinUser)
     }
 
-    function onUpdateLikeComment(isLike, commentId) {
-        if (isLike) addLikeByCommentOptimistic(post._id, commentId, loggedinUser)
-        else removeLikeByCommentOptimistic(post._id, commentId, loggedinUser)
+    function onUpdateLikeComment(isLike, comment) {
+        if (isLike) addLikeByCommentOptimistic(post._id, comment, loggedinUser)
+        else removeLikeByCommentOptimistic(post._id, comment._id, loggedinUser)
     }
 
     function onRemovePost() {
