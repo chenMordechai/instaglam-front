@@ -11,10 +11,11 @@ export function PostList({ isLoggedinUserProfile, userId, postsMini }) {
                     <img src={grid} />
                     <span>Posts</span>
                 </NavLink>
-                {isLoggedinUserProfile && <NavLink to={`/profile/${userId}/saved`}>
+                {/* {isLoggedinUserProfile && 
+                <NavLink to={`/profile/${userId}/saved`}>
                     <img src={bookmark} />
                     <span>Saved</span>
-                </NavLink>}
+                </NavLink>} */}
                 <NavLink to={`/profile/${userId}/tagged`}>
                     <img src={image} />
                     <span>Tagged</span>

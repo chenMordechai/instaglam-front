@@ -1,6 +1,6 @@
 .nav-links {
     // background-color: red;
-    width: 20vw;
+    width: 230px;
     position: sticky;
     top: 0;
     height: 100vh;
@@ -27,7 +27,7 @@
         // top: calc(100dvh - 55px);
     }
 
-    a {
+    & > a {
         width: 100%;
         padding: $pad1;
         color: $clr-black;

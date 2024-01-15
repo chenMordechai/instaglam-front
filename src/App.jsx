@@ -10,6 +10,7 @@ import { Profile } from './pages/Profile'
 import { UserEdit } from './pages/UserEdit'
 import { PostEdit } from './pages/PostEdit'
 import { Notification } from './pages/Notification'
+import { Search } from './pages/Search'
 
 import { NavLinks } from './cpms/NavLinks'
 import { UserPosts } from './cpms/UserPosts'
@@ -43,7 +44,7 @@ export function App() {
                 <Route element={<Profile isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />} path="/profile/:userId" >
                   <Route path="/profile/:userId/posts" element={<UserPosts />} />
                   <Route path="/profile/:userId/tagged" element={<UserTagged />} />
-                  <Route path="/profile/:userId/saved" element={<UserSaved />} />
+                  {/* <Route path="/profile/:userId/saved" element={<UserSaved />} /> */}
                   {/* <Route path="/profile/:userId/reals" element={} /> */}
                   {/* <Route path="/profile/:userId/saved" element={} /> */}
                 </Route>
@@ -51,6 +52,7 @@ export function App() {
                 <Route element={<PostEdit />} path="/post/edit/" />
                 <Route element={<PostEdit />} path="/post/edit/:postId" />
                 <Route element={<Notification />} path="/notification/:userId" />
+                <Route element={<Search />} path="/Search" />
               </Routes>
             </div>
           </main>

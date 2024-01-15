@@ -132,11 +132,9 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         try {
             setIsLoading(true)
             const imgUrl = await utilService.uploadImgToCloudinary(ev)
-            // setUser(() => ({ ...user, imgUrl: imgUrl }))
             await saveUserImg({ ...user, imgUrl: imgUrl })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)
-            // navigate('/toy')
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')

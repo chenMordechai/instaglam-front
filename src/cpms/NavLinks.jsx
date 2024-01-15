@@ -17,18 +17,30 @@ import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
 import {Notification} from '../pages/Notification'
+import {Search} from '../pages/Search'
 
 import { Img } from './Img'
 
 export function NavLinks({ navLinksDisplay }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const [openNotificationModal, setOpenNotificationModal] = useState(false)
+    const [openSearchModal, setOpenSearchModal] = useState(false)
 
 
         
     function onToggleNotificationModal() {
+        if(openSearchModal) onToggleSearchModal()
         setOpenNotificationModal(prev => !prev)
     }
+
+    function onToggleSearchModal() {
+        if(openNotificationModal) onToggleNotificationModal()
+        setOpenSearchModal(prev => !prev)
+    }
+
+    function isMobile(){
+        return (window.innerWidth > 700) ? false:true
+      }
   
 
     if (!loggedinUser) return ''
@@ -43,10 +55,14 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={house} />
                 <span>Home</span>
             </NavLink>
-            <a className="disable" title="Search" >
+          { isMobile() && <Link to="search" title="Search" >
                 <img src={glass} />
                 <span>Search</span>
-            </a>
+            </Link>}
+          { !isMobile() && <a  onClick={onToggleSearchModal} title="Search" >
+                <img src={glass} />
+                <span>Search</span>
+            </a>}
             <a className="disable not-mobile" title="Explore" >
                 <img src={compass} />
                 <span>Explore</span>
@@ -81,6 +97,7 @@ export function NavLinks({ navLinksDisplay }) {
 
 
            {openNotificationModal && <Notification loggedinUserId={loggedinUser._id}/>}
+           {openSearchModal && <Search />}
         </section>
     )
 }

@@ -14,7 +14,6 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
 
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
-    // console.log('users:', users)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     // console.log('loggedinUser:', loggedinUser)
     const navigate = useNavigate()
@@ -30,18 +29,18 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
     }, [])
 
         function getOrderedUsers(){
+            if(!users.length) return []
             const currUser = users.find(user=> user._id === loggedinUser._id)
             const orderedUsers = [currUser , ...users.filter(user=> user._id !== loggedinUser._id)]
             return orderedUsers
         }
   
 
-   
     return (
         <section className="home">
             <HomeHeader loggedinUserId={loggedinUser._id} />
             <div className="main-content">
-              {users.length &&  <Users users={getOrderedUsers()} />}
+                <Users users={getOrderedUsers()} />
                 <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser}  />
             </div>
             <NavSide />

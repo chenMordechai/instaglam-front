@@ -11,8 +11,6 @@ export function Notification ({loggedinUserId}){
   
   const { userId } = useParams()
   const notifications  = useSelector(storeState => storeState.userModule.currUser?.notifications)
-  // console.log('user notification:', user)
-  console.log('user notification:', notifications)
 
   useEffect(() => {
     init()
@@ -32,19 +30,16 @@ async function init() {
   }
     
   function getClass(){
-    return (window.innerWidth > 700) ? 'notification-modal':'notification-mobile'
+    return (window.innerWidth > 700) ? 'big-modal':'page-mobile'
   }
   
-
-
     return (
         <section className={'notification '+ getClass()}>
         { isMobile() &&   <NotificationHeader/>}
         { !isMobile() &&   <h3>Notifications</h3>}
 
-
         <ul className="notification-list">
-          {notifications?.map((n,i)=> <li key={i}>
+          {notifications?.reverse().map((n,i)=> <li key={i}>
             <NotificationPreview userImgUrl={n.miniUser.imgUrl} userId={n.miniUser._id}  username={n.miniUser.username} action={n.action} timeStamp={n.timeStamp} isButton={n.button?true:false}  postImgUrl={n.postImgUrl}/>
            </li>)}
         </ul>
