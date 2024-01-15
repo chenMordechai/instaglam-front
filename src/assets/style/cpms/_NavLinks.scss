@@ -75,7 +75,8 @@
                 }
             }
         }
-        img {
+        img,
+        svg {
             height: em(23px);
             width: em(23px);
             // @include for-mobile-layout {

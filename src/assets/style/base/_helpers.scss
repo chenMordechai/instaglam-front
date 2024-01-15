@@ -26,3 +26,8 @@
 .weight-light {
     font-weight: 100;
 }
+
+.header {
+    @include header;
+    border-bottom: 1px solid $clr-grey2;
+}

@@ -2,6 +2,9 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
 import instagram from '../assets/icons/instagram.svg'
 import compass from '../assets/icons/compass-regular.svg'
 import heart from '../assets/icons/heart-regular.svg'
@@ -57,7 +60,8 @@ export function NavLinks({ navLinksDisplay }) {
                 <span>Messages</span>
             </a>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
-                <img src={heart} />
+               { !openNotificationModal &&<img src={heart} />}
+                {openNotificationModal &&  <FontAwesomeIcon icon={faHeart} />}
                 <span>Notifications</span>
             </a>
             <Link to={'/post/edit'} title="New Post">
@@ -76,8 +80,7 @@ export function NavLinks({ navLinksDisplay }) {
             </a>
 
 
-
-           {openNotificationModal && <Notification/>}
+           {openNotificationModal && <Notification loggedinUserId={loggedinUser._id}/>}
         </section>
     )
 }

@@ -2,7 +2,6 @@ import { Fragment } from 'react'
 import { Link } from "react-router-dom";
 
 export function PostOptionsModal({isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
-   console.log('isFollowing:', isFollowing)
     return (
         <section className="modal">
             {!isLoggedinUserPost && <Fragment>

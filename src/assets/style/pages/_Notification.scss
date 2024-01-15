@@ -1,7 +1,53 @@
 .notification {
-    h2 {
+    h3 {
         font-weight: 500;
         font-size: 1.8em;
+    }
+
+    ul.notification-list {
+        padding: $pad1;
+
+        .notification-preview {
+            @include flex(row, center, space-between);
+            margin-bottom: $pad1;
+
+            .img-container {
+                height: 50px;
+                width: 50px;
+            }
+
+            .content-container {
+                width: calc(100% - 170px);
+                @include flex(row, center, start, 5px, wrap);
+
+                a {
+                    font-weight: 500;
+                }
+
+                span {
+                    font-weight: 300;
+                }
+
+                span:last-child {
+                    color: $clr-grey4;
+                }
+            }
+
+            .left-container {
+                @include flex(row, center, end);
+                width: 100px;
+                .post-img {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 10px;
+                }
+
+                button {
+                    // width: 70px;
+                    padding: 5px 10px;
+                }
+            }
+        }
     }
 }
 
@@ -12,7 +58,7 @@
     position: fixed;
     top: 0;
     background-color: $clr-white;
-    left: 18vw;
+    left: 20vw;
 
     @include for-narrow-layout {
         left: 80px;
@@ -20,4 +66,5 @@
 }
 
 .notification-mobile {
+    padding-bottom: 55px;
 }

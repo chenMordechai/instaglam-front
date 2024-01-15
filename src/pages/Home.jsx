@@ -30,7 +30,6 @@ export function Home({isScreenOpen,onOpenScreen,onCloseScreen}) {
     }, [])
 
         function getOrderedUsers(){
-            console.log('users:', users)
             const currUser = users.find(user=> user._id === loggedinUser._id)
             const orderedUsers = [currUser , ...users.filter(user=> user._id !== loggedinUser._id)]
             return orderedUsers

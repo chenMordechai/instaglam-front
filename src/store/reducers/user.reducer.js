@@ -23,7 +23,6 @@ export function userReducer(state = initialState, action = {}) {
         case SET_USERS:
             return { ...state, users: action.users }
         case SET_USER:
-            console.log('action.user:', action.user)
             return { ...state, currUser: action.user }
         case SET_LOGGEDIN_USER:
             return { ...state, loggedinUser: action.user }

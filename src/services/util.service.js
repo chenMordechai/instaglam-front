@@ -126,27 +126,33 @@ function timeDifference(current, previous) {
     var elapsed = current - previous;
 
     if (elapsed < msPerMinute) {
-        return Math.round(elapsed / 1000) + ' seconds ago';
+        return Math.round(elapsed / 1000) + 's';
+        // return Math.round(elapsed / 1000) + ' seconds ago';
     }
 
     else if (elapsed < msPerHour) {
-        return Math.round(elapsed / msPerMinute) + ' minutes ago';
+        return Math.round(elapsed / msPerMinute) + 'm';
+        // return Math.round(elapsed / msPerMinute) + ' minutes ago';
     }
 
     else if (elapsed < msPerDay) {
-        return Math.round(elapsed / msPerHour) + ' hours ago';
+        return Math.round(elapsed / msPerHour) + 'h';
+        // return Math.round(elapsed / msPerHour) + ' hours ago';
     }
 
     else if (elapsed < msPerMonth) {
-        return Math.round(elapsed / msPerDay) + ' days ago';
+        return Math.round(elapsed / msPerDay) + 'd';
+        // return Math.round(elapsed / msPerDay) + ' days ago';
     }
 
     else if (elapsed < msPerYear) {
-        return Math.round(elapsed / msPerMonth) + ' months ago';
+        return Math.round(elapsed / msPerMonth) + 'm';
+        // return Math.round(elapsed / msPerMonth) + ' months ago';
     }
 
     else {
-        return Math.round(elapsed / msPerYear) + ' years ago';
+        return Math.round(elapsed / msPerYear) + 'y';
+        // return Math.round(elapsed / msPerYear) + ' years ago';
     }
 }
 

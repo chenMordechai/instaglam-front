@@ -26,7 +26,7 @@ export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePrefere
                 </div>
             </section>}
 
-            {!isLoggedinUserProfile && <section className="profile-header">
+            {!isLoggedinUserProfile && <section className="profile-header header">
                 <Link to="/home">
                     <img src={chevron} />
                 </Link>

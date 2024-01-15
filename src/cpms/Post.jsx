@@ -67,16 +67,9 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
         await removeComment(commentId, post._id)
     }
 
-    function isFollowing() {
-        if (isLoggedinUserPost()) return
-        // const foundUser = loggedinUser.following.find(u => u.username === post.by.username)
-        // if (foundUser) return true
-        // else return false
-    }
-
     return (
         <section className="post">
-            {openOptionsModal && <PostOptionsModal isFollowing={isFollowing()} onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
+            {openOptionsModal && <PostOptionsModal  onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
