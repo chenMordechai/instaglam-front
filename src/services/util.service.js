@@ -156,7 +156,8 @@ function timeDifference(current, previous) {
     }
 }
 
-function isHebrew(letter){
+function isHebrew(txt){
    const hebrewLeters = 'אבגדהוזחטיכלמנסעפצקרשת'
-    return hebrewLeters.includes(letter)
+   const parts = txt.split('')
+   return parts.some(letter => hebrewLeters.includes(letter))
 }

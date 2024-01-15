@@ -20,6 +20,10 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
         } else {
             onCloseScreen()
         }
+        
+        return ()=>{
+            onCloseScreen()
+        }
 
     }, [openOptionsModal, openCommentModal])
 
@@ -69,7 +73,7 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
 
     return (
         <section className="post">
-            {openOptionsModal && <PostOptionsModal  onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
+            {openOptionsModal && <PostOptionsModal userId={post.by._id} setOpenCommentModal={setOpenCommentModal}  onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />

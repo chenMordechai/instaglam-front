@@ -31,3 +31,7 @@
     @include header;
     border-bottom: 1px solid $clr-grey2;
 }
+
+.doesnt-work {
+    color: $clr-grey3;
+}

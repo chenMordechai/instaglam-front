@@ -21,10 +21,12 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
     }
 
     function getClass() {
-        const res = utilService.isHebrew(comment.txt.charAt(1))
+        if(!comment) return
+        const res = utilService.isHebrew(comment.txt)
         if (res) return 'rtl'
         else ''
     }
+    
     function onRemoveComment(){
         onRemoveCommentFromPost(comment._id)
     }

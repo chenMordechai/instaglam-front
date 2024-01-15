@@ -14,7 +14,7 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
     console.log('isLoggedinUserProfile:', isLoggedinUserProfile)
     function getClass() {
         if (!bio) return ''
-        const res = utilService.isHebrew(bio.charAt(1))
+        const res = utilService.isHebrew(bio)
         if (res) return 'rtl'
         else ''
     }

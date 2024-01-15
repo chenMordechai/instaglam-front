@@ -51,6 +51,10 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         } else {
             onCloseScreen()
         }
+        
+        return ()=>{
+            onCloseScreen()
+        }
 
     }, [openPreferenceModal, openChangeImgModal,openFollowingModal,openShowImgModal])
 
@@ -159,7 +163,7 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
     const { _id, username, fullname, imgUrl, bio, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">
-            {openPreferenceModal && <PreferenceModal onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
+            {openPreferenceModal && <PreferenceModal loggedinUserId={loggedinUser._id} onTogglePreferencesModal={onTogglePreferencesModal} onLogout={onLogout} />}
             {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
             {openShowImgModal && <ShowImgModal imgUrl={imgUrl} />}
             {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} onToggleFollowingModal={onToggleFollowingModal} />}
