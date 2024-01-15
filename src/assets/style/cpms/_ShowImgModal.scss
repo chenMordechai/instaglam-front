@@ -1,0 +1,17 @@
+.show-img-modal {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+
+    img {
+        border-radius: 50%;
+    }
+
+    @include for-mobile-layout {
+        height: 200px;
+        width: 200px;
+        bottom: 50%;
+        left: 50%;
+        translate: -50% 50%;
+    }
+}

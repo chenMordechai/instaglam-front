@@ -10,7 +10,8 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo({onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
+export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
+    console.log('isLoggedinUserProfile:', isLoggedinUserProfile)
     function getClass() {
         if (!bio) return ''
         const res = utilService.isHebrew(bio.charAt(1))
@@ -18,15 +19,22 @@ export function ProfileInfo({onToggleFollowingModal,onAddFollowing, isFollowing,
         else ''
     }
 
+    function onClickImg(){
+        if(isLoggedinUserProfile){
+            onToggleChangeImgModal()
+        }else{
+            onToggleShowImgModal()
+        }
+    }
+
     return (
         <section className="profile-info">
             <div className="left-container">
-                <div onClick={onToggleChangeImgModal} className="img-container">
+                <div onClick={onClickImg}  className="img-container">
                     <Img imgUrl={imgUrl} className="gradient" />
                 </div>
             </div>
             <div className="user-info">
-                {/* אם מישו נכנס לפרופיך שלו ישפה דברים שונים */}
                 <div className="user-info-header">
                     <h2>{username}</h2>
                     {!isLoggedinUserProfile && <div className="btn-container">
