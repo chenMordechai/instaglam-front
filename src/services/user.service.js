@@ -20,7 +20,8 @@ export const userService = {
     // changeScore,
     getEmptyCredentials,
     addFollowing,
-    removeFollowing
+    removeFollowing,
+    updateNotificationSeen
 }
 
 
@@ -38,17 +39,17 @@ async function remove(userId) {
 }
 
 async function update(user) {
-    user = await httpService.put(BASE_URL_USER + user._Id , user)
+    user = await httpService.put(BASE_URL_USER + user._Id, user)
     // Handle case in which admin updates other user's details
-    if (getLoggedinUser()._id === user._id) _setLoggedinUser({...getLoggedinUser(),...user})
+    if (getLoggedinUser()._id === user._id) _setLoggedinUser({ ...getLoggedinUser(), ...user })
     return user
 }
 
 async function updateImg(user) {
-    user = await httpService.put(BASE_URL_USER + user._Id +'/img', user)
+    user = await httpService.put(BASE_URL_USER + user._Id + '/img', user)
     // Handle case in which admin updates other user's details
     // console.log('update img user service!!:', {...getLoggedinUser(),...user})
-    if (getLoggedinUser()._id === user._id) _setLoggedinUser({...getLoggedinUser(),...user})
+    if (getLoggedinUser()._id === user._id) _setLoggedinUser({ ...getLoggedinUser(), ...user })
     // if (getLoggedinUser()._id === user._id) _setLoggedinUser(user)
     return user
 }
@@ -60,7 +61,7 @@ async function login(userCred) {
     }
 }
 
-async function signup({ username, password, fullname  , email}) {
+async function signup({ username, password, fullname, email }) {
     const userToSave = {
         username,
         password,
@@ -90,27 +91,24 @@ function _setLoggedinUser(user) {
     return userToSave
 }
 
+async function addFollowing(miniUser) {
+    return httpService.post(BASE_URL_USER + miniUser._id + '/following', miniUser)
+}
+
+async function removeFollowing(miniUserId) {
+    return httpService.delete(BASE_URL_USER + miniUserId + '/following')
+}
+
+async function updateNotificationSeen(userId) {
+    return await httpService.put(BASE_URL_USER + userId + '/notification')
+}
+
 function getEmptyCredentials() {
     return {
         username: 'chen_mordechai1',
         password: '123',
-        fullname:'',
-        email:''
+        fullname: '',
+        email: ''
     }
-}
-
-// async function changeScore(by) {
-//     const user = getLoggedinUser()
-//     if (!user) throw new Error('Not loggedin')
-//     user.score = user.score + by || by
-//     await update(user)
-//     return user.score
-// }
-
-async function addFollowing(miniUser) {
-    return httpService.post(BASE_URL_USER + miniUser._id + '/following',miniUser)
-}
-async function removeFollowing(miniUserId) {
-    return httpService.delete(BASE_URL_USER + miniUserId + '/following')
 }
 

@@ -8,7 +8,7 @@ import { Users } from "../cpms/Users";
 import { Posts } from "../cpms/Posts";
 import { NavSide } from '../cpms/NavSide'
 import { loadPosts } from '../store/actions/post.actions.js'
-import { loadUsers } from '../store/actions/user.actions.js'
+import { loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { addFollowing, removeFollowing, logout } from '../store/actions/user.actions.js'
 
 export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
@@ -16,19 +16,28 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    // console.log('loggedinUser:', loggedinUser)
+    const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
+    const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUser, setUpdatedUser] = useState(null)
+
     const navigate = useNavigate()
+
     useEffect(() => {
         if (!loggedinUser) navigate('/')
         try {
             loadPosts()
             loadUsers()
+            loadUser(loggedinUser._id)
         } catch (err) {
             console.log('err:', err)
         }
-
     }, [])
+
+    useEffect(() => {
+        const notSeen = notifications?.some(n => !n.seen)
+        if (notSeen) setNewNotifications(true)
+
+    }, [notifications])
 
     function getOrderedUsers() {
         if (!users.length) return []
@@ -51,6 +60,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
                 })
             })
         })
+        if (!filteredUsersWithCommonFollowing.length) return filteredUsers
         return filteredUsersWithCommonFollowing
     }
 
@@ -89,7 +99,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     if (!loggedinUser) return ''
     return (
         <section className="home">
-            <HomeHeader loggedinUserId={loggedinUser._id} />
+            <HomeHeader newNotifications={newNotifications} loggedinUserId={loggedinUser._id} />
             <div className="main-content">
                 <Users users={getOrderedUsers()} />
                 <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser} />

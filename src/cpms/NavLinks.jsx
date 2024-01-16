@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 import instagram from '../assets/icons/instagram.svg'
 import compass from '../assets/icons/compass-regular.svg'
@@ -16,8 +17,8 @@ import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
-import {Notification} from '../pages/Notification'
-import {Search} from '../pages/Search'
+import { Notification } from '../pages/Notification'
+import { Search } from '../pages/Search'
 
 import { Img } from './Img'
 
@@ -27,21 +28,21 @@ export function NavLinks({ navLinksDisplay }) {
     const [openSearchModal, setOpenSearchModal] = useState(false)
 
 
-        
+
     function onToggleNotificationModal() {
-        if(openSearchModal) onToggleSearchModal()
+        if (openSearchModal) onToggleSearchModal()
         setOpenNotificationModal(prev => !prev)
     }
 
     function onToggleSearchModal() {
-        if(openNotificationModal) onToggleNotificationModal()
+        if (openNotificationModal) onToggleNotificationModal()
         setOpenSearchModal(prev => !prev)
     }
 
-    function isMobile(){
-        return (window.innerWidth > 700) ? false:true
-      }
-  
+    function isMobile() {
+        return (window.innerWidth > 700) ? false : true
+    }
+
 
     if (!loggedinUser) return ''
     return (
@@ -55,11 +56,11 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={house} />
                 <span>Home</span>
             </NavLink>
-          { isMobile() && <Link to="search" title="Search" >
+            {isMobile() && <Link to="search" title="Search" >
                 <img src={glass} />
                 <span>Search</span>
             </Link>}
-          { !isMobile() && <a  onClick={onToggleSearchModal} title="Search" >
+            {!isMobile() && <a onClick={onToggleSearchModal} title="Search" >
                 <img src={glass} />
                 <span>Search</span>
             </a>}
@@ -76,8 +77,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <span>Messages</span>
             </a>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
-               { !openNotificationModal &&<img src={heart} />}
-                {openNotificationModal &&  <FontAwesomeIcon icon={faHeart} />}
+                {!openNotificationModal && <img src={heart} />}
+                {openNotificationModal && <FontAwesomeIcon icon={faHeart} />}
+                <FontAwesomeIcon className="have-notification" icon={faCircle} />
+
                 <span>Notifications</span>
             </a>
             <Link to={'/post/edit'} title="New Post">
@@ -96,8 +99,8 @@ export function NavLinks({ navLinksDisplay }) {
             </a>
 
 
-           {openNotificationModal && <Notification loggedinUserId={loggedinUser._id}/>}
-           {openSearchModal && <Search />}
+            {openNotificationModal && <Notification loggedinUserId={loggedinUser._id} />}
+            {openSearchModal && <Search />}
         </section>
     )
 }

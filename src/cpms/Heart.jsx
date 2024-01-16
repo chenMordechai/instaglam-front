@@ -5,7 +5,7 @@ import heart from '../assets/icons/heart-regular.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
-export function Heart ({ onUpdateLike, loggedinUser , likedBy }){
+export function Heart({ onUpdateLike, loggedinUser, likedBy }) {
     const [isLiked, setIsLiked] = useState()
 
     useEffect(() => {
@@ -23,10 +23,11 @@ export function Heart ({ onUpdateLike, loggedinUser , likedBy }){
     function onLikePost() {
         onUpdateLike(!isLiked)
     }
-   return(
-    <a  onClick={onLikePost} className={(isLiked ? 'red-heart' : '')+' heart'}>
-    <img className="empty-heart" src={heart} />
-    <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
-    </a>
-   )
+    return (
+        <a onClick={onLikePost} className={(isLiked ? 'red-heart' : '') + ' heart'}>
+            <img className="empty-heart" src={heart} />
+            <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
+
+        </a>
+    )
 }

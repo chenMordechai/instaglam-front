@@ -111,25 +111,25 @@ async function removeLikePost(postId, likeById) {
     return httpService.delete(BASE_URL + postId + '/like/' + likeById)
 }
 
-async function addComment(comment,postId) {
-    return httpService.post(BASE_URL + postId + '/comment',comment)
+async function addComment(comment, postId) {
+    return httpService.post(BASE_URL + postId + '/comment', comment)
 }
 
-async function removeComment(commentId,postId) {
+async function removeComment(commentId, postId) {
     return httpService.delete(BASE_URL + postId + '/comment/' + commentId)
 }
 
-async function addLikeComment(postId,comment) {
-    return httpService.post(BASE_URL + postId + '/comment/like/'+comment._id,comment)
+async function addLikeComment(postId, comment) {
+    return httpService.post(BASE_URL + postId + '/comment/like/' + comment._id, comment)
 }
 
-async function removeLikeComment(postId,commentId, likeById) {
-    return httpService.delete(BASE_URL + postId + '/comment/like/' + commentId+'/'+likeById)
+async function removeLikeComment(postId, commentId, likeById) {
+    return httpService.delete(BASE_URL + postId + '/comment/like/' + commentId + '/' + likeById)
 }
 
 function getEmptyPost() {
     return {
-        txt: 'hi',
+        txt: '',
         imgUrl: '',
         createdAt: '',
         by: null,
@@ -147,9 +147,9 @@ function getFilters() {
 function getEmptyComment() {
     return {
         txt: '',
-        createdAt:'',
-        by:'',
-        likedBy:[]
+        createdAt: '',
+        by: '',
+        likedBy: []
     }
 }
 

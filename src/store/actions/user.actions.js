@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js";
-import { SET_USERS, SET_USER, SET_LOGGEDIN_USER, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING, ADD_FOLLOWING, REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
+import { SET_USERS, SET_USER, SET_LOGGEDIN_USER, UPDATE_USER_NOTIFICATIONS, SET_LOGGEDIN_USER_IMG, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING, ADD_FOLLOWING, REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
@@ -64,7 +64,14 @@ export async function saveUser(user) {
     // const type = toy._id ? UPDATE_TOY : ADD_TOY
     try {
         const userToSave = await userService.update(user)
-        store.dispatch({ type: UPDATE_USER, user: userToSave })
+        store.dispatch({ type: SET_USER, user: user })
+        // const miniUser = {
+        //     _id: user._id,
+        //     username: user.username,
+        //     fullname: user.fullname,
+        //     imgUrl: user.imgUrl
+        // }
+        store.dispatch({ type: SET_LOGGEDIN_USER, user: userToSave })
         return userToSave
     } catch (err) {
         console.log('user action -> Cannot save user', err)
@@ -77,6 +84,7 @@ export async function saveUserImg(user) {
     try {
         const userToSave = await userService.updateImg(user)
         store.dispatch({ type: SET_USER, user })
+        store.dispatch({ type: SET_LOGGEDIN_USER_IMG, imgUrl: userToSave.imgUrl })
         return userToSave
     } catch (err) {
         console.log('user action -> Cannot save user', err)
@@ -106,6 +114,18 @@ export async function removeFollowing(userId, loggedinUserId, from) {
         return removedUserId
     } catch (err) {
         console.log('user action -> Cannot add following user', err)
+        throw err
+
+    }
+}
+
+export async function updateNotificationSeen(userId) {
+    try {
+        const userToSave = await userService.updateNotificationSeen(userId)
+        store.dispatch({ type: UPDATE_USER_NOTIFICATIONS })
+        return userToSave
+    } catch (err) {
+        console.log('user action -> Cannot save user', err)
         throw err
 
     }

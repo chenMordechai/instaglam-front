@@ -3,7 +3,6 @@
 import { UserPreview } from "./UserPreview"
 
 export function NavSide({ loggedinUser, users, onAddFollowing, onRemoveFollowing, onLogout, updatedUser }) {
-    console.log('users:', users)
     function isFollowing(username) {
         return username === updatedUser?.username
     }

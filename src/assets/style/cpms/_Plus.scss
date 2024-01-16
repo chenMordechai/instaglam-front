@@ -1,3 +1,10 @@
 .plus {
-    @include flex(column, center, start);
+    @include flex(column, center, start, 5px);
+    .img-container {
+        height: 50px;
+    }
+    span {
+        font-size: 13px;
+        text-align: center;
+    }
 }

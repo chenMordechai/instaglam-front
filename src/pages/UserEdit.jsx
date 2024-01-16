@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 import { utilService } from "../services/util.service.js";
 import { saveUserImg, saveUser } from '../store/actions/user.actions.js'
@@ -11,6 +11,7 @@ export function UserEdit() {
     const [user, setUser] = useState(null)
 
     const { userId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         init()
@@ -46,9 +47,11 @@ export function UserEdit() {
     async function onSubmitForm(ev) {
         ev.preventDefault()
         try {
+            console.log('hi')
             const savedUser = await saveUser({ ...user })
+            console.log('savedUser:', savedUser)
             // showSuccessMsg('Save Toy: ' + savedToy._id)
-            // navigate('/toy')
+            navigate(-1)
         } catch (err) {
             console.log('err:', err)
             // showErrorMsg('Cannot Save Toy')

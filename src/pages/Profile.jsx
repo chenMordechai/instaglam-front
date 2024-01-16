@@ -85,6 +85,8 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false
+        console.log('loggedinUser.username:', loggedinUser.username)
+        console.log('user.username:', user.username)
         return loggedinUser.username === user.username
     }
 

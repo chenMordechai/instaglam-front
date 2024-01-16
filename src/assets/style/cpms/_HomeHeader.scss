@@ -3,4 +3,12 @@
     @include for-mobile-layout {
         @include header;
     }
+
+    .have-notification {
+        color: red;
+        height: 9px;
+        position: absolute;
+        top: 13px;
+        right: 62px;
+    }
 }
