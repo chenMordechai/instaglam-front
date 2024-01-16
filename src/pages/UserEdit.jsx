@@ -68,7 +68,7 @@ export function UserEdit() {
                     <div className="change-photo-container">
                         <img src={user.imgUrl} />
 
-                        <label className="blue bold" htmlFor="imgFile">
+                        <label className="clr-blue bold" htmlFor="imgFile">
                             Edit picture
                             <input type="file" id="imgFile" onChange={onChangeImg} />
                         </label>

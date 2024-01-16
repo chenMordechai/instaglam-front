@@ -8,7 +8,7 @@
         color: $clr-grey4;
     }
     @include for-narrow-layout {
-        // display: none;
+        display: none;
     }
 
     ul,
@@ -27,16 +27,23 @@
         }
 
         .name-container {
-            width: calc(100% - 110px);
+            width: calc(100% - 120px);
             @include flex(column, start, center);
             span {
                 color: $clr-grey4;
                 font-size: 0.7rem;
                 font-weight: 300;
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
         button {
+            min-width: 52px;
+            justify-self: end;
             font-size: 0.8rem;
+            justify-content: end;
         }
     }
 }

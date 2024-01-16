@@ -1,4 +1,5 @@
 .home {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 
@@ -12,8 +13,8 @@
 
     div.main-content {
         padding-top: 20px;
-        // width: 663px;
-        width: calc(100% - 550px);
+        width: 663px;
+        width: calc(100% - 320px);
 
         @include for-narrow-layout {
             width: 75%;

@@ -21,7 +21,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
     }
 
     function getClass() {
-        if(!txt) return
+        if (!txt) return
         const res = utilService.isHebrew(txt)
         if (res) return 'rtl'
         else ''
@@ -32,9 +32,9 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
             {/* <a>{by} <span>{txt}</span></a> */}
             <Link to={'/profile/' + byId + '/posts'} >
                 {by}
-                <span className={getClass() }>{txt}</span>
+                <span className={getClass()}>{txt}</span>
             </Link>
-            <button onClick={onToggleCommentModal} className="color-grey">View all {comments.length} comments</button>
+            <button onClick={onToggleCommentModal} className="clr-grey">View all {comments.length} comments</button>
             {myNewComment && <h3>{myNewComment.by.username} <span>{myNewComment.txt}</span> </h3>}
             <form onSubmit={onSubmitForm}>
                 <div className="img-container">
@@ -43,7 +43,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
 
                 <input onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
                 {/* if input have value add button post */}
-                {comment.txt && <button className="blue bold post">Post</button>}
+                {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
             </form>
         </section>

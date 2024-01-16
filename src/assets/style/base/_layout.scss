@@ -14,7 +14,7 @@
   }
 
   main {
-    width: calc(100vw - 230px);
+    width: calc(100% - 230px);
     min-height: calc(100vh - 55px);
     // background-color: pink;
     // @include flex(row, start, center);

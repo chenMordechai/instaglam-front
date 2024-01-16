@@ -13,18 +13,17 @@ import { PreferenceModal } from '../cpms/PreferenceModal'
 import { ChangeImgModal } from '../cpms/ChangeImgModal'
 import { ShowImgModal } from '../cpms/ShowImgModal'
 import { FollowingModal } from '../cpms/FollowingModal'
-import { logout, saveUserImg } from '../store/actions/user.actions.js'
 import { faL } from "@fortawesome/free-solid-svg-icons";
-import { addFollowing,removeFollowing, loadUser } from '../store/actions/user.actions.js'
+import { addFollowing, removeFollowing, loadUser, logout, saveUserImg } from '../store/actions/user.actions.js'
 
 
-export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
+export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const [isLoading, setIsLoading] = useState(false)
     const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
     const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
     const [openShowImgModal, setOpenShowImgModal] = useState(false)
     const [openFollowingModal, setOpenFollowingModal] = useState(false)
-   
+
     const { currUser: user } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
 
@@ -46,17 +45,17 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
     }
 
     useEffect(() => {
-        if (openPreferenceModal || openChangeImgModal || openFollowingModal || openShowImgModal ) {
+        if (openPreferenceModal || openChangeImgModal || openFollowingModal || openShowImgModal) {
             onOpenScreen()
         } else {
             onCloseScreen()
         }
-        
-        return ()=>{
+
+        return () => {
             onCloseScreen()
         }
 
-    }, [openPreferenceModal, openChangeImgModal,openFollowingModal,openShowImgModal])
+    }, [openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
 
     useEffect(() => {
         if (!isScreenOpen) {
@@ -68,7 +67,7 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
 
     }, [isScreenOpen])
 
-    
+
     function onTogglePreferencesModal() {
         setOpenPreferenceModal(prev => !prev)
     }
@@ -98,19 +97,19 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
 
     }
 
-    async function onAddFollowing(){
+    async function onAddFollowing() {
         const miniUser = {
-            _id:user._id,
+            _id: user._id,
             username: user.username,
-            fullname:user.fullname,
-            imgUrl:user.imgUrl
+            fullname: user.fullname,
+            imgUrl: user.imgUrl
         }
-       const updatedUser = await addFollowing(miniUser,loggedinUser)
+        const updatedUser = await addFollowing(miniUser, loggedinUser)
     }
 
-    async function onRemoveFollowing(){
-       await removeFollowing(user._id,loggedinUser._id)
-       onToggleFollowingModal()
+    async function onRemoveFollowing() {
+        await removeFollowing(user._id, loggedinUser._id)
+        onToggleFollowingModal()
     }
 
     async function onLogout() {
@@ -157,7 +156,7 @@ export function Profile({isScreenOpen,onOpenScreen,onCloseScreen}) {
         }
     }
 
-    if (!user) return
+    if (!user || !loggedinUser) return
     const { _id, username, fullname, imgUrl, bio, followers, following, highlights, postsMini } = user
     return (
         <section className="profile">

@@ -1,15 +1,15 @@
 import { Fragment } from 'react'
 import { Link } from "react-router-dom";
 
-export function PostOptionsModal({userId,setOpenCommentModal,isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
+export function PostOptionsModal({ userId, setOpenCommentModal, isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
 
-    
+
     return (
         <section className="modal">
-            {!isLoggedinUserPost && 
-                 <Link to={`/profile/${userId}/posts`} >
-                About this account
-             </Link>}
+            {!isLoggedinUserPost &&
+                <Link to={`/profile/${userId}/posts`} >
+                    About this account
+                </Link>}
 
             <button className="doesnt-work">Add to favorites</button>
             <button className="doesnt-work">Go to post</button>
@@ -18,13 +18,13 @@ export function PostOptionsModal({userId,setOpenCommentModal,isFollowing, onRemo
             <button className="doesnt-work">Save</button>
 
             {isLoggedinUserPost && <Fragment>
-            
+
                 <button className="doesnt-work">Archive</button>
-                    <Link to={`/post/edit/${postId}`}>
-                        Edit
-                    </Link>
-                
-                <button onClick={() => onRemovePost()} className="red">
+                <Link to={`/post/edit/${postId}`}>
+                    Edit
+                </Link>
+
+                <button onClick={() => onRemovePost()} className="clr-red">
                     Delete
                 </button>
             </Fragment>}

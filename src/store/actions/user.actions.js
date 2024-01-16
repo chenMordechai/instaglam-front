@@ -1,5 +1,5 @@
 import { userService } from "../../services/user.service.js";
-import { SET_USERS, SET_USER,SET_LOGGEDIN_USER, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING,ADD_FOLLOWING,REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
+import { SET_USERS, SET_USER, SET_LOGGEDIN_USER, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING, ADD_FOLLOWING, REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
@@ -35,7 +35,7 @@ export async function loadUser(userId) {
     } catch (err) {
         console.log('toy action -> Cannot load user', err)
         throw err
-    } 
+    }
 }
 
 export async function logout() {
@@ -85,21 +85,24 @@ export async function saveUserImg(user) {
     }
 }
 
-export async function addFollowing(miniUser,loggedinUser){
+// from profile after we have currUser
+export async function addFollowing(miniUser, loggedinUser, from) {
+    // console.log('miniUser, loggedinUser:', miniUser, loggedinUser)
     try {
         const addedUser = await userService.addFollowing(miniUser)
-        store.dispatch({ type: ADD_FOLLOWING, loggedinUser })
+        if (!from) store.dispatch({ type: ADD_FOLLOWING, loggedinUser })
         return addedUser
     } catch (err) {
         console.log('user action -> Cannot add following user', err)
         throw err
-
     }
 }
-export async function removeFollowing(userId,loggedinUserId){
+
+
+export async function removeFollowing(userId, loggedinUserId, from) {
     try {
         const removedUserId = await userService.removeFollowing(userId)
-        store.dispatch({ type: REMOVE_FOLLOWING, loggedinUserId })
+        if (!from) store.dispatch({ type: REMOVE_FOLLOWING, loggedinUserId })
         return removedUserId
     } catch (err) {
         console.log('user action -> Cannot add following user', err)
@@ -107,4 +110,3 @@ export async function removeFollowing(userId,loggedinUserId){
 
     }
 }
-
