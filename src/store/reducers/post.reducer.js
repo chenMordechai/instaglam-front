@@ -4,7 +4,6 @@ export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST = 'SET_POST'
-export const UPDATE_POSTS = 'UPDATE_POSTS'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_POST_LIKED_BY = 'UPDATE_POST_LIKED_BY'
 export const REMOVE_POST_LIKED_BY = 'REMOVE_POST_LIKED_BY'
@@ -37,10 +36,10 @@ export function postReducer(state = initialState, action = {}) {
             return { ...state, posts }
 
         case ADD_POST:
-            posts = [...state.posts, action.post]
+            posts = [action.post, ...state.posts]
             return { ...state, posts }
 
-        case UPDATE_POSTS:
+        case UPDATE_POST:
             posts = state.posts.map(post => post._id === action.post._id ? action.post : post)
             return { ...state, posts }
 
@@ -62,51 +61,51 @@ export function postReducer(state = initialState, action = {}) {
             })
             return { ...state, posts }
 
-            case UPDATE_POST_COMMENT:
-                posts = state.posts.map(post => {
-                    if (post._id === action.postId) {
-                        post.comments = [...post.comments, action.comment]
-                    }
-                    return post
-                })
-                return { ...state, posts }
+        case UPDATE_POST_COMMENT:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.comments = [...post.comments, action.comment]
+                }
+                return post
+            })
+            return { ...state, posts }
 
-                case REMOVE_POST_COMMENT:
-                    posts = state.posts.map(post => {
-                        if (post._id === action.postId) {
-                            post.comments = post.comments.filter(c => c._id !== action.commentId)
+        case REMOVE_POST_COMMENT:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.comments = post.comments.filter(c => c._id !== action.commentId)
+                }
+                return post
+            })
+            return { ...state, posts }
+
+        case UPDATE_COMMENT_LIKED_BY:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.comments = post.comments.map(comment => {
+                        if (comment._id === action.commentId) {
+                            comment.likedBy = [...comment.likedBy, action.likedBy]
                         }
-                        return post
+                        return comment
                     })
-                    return { ...state, posts }
+                }
+                return post
+            })
+            return { ...state, posts }
 
-                    case UPDATE_COMMENT_LIKED_BY:
-                        posts = state.posts.map(post => {
-                            if (post._id === action.postId) {
-                                post.comments = post.comments.map(comment=>{
-                                    if(comment._id === action.commentId){
-                                        comment.likedBy = [...comment.likedBy, action.likedBy]
-                                    }
-                                    return comment
-                                })
-                            }
-                            return post
-                        })
-                        return { ...state, posts }
-            
-                    case REMOVE_COMMENT_LIKED_BY:
-                        posts = state.posts.map(post => {
-                            if (post._id === action.postId) {
-                                post.comments = post.comments.map(comment=>{
-                                    if(comment._id === action.commentId){
-                                        comment.likedBy = comment.likedBy.filter(lb => lb._id !== action.likeById)
-                                    }
-                                    return comment
-                                })
-                            }
-                            return post
-                        })
-                        return { ...state, posts }
+        case REMOVE_COMMENT_LIKED_BY:
+            posts = state.posts.map(post => {
+                if (post._id === action.postId) {
+                    post.comments = post.comments.map(comment => {
+                        if (comment._id === action.commentId) {
+                            comment.likedBy = comment.likedBy.filter(lb => lb._id !== action.likeById)
+                        }
+                        return comment
+                    })
+                }
+                return post
+            })
+            return { ...state, posts }
 
         case SET_IS_LOADING:
             return { ...state, isLoading: action.isLoading }

@@ -1,15 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
-import { useSelector } from 'react-redux'
-import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 
 import { HomeHeader } from '../cpms/HomeHeader'
 import { Users } from "../cpms/Users";
 import { Posts } from "../cpms/Posts";
 import { NavSide } from '../cpms/NavSide'
-import { loadPosts } from '../store/actions/post.actions.js'
-import { loadUsers, loadUser } from '../store/actions/user.actions.js'
-import { addFollowing, removeFollowing, logout } from '../store/actions/user.actions.js'
+import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getActionLikePostRemove, loadPosts, getActionAddPost, getActionUpdatePost, getActionRemovePost } from '../store/actions/post.actions.js'
+import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
+import { socketService } from '../services/socket.service.js'
 
 export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
@@ -17,10 +16,13 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { users } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
+    console.log('notifications:', notifications)
+
     const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUser, setUpdatedUser] = useState(null)
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!loggedinUser) navigate('/')
@@ -31,6 +33,46 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
         } catch (err) {
             console.log('err:', err)
         }
+    }, [])
+
+    useEffect(() => {
+        socketService.on('post-added', post => {
+            dispatch(getActionAddPost(post))
+        })
+        socketService.on('post-updated', post => {
+            dispatch(getActionUpdatePost(post))
+        })
+        socketService.on('post-removed', postId => {
+            dispatch(getActionRemovePost(postId))
+        })
+        socketService.on('like-post-added', ({ postId, likedBy }) => {
+            dispatch(getActionLikePostAdd(postId, likedBy))
+        })
+        socketService.on('like-post-removed', ({ postId, likeById }) => {
+            dispatch(getActionLikePostRemove(postId, likeById))
+        })
+        socketService.on('comment-added', ({ postId, comment }) => {
+            dispatch(getActionCommentAdd(postId, comment))
+        })
+        socketService.on('comment-removed', ({ postId, commentId }) => {
+            dispatch(getActionCommentRemove(postId, commentId))
+        })
+
+        socketService.emit('user-watch', loggedinUser._id)
+        socketService.on('notification-added', () => {
+            setNewNotifications(true)
+        })
+
+        return () => {
+            socketService.off('post-added')
+            socketService.off('post-updated')
+            socketService.off('post-removed')
+            socketService.off('like-post-added')
+            socketService.off('like-post-removed')
+            socketService.off('comment-added')
+            socketService.off('comment-removed')
+        }
+
     }, [])
 
     useEffect(() => {

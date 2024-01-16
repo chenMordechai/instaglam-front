@@ -1,7 +1,8 @@
 import { Post } from "./Post";
 
 
-export function Posts({isScreenOpen,onOpenScreen,onCloseScreen, posts,loggedinUser }) {
+export function Posts({ isScreenOpen, onOpenScreen, onCloseScreen, posts, loggedinUser }) {
+    // console.log('posts:', posts)
     return (
         <section className="posts">
             <ul className="posts-container">
