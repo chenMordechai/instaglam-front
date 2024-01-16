@@ -13,7 +13,7 @@
     div.main-content {
         padding-top: 20px;
         // width: 663px;
-        width: 65%;
+        width: calc(100% - 550px);
 
         @include for-narrow-layout {
             width: 75%;

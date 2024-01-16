@@ -1,6 +1,7 @@
 .main-layout {
   display: flex;
   // height: 100vh;
+  min-height: calc(100vh - 55px);
 
   @include for-mobile-layout {
     // flex-direction: column;
@@ -14,6 +15,7 @@
 
   main {
     width: calc(100vw - 230px);
+    min-height: calc(100vh - 55px);
     // background-color: pink;
     // @include flex(row, start, center);
     @include for-narrow-layout {

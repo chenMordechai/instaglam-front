@@ -1,0 +1,12 @@
+.search {
+    .form-container {
+        padding: $pad1;
+        border-bottom: 1px solid $clr-grey2;
+
+        form {
+            input {
+                background-color: $clr-grey2;
+            }
+        }
+    }
+}

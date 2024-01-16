@@ -15,6 +15,14 @@ export function Search (){
         <section className={'search '+ getClass()}>
              { isMobile() &&   <SearchHeader/>}
         { !isMobile() &&   <h3>Search</h3>}
+
+<div className="form-container">
+
+        <form>
+          <input type="text" />
+          <button>x</button>
+        </form>
+</div>
         </section>
     )
 }

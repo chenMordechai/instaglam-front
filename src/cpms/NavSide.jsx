@@ -1,26 +1,23 @@
 
 
-export function NavSide() {
+import { UserPreview } from "./UserPreview"
+
+export function NavSide({ loggedinUser, users }) {
+    console.log('users:', users)
+
     return (
         <section className="nav-side">
-            <div>
-                <img src="" alt="" />
-                <div>Me</div>
-                <button>Logout</button>
-            </div>
+            <UserPreview imgUrl={loggedinUser.imgUrl} username={loggedinUser.username} spanContent={loggedinUser.fullname} btnContent="Logout" />
 
             <h3>Suggested for you</h3>
 
-            <div>
-                <img src="" alt="" />
-                <div>name</div>
-                <button>Follow</button>
-            </div>
-            <div>
-                <img src="" alt="" />
-                <div>name</div>
-                <button>Follow</button>
-            </div>
+            <ul>
+                {users.map(user => <li key={user._id}>
+                    <UserPreview imgUrl={user.imgUrl} username={user.username} spanContent="Followed by.." btnContent="Follow" />
+
+                </li>)}
+
+            </ul>
         </section>
     )
 }
