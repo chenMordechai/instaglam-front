@@ -46,7 +46,7 @@ export function userReducer(state = initialState, action = {}) {
         //     return { ...state, users }
 
         case SET_LOGGEDIN_USER_IMG:
-            return { ...state, loggedinUser: { ...loggedinUser, imgUrl: action.imgUrl } }
+            return { ...state, loggedinUser: { ...state.loggedinUser, imgUrl: action.imgUrl } }
         case ADD_FOLLOWING:
             return { ...state, currUser: { ...state.currUser, followers: [...state.currUser.followers, action.loggedinUser] } }
         case REMOVE_FOLLOWING:

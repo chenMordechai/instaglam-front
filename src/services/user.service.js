@@ -17,7 +17,6 @@ export const userService = {
     logout,
     signup,
     getLoggedinUser,
-    // changeScore,
     getEmptyCredentials,
     addFollowing,
     removeFollowing,
@@ -25,8 +24,8 @@ export const userService = {
 }
 
 
-async function query() {
-    return httpService.get(BASE_URL_USER)
+async function query(filterBy = {}) {
+    return httpService.get(BASE_URL_USER, filterBy)
 }
 
 async function getById(userId) {

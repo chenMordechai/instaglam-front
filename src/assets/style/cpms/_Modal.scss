@@ -37,6 +37,16 @@
             margin-bottom: $pad1;
         }
 
+        img.loader {
+            border: none;
+            height: 60px;
+            width: 60px;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
         span {
             color: $clr-grey4;
             font-size: 16px;

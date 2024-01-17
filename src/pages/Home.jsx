@@ -15,9 +15,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    console.log('loggedinUser:', loggedinUser)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-    // console.log('notifications:', notifications)
 
     const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUser, setUpdatedUser] = useState(null)

@@ -1,19 +1,17 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { ProfileHeader } from "../cpms/ProfileHeader";
 import { ProfileInfo } from "../cpms/ProfileInfo";
 import { ProfileHighlight } from "../cpms/ProfileHighlight";
 import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
 import { PostList } from "../cpms/PostList";
-import { userService } from "../services/user.service.js";
 import { utilService } from "../services/util.service.js";
 import { PreferenceModal } from '../cpms/PreferenceModal'
 import { ChangeImgModal } from '../cpms/ChangeImgModal'
 import { ShowImgModal } from '../cpms/ShowImgModal'
 import { FollowingModal } from '../cpms/FollowingModal'
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import { addFollowing, removeFollowing, loadUser, logout, saveUserImg } from '../store/actions/user.actions.js'
 
 
@@ -145,7 +143,6 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     async function onRemoveImg() {
         const defaultImgUrl = 'https://res.cloudinary.com/dnluclrao/image/upload/v1704182274/user_afklid.jpg'
         try {
-            setUser(() => ({ ...user, imgUrl: defaultImgUrl }))
             await saveUserImg({ ...user, imgUrl: defaultImgUrl })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)

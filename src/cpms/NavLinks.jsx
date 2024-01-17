@@ -17,6 +17,7 @@ import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
+
 import { Notification } from '../pages/Notification'
 import { Search } from '../pages/Search'
 import { Img } from './Img'

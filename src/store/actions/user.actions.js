@@ -36,12 +36,11 @@ export async function signup(credentials) {
 }
 
 
-export async function loadUsers() {
-    // const { filterBy } = store.getState().postModule
-    // const { sortBy } = store.getState().postModule
+export async function loadUsers(filterBy) {
+    console.log('filterBy', filterBy)
     try {
-        const users = await userService.query()
-        // console.log('users:', users)
+        const users = await userService.query(filterBy)
+        console.log('users:', users)
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
         console.log('user action -> Cannot load users', err)
@@ -106,7 +105,6 @@ export async function saveUserImg(user) {
 
 // from profile after we have currUser
 export async function addFollowing(miniUser, loggedinUser, from) {
-    // console.log('miniUser, loggedinUser:', miniUser, loggedinUser)
     try {
         const addedUser = await userService.addFollowing(miniUser)
         if (!from) store.dispatch({ type: ADD_FOLLOWING, loggedinUser })

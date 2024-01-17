@@ -11,7 +11,7 @@ export function UserPreview({ userId, imgUrl, username, spanContent, btnContent,
                 <h3>{username}</h3>
                 <span>{spanContent}</span>
             </div>
-            <button className={(btnContent === 'Following') ? 'clr-grey' : 'clr-blue'} onClick={() => func(userId)}>
+            <button className={(btnContent === 'Follow') ? 'clr-blue' :'clr-grey' } onClick={() => func(userId)}>
                 {btnContent}
             </button>
         </div>
