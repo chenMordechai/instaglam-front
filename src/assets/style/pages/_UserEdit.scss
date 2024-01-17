@@ -6,9 +6,11 @@
     }
 
     .edit-header {
-        @include flex(row, center, space-between);
-        width: 100%;
-        padding: $pad1;
+        display: none;
+        @include for-mobile-layout {
+            @include header;
+            border-bottom: 1px solid $clr-grey2;
+        }
     }
 
     .edit-container {
