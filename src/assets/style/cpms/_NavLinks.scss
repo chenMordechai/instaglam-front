@@ -122,8 +122,11 @@
             color: red;
             height: 9px;
             position: absolute;
-            right: 20px;
-            bottom: 203px;
+            right: 173px;
+            top: 381px;
+            @include for-narrow-layout {
+                right: 20px;
+            }
         }
     }
 }

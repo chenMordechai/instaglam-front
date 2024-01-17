@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -19,15 +19,28 @@ import logo from '../assets/icons/logo.svg'
 
 import { Notification } from '../pages/Notification'
 import { Search } from '../pages/Search'
-
 import { Img } from './Img'
+import { socketService } from '../services/socket.service.js'
 
 export function NavLinks({ navLinksDisplay }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const [openNotificationModal, setOpenNotificationModal] = useState(false)
     const [openSearchModal, setOpenSearchModal] = useState(false)
 
+    const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
 
+    const [newNotifications, setNewNotifications] = useState(false)
+
+    useEffect(() => {
+        const notSeen = notifications?.some(n => !n.seen)
+        if (notSeen) setNewNotifications(true)
+
+        socketService.emit('user-watch', loggedinUser._id)
+        socketService.on('notification-added', () => {
+            setNewNotifications(true)
+        })
+
+    }, [notifications])
 
     function onToggleNotificationModal() {
         if (openSearchModal) onToggleSearchModal()
@@ -79,7 +92,7 @@ export function NavLinks({ navLinksDisplay }) {
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
                 {!openNotificationModal && <img src={heart} />}
                 {openNotificationModal && <FontAwesomeIcon icon={faHeart} />}
-                <FontAwesomeIcon className="have-notification" icon={faCircle} />
+                {newNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
 
                 <span>Notifications</span>
             </a>
