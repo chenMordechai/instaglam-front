@@ -19,9 +19,9 @@
 
     border-radius: 10px;
 
-    button,
-    h3,
-    a {
+    & > button,
+    & > h3,
+    & > a {
         @include flex(column, center, center);
         border-bottom: 1px solid $clr-grey2;
         padding: 15px;

@@ -56,8 +56,10 @@ async function updateImg(user) {
 
 async function login(userCred) {
     const user = await httpService.post(BASE_URL_AUTH + 'login', userCred)
+    console.log('user loginnnnnnnnn:', user)
     if (user) {
-        return _setLoggedinUser(user)
+        _setLoggedinUser(user)
+        return user
     }
 }
 
@@ -70,7 +72,8 @@ async function signup({ username, password, fullname, email }) {
     }
     // console.log('userToSave:', userToSave)
     const user = await httpService.post(BASE_URL_AUTH + 'signup', userToSave)
-    return _setLoggedinUser(user)
+    _setLoggedinUser(user)
+    return user
 
 }
 

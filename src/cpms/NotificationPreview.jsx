@@ -3,14 +3,14 @@ import { Link } from "react-router-dom"
 import { Img } from '../cpms/Img'
 import { utilService } from '../services/util.service'
 
-export function NotificationPreview ({userImgUrl ,userId , username ,action,timeStamp, isButton , postImgUrl}){
+export function NotificationPreview ({userImgUrl ,userId , username ,action,timeStamp, isButton , postImgUrl,comment}){
+  console.log('comment:', comment)
     function getRandomClass(){
         return (Math.random > 0.5)?'gradient':'grey'
       }
       function getRelativeDate(createdAt) {
         return utilService.timeDifference(Date.now(), createdAt)
       }
-
        
 
   function getStyle(postImgUrl) {
@@ -35,7 +35,7 @@ export function NotificationPreview ({userImgUrl ,userId , username ,action,time
            {username}
            </Link> 
 
-           <span>{action}</span> 
+           <span>{action} {comment}</span> 
 
            <span>{getRelativeDate(timeStamp)}</span> 
             

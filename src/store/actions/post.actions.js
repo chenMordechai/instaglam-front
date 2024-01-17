@@ -55,7 +55,7 @@ export async function removePost(postId) {
     console.log('removePost', postId)
     try {
         await postService.remove(postId)
-        store.dispatch({ type: REMOVE_POST, postId })
+        store.dispatch(getActionRemovePost(postId))
     } catch (err) {
         console.log('post action -> Cannot remove post', err)
         throw err
@@ -64,7 +64,6 @@ export async function removePost(postId) {
 }
 
 export async function savePost(post) {
-    console.log('savePost -left:')
     const type = post._id ? UPDATE_POST : ADD_POST
     try {
         const postToSave = await postService.save(post)
@@ -80,7 +79,7 @@ export async function savePost(post) {
 export async function addLikeByPost(postId) {
     try {
         const likedBy = await postService.addLikePost(postId)
-        store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy })
+        store.dispatch(getActionLikePostAdd(postId, likedBy))
         return likedBy
     } catch (err) {
         console.log('post action -> Cannot save post', err)
@@ -90,7 +89,7 @@ export async function addLikeByPost(postId) {
 
 export async function addLikeByPostOptimistic(postId, likedByUser) {
     try {
-        store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy: likedByUser })
+        store.dispatch(getActionLikePostAdd(postId, likedByUser))
         const likedBy = await postService.addLikePost(postId)
         return likedBy
     } catch (err) {
@@ -105,35 +104,30 @@ export async function addLikeByPostOptimistic(postId, likedByUser) {
 export async function removeLikeByPost(postId, likeById) {
     try {
         const updatedPostId = await postService.removeLikePost(postId, likeById)
-        store.dispatch({ type: REMOVE_POST_LIKED_BY, postId, likeById })
+        store.dispatch(getActionLikePostRemove(postId, likeById))
         return updatedPostId
     } catch (err) {
         console.log('post action -> Cannot remove like', err)
         throw err
-
     }
 }
 
 export async function removeLikeByPostOptimistic(postId, likedByUser) {
     try {
-        store.dispatch({ type: REMOVE_POST_LIKED_BY, postId, likeById: likedByUser._id })
+        store.dispatch(getActionLikePostRemove(postId,likedByUser._id))
         const likedBy = await postService.removeLikePost(postId, likedByUser._id)
         return likedBy
     } catch (err) {
         store.dispatch({ type: UPDATE_POST_LIKED_BY, postId, likedBy: likedByUser })
         console.log('post action -> Cannot save post', err)
         throw err
-
     }
-
 }
 
 export async function addComment(comment, postId) {
-    // console.log('comment:', comment)
-    // console.log('txt,postId:', txt,postId)
     try {
         const addedComment = await postService.addComment(comment, postId)
-        store.dispatch({ type: UPDATE_POST_COMMENT, postId, comment: addedComment })
+        store.dispatch(getActionCommentAdd(postId, addedComment))
         return addedComment
     } catch (err) {
         console.log('post action -> Cannot save post', err)
@@ -145,7 +139,7 @@ export async function addComment(comment, postId) {
 export async function removeComment(commentId, postId) {
     try {
         const updatedPostId = await postService.removeComment(commentId, postId)
-        store.dispatch({ type: REMOVE_POST_COMMENT, postId, commentId })
+        store.dispatch(getActionCommentRemove(postId, commentId) )
         return updatedPostId
     } catch (err) {
         console.log('post action -> Cannot remove comment', err)

@@ -4,7 +4,7 @@ import chevron from '../assets/icons/chevron-left-solid.svg'
 export function UserEditHeader({userId}){
     return (
         <section className="edit-header">
-              <Link to={`/profile/${userId}`}>
+              <Link to={`/profile/${userId}/posts`}>
                     <img src={chevron} />
                 </Link>
             <h2>Edit Profile</h2>

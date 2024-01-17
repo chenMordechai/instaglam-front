@@ -1,8 +1,9 @@
 .user-edit {
     @include flex(column, center, center);
-    height: 100vh;
+    min-height: 100vh;
     @include for-mobile-layout {
         justify-content: start;
+        min-height: unset;
     }
 
     .edit-header {
@@ -16,7 +17,7 @@
     .edit-container {
         text-align: center;
         width: 350px;
-        padding: $pad3 $pad1;
+        padding: $pad2 $pad1;
         border: 1px solid $clr-grey2;
 
         @include for-mobile-layout {
@@ -25,7 +26,9 @@
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: $pad2;
             @include for-mobile-layout {
                 display: none;
             }
@@ -37,12 +40,17 @@
             .change-photo-container {
                 @include flex(column, center, center, $pad2);
                 img {
-                    height: 70px;
+                    height: 130px;
                     border-radius: 50%;
                     border: 1px solid $clr-grey3;
+
+                    @include for-mobile-layout {
+                        height: 100px;
+                    }
                 }
                 label {
                     font-weight: 400;
+                    @include flex(column, center, center);
                 }
                 input {
                     display: none;

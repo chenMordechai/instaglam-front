@@ -7,7 +7,10 @@ import { store } from "../store.js";
 export async function login(credentials) {
     try {
         const user = await userService.login(credentials)
-        store.dispatch({ type: SET_LOGGEDIN_USER, user })
+        console.log('user:', user)
+        const { _id, fullname, username, imgUrl } = user
+        const miniUser = { _id, fullname, username, imgUrl }
+        store.dispatch({ type: SET_LOGGEDIN_USER, user: miniUser })
         socketService.login(user._id)
         return user
     } catch (err) {
@@ -16,6 +19,22 @@ export async function login(credentials) {
 
     }
 }
+export async function signup(credentials) {
+    try {
+        const user = await userService.signup(credentials)
+        console.log('user:', user)
+        store.dispatch({ type: ADD_USER, user })
+        const { _id, fullname, username, imgUrl } = user
+        const miniUser = { _id, fullname, username, imgUrl }
+        store.dispatch({ type: SET_LOGGEDIN_USER, user: miniUser })
+        socketService.login(user._id)
+        return user
+    } catch (err) {
+        console.log('user actions -> Cannot signup', err)
+        throw err
+    }
+}
+
 
 export async function loadUsers() {
     // const { filterBy } = store.getState().postModule
@@ -35,7 +54,7 @@ export async function loadUser(userId) {
         const user = await userService.getById(userId)
         store.dispatch({ type: SET_USER, user })
     } catch (err) {
-        console.log('toy action -> Cannot load user', err)
+        console.log('user action -> Cannot load user', err)
         throw err
     }
 }
@@ -52,20 +71,8 @@ export async function logout() {
 
 }
 
-export async function signup(credentials) {
-    try {
-        const user = await userService.signup(credentials)
-        store.dispatch({ type: SET_USER, user })
-        socketService.login(user._id)
-        return user
-    } catch (err) {
-        console.log('user actions -> Cannot signup', err)
-        throw err
-    }
-}
 
 export async function saveUser(user) {
-    // const type = toy._id ? UPDATE_TOY : ADD_TOY
     try {
         const userToSave = await userService.update(user)
         store.dispatch({ type: SET_USER, user: user })

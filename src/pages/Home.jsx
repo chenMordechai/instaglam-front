@@ -15,6 +15,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    console.log('loggedinUser:', loggedinUser)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     // console.log('notifications:', notifications)
 
@@ -25,15 +26,20 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        init()
+    }, [])
+
+    async function init() {
         if (!loggedinUser) navigate('/')
         try {
-            loadPosts()
-            loadUsers()
-            loadUser(loggedinUser._id)
+            await loadPosts()
+            await loadUsers()
+            await loadUser(loggedinUser._id)
+
         } catch (err) {
             console.log('err:', err)
         }
-    }, [])
+    }
 
     useEffect(() => {
         socketService.on('post-added', post => {
@@ -71,6 +77,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             socketService.off('like-post-removed')
             socketService.off('comment-added')
             socketService.off('comment-removed')
+            socketService.off('notification-added')
         }
 
     }, [])

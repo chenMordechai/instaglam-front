@@ -11,7 +11,7 @@ export function Notification({ loggedinUserId }) {
 
   const { userId } = useParams()
   const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-
+console.log('notifications:', notifications)
   useEffect(() => {
     init()
   }, [])
@@ -40,7 +40,7 @@ export function Notification({ loggedinUserId }) {
 
       <ul className="notification-list">
         {notifications?.reverse().map((n, i) => <li key={i}>
-          <NotificationPreview userImgUrl={n.miniUser.imgUrl} userId={n.miniUser._id} username={n.miniUser.username} action={n.action} timeStamp={n.timeStamp} isButton={n.button ? true : false} postImgUrl={n.postImgUrl} />
+          <NotificationPreview userImgUrl={n.miniUser.imgUrl} userId={n.miniUser._id} username={n.miniUser.username} action={n.action} timeStamp={n.timeStamp} isButton={n.button ? true : false} postImgUrl={n.postImgUrl} comment={n.comment} />
         </li>)}
       </ul>
     </section>

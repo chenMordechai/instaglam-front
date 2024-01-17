@@ -1,5 +1,5 @@
 .post-edit {
-    height: 100vh;
+    // height: 100vh;
     width: 100%;
     @include flex(column, center, start);
 
@@ -51,7 +51,7 @@
             }
             margin-bottom: 0;
             @include for-mobile-layout {
-                margin-bottom: 55px;
+                // margin-bottom: 55px;
             }
             .img-container {
                 margin-top: $pad1;
