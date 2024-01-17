@@ -1,8 +1,11 @@
-# React + Vite
+# Instaglam
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ Instaglam (Instagram clone)
 
-Currently, two official plugins are available:
+Full Stack Developing - End to end application – used React framework
+with MVC & React hooks, Redux state management, Node.js.
+REST API, MongoDB, websockets with Socket.io, deployment with Render.
+Responsive design using SASS, complete CRUD.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Demo https://instaglam-5c7a.onrender.com/home 
+![7d3ac967-0f34-4567-9f2f-f5549e417123](https://github.com/chenMordechai/instaglam-front/assets/51116103/eff43f33-7bdd-4de0-8b98-d252b4cbb289)
