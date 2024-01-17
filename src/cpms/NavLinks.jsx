@@ -35,7 +35,7 @@ export function NavLinks({ navLinksDisplay }) {
         const notSeen = notifications?.some(n => !n.seen)
         if (notSeen) setNewNotifications(true)
 
-        socketService.emit('user-watch', loggedinUser._id)
+        socketService.emit('user-watch', loggedinUser?._id)
         socketService.on('notification-added', () => {
             setNewNotifications(true)
         })
