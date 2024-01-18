@@ -13,14 +13,12 @@ export function Search() {
 
   const [search, setSearch] = useState({ txt: '' })
   const [users, setUsers] = useState(null)
-
   const { loggedinUser } = useSelector(storeState => storeState.userModule)
-
 
   useEffect(() => {
     if (!search.txt) return
     getResult()
-  }, [search])
+  }, [search ])
 
   function isMobile() {
     return (window.innerWidth > 700) ? false : true
@@ -33,18 +31,15 @@ export function Search() {
   async function onSubmitForm(ev) {
     ev.preventDefault()
     getResult()
-
   }
 
   async function getResult() {
     const users = await userService.query(search)
-    console.log('users:', users)
     setUsers(users)
   }
 
   function onChangeInput(ev) {
     const { name, value } = ev.target
-    console.log('name, value:', name, value)
     setSearch(prev => ({ ...prev, [name]: value }))
   }
 
@@ -58,6 +53,7 @@ export function Search() {
       setUsers(prev => prev.filter(u=>u._id !== userId))
   }
 
+  
   return (
     <section className={'search ' + getClass()}>
       {isMobile() && <SearchHeader />}

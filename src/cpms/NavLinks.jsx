@@ -51,7 +51,6 @@ export function NavLinks({ navLinksDisplay }) {
         if(openNotificationModal)  {
             setNewNotifications(false)
         }
-
     },[openNotificationModal])
 
     function onToggleNotificationModal() {

@@ -5,7 +5,7 @@ import { utilService } from '../services/util.service'
 
 export function NotificationPreview ({userImgUrl ,userId , username ,action,timeStamp, isButton , postImgUrl,comment}){
     function getRandomClass(){
-        return (Math.random > 0.5)?'gradient':'grey'
+        return (Math.random() > 0.5)?'gradient':'grey'
       }
       function getRelativeDate(createdAt) {
         return utilService.timeDifference(Date.now(), createdAt)

@@ -17,7 +17,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     const [newNotifications, setNewNotifications] = useState(false)
-    const [updatedUser, setUpdatedUser] = useState(null)
+    const [updatedUsers, setUpdatedUsers] = useState([])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -124,12 +124,12 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             imgUrl: user.imgUrl
         }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
-        setUpdatedUser(updatedUser)
+        setUpdatedUsers(prev=> [...prev , updatedUser])
     }
 
     async function onRemoveFollowing(userId) {
         await removeFollowing(userId, loggedinUser._id, 'fromHome')
-        setUpdatedUser(null)
+        setUpdatedUsers(prev=> prev.filter(u => u._id !== userId))
     }
 
     async function onLogout() {
@@ -150,7 +150,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
                 <Users users={getOrderedUsers()} />
                 <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser} />
             </div>
-            <NavSide loggedinUser={loggedinUser} users={getNotFollowingUsers()} onAddFollowing={onAddFollowing} onRemoveFollowing={onRemoveFollowing} onLogout={onLogout} updatedUser={updatedUser} />
+            <NavSide loggedinUser={loggedinUser} users={getNotFollowingUsers()} onAddFollowing={onAddFollowing} onRemoveFollowing={onRemoveFollowing} onLogout={onLogout} updatedUsers={updatedUsers} />
         </section>
     )
 }
