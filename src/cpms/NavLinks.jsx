@@ -29,12 +29,16 @@ export function NavLinks({ navLinksDisplay }) {
     const [openSearchModal, setOpenSearchModal] = useState(false)
 
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-
+// console.log('notifications from the nav side:', notifications)
+// console.log(notifications[0].seen)
+// console.log(notifications[notifications.length-1].seen)
     const [newNotifications, setNewNotifications] = useState(false)
 
     useEffect(() => {
-        const notSeen = notifications?.some(n => !n.seen)
-        if (notSeen) setNewNotifications(true)
+        // console.log('useEffect nav links')
+        // const notSeen = notifications?.some(n => !n.seen)
+        // console.log('notSeen:', notSeen)
+        // if (notSeen) setNewNotifications(true)
 
         socketService.emit('user-watch', loggedinUser?._id)
         socketService.on('notification-added', () => {
@@ -42,6 +46,13 @@ export function NavLinks({ navLinksDisplay }) {
         })
 
     }, [notifications])
+
+    useEffect(()=>{
+        if(openNotificationModal)  {
+            setNewNotifications(false)
+        }
+
+    },[openNotificationModal])
 
     function onToggleNotificationModal() {
         if (openSearchModal) onToggleSearchModal()

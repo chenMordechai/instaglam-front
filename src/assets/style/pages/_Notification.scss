@@ -1,6 +1,6 @@
 .notification {
     ul.notification-list {
-        padding: $pad1;
+        padding: $pad2 0;
 
         .notification-preview {
             @include flex(row, center, space-between);
@@ -12,16 +12,22 @@
             }
 
             .content-container {
-                width: calc(100% - 160px);
-                @include flex(row, center, start, 5px, wrap);
+                width: calc(100% - 140px);
+                @include flex(row, center, start, 2px, wrap);
 
                 a {
                     font-weight: 500;
+                    // font-size: 15px;
                 }
 
                 span {
                     font-weight: 300;
                     display: block;
+                    // font-size: 13px;
+                    white-space: nowrap;
+                    max-width: 85%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 span:last-child {
@@ -31,7 +37,7 @@
 
             .left-container {
                 @include flex(row, center, end);
-                width: 85px;
+                width: 70px;
                 .post-img {
                     height: 40px;
                     width: 40px;
@@ -41,6 +47,7 @@
                 button {
                     // width: 70px;
                     padding: 5px 10px;
+                    font-size: 14px;
                 }
             }
         }

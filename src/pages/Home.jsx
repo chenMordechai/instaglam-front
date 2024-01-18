@@ -16,7 +16,6 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const { users } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-
     const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUser, setUpdatedUser] = useState(null)
 
@@ -81,8 +80,8 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     }, [])
 
     useEffect(() => {
-        const notSeen = notifications?.some(n => !n.seen)
-        if (notSeen) setNewNotifications(true)
+        // const notSeen = notifications?.some(n => !n.seen)
+        // if (notSeen) setNewNotifications(true)
 
     }, [notifications])
 

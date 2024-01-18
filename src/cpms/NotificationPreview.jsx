@@ -4,7 +4,6 @@ import { Img } from '../cpms/Img'
 import { utilService } from '../services/util.service'
 
 export function NotificationPreview ({userImgUrl ,userId , username ,action,timeStamp, isButton , postImgUrl,comment}){
-  console.log('comment:', comment)
     function getRandomClass(){
         return (Math.random > 0.5)?'gradient':'grey'
       }

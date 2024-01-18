@@ -1,11 +1,15 @@
 .search {
     .form-container {
-        padding: $pad1;
+        padding: $pad1 0;
         border-bottom: 1px solid $clr-grey2;
+
+        @include for-mobile-layout {
+            padding: $pad2;
+        }
 
         form {
             position: relative;
-            padding: $pad1;
+            padding: $pad1 0;
             input {
                 background-color: $clr-grey1;
                 width: 100%;

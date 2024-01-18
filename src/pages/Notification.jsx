@@ -11,7 +11,6 @@ export function Notification({ loggedinUserId }) {
 
   const { userId } = useParams()
   const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-console.log('notifications:', notifications)
   useEffect(() => {
     init()
   }, [])
@@ -19,6 +18,7 @@ console.log('notifications:', notifications)
   async function init() {
     try {
       await loadUser(userId || loggedinUserId)
+      console.log('updateNotificationSeen')
       await updateNotificationSeen(userId || loggedinUserId)
     } catch (err) {
       console.log('user action -> Cannot load user', err)
