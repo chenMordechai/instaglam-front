@@ -1,13 +1,12 @@
 
 import {Media} from './media'
 
-export function PostMedia({ media}) {
-    console.log('media:', media)
+export function PostMedia({ type,url , filter}) {
    
     return (
-        <section className="post-media" style={media.filter}>
+        <section className="post-media" style={filter}>
             {/* <img src={media} /> */}
-            <Media media={media} style={media.filter}/>
+            <Media type={type} url={url} style={filter}/>
         </section>
     )
 }

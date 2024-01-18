@@ -5,19 +5,14 @@ import { Media } from "../cpms/Media.jsx";
 import loader from '../assets/icons/loader.gif'
 
 
-export function PostEditImg({ isLoading, media, style, onChangeImg, filters, onSetImgFilter }) {
-    console.log('media:', media)
-    function getMediaType(){
-        if(!media) return ''
-        if(media.type.includes('image'))return 'img'
-        else return 'video'
-    }
+export function PostEditImg({ isLoading, type ,url, style, onChangeImg, filters, onSetImgFilter }) {
+    console.log(' type ,url:',  type ,url)
     return (
         <section className="post-edit-img">
             <div className="placeholder-container">
-                {!media && !isLoading && <img className="placeholder" src={image} />}
+                {!url && !isLoading && <img className="placeholder" src={image} />}
                 {isLoading && <img className="loader" src={loader} />}
-                {!isLoading && <Media media={media} style={style} />}
+                {!isLoading && url && <Media type={type} url={url} style={style} />}
             </div>
 
             <button className="clr-blue bold">
@@ -28,7 +23,7 @@ export function PostEditImg({ isLoading, media, style, onChangeImg, filters, onS
             </button>
 
            <div className="img-filter-container">
-                <Carousel items={filters} Comp1={ImgFilter} media={media} onSetImgFilter={onSetImgFilter} />
+             { url &&  <Carousel items={filters} Comp1={ImgFilter} type={type} url={url}  onSetImgFilter={onSetImgFilter} />}
             </div>
         </section>
     )

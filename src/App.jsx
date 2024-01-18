@@ -11,6 +11,7 @@ import { UserEdit } from './pages/UserEdit'
 import { PostEdit } from './pages/PostEdit'
 import { Notification } from './pages/Notification'
 import { Search } from './pages/Search'
+import { Video } from './pages/Video'
 
 import { NavLinks } from './cpms/NavLinks'
 import { UserPosts } from './cpms/UserPosts'
@@ -53,6 +54,7 @@ export function App() {
                 <Route element={<PostEdit />} path="/post/edit/:postId" />
                 <Route element={<Notification />} path="/notification/:userId" />
                 <Route element={<Search />} path="/Search" />
+                <Route element={<Video/>} path="/Video" />
               </Routes>
             </div>
           </main>

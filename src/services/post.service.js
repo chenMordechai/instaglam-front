@@ -32,7 +32,7 @@ export const postService = {
 }
 
 async function query(filterBy = {}, sortBy = {}) {
-    filterBy = { ...filterBy, ...sortBy }
+    // filterBy = { ...filterBy, ...sortBy }
     return httpService.get(BASE_URL, filterBy)
 }
 
@@ -130,7 +130,8 @@ async function removeLikeComment(postId, commentId, likeById) {
 function getEmptyPost() {
     return {
         txt: '',
-        media: null,
+        type:'',
+        url:'',
         createdAt: '',
         by: null,
         loc: null,

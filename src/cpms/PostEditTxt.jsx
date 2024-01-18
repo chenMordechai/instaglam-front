@@ -9,14 +9,14 @@ import chevron from '../assets/icons/chevron-right-solid.svg'
 import { Media } from "../cpms/Media.jsx";
 
 
-export function PostEditTxt ({isEdit,media, style,postToEdit, setPostToEdit,handleChange,onSubmitForm}){
+export function PostEditTxt ({isEdit,type , url, style,postToEdit, setPostToEdit,handleChange,onSubmitForm}){
 
   
     return (
         <section className="post-edit-txt">
             <div className="media-container">
              {/* <img src={media.url} style={style}  /> */}
-             <Media media={media} style={style} />
+             <Media type={type} url={url} style={style} />
           </div>
           <form onSubmit={onSubmitForm} >
           <label htmlFor="txt">

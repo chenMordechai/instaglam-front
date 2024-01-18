@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
 
-export function Carousel({ items , Comp1 , Comp2,media , onSetImgFilter}) {
+export function Carousel({ items , Comp1 , Comp2,type,url , onSetImgFilter}) {
     const [isDragging, setIsDragging] = useState()
     const [startX, setStartX] = useState()
     const [startScrollLeft, setStartScrollLeft] = useState()
@@ -70,7 +70,7 @@ export function Carousel({ items , Comp1 , Comp2,media , onSetImgFilter}) {
                     onMouseDown={dragStart} onMouseMove={dragging}
                     onTouchStart={dragStart} onTouchMove={dragging}>
                     {items.map((item,i) => <li className="card" key={item._id || i}>
-                        <Comp1 item={item} isDragging={isDragging} media={media} onSetImgFilter={onSetImgFilter} />
+                        <Comp1 item={item} isDragging={isDragging} type={type} url={url} onSetImgFilter={onSetImgFilter} />
                     </li>
                     )}
                  {Comp2 && <Comp2/>}

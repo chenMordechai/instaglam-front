@@ -26,11 +26,9 @@ export function getActionCommentRemove(postId, commentId) {
 }
 
 
-export async function loadPosts() {
-    // const { filterBy } = store.getState().postModule
-    // const { sortBy } = store.getState().postModule
+export async function loadPosts(filterBy) {
     try {
-        const posts = await postService.query()
+        const posts = await postService.query(filterBy)
         store.dispatch({ type: SET_POSTS, posts })
     } catch (err) {
         console.log('post action -> Cannot load posts', err)

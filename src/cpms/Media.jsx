@@ -1,19 +1,19 @@
 
 
-export function Media ({media,style}){
+export function Media ({type ,url,style}){
     // console.log('media:', media)
 
     function getMediaType(){
-        if(!media) return ''
-        if(media.type.includes('image'))return 'img'
+        if(!type) return ''
+        if(type.includes('image'))return 'img'
         else return 'video'
     }
     return (
         <section className="media">
-             {getMediaType() === 'img'  &&  <img src={media.url} style={style} />}
+             {getMediaType() === 'img'  &&  <img src={url} style={style} />}
                 {getMediaType() === 'video' && 
                  <video  style={style} controls >
-                <source src={media.url} type="video/mp4"/>
+                <source src={url} type="video/mp4"/>
                 </video>}
         </section>
     )

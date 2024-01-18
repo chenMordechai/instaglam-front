@@ -92,10 +92,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={compass} />
                 <span>Explore</span>
             </a>
-            <a className="disable" title="Reels" >
+            <Link to="video"  title="Reels" >
                 <img src={film} />
                 <span>Reels</span>
-            </a>
+            </Link>
             <a className="disable not-mobile" title="Messages"  >
                 <img src={message} />
                 <span>Messages</span>

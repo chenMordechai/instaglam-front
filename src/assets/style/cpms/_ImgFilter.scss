@@ -1,11 +1,7 @@
 .img-filter {
-    height: 100px;
-    // width: 100px;
-
     img,
     video {
-        // height: 100px;
-        // filter: blur(0.5);
+        height: 100px;
         border-radius: 10px;
         cursor: pointer;
     }

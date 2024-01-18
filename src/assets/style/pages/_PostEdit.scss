@@ -23,9 +23,11 @@
                 @include flex(column, center, center);
                 margin-top: $pad2;
                 height: 300px;
-
-                img.placeholder {
+                img,
+                video {
                     height: 100%;
+                }
+                img.placeholder {
                     filter: opacity(0.2);
                 }
                 img.loader {

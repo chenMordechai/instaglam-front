@@ -31,5 +31,8 @@
 
     .result-container {
         padding: $pad2;
+        span {
+            display: block;
+        }
     }
 }

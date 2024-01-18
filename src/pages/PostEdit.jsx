@@ -60,10 +60,10 @@ export function PostEdit() {
             setIsLoading(true)
             const media = await utilService.uploadImgToCloudinary(ev)
             console.log('media:', media)
-            setPostToEdit(() => ({ ...postToEdit, media }))
+            const {type,url } = media
+            setPostToEdit(() => ({ ...postToEdit, type, url}))
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Toy')
         } finally {
             setIsLoading(false)
         }
@@ -80,8 +80,8 @@ export function PostEdit() {
         <section className="post-edit">
             <PostEditHeader pageNum={pageNum} isEdit={postId ? true : false} onChangePageNum={onChangePageNum} />
             <div className="post-edit-container">
-                {pageNum === 1 && <PostEditImg isLoading={isLoading} media={postToEdit.media} style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter} />}
-                {pageNum === 2 && <PostEditTxt isEdit={postId ? true : false} media={postToEdit.media} style={postToEdit.media.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm} />}
+                {pageNum === 1 && <PostEditImg isLoading={isLoading} type={postToEdit.type} url={postToEdit.url}  style={postToEdit.imgFilter} onChangeImg={onChangeImg} filters={postService.getFilters()} onSetImgFilter={onSetImgFilter} />}
+                {pageNum === 2 && <PostEditTxt isEdit={postId ? true : false} type={postToEdit.type} url={postToEdit.url} style={postToEdit.imgFilter} postToEdit={postToEdit} setPostToEdit={setPostToEdit} handleChange={handleChange} onSubmitForm={onSubmitForm} />}
 
             </div>
 
