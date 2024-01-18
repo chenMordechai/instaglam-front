@@ -5,7 +5,7 @@ import { utilService } from "../services/util.service.js";
 import { saveUserImg, saveUser } from '../store/actions/user.actions.js'
 
 import { userService } from "../services/user.service.js";
-import { UserEditHeader } from "../cpms/UserEditHeader";
+import { SimpleHeader } from "../cpms/SimpleHeader";
 
 export function UserEdit() {
     const [user, setUser] = useState(null)
@@ -63,7 +63,9 @@ export function UserEdit() {
     if (!user) return ''
     return (
         <section className="user-edit">
-            <UserEditHeader userId={userId} />
+            <div className="header-container">
+            <SimpleHeader h2Content="Edit Profile" />
+            </div>
 
             <div className="edit-container">
                 <h2>Edit profile</h2>

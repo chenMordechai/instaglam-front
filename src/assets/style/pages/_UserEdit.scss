@@ -6,11 +6,11 @@
         min-height: unset;
     }
 
-    .edit-header {
+    .header-container {
         display: none;
         @include for-mobile-layout {
-            @include header;
-            border-bottom: 1px solid $clr-grey2;
+            display: block;
+            width: 100%;
         }
     }
 

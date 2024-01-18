@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { SearchHeader } from '../cpms/SearchHeader'
 import xmark from '../assets/icons/circle-xmark-solid.svg'
 import xmark2 from '../assets/icons/xmark-solid.svg'
 import { loadUsers } from '../store/actions/user.actions.js'
 import { userService } from '../services/user.service.js'
 import { UserPreview } from '../cpms/UserPreview.jsx'
+import { SimpleHeader } from '../cpms/SimpleHeader'
 
 
 export function Search() {
@@ -56,7 +56,7 @@ export function Search() {
   
   return (
     <section className={'search ' + getClass()}>
-      {isMobile() && <SearchHeader />}
+      {isMobile() && <SimpleHeader h2Content="Search" />}
       {!isMobile() && <h3>Search</h3>}
 
       <div className="form-container">

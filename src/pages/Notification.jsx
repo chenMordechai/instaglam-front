@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import { NotificationHeader } from '../cpms/NotificationHeader'
+import { SimpleHeader } from '../cpms/SimpleHeader'
 import { NotificationPreview } from '../cpms/NotificationPreview'
 import { loadUser, updateNotificationSeen } from '../store/actions/user.actions.js'
 
@@ -18,7 +18,6 @@ export function Notification({ loggedinUserId }) {
   async function init() {
     try {
       await loadUser(userId || loggedinUserId)
-      console.log('updateNotificationSeen')
       await updateNotificationSeen(userId || loggedinUserId)
     } catch (err) {
       console.log('user action -> Cannot load user', err)
@@ -35,7 +34,7 @@ export function Notification({ loggedinUserId }) {
 
   return (
     <section className={'notification ' + getClass()}>
-      {isMobile() && <NotificationHeader />}
+      {isMobile() && <SimpleHeader h2Content="Notificatios" />}
       {!isMobile() && <h3>Notifications</h3>}
 
       <ul className="notification-list">
