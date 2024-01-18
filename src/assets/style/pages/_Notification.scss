@@ -1,6 +1,6 @@
 .notification {
     ul.notification-list {
-        padding: $pad2 0;
+        padding: $pad2;
 
         .notification-preview {
             @include flex(row, center, space-between);
@@ -16,14 +16,12 @@
                 @include flex(row, center, start, 2px, wrap);
 
                 a {
-                    font-weight: 500;
-                    // font-size: 15px;
+                    font-weight: 550;
                 }
 
                 span {
-                    font-weight: 300;
                     display: block;
-                    // font-size: 13px;
+                    font-size: 13px;
                     white-space: nowrap;
                     max-width: 85%;
                     overflow: hidden;

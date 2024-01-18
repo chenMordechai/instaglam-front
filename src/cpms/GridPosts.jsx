@@ -41,7 +41,7 @@ export function GridPosts({ posts }) {
             {posts.map(post => <li
                 ref={square} className="square"
                 key={post._id}
-                style={getStyle(post.imgUrl, post.imgFilter?.filter)}>
+                style={getStyle(post.media.url, post.media.imgFilter?.filter)}>
 
             </li>)}
             </ul>

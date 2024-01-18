@@ -130,7 +130,7 @@ async function removeLikeComment(postId, commentId, likeById) {
 function getEmptyPost() {
     return {
         txt: '',
-        imgUrl: '',
+        media: null,
         createdAt: '',
         by: null,
         loc: null,

@@ -11,6 +11,7 @@ import { SimpleHeader } from '../cpms/SimpleHeader'
 
 export function Search() {
 
+  const [innerWidth, setInnerWidth] = useState('')
   const [search, setSearch] = useState({ txt: '' })
   const [users, setUsers] = useState(null)
   const { loggedinUser } = useSelector(storeState => storeState.userModule)
@@ -19,6 +20,14 @@ export function Search() {
     if (!search.txt) return
     getResult()
   }, [search ])
+
+  useEffect(() => {
+      setInnerWidth(window.innerWidth)
+    // window.addEventListener('resize', ()=>{
+    //   console.log('resize')
+    //   setInnerWidth(window.innerWidth)
+    // })
+  }, [ ])
 
   function isMobile() {
     return (window.innerWidth > 700) ? false : true
@@ -55,9 +64,9 @@ export function Search() {
 
   
   return (
-    <section className={'search ' + getClass()}>
-      {isMobile() && <SimpleHeader h2Content="Search" />}
-      {!isMobile() && <h3>Search</h3>}
+    <section className={'search ' + ((innerWidth < 700)?'page-mobile' : 'big-modal') }>
+      {innerWidth < 700 && <SimpleHeader h2Content="Search" />}
+      {innerWidth > 700 && <h3>Search</h3>}
 
       <div className="form-container">
         <form onSubmit={onSubmitForm}>

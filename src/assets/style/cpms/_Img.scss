@@ -7,7 +7,7 @@
         border-radius: 50%;
         height: 95%;
         width: 95%;
-        border: em(3px) solid white;
+        border: rem(3px) solid white;
         filter: none;
     }
 }
@@ -22,5 +22,13 @@
     img {
         height: 97%;
         width: 97%;
+    }
+}
+
+.none {
+    img {
+        border: 1px solid $clr-grey4;
+        height: 94%;
+        width: 94%;
     }
 }

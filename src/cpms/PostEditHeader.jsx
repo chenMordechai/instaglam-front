@@ -6,7 +6,6 @@ import arrow from '../assets/icons/arrow-left-long-solid.svg'
 import { Fragment } from 'react'
 
 export function PostEditHeader({ pageNum, isEdit, onChangePageNum }) {
-    console.log('isEdit:', isEdit)
     const navigate = useNavigate()
     return (
         <section className="post-edit-header">

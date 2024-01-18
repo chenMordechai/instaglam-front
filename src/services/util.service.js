@@ -92,25 +92,32 @@ async function uploadImgToCloudinary(ev) {
     // console.log('CLOUD_NAME:', CLOUD_NAME)
     // console.log('UPLOAD_PRESET:', UPLOAD_PRESET)
 
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-    const FORM_DATA = new FormData()
+    const mediaType = ev.target.files[0].type
+    let UPLOAD_URL
+    if(mediaType.includes('image')){
+        UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+    }else if(mediaType.includes('video')){
+        UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/video/upload`
+    }
 
+    const FORM_DATA = new FormData()
     // //Bulding the request body
     FORM_DATA.append('file', ev.target.files[0])
     FORM_DATA.append('upload_preset', UPLOAD_PRESET)
 
     // // Sending a post method request to Cloudinarys API
-
     try {
         const res = await fetch(UPLOAD_URL, {
             method: 'POST',
             body: FORM_DATA,
         })
-        //   const elImg = document.createElement('img')
         const { url } = await res.json()
-        return url
-        //   elImg.src = url
-        //   document.body.append(elImg)
+
+        const media = {
+            type:mediaType,
+            url
+        }
+        return media
     } catch (err) {
         console.error(err)
     }

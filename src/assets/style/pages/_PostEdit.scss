@@ -19,14 +19,13 @@
 
         .post-edit-img {
             width: 100%;
-            .img-container {
+            .placeholder-container {
                 @include flex(column, center, center);
                 margin-top: $pad2;
                 height: 300px;
-                img {
-                    height: 100%;
-                }
+
                 img.placeholder {
+                    height: 100%;
                     filter: opacity(0.2);
                 }
                 img.loader {
@@ -53,11 +52,12 @@
             @include for-mobile-layout {
                 // margin-bottom: 55px;
             }
-            .img-container {
+            .media-container {
                 margin-top: $pad1;
                 height: 200px;
 
-                img {
+                img,
+                video {
                     height: 100%;
                 }
             }
