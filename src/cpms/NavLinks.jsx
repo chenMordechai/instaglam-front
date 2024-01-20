@@ -17,7 +17,6 @@ import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
 import logo from '../assets/icons/logo.svg'
 
-
 import { Notification } from '../pages/Notification'
 import { Search } from '../pages/Search'
 import { Img } from './Img'
@@ -80,10 +79,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={house} />
                 <span>Home</span>
             </NavLink>
-            {isMobile() && <Link to="search" title="Search" >
+            {isMobile() && <NavLink to="search" title="Search" >
                 <img src={glass} />
                 <span>Search</span>
-            </Link>}
+            </NavLink>}
             {!isMobile() && <a onClick={onToggleSearchModal} title="Search" >
                 <img src={glass} />
                 <span>Search</span>
@@ -92,10 +91,10 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={compass} />
                 <span>Explore</span>
             </a>
-            <Link to="video"  title="Reels" >
+            <NavLink to="video"  title="Reels" >
                 <img src={film} />
                 <span>Reels</span>
-            </Link>
+            </NavLink>
             <a className="disable not-mobile" title="Messages"  >
                 <img src={message} />
                 <span>Messages</span>
@@ -107,10 +106,10 @@ export function NavLinks({ navLinksDisplay }) {
 
                 <span>Notifications</span>
             </a>
-            <Link to={'/post/edit'} title="New Post">
+            <NavLink to={'/post/edit'} title="New Post">
                 <img src={plus} />
                 <span >Create</span>
-            </Link>
+            </NavLink>
             <NavLink to={`/profile/${loggedinUser._id}/posts`} title="Profile">
                 <div className="img-container">
                     <Img imgUrl={loggedinUser.imgUrl} className="regular" />

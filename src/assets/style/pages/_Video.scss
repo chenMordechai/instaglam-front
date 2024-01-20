@@ -1,0 +1,21 @@
+.video {
+    width: 100%;
+    @include flex(column, center, center);
+    padding-top: 30px;
+    // .video-container {
+    // background-color: rebeccapurple;
+    // width: 100%;
+    // width: 90%;
+    // }
+
+    ul li {
+        @include flex(row, end, center, $pad3);
+        // width: 420px;
+        margin-bottom: 5px;
+        position: relative;
+
+        video {
+            width: 330px;
+        }
+    }
+}

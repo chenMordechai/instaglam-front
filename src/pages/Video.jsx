@@ -8,6 +8,7 @@ import { PostVideoControls } from "../cpms/PostVideoControls";
 
 export function Video (){
     const { posts } = useSelector(storeState => storeState.postModule)
+    // const { loggedinUser } = useSelector(storeState => storeState.userModule)
     console.log('posts:', posts)
     useEffect(() => {
         init()
@@ -25,12 +26,13 @@ export function Video (){
 
     return (
         <section className="video">
-            <h1>video</h1>
 
+            {/* <div className="video-container"> */}
             <ul>{posts.map(post=><li key={post._id}>
                 <PostMedia type={post.type} url={post.url} filter={post.imgFilter}  />
-                <PostVideoControls  />
+                <PostVideoControls by={post.by} />
             </li>)}</ul>
+            {/* </div> */}
         </section>
     )
 }

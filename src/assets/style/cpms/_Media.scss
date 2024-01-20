@@ -1,7 +1,17 @@
 .media {
     height: 100%;
+
+    video {
+        border-radius: 5px;
+    }
     // img,
-    // video {
-    // height: 100%;
-    // }
+    video {
+        // height: 100vh;
+        // width: 300px;
+
+        // @include for-mobile-layout {
+        //     // width: 170px;
+        //     width: 100%;
+        // }
+    }
 }

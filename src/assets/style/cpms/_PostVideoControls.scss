@@ -1,0 +1,27 @@
+.post-video-controls {
+    @include flex(column, center, end, 30px);
+    padding-bottom: 10px;
+
+    button {
+        img,
+        svg {
+            height: 25px;
+        }
+    }
+
+    .img-container {
+        height: 40px;
+        width: 40px;
+    }
+
+    // @include for-mobile-layout {
+    //     position: absolute;
+    //     right: 0;
+
+    //     button {
+    //         img {
+    //             // filter: brightness(1000000) !important;
+    //         }
+    //     }
+    // }
+}
