@@ -8,14 +8,29 @@
     // width: 90%;
     // }
 
-    ul li {
-        @include flex(row, end, center, $pad3);
-        // width: 420px;
-        margin-bottom: 5px;
-        position: relative;
+    ul {
+        @include for-mobile-layout {
+            // width: 100%;
+        }
 
-        video {
-            width: 330px;
+        li {
+            @include flex(row, end, center, $pad3);
+            // width: 420px;
+            margin-bottom: 5px;
+            position: relative;
+
+            video {
+                width: 330px;
+            }
+
+            @include for-mobile-layout {
+                // justify-content: space-around;
+
+                width: 100%;
+                .post-media {
+                    width: 90%;
+                }
+            }
         }
     }
 }
