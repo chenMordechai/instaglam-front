@@ -128,8 +128,8 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     async function onChangeImg(ev) {
         try {
             setIsLoading(true)
-            const imgUrl = await utilService.uploadImgToCloudinary(ev)
-            await saveUserImg({ ...user, imgUrl: imgUrl })
+            const media = await utilService.uploadImgToCloudinary(ev)
+            await saveUserImg({ ...user, imgUrl: media.url })
             onToggleChangeImgModal()
             // showSuccessMsg('Save Toy: ' + savedToy._id)
         } catch (err) {

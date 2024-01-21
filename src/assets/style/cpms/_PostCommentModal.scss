@@ -1,9 +1,11 @@
 .modal.comment-modal {
     height: 70%;
+    border-radius: 0px;
     .header {
         @include flex(column, center, center);
         width: 100%;
         border-bottom: 1px solid $clr-grey2;
+        position: static;
 
         img.line {
             height: 30px;

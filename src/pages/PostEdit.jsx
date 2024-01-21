@@ -20,14 +20,12 @@ export function PostEdit() {
 
     useEffect(() => {
         if (postId) loadPost()
-        // console.log('postToEdit.txt:', postToEdit.txt)
 
     }, [postId])
 
     async function loadPost() {
         try {
             const post = await postService.getById(postId)
-            console.log('post:', post)
             setPostToEdit(post)
         } catch (err) {
             console.log('Had issues in post details', err)
@@ -45,7 +43,6 @@ export function PostEdit() {
         ev.preventDefault()
         try {
             const savedPost = await savePost({ ...postToEdit })
-            console.log('savedPost:', savedPost)
             // showSuccessMsg('Save Post: ' + savedPost._id)
             navigate('/home')
         } catch (err) {
@@ -55,11 +52,9 @@ export function PostEdit() {
     }
 
     async function onChangeImg(ev) {
-        // console.log('ev:', ev)
         try {
             setIsLoading(true)
             const media = await utilService.uploadImgToCloudinary(ev)
-            console.log('media:', media)
             const {type,url } = media
             setPostToEdit(() => ({ ...postToEdit, type, url}))
         } catch (err) {

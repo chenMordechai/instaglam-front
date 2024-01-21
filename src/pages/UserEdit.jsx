@@ -9,6 +9,7 @@ import { SimpleHeader } from "../cpms/SimpleHeader";
 
 export function UserEdit() {
     const [user, setUser] = useState(null)
+    console.log('user.bio:', user?.bio)
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -47,9 +48,7 @@ export function UserEdit() {
     async function onSubmitForm(ev) {
         ev.preventDefault()
         try {
-            console.log('hi')
             const savedUser = await saveUser({ ...user })
-            console.log('savedUser:', savedUser)
             // showSuccessMsg('Save Toy: ' + savedToy._id)
             navigate(-1)
         } catch (err) {

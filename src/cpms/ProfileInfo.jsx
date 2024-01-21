@@ -11,7 +11,6 @@ import { utilService } from '../services/util.service'
 
 
 export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
-    console.log('isLoggedinUserProfile:', isLoggedinUserProfile)
     function getClass() {
         if (!bio) return ''
         const res = utilService.isHebrew(bio)

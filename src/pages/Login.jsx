@@ -11,10 +11,8 @@ import { login , signup } from '../store/actions/user.actions.js'
 
 export function Login({ setNavLinksDisplay }) {
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
-//    console.log('credentials:', credentials)
     const [isSignupState, setIsSignupState] = useState(false)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    // console.log('loggedinUser:', loggedinUser)
     const navigate = useNavigate()
 
     useEffect(() => {

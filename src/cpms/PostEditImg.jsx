@@ -6,7 +6,6 @@ import loader from '../assets/icons/loader.gif'
 
 
 export function PostEditImg({ isLoading, type ,url, style, onChangeImg, filters, onSetImgFilter }) {
-    console.log(' type ,url:',  type ,url)
     return (
         <section className="post-edit-img">
             <div className="placeholder-container">

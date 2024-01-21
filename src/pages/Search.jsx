@@ -23,10 +23,7 @@ export function Search() {
 
   useEffect(() => {
       setInnerWidth(window.innerWidth)
-    // window.addEventListener('resize', ()=>{
-    //   console.log('resize')
-    //   setInnerWidth(window.innerWidth)
-    // })
+   
   }, [ ])
 
   function isMobile() {

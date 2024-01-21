@@ -19,7 +19,6 @@ export function AddComment ({loggedinUserImg , username ,onAddCommentToPost}){
 
     function onSubmitForm(ev){
         ev.preventDefault()
-        console.log('onSubmitForm')
         onAddCommentToPost(comment)
         setComment(postService.getEmptyComment())
     }

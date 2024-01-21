@@ -72,6 +72,8 @@ export async function logout() {
 
 
 export async function saveUser(user) {
+    console.log('user action:', user)
+    console.log('user action:', user.bio)
     try {
         const userToSave = await userService.update(user)
         store.dispatch({ type: SET_USER, user: user })

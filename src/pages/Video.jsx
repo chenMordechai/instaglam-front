@@ -9,7 +9,6 @@ import { PostVideoControls } from "../cpms/PostVideoControls";
 export function Video (){
     const { posts } = useSelector(storeState => storeState.postModule)
     // const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    console.log('posts:', posts)
     useEffect(() => {
         init()
     }, [])

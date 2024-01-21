@@ -15,7 +15,6 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
 
     function onSubmitForm(ev) {
         ev.preventDefault()
-        console.log('onSubmitForm')
         onAddCommentToPost(comment)
         setComment(postService.getEmptyComment())
     }

@@ -3,7 +3,6 @@ import {AddComment} from './AddComment'
 import line from '../assets/icons/line.png'
 
 export function PostCommentModal ({onUpdateLikeComment,comments,loggedinUser,username,onAddCommentToPost,onToggleCommentModal,onToggleRemoveCommentModal,onRemoveCommentFromPost}){
-  console.log('comments:', comments)
     return (
         <section className="modal comment-modal">
             <div className="header">

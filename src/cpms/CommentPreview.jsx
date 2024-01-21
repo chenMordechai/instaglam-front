@@ -43,8 +43,8 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
                 <p className={getClass()}>{comment.txt}</p>
                 <div className="controls-container">
                 <button>Reply</button>
-                 <button onClick={onRemoveComment}>
-                <img className="trash" src={trash} />
+                 <button   onClick={onRemoveComment}>
+                <img className={'trash ' +(isLoggdinUserComment()?'allow':'')} src={trash} />
                  </button>
                 </div>
              </div>
