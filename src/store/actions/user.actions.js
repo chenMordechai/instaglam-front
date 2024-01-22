@@ -93,6 +93,7 @@ export async function saveUser(user) {
 }
 
 export async function saveUserImg(user) {
+    console.log('user:', user)
     try {
         const userToSave = await userService.updateImg(user)
         store.dispatch({ type: SET_USER, user })
