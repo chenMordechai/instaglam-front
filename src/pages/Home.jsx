@@ -35,6 +35,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
         } catch (err) {
             console.log('err:', err)
+            navigate('/')
         }
     }
 
