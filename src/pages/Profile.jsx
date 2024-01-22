@@ -83,25 +83,21 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false
-        return loggedinUser.username === user.username
+        return loggedinUser._id === user._id
     }
 
     function isFollowing() {
         if (!user) return
         if (isLoggedinUserProfile()) return
-        const foundUser = user.followers.find(u => u.username === loggedinUser.username)
+        const foundUser = user.followers.find(u => u._id === loggedinUser._id)
         if (foundUser) return true
         else return false
 
     }
 
     async function onAddFollowing() {
-        const miniUser = {
-            _id: user._id,
-            username: user.username,
-            fullname: user.fullname,
-            imgUrl: user.imgUrl
-        }
+        const {_id , username , fullname ,imgUrl} = user
+        const miniUser =  {_id , username , fullname ,imgUrl}
         const updatedUser = await addFollowing(miniUser, loggedinUser)
     }
 

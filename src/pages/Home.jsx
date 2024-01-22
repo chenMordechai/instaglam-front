@@ -117,12 +117,8 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
     async function onAddFollowing(userId) {
         const user = users.find(user => user._id === userId)
-        const miniUser = {
-            _id: user._id,
-            username: user.username,
-            fullname: user.fullname,
-            imgUrl: user.imgUrl
-        }
+        const {_id,username,fullname,imgUrl} = user
+        const miniUser = {_id,username,fullname,imgUrl}
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
         setUpdatedUsers(prev=> [...prev , updatedUser])
     }

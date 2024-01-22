@@ -45,7 +45,7 @@ export function Post({isScreenOpen,onOpenScreen,onCloseScreen, post, loggedinUse
 
     function isLoggedinUserPost() {
         if (!loggedinUser) return false
-        return loggedinUser.username === post.by.username
+        return loggedinUser._id === post.by._id
     }
 
     function onUpdateLikePost(isLike) {

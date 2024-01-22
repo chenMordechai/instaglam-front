@@ -3,8 +3,8 @@
 import { UserPreview } from "./UserPreview"
 
 export function NavSide({ loggedinUser, users, onAddFollowing, onRemoveFollowing, onLogout, updatedUsers }) {
-    function isFollowing(username) {
-        return (updatedUsers.find(u=> u.username === username))?true : false
+    function isFollowing(userId) {
+        return (updatedUsers.find(u=> u._id === userId))?true : false
     }
 
     return (
@@ -14,7 +14,7 @@ export function NavSide({ loggedinUser, users, onAddFollowing, onRemoveFollowing
             <h3>Suggested for you</h3>
             <ul>
                 {users.map(user => <li key={user._id}>
-                    <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.username} spanContent={`Followed by ${user.commonFollowings[0]}`} btnContent={(isFollowing(user.username)) ? 'Following' : 'Follow'} func={(isFollowing(user.username)) ? onRemoveFollowing : onAddFollowing} />
+                    <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.username} spanContent={`Followed by ${user.commonFollowings[0]}`} btnContent={(isFollowing(user._id)) ? 'Following' : 'Follow'} func={(isFollowing(user.username)) ? onRemoveFollowing : onAddFollowing} />
             </li>)}
             </ul>
         </section>

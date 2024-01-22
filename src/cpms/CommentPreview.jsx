@@ -9,7 +9,7 @@ export function CommentPreview ({onUpdateLikeComment,comment,onToggleRemoveComme
     const [isLiked, setIsLiked] = useState()
 
     function isLoggdinUserComment(){
-        return comment.by.username === loggedinUser.username
+        return comment.by._id === loggedinUser._id
     }
 
     function onUpdateLike(isLike){
