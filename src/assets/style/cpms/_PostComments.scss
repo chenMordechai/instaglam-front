@@ -9,6 +9,9 @@
     a {
         font-weight: 450;
         gap: 5px;
+        display: flex;
+        align-items: baseline;
+
         @include for-mobile-layout {
         }
         span {

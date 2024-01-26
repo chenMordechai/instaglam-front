@@ -10,7 +10,7 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followersLength, followingLength }) {
+export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followers, followingLength }) {
     function getClass() {
         if (!bio) return ''
         const res = utilService.isHebrew(bio)
@@ -62,13 +62,13 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
                 </div>
                 <div className="user-info-dash-board">
                     <h3><span>{postsLength}</span> posts</h3>
-                    <h3><span>{followersLength}</span> followers</h3>
+                    <h3><span>{followers.length}</span> followers</h3>
                     <h3><span>{followingLength}</span> following</h3>
                 </div>
                 <div className="user-description">
                     <h3>{fullname}</h3>
                     <pre className={getClass()}>{bio}</pre>
-                    <h4>followed by <span> some name שהם חברים משותפים</span></h4>
+                   {!isLoggedinUserProfile && <h4>followed by {followers.map(f=><span> {f.username}</span>).slice(0,2)} and more...</h4>}
                 </div>
             </div>
         </section>

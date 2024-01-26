@@ -29,7 +29,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
         <section className="post-comments">
             <h3>{likedBy.length} likes</h3>
             {/* <a>{by} <span>{txt}</span></a> */}
-            <Link to={'/profile/' + byId + '/posts'} >
+            <Link className="new-comment" to={'/profile/' + byId + '/posts'} >
                 {by}
                 <span className={getClass()}>{txt}</span>
             </Link>

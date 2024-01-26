@@ -158,7 +158,7 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             {openShowImgModal && <ShowImgModal imgUrl={imgUrl} />}
             {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} onToggleFollowingModal={onToggleFollowingModal} />}
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
-            <ProfileInfo onToggleShowImgModal={onToggleShowImgModal} onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+            <ProfileInfo onToggleShowImgModal={onToggleShowImgModal} onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followers={followers} />
             <ProfileHighlight highlights={highlights} />
             <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />
