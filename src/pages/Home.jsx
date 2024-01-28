@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo,useCallback} from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 
@@ -80,20 +80,15 @@ export function Home() {
 
     }, [])
 
-    useEffect(() => {
-        // const notSeen = notifications?.some(n => !n.seen)
-        // if (notSeen) setNewNotifications(true)
+  const orderedUsers = useMemo(()=>{
+    if (!users.length) return []
+    const currUser = users.find(user => user._id === loggedinUser._id)
+    const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
+    return orderedUsers
+    },[users.length])
 
-    }, [notifications])
 
-    function getOrderedUsers() {
-        if (!users.length) return []
-        const currUser = users.find(user => user._id === loggedinUser._id)
-        const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
-        return orderedUsers
-    }
-
-    function getNotFollowingUsers() {
+    const notFollowingUsers = useMemo(()=> {
         const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
         const filteredUsers = users.filter(user => user.followers.every(f => f._id !== loggedinUser._id) && user._id !== loggedinUser._id)
         const filteredUsersWithCommonFollowing = filteredUsers.filter(filteredUser => {
@@ -109,27 +104,23 @@ export function Home() {
         })
         if (!filteredUsersWithCommonFollowing.length) return filteredUsers
         return filteredUsersWithCommonFollowing
-    }
+    },[users])
 
-    // const calculation = useMemo(() =>
-    //     getNotFollowingUsers(),
-    //     [users]
-    // );
-
-    async function onAddFollowing(userId) {
+  
+     const onAddFollowing = useCallback(async(userId)=> {
         const user = users.find(user => user._id === userId)
         const { _id, username, fullname, imgUrl } = user
         const miniUser = { _id, username, fullname, imgUrl }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
         setUpdatedUsers(prev => [...prev, updatedUser])
-    }
-
-    async function onRemoveFollowing(userId) {
-        await removeFollowing(userId, loggedinUser._id, 'fromHome')
-        setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
-    }
-
-    async function onLogout() {
+    },[])
+    
+    const onRemoveFollowing = useCallback(async(userId)=> {
+         await removeFollowing(userId, loggedinUser._id, 'fromHome')
+         setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
+        },[])
+        
+        const onLogout = useCallback(async()=>{
         try {
             await logout()
             console.log('Success Logout')
@@ -137,17 +128,17 @@ export function Home() {
         } catch (err) {
             console.log('err:', err)
         }
-    }
+    },[])
 
     if (!loggedinUser) return ''
     return (
         <section className="home">
             <HomeHeader newNotifications={newNotifications} loggedinUserId={loggedinUser._id} />
             <div className="main-content">
-                <Users users={getOrderedUsers()} />
+                <Users users={orderedUsers} />
                 <Posts posts={posts} loggedinUser={loggedinUser} />
             </div>
-            <NavSide loggedinUser={loggedinUser} users={getNotFollowingUsers()} onAddFollowing={onAddFollowing} onRemoveFollowing={onRemoveFollowing} onLogout={onLogout} updatedUsers={updatedUsers} />
+            <NavSide loggedinUser={loggedinUser} users={notFollowingUsers} onAddFollowing={onAddFollowing} onRemoveFollowing={onRemoveFollowing} onLogout={onLogout} updatedUsers={updatedUsers} />
         </section>
     )
 }

@@ -1,3 +1,4 @@
+import {memo} from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
@@ -6,10 +7,8 @@ import logo from '../assets/icons/logo.svg'
 import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 
-export function HomeHeader({ newNotifications, loggedinUserId }) {
-
-    // const [isOpenNotification, setIsOpenNotification] = useState(false)
-
+export const HomeHeader = memo(({ newNotifications, loggedinUserId })=> {
+    console.log('HomeHeader render')
     return (
         <section className="home-header">
             <button>
@@ -27,4 +26,4 @@ export function HomeHeader({ newNotifications, loggedinUserId }) {
             </section>
         </section>
     )
-}
+})
