@@ -19,12 +19,14 @@ import { UserTagged } from './cpms/UserTagged'
 import { UserSaved } from './cpms/UserSaved'
 import { scrollService } from './services/scroll.service'
 import { ScreenOpenContext } from './contexts/ScreenOpenConext'
+import { useToggle } from './customHooks/useToggle'
 
 export function App() {
 
   const [navLinksDisplay, setNavLinksDisplay] = useState('')
-  const [isScreenOpen, setIsScreenOpen] = useState(false)
-
+  // const [isScreenOpen, setIsScreenOpen] = useState(false)
+  const [isScreenOpen, setIsScreenOpen]= useToggle(false)
+ 
   function onOpenScreen() {
     setIsScreenOpen(true)
     scrollService.disableScroll()

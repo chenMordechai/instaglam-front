@@ -9,42 +9,20 @@ import { PostCommentModal } from "../cpms/PostCommentModal";
 import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost, addComment, removeComment, addLikeByCommentOptimistic, removeLikeByCommentOptimistic } from '../store/actions/post.actions.js'
 import { removeFollowing } from '../store/actions/user.actions.js'
 import { ScreenOpenContext } from "../contexts/ScreenOpenConext.js";
+import { useToggle } from '../customHooks/useToggle'
+import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
+import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
 
 export function Post({ post, loggedinUser }) {
-    const [openOptionsModal, setOpenOptionsModal] = useState(false)
-    const [openCommentModal, setOpenCommentModal] = useState(false)
+    const [openOptionsModal, onToggleOptionsModal] = useToggle(false)
+    const [openCommentModal, onToggleCommentModal] = useToggle(false)
     const [newComment, setNewComment] = useState(null)
 
     const { isScreenOpen, onOpenScreen, onCloseScreen, } = useContext(ScreenOpenContext)
 
-    useEffect(() => {
-        if (openOptionsModal || openCommentModal) {
-            onOpenScreen()
-        } else {
-            onCloseScreen()
-        }
-
-        return () => {
-            onCloseScreen()
-        }
-
-    }, [openOptionsModal, openCommentModal])
-
-    useEffect(() => {
-        if (!isScreenOpen) {
-            setOpenOptionsModal(false)
-            setOpenCommentModal(false)
-        }
-
-    }, [isScreenOpen])
-
-
-    function onToggleOptionsModal() {
-        setOpenOptionsModal(prev => !prev)
-    }
-    function onToggleCommentModal() {
-        setOpenCommentModal(prev => !prev)
-    }
+    useEffectToggleModal(onOpenScreen,onCloseScreen,[openOptionsModal,openCommentModal])
+  
+    useEffectCloseModal(isScreenOpen,[onToggleOptionsModal,onToggleCommentModal])
 
     function isLoggedinUserPost() {
         if (!loggedinUser) return false
@@ -76,7 +54,7 @@ export function Post({ post, loggedinUser }) {
 
     return (
         <section className="post">
-            {openOptionsModal && <PostOptionsModal userId={post.by._id} setOpenCommentModal={setOpenCommentModal} onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
+            {openOptionsModal && <PostOptionsModal userId={post.by._id}  onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />

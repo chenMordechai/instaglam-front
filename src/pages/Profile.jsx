@@ -13,14 +13,17 @@ import { ChangeImgModal } from '../cpms/ChangeImgModal'
 import { ShowImgModal } from '../cpms/ShowImgModal'
 import { FollowingModal } from '../cpms/FollowingModal'
 import { addFollowing, removeFollowing, loadUser, logout, saveUserImg } from '../store/actions/user.actions.js'
+import { useToggle } from '../customHooks/useToggle'
+import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
+import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
 
 
 export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const [isLoading, setIsLoading] = useState(false)
-    const [openPreferenceModal, setOpenPreferenceModal] = useState(false)
-    const [openChangeImgModal, setOpenChangeImgModal] = useState(false)
-    const [openShowImgModal, setOpenShowImgModal] = useState(false)
-    const [openFollowingModal, setOpenFollowingModal] = useState(false)
+    const [openPreferenceModal, onTogglePreferencesModal] = useToggle(false)
+    const [openChangeImgModal, onToggleChangeImgModal] = useToggle(false)
+    const [openShowImgModal, onToggleShowImgModal] = useToggle(false)
+    const [openFollowingModal, onToggleFollowingModal] = useToggle(false)
 
     const { currUser: user } = useSelector(storeState => storeState.userModule)
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
@@ -42,44 +45,9 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
         }
     }
 
-    useEffect(() => {
-        if (openPreferenceModal || openChangeImgModal || openFollowingModal || openShowImgModal) {
-            onOpenScreen()
-        } else {
-            onCloseScreen()
-        }
-
-        return () => {
-            onCloseScreen()
-        }
-
-    }, [openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
-
-    useEffect(() => {
-        if (!isScreenOpen) {
-            setOpenPreferenceModal(false)
-            setOpenChangeImgModal(false)
-            setOpenFollowingModal(false)
-            setOpenShowImgModal(false)
-        }
-
-    }, [isScreenOpen])
-
-
-    function onTogglePreferencesModal() {
-        setOpenPreferenceModal(prev => !prev)
-    }
-
-    function onToggleChangeImgModal() {
-        setOpenChangeImgModal(prev => !prev)
-    }
-    function onToggleShowImgModal() {
-        setOpenShowImgModal(prev => !prev)
-    }
-
-    function onToggleFollowingModal() {
-        setOpenFollowingModal(prev => !prev)
-    }
+    useEffectToggleModal(onOpenScreen,onCloseScreen,[openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
+  
+    useEffectCloseModal(isScreenOpen,[onTogglePreferencesModal,onToggleChangeImgModal,onToggleShowImgModal,onToggleFollowingModal])
 
     function isLoggedinUserProfile() {
         if (!loggedinUser) return false

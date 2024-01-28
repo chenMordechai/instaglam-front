@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Link } from "react-router-dom";
 
-export function PostOptionsModal({ userId, setOpenCommentModal, isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
+export function PostOptionsModal({ userId, isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
 
 
     return (

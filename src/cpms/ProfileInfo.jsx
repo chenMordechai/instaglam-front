@@ -68,7 +68,7 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
                 <div className="user-description">
                     <h3>{fullname}</h3>
                     <pre className={getClass()}>{bio}</pre>
-                   {!isLoggedinUserProfile && <h4>followed by {followers.map(f=><span> {f.username}</span>).slice(0,2)} and more...</h4>}
+                   {!isLoggedinUserProfile && <h4>followed by {followers.map(f=><span key={f._id}> {f.username}</span>).slice(0,2)} and more...</h4>}
                 </div>
             </div>
         </section>
