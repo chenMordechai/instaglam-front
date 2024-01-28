@@ -8,10 +8,11 @@ import { postService } from "../services/post.service"
 import { PostEditHeader } from "../cpms/PostEditHeader.jsx";
 import { PostEditImg } from "../cpms/PostEditImg.jsx";
 import { PostEditTxt } from "../cpms/PostEditTxt.jsx";
+import { useForm } from '../customHooks/useForm'
 
 
 export function PostEdit() {
-    const [postToEdit, setPostToEdit] = useState(postService.getEmptyPost())
+    const [postToEdit, setPostToEdit, handleChange] = useForm(postService.getEmptyPost())
     const [pageNum, setPageNum] = useState(1)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -20,7 +21,6 @@ export function PostEdit() {
 
     useEffect(() => {
         if (postId) loadPost()
-
     }, [postId])
 
     async function loadPost() {
@@ -32,12 +32,6 @@ export function PostEdit() {
             navigate('/post')
         }
     }
-
-    function handleChange(ev) {
-        let { value, name } = ev.target
-        setPostToEdit(prevPost => ({ ...prevPost, [name]: value }))
-    }
-
 
     async function onSubmitForm(ev) {
         ev.preventDefault()

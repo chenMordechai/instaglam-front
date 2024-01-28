@@ -3,13 +3,12 @@ import { useParams, useNavigate } from "react-router-dom"
 
 import { utilService } from "../services/util.service.js";
 import { saveUserImg, saveUser } from '../store/actions/user.actions.js'
-
 import { userService } from "../services/user.service.js";
 import { SimpleHeader } from "../cpms/SimpleHeader";
+import { useForm } from '../customHooks/useForm'
 
 export function UserEdit() {
-    const [user, setUser] = useState(null)
-    console.log('user.bio:', user?.bio)
+    const [user, setUser,handleChange] = useForm(null)
 
     const { userId } = useParams()
     const navigate = useNavigate()
@@ -33,30 +32,26 @@ export function UserEdit() {
         try {
             setUser(() => ({ ...user, imgUrl: imgUrl }))
             await saveUserImg({ ...user, imgUrl: imgUrl })
-            // showSuccessMsg('Save Toy: ' + savedToy._id)
+            // showSuccessMsg('Save User: ' + savedUser._id)
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Toy')
+            // showErrorMsg('Cannot Save User')
         }
     }
 
-    function handleChange(ev) {
-        let { value, name } = ev.target
-        setUser(prevUser => ({ ...prevUser, [name]: value }))
-    }
+ 
 
     async function onSubmitForm(ev) {
         ev.preventDefault()
         try {
             const savedUser = await saveUser({ ...user })
-            // showSuccessMsg('Save Toy: ' + savedToy._id)
+            // showSuccessMsg('Save User')
             navigate(-1)
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Toy')
+            // showErrorMsg('Cannot Save Uesr')
         }
     }
-
 
 
     if (!user) return ''

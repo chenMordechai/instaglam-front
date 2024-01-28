@@ -3,19 +3,14 @@ import {useState , useRef} from 'react'
 import {Img} from './Img'
 import gif from '../assets/icons/gif.png'
 import {postService} from '../services/post.service'
+import { useForm } from '../customHooks/useForm'
 
 export function AddComment ({loggedinUserImg , username ,onAddCommentToPost}){
-    const [comment, setComment] = useState(postService.getEmptyComment())
-   const emojis = ['❤️','🙌','🔥','👏','😥','😍','😮','😂']
+    const [comment, setComment , handleChange] = useForm(postService.getEmptyComment())
+ 
+    const emojis = ['❤️','🙌','🔥','👏','😥','😍','😮','😂']
     
     const inputTxt = useRef()
-
-
-   function handleChange(ev) {
-    
-        let { value, name } = ev.target
-        setComment(prevComment => ({ ...prevComment, [name]: value }))
-    }
 
     function onSubmitForm(ev){
         ev.preventDefault()

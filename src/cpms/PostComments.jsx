@@ -4,14 +4,10 @@ import { NavLink, Link } from "react-router-dom";
 import { postService } from '../services/post.service'
 import { Img } from './Img'
 import { utilService } from '../services/util.service'
+import { useForm } from '../customHooks/useForm'
 
 export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
-    const [comment, setComment] = useState(postService.getEmptyComment())
-
-    function handleChange(ev) {
-        let { value, name } = ev.target
-        setComment(prevComment => ({ ...prevComment, [name]: value }))
-    }
+    const [comment, setComment,handleChange] = useForm(postService.getEmptyComment())
 
     function onSubmitForm(ev) {
         ev.preventDefault()
