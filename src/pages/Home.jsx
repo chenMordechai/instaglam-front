@@ -10,7 +10,7 @@ import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getA
 import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { socketService } from '../services/socket.service.js'
 
-export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
+export function Home() {
 
     const { posts } = useSelector(storeState => storeState.postModule)
     const { users } = useSelector(storeState => storeState.userModule)
@@ -118,15 +118,15 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
 
     async function onAddFollowing(userId) {
         const user = users.find(user => user._id === userId)
-        const {_id,username,fullname,imgUrl} = user
-        const miniUser = {_id,username,fullname,imgUrl}
+        const { _id, username, fullname, imgUrl } = user
+        const miniUser = { _id, username, fullname, imgUrl }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
-        setUpdatedUsers(prev=> [...prev , updatedUser])
+        setUpdatedUsers(prev => [...prev, updatedUser])
     }
 
     async function onRemoveFollowing(userId) {
         await removeFollowing(userId, loggedinUser._id, 'fromHome')
-        setUpdatedUsers(prev=> prev.filter(u => u._id !== userId))
+        setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
     }
 
     async function onLogout() {
@@ -145,7 +145,7 @@ export function Home({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             <HomeHeader newNotifications={newNotifications} loggedinUserId={loggedinUser._id} />
             <div className="main-content">
                 <Users users={getOrderedUsers()} />
-                <Posts isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} posts={posts} loggedinUser={loggedinUser} />
+                <Posts posts={posts} loggedinUser={loggedinUser} />
             </div>
             <NavSide loggedinUser={loggedinUser} users={getNotFollowingUsers()} onAddFollowing={onAddFollowing} onRemoveFollowing={onRemoveFollowing} onLogout={onLogout} updatedUsers={updatedUsers} />
         </section>

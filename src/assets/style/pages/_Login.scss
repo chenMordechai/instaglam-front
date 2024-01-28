@@ -3,7 +3,7 @@
     width: 100vw;
     @include flex(column, center, center);
     @include for-mobile-layout {
-        justify-content: start;
+        // justify-content: start;
     }
 
     .login-container,
