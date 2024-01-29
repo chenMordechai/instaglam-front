@@ -1,9 +1,8 @@
-import { useState, Fragment } from "react"
+import { Fragment } from "react"
 
 import gear from '../assets/icons/gear-solid.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
-import bars from '../assets/icons/bars-solid.svg'
 import chevron from '../assets/icons/chevron-left-solid.svg'
 import { Link } from 'react-router-dom'
 

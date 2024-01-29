@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate, useParams } from "react-router-dom"
 
-import { SimpleHeader } from '../cpms/SimpleHeader'
-import { NotificationPreview } from '../cpms/NotificationPreview'
+import { SimpleHeader } from '../cmps/SimpleHeader'
+import { NotificationPreview } from '../cmps/NotificationPreview'
 import { loadUser, updateNotificationSeen } from '../store/actions/user.actions.js'
 
 export function Notification({ loggedinUserId }) {

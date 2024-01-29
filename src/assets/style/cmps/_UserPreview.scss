@@ -11,6 +11,9 @@
     .name-container {
         width: calc(100% - 120px);
         @include flex(column, start, center);
+        h3 {
+            cursor: pointer;
+        }
         span {
             color: $clr-grey4;
             font-size: 14px;

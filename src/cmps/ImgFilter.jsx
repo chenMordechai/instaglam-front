@@ -1,5 +1,5 @@
 
-import { Media } from "../cpms/Media.jsx";
+import { Media } from "../cmps/Media.jsx";
 
 export function ImgFilter ({item,type,url,onSetImgFilter}){
        const mystyle = {

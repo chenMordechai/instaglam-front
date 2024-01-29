@@ -1,4 +1,4 @@
-import {memo} from 'react'
+import { memo } from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
@@ -7,7 +7,7 @@ import logo from '../assets/icons/logo.svg'
 import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 
-export const HomeHeader = memo(({ newNotifications, loggedinUserId })=> {
+export const HomeHeader = memo(({ newNotifications, loggedinUserId }) => {
     console.log('HomeHeader render')
     return (
         <section className="home-header">
@@ -20,9 +20,9 @@ export const HomeHeader = memo(({ newNotifications, loggedinUserId })=> {
                     <img src={heart} />
                     {newNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 </Link>
-                <a className="disable" title="Messages"  >
+                <Link to="/message" className="disable" title="Messages"  >
                     <img src={message} />
-                </a>
+                </Link>
             </section>
         </section>
     )

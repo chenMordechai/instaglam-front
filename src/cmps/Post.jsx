@@ -4,8 +4,8 @@ import { PostComments } from "./PostComments"
 import { PostHeader } from "./PostHeader"
 import { PostMedia } from "./PostMedia"
 import { PostControls } from "./PostControls"
-import { PostOptionsModal } from "../cpms/PostOptionsModal";
-import { PostCommentModal } from "../cpms/PostCommentModal";
+import { PostOptionsModal } from "../cmps/PostOptionsModal";
+import { PostCommentModal } from "../cmps/PostCommentModal";
 import { removeLikeByPostOptimistic, addLikeByPostOptimistic, removePost, addComment, removeComment, addLikeByCommentOptimistic, removeLikeByCommentOptimistic } from '../store/actions/post.actions.js'
 import { removeFollowing } from '../store/actions/user.actions.js'
 import { ScreenOpenContext } from "../contexts/ScreenOpenConext.js";

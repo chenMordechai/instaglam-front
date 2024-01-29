@@ -18,45 +18,48 @@
 @import "pages/Notification";
 @import "pages/Search";
 @import "pages/Video";
+@import "pages/Message";
 
 /* Components */
-@import "cpms/NavSide";
-@import "cpms/NavLinks";
-@import "cpms/HomeHeader";
-@import "cpms/Users";
-@import "cpms/User";
+@import "cmps/MessageHeader";
+@import "cmps/SearchMessageModal";
+@import "cmps/NavSide";
+@import "cmps/NavLinks";
+@import "cmps/HomeHeader";
+@import "cmps/Users";
+@import "cmps/User";
 
-@import "cpms/Carousel";
-@import "cpms/Img";
+@import "cmps/Carousel";
+@import "cmps/Img";
 
-@import "cpms/Posts";
-@import "cpms/Post";
-@import "cpms/PostHeader";
-@import "cpms/PostMedia";
-@import "cpms/PostControls";
-@import "cpms/PostComments";
+@import "cmps/Posts";
+@import "cmps/Post";
+@import "cmps/PostHeader";
+@import "cmps/PostMedia";
+@import "cmps/PostControls";
+@import "cmps/PostComments";
 
-@import "cpms/ProfileHeader";
-@import "cpms/ProfileInfo";
-@import "cpms/ProfileHighlight";
-@import "cpms/HighlightPreview";
-@import "cpms/ProfileDashBoard";
-@import "cpms/Plus";
-@import "cpms/PostList";
-@import "cpms/UserPosts";
-@import "cpms/GridPosts";
+@import "cmps/ProfileHeader";
+@import "cmps/ProfileInfo";
+@import "cmps/ProfileHighlight";
+@import "cmps/HighlightPreview";
+@import "cmps/ProfileDashBoard";
+@import "cmps/Plus";
+@import "cmps/PostList";
+@import "cmps/UserPosts";
+@import "cmps/GridPosts";
 
-@import "cpms/Modal";
+@import "cmps/Modal";
 
-@import "cpms/ImgFilter";
-@import "cpms/PostEditHeader";
-@import "cpms/CommentPreview";
-@import "cpms/AddComment";
-@import "cpms/PostCommentModal";
-@import "cpms/Heart";
-@import "cpms/FollowingModal";
-@import "cpms/MiniPlus";
-@import "cpms/ShowImgModal";
-@import "cpms/UserPreview";
-@import "cpms/Media";
-@import "cpms/PostVideoControls";
+@import "cmps/ImgFilter";
+@import "cmps/PostEditHeader";
+@import "cmps/CommentPreview";
+@import "cmps/AddComment";
+@import "cmps/PostCommentModal";
+@import "cmps/Heart";
+@import "cmps/FollowingModal";
+@import "cmps/MiniPlus";
+@import "cmps/ShowImgModal";
+@import "cmps/UserPreview";
+@import "cmps/Media";
+@import "cmps/PostVideoControls";

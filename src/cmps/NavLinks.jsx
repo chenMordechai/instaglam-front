@@ -38,11 +38,11 @@ export function NavLinks({ navLinksDisplay }) {
 
     }, [notifications])
 
-    useEffect(()=>{
-        if(openNotificationModal)  {
+    useEffect(() => {
+        if (openNotificationModal) {
             setNewNotifications(false)
         }
-    },[openNotificationModal])
+    }, [openNotificationModal])
 
     function onToggleNotificationModal() {
         if (openSearchModal) onToggleSearchModal()
@@ -83,14 +83,14 @@ export function NavLinks({ navLinksDisplay }) {
                 <img src={compass} />
                 <span>Explore</span>
             </a>
-            <NavLink to="video"  title="Reels" >
+            <NavLink to="video" title="Reels" >
                 <img src={film} />
                 <span>Reels</span>
             </NavLink>
-            <a className="disable not-mobile" title="Messages"  >
+            <NavLink to="message" className="disable not-mobile" title="Messages"  >
                 <img src={message} />
                 <span>Messages</span>
-            </a>
+            </NavLink>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
                 {!openNotificationModal && <img src={heart} />}
                 {openNotificationModal && <FontAwesomeIcon icon={faHeart} />}

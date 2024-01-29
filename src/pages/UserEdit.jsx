@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { utilService } from "../services/util.service.js";
 import { saveUserImg, saveUser } from '../store/actions/user.actions.js'
 import { userService } from "../services/user.service.js";
-import { SimpleHeader } from "../cpms/SimpleHeader";
+import { SimpleHeader } from "../cmps/SimpleHeader";
 import { useForm } from '../customHooks/useForm'
 
 export function UserEdit() {

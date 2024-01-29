@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import xmark from '../assets/icons/xmark-solid.svg'
-import check from '../assets/icons/check-solid.svg'
 import arrow from '../assets/icons/arrow-left-long-solid.svg'
-import { Fragment } from 'react'
 
 export function PostEditHeader({ pageNum, isEdit, onChangePageNum }) {
     const navigate = useNavigate()

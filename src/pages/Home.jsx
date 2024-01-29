@@ -2,10 +2,10 @@ import { useEffect, useState, useMemo,useCallback} from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 
-import { HomeHeader } from '../cpms/HomeHeader'
-import { Users } from "../cpms/Users";
-import { Posts } from "../cpms/Posts";
-import { NavSide } from '../cpms/NavSide'
+import { HomeHeader } from '../cmps/HomeHeader'
+import { Users } from "../cmps/Users";
+import { Posts } from "../cmps/Posts";
+import { NavSide } from '../cmps/NavSide'
 import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getActionLikePostRemove, loadPosts, getActionAddPost, getActionUpdatePost, getActionRemovePost } from '../store/actions/post.actions.js'
 import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { socketService } from '../services/socket.service.js'

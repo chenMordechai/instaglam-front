@@ -2,16 +2,16 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-import { ProfileHeader } from "../cpms/ProfileHeader";
-import { ProfileInfo } from "../cpms/ProfileInfo";
-import { ProfileHighlight } from "../cpms/ProfileHighlight";
-import { ProfileDashBoard } from "../cpms/ProfileDashBoard";
-import { PostList } from "../cpms/PostList";
+import { ProfileHeader } from "../cmps/ProfileHeader";
+import { ProfileInfo } from "../cmps/ProfileInfo";
+import { ProfileHighlight } from "../cmps/ProfileHighlight";
+import { ProfileDashBoard } from "../cmps/ProfileDashBoard";
+import { PostList } from "../cmps/PostList";
 import { utilService } from "../services/util.service.js";
-import { PreferenceModal } from '../cpms/PreferenceModal'
-import { ChangeImgModal } from '../cpms/ChangeImgModal'
-import { ShowImgModal } from '../cpms/ShowImgModal'
-import { FollowingModal } from '../cpms/FollowingModal'
+import { PreferenceModal } from '../cmps/PreferenceModal'
+import { ChangeImgModal } from '../cmps/ChangeImgModal'
+import { ShowImgModal } from '../cmps/ShowImgModal'
+import { FollowingModal } from '../cmps/FollowingModal'
 import { addFollowing, removeFollowing, loadUser, logout, saveUserImg } from '../store/actions/user.actions.js'
 import { useToggle } from '../customHooks/useToggle'
 import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'

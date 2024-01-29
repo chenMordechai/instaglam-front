@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { Img } from '../cpms/Img'
+import { Img } from '../cmps/Img'
 import { utilService } from '../services/util.service'
 
 export function NotificationPreview ({userImgUrl ,userId , username ,action,timeStamp, isButton , postImgUrl,comment}){

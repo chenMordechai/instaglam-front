@@ -5,9 +5,9 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { savePost } from '../store/actions/post.actions.js'
 import { utilService } from "../services/util.service"
 import { postService } from "../services/post.service"
-import { PostEditHeader } from "../cpms/PostEditHeader.jsx";
-import { PostEditImg } from "../cpms/PostEditImg.jsx";
-import { PostEditTxt } from "../cpms/PostEditTxt.jsx";
+import { PostEditHeader } from "../cmps/PostEditHeader.jsx";
+import { PostEditImg } from "../cmps/PostEditImg.jsx";
+import { PostEditTxt } from "../cmps/PostEditTxt.jsx";
 import { useForm } from '../customHooks/useForm'
 
 

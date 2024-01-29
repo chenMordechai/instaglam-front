@@ -12,11 +12,12 @@ import { PostEdit } from './pages/PostEdit'
 import { Notification } from './pages/Notification'
 import { Search } from './pages/Search'
 import { Video } from './pages/Video'
+import { Message } from './pages/Message'
 
-import { NavLinks } from './cpms/NavLinks'
-import { UserPosts } from './cpms/UserPosts'
-import { UserTagged } from './cpms/UserTagged'
-import { UserSaved } from './cpms/UserSaved'
+import { NavLinks } from './cmps/NavLinks'
+import { UserPosts } from './cmps/UserPosts'
+import { UserTagged } from './cmps/UserTagged'
+import { UserSaved } from './cmps/UserSaved'
 import { scrollService } from './services/scroll.service'
 import { ScreenOpenContext } from './contexts/ScreenOpenConext'
 import { useToggle } from './customHooks/useToggle'
@@ -25,8 +26,8 @@ export function App() {
 
   const [navLinksDisplay, setNavLinksDisplay] = useState('')
   // const [isScreenOpen, setIsScreenOpen] = useState(false)
-  const [isScreenOpen, setIsScreenOpen]= useToggle(false)
- 
+  const [isScreenOpen, setIsScreenOpen] = useToggle(false)
+
   function onOpenScreen() {
     setIsScreenOpen(true)
     scrollService.disableScroll()
@@ -60,8 +61,9 @@ export function App() {
                   <Route element={<PostEdit />} path="/post/edit/" />
                   <Route element={<PostEdit />} path="/post/edit/:postId" />
                   <Route element={<Notification />} path="/notification/:userId" />
-                  <Route element={<Search />} path="/Search" />
-                  <Route element={<Video />} path="/Video" />
+                  <Route element={<Search />} path="/search" />
+                  <Route element={<Video />} path="/video" />
+                  <Route element={<Message />} path="/message" />
                 </Routes>
               </div>
             </main>

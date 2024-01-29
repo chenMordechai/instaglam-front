@@ -6,7 +6,7 @@ import eye from '../assets/icons/eye-solid.svg'
 import gear from '../assets/icons/gear-solid.svg'
 import chevron from '../assets/icons/chevron-right-solid.svg'
 
-import { Media } from "../cpms/Media.jsx";
+import { Media } from "../cmps/Media.jsx";
 
 
 export function PostEditTxt ({isEdit,type , url, style,postToEdit, setPostToEdit,handleChange,onSubmitForm}){

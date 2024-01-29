@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import {loadPosts } from '../store/actions/post.actions.js'
-import { PostMedia } from "../cpms/PostMedia";
-import { PostVideoControls } from "../cpms/PostVideoControls";
+import { PostMedia } from "../cmps/PostMedia";
+import { PostVideoControls } from "../cmps/PostVideoControls";
 
 
 export function Video (){

@@ -1,7 +1,7 @@
 import image from '../assets/icons/image-regular.svg'
-import { Carousel } from "../cpms/Carousel.jsx";
-import { ImgFilter } from "../cpms/ImgFilter.jsx";
-import { Media } from "../cpms/Media.jsx";
+import { Carousel } from "../cmps/Carousel.jsx";
+import { ImgFilter } from "../cmps/ImgFilter.jsx";
+import { Media } from "../cmps/Media.jsx";
 import loader from '../assets/icons/loader.gif'
 
 
