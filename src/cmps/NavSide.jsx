@@ -4,8 +4,6 @@ import { UserPreview } from "./UserPreview"
 
 export const NavSide = memo(({ loggedinUser, users, onAddFollowing, onRemoveFollowing, onLogout, updatedUsers })=> {
   
-    console.log('NavSide render')
-    console.log('users:', users)
     function isFollowing(userId) {
         return (updatedUsers.find(u=> u._id === userId))?true : false
     }

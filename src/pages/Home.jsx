@@ -1,6 +1,8 @@
-import { useEffect, useState, useMemo,useCallback} from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
+import { React } from 'react'
+import addNotification from 'react-push-notification'
 
 import { HomeHeader } from '../cmps/HomeHeader'
 import { Users } from "../cmps/Users";
@@ -9,6 +11,7 @@ import { NavSide } from '../cmps/NavSide'
 import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getActionLikePostRemove, loadPosts, getActionAddPost, getActionUpdatePost, getActionRemovePost } from '../store/actions/post.actions.js'
 import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { socketService } from '../services/socket.service.js'
+
 
 export function Home() {
 
@@ -63,8 +66,20 @@ export function Home() {
         })
 
         socketService.emit('user-watch', loggedinUser._id)
-        socketService.on('notification-added', () => {
+        socketService.on('notification-added', (data) => {
             setNewNotifications(true)
+            console.log('data:', data)
+            const username = data.miniUser.username
+            const msg = data.action
+            const comment = data.comment || ''
+            addNotification({
+                title: 'message',
+                message: `${username} ${msg} ${comment}`,
+                // theme: 'light',
+                native: false,
+                position: 'bottom-right',
+                duration: 3000,
+            });
         })
 
         return () => {
@@ -80,15 +95,15 @@ export function Home() {
 
     }, [])
 
-  const orderedUsers = useMemo(()=>{
-    if (!users.length) return []
-    const currUser = users.find(user => user._id === loggedinUser._id)
-    const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
-    return orderedUsers
-    },[users.length])
+    const orderedUsers = useMemo(() => {
+        if (!users.length) return []
+        const currUser = users.find(user => user._id === loggedinUser._id)
+        const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
+        return orderedUsers
+    }, [users.length])
 
 
-    const notFollowingUsers = useMemo(()=> {
+    const notFollowingUsers = useMemo(() => {
         const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
         const filteredUsers = users.filter(user => user.followers.every(f => f._id !== loggedinUser._id) && user._id !== loggedinUser._id)
         const filteredUsersWithCommonFollowing = filteredUsers.filter(filteredUser => {
@@ -104,23 +119,23 @@ export function Home() {
         })
         if (!filteredUsersWithCommonFollowing.length) return filteredUsers
         return filteredUsersWithCommonFollowing
-    },[users])
+    }, [users])
 
-  
-     const onAddFollowing = useCallback(async(userId)=> {
+
+    const onAddFollowing = useCallback(async (userId) => {
         const user = users.find(user => user._id === userId)
         const { _id, username, fullname, imgUrl } = user
         const miniUser = { _id, username, fullname, imgUrl }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
         setUpdatedUsers(prev => [...prev, updatedUser])
-    },[])
-    
-    const onRemoveFollowing = useCallback(async(userId)=> {
-         await removeFollowing(userId, loggedinUser._id, 'fromHome')
-         setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
-        },[])
-        
-        const onLogout = useCallback(async()=>{
+    }, [])
+
+    const onRemoveFollowing = useCallback(async (userId) => {
+        await removeFollowing(userId, loggedinUser._id, 'fromHome')
+        setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
+    }, [])
+
+    const onLogout = useCallback(async () => {
         try {
             await logout()
             console.log('Success Logout')
@@ -128,7 +143,8 @@ export function Home() {
         } catch (err) {
             console.log('err:', err)
         }
-    },[])
+    }, [])
+
 
     if (!loggedinUser) return ''
     return (

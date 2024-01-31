@@ -22,6 +22,8 @@ import { scrollService } from './services/scroll.service'
 import { ScreenOpenContext } from './contexts/ScreenOpenConext'
 import { useToggle } from './customHooks/useToggle'
 
+import { Notifications } from 'react-push-notification';
+
 export function App() {
 
   const [navLinksDisplay, setNavLinksDisplay] = useState('')
@@ -43,6 +45,7 @@ export function App() {
       <Router>
         <ScreenOpenContext.Provider value={{ isScreenOpen, onOpenScreen, onCloseScreen }}>
           <section className={'main-layout ' + (isScreenOpen ? 'screen-open' : '')}>
+            <Notifications />
             <section className="screen" onClick={onCloseScreen}></section>
             <NavLinks navLinksDisplay={navLinksDisplay} />
             <main>

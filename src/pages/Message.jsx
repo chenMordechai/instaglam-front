@@ -39,9 +39,9 @@ export function Message() {
             </Fragment>}
             {openSearchModal && <Search onToggleSearchModal={onToggleSearchModal} goToChat={goToChat} />}
 
-            <Users users={getOrderedUsers()} />
+            {!openSearchModal && <Users users={getOrderedUsers()} />}
 
-            <MessageList />
+            {/* <MessageList /> */}
 
         </section>
     )

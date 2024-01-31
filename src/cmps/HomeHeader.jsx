@@ -8,7 +8,6 @@ import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 
 export const HomeHeader = memo(({ newNotifications, loggedinUserId }) => {
-    console.log('HomeHeader render')
     return (
         <section className="home-header">
             <button>

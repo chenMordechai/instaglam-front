@@ -7,7 +7,6 @@ import { store } from "../store.js";
 export async function login(credentials) {
     try {
         const user = await userService.login(credentials)
-        console.log('user:', user)
         const { _id, fullname, username, imgUrl } = user
         const miniUser = { _id, fullname, username, imgUrl }
         store.dispatch({ type: SET_LOGGEDIN_USER, user: miniUser })
@@ -22,7 +21,6 @@ export async function login(credentials) {
 export async function signup(credentials) {
     try {
         const user = await userService.signup(credentials)
-        console.log('user:', user)
         store.dispatch({ type: ADD_USER, user })
         const { _id, fullname, username, imgUrl } = user
         const miniUser = { _id, fullname, username, imgUrl }
@@ -37,10 +35,8 @@ export async function signup(credentials) {
 
 
 export async function loadUsers(filterBy) {
-    console.log('filterBy', filterBy)
     try {
         const users = await userService.query(filterBy)
-        console.log('users:', users)
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
         console.log('user action -> Cannot load users', err)
@@ -72,8 +68,6 @@ export async function logout() {
 
 
 export async function saveUser(user) {
-    console.log('user action:', user)
-    console.log('user action:', user.bio)
     try {
         const userToSave = await userService.update(user)
         store.dispatch({ type: SET_USER, user: user })
@@ -93,7 +87,6 @@ export async function saveUser(user) {
 }
 
 export async function saveUserImg(user) {
-    console.log('user:', user)
     try {
         const userToSave = await userService.updateImg(user)
         store.dispatch({ type: SET_USER, user })
