@@ -1,19 +1,19 @@
 .user {
     // background-color: red;
-    @include flex(column, center, space-between, 5px);
+    @include flex(column, center, space-between, 4px);
     width: 66px;
     text-align: center;
     cursor: pointer;
 
     div.img-container {
-        height: 75px;
-        width: 75px;
+        height: 64px;
+        width: 64px;
     }
     a {
-        width: 100%;
+        width: 107%;
 
         span {
-            font-size: 13px;
+            font-size: 12px;
             white-space: nowrap;
             width: 100%;
             overflow: hidden;

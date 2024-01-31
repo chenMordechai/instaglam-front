@@ -1,16 +1,16 @@
 .post-header {
     @include flex(row, center, space-between);
-    padding: $pad1 0;
+    padding: 8px 0;
 
     @include for-mobile-layout {
         padding: $pad1;
     }
     .user-info-container {
-        @include flex(row, center, start, $pad1);
+        @include flex(row, center, start, 8px);
 
         div.img-container {
-            height: 45px;
-            width: 45px;
+            height: 40px;
+            width: 40px;
         }
 
         div.text-container {
@@ -39,7 +39,9 @@
         }
     }
     .ellipsis {
+        margin-right: 2px;
         img {
+            height: 19px;
             @include for-mobile-layout {
                 transform: rotate(90deg);
             }

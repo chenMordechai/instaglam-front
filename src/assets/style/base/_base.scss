@@ -116,7 +116,7 @@ button {
 // links
 a {
   text-decoration: none;
-  @include flex(row, center, start, $pad2);
+  @include flex(row, start, start, $pad2);
   cursor: pointer;
   color: black;
 

@@ -7,7 +7,7 @@ import { utilService } from '../services/util.service'
 import { useForm } from '../customHooks/useForm'
 
 export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
-    const [comment, setComment,handleChange] = useForm(postService.getEmptyComment())
+    const [comment, setComment, handleChange] = useForm(postService.getEmptyComment())
 
     function onSubmitForm(ev) {
         ev.preventDefault()
@@ -29,8 +29,9 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
                 {by}
                 <span className={getClass()}>{txt}</span>
             </Link>
+            <h4>See translation</h4>
             <button onClick={onToggleCommentModal} className="clr-grey">View all {comments.length} comments</button>
-            {myNewComment && <h3>{myNewComment.by.username} <span>{myNewComment.txt}</span> </h3>}
+            {myNewComment && <h3>{myNewComment.by.username} <span className={getClass()}>{myNewComment.txt}</span> </h3>}
             <form onSubmit={onSubmitForm}>
                 <div className="img-container">
                     <Img imgUrl={loggeginUserImgUrl} className="none" />

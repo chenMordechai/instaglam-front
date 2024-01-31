@@ -3,11 +3,12 @@
     // margin-bottom: 50px;
 
     ul.posts-container {
+        margin-top: 16px;
         width: 100%;
         @include flex(column, center, start, $pad1);
 
         li {
-            width: 75%;
+            width: 74%;
 
             @include for-mobile-layout {
                 width: 100%;

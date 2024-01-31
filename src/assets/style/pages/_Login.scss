@@ -50,7 +50,7 @@
             }
         }
         .fb-container {
-            @include flex(row, center, center, $pad1);
+            @include flex(row, start, center, $pad1);
             padding: $pad2 0 $pad3 0;
             img.fb {
                 height: 19px;

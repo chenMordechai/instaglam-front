@@ -1,13 +1,16 @@
 .post-comments {
-    padding: 0 10px;
-
-    @include flex(column, start, start, 7px);
+    @include for-mobile-layout {
+        padding: 0 10px;
+    }
+    @include flex(column, start, start);
     font-size: 16.5;
-    h3 {
-        font-weight: 450;
+    h3,
+    a {
+        font-weight: 500;
+        font-size: 14px;
     }
     a {
-        font-weight: 450;
+        // margin-top: 1px;
         gap: 5px;
         display: flex;
         align-items: baseline;
@@ -15,22 +18,34 @@
         @include for-mobile-layout {
         }
         span {
-            font-size: inherit;
-            font-weight: 400;
-            font-family: system-ui;
+            // font-size: inherit;
+            // font-weight: 350;
+            // font-family: system-ui;
         }
     }
-    button,
-    span {
-        font-weight: 300;
+    h4 {
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 12px;
     }
 
+    & > button {
+        font-weight: 350;
+        margin: 5px 0;
+        font-size: 14px;
+    }
     form {
+        margin-top: 9px;
         width: 100%;
         @include flex(row, center, space-between);
         .img-container {
-            height: 40px;
-            width: 40px;
+            display: none;
+
+            @include for-mobile-layout {
+                display: block;
+                height: 40px;
+                width: 40px;
+            }
         }
 
         input,
@@ -38,8 +53,8 @@
             width: calc(100% - 90px);
             cursor: pointer;
             padding: 0;
-            font-size: 1em;
-            font-weight: 300;
+            font-size: 14px;
+            font-weight: 350;
             @include for-mobile-layout {
                 font-size: 16.5px;
             }
@@ -51,5 +66,7 @@
         width: 40px;
         border: none;
         padding: 0;
+        font-size: 14px;
+        font-weight: 350;
     }
 }
