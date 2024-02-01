@@ -9,6 +9,12 @@
         font-weight: 500;
         font-size: 14px;
     }
+    h3.new-comment {
+        margin-bottom: 8px;
+        span:not(.rtl) {
+            font-weight: 300;
+        }
+    }
     a {
         // margin-top: 1px;
         gap: 5px;
@@ -24,7 +30,7 @@
         }
     }
     h4 {
-        margin-top: 4px;
+        margin-top: 3px;
         font-weight: 400;
         font-size: 12px;
     }
@@ -35,9 +41,10 @@
         font-size: 14px;
     }
     form {
-        margin-top: 9px;
         width: 100%;
-        @include flex(row, center, space-between);
+        // margin-top: -1px;
+        // margin-top: 2px;
+        @include flex(row, baseline, space-between);
         .img-container {
             display: none;
 
@@ -50,23 +57,31 @@
 
         input,
         input::placeholder {
-            width: calc(100% - 90px);
+            width: calc(100% - 61px);
             cursor: pointer;
             padding: 0;
             font-size: 14px;
-            font-weight: 350;
+            font-weight: 300;
             @include for-mobile-layout {
                 font-size: 16.5px;
             }
         }
+
+        span.icon {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        // input {
+        //     font-size: 1rem;
+        // }
     }
 
     button.post,
     span.post {
-        width: 40px;
+        width: 29px;
         border: none;
         padding: 0;
         font-size: 14px;
-        font-weight: 350;
+        font-weight: 450;
     }
 }

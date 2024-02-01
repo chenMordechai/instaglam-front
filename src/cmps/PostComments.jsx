@@ -15,7 +15,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
         setComment(postService.getEmptyComment())
     }
 
-    function getClass() {
+    function getClass(txt) {
         if (!txt) return
         const res = utilService.isHebrew(txt)
         if (res) return 'rtl'
@@ -27,20 +27,21 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
             {/* <a>{by} <span>{txt}</span></a> */}
             <Link className="new-comment" to={'/profile/' + byId + '/posts'} >
                 {by}
-                <span className={getClass()}>{txt}</span>
+                <span className={getClass(txt)}>{txt}</span>
             </Link>
             <h4>See translation</h4>
             <button onClick={onToggleCommentModal} className="clr-grey">View all {comments.length} comments</button>
-            {myNewComment && <h3>{myNewComment.by.username} <span className={getClass()}>{myNewComment.txt}</span> </h3>}
+            {myNewComment && <h3 className="new-comment">{myNewComment.by.username} <span className={getClass(myNewComment.txt)}>{myNewComment.txt}</span> </h3>}
             <form onSubmit={onSubmitForm}>
                 <div className="img-container">
                     <Img imgUrl={loggeginUserImgUrl} className="none" />
                 </div>
 
-                <input onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
+                <input className={getClass(comment.txt)} onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
                 {/* if input have value add button post */}
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
+                <span className="icon">:D</span>
             </form>
         </section>
     )
