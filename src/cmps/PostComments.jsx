@@ -5,6 +5,10 @@ import { postService } from '../services/post.service'
 import { Img } from './Img'
 import { utilService } from '../services/util.service'
 import { useForm } from '../customHooks/useForm'
+import smile from '../assets/icons/face-smile-regular.svg'
+import heart from '../assets/icons/heart-regular.svg'
+
+
 
 export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
     const [comment, setComment, handleChange] = useForm(postService.getEmptyComment())
@@ -31,7 +35,10 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
             </Link>
             <h4>See translation</h4>
             <button onClick={onToggleCommentModal} className="clr-grey">View all {comments.length} comments</button>
-            {myNewComment && <h3 className="new-comment">{myNewComment.by.username} <span className={getClass(myNewComment.txt)}>{myNewComment.txt}</span> </h3>}
+            {myNewComment && <h3 className="new-comment">
+                {myNewComment.by.username} <span className={getClass(myNewComment.txt)}>{myNewComment.txt}</span>
+                <span className="icon"> <img src={heart} /></span>
+            </h3>}
             <form onSubmit={onSubmitForm}>
                 <div className="img-container">
                     <Img imgUrl={loggeginUserImgUrl} className="none" />
@@ -41,7 +48,7 @@ export function PostComments({ loggeginUserImgUrl, onToggleCommentModal, comment
                 {/* if input have value add button post */}
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
-                <span className="icon">:D</span>
+                <span className="icon"><img src={smile} /></span>
             </form>
         </section>
     )

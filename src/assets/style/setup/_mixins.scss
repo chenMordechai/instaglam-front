@@ -96,15 +96,16 @@
 // Buttons
 
 @mixin blue-btn {
-    margin: 7px 0;
+    margin: 8px 0;
     background-color: $clr-blue;
-    padding: $pad1;
+    padding-top: 8px;
+    padding-bottom: 5px;
     border-radius: 10px;
     color: $clr-white;
     @include flex(row, center, center);
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 400;
-    width: 100%;
+    width: 82%;
 }
 
 @mixin btn($type: regular) {

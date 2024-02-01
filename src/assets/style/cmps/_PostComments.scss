@@ -10,9 +10,16 @@
         font-size: 14px;
     }
     h3.new-comment {
+        width: 100%;
+        @include flex(row, center, start, 5px);
         margin-bottom: 8px;
+        margin-top: 2px;
         span:not(.rtl) {
             font-weight: 300;
+        }
+        span.icon {
+            margin-left: auto;
+            width: 13px;
         }
     }
     a {
@@ -67,13 +74,16 @@
             }
         }
 
-        span.icon {
-            margin-right: 5px;
-            font-size: 14px;
-        }
         // input {
         //     font-size: 1rem;
         // }
+    }
+    span.icon {
+        margin-right: 5px;
+        margin-top: 2px;
+        font-size: 14px;
+        width: 13px;
+        filter: opacity(0.5);
     }
 
     button.post,
