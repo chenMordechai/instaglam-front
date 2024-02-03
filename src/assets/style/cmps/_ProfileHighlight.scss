@@ -1,14 +1,16 @@
 .profile-highlight {
-    margin-top: $pad3;
-    margin-bottom: $pad3;
+    margin-top: 45px;
+    margin-bottom: 52px;
+    margin-left: 52px;
 
     ul {
         display: flex;
         li {
-            width: 66px;
+            // margin-right: 34px;
+            // width: 66px;
             .img-container {
-                height: 100px;
-                width: 100px;
+                height: 84px;
+                width: 84px;
 
                 @include for-mobile-layout {
                     height: 65px;

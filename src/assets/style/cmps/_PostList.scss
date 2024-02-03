@@ -2,26 +2,33 @@
     @include flex(column, center, center);
     border-top: 1px solid $clr-grey2;
     nav {
-        @include flex(row, center, center);
+        @include flex(row, center, center, 26%);
         width: 250px;
         @include for-mobile-layout {
             width: 100%;
         }
         a {
-            @include flex(row, center, center);
-            width: 50%;
-            padding: $pad2;
+            @include flex(row, baseline, center);
+            width: 23%;
+            padding: 16px 0px;
+            gap: 6px;
             &.active {
                 border-top: 1px solid $clr-grey4;
-                img {
-                    filter: brightness(3);
+                @include for-mobile-layout {
+                    img {
+                        filter: brightness(3);
+                    }
                 }
             }
             img {
-                height: 25px;
+                height: 11px;
             }
             span {
-                margin-left: 15px;
+                font-size: 13px;
+                text-transform: uppercase;
+                font-weight: 400;
+                margin-right: 6px;
+                // margin-left: 6px;
                 @include for-mobile-layout {
                     display: none;
                 }

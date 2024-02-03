@@ -10,7 +10,7 @@ import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
 
-export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followers, followingLength }) {
+export function ProfileInfo({ onToggleShowImgModal, onToggleFollowingModal, onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followers, followingLength }) {
     function getClass() {
         if (!bio) return ''
         const res = utilService.isHebrew(bio)
@@ -18,10 +18,10 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
         else ''
     }
 
-    function onClickImg(){
-        if(isLoggedinUserProfile){
+    function onClickImg() {
+        if (isLoggedinUserProfile) {
             onToggleChangeImgModal()
-        }else{
+        } else {
             onToggleShowImgModal()
         }
     }
@@ -29,8 +29,8 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
     return (
         <section className="profile-info">
             <div className="left-container">
-                <div onClick={onClickImg}  className="img-container">
-                    <Img imgUrl={imgUrl} className="gradient" />
+                <div onClick={onClickImg} className="img-container">
+                    <Img imgUrl={imgUrl} className="" />
                 </div>
             </div>
             <div className="user-info">
@@ -38,12 +38,12 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
                     <h2>{username}</h2>
                     {!isLoggedinUserProfile && <div className="btn-container">
                         {isFollowing && <button onClick={onToggleFollowingModal}
-                        className="btn">
+                            className="btn">
                             Following
                             <img src={arrow} />
                         </button>}
                         {!isFollowing && <button onClick={onAddFollowing}
-                         className="btn follow">
+                            className="btn follow">
                             Follow
                         </button>}
                         <button className="btn">Message</button>
@@ -68,7 +68,7 @@ export function ProfileInfo({onToggleShowImgModal,onToggleFollowingModal,onAddFo
                 <div className="user-description">
                     <h3>{fullname}</h3>
                     <pre className={getClass()}>{bio}</pre>
-                   {!isLoggedinUserProfile && <h4>followed by {followers.map(f=><span key={f._id}> {f.username}</span>).slice(0,2)} and more...</h4>}
+                    {!isLoggedinUserProfile && <h4>followed by {followers.map(f => <span key={f._id}> {f.username}</span>).slice(0, 2)} and more...</h4>}
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 .profile-info {
-    padding: $pad1;
-    @include flex(row, center, start, 50px);
+    // padding: $pad1;
+    @include flex(row, center, start, 17px);
     @include for-mobile-layout {
         position: relative;
         @include flex(column, start, start);
@@ -11,7 +11,8 @@
         }
     }
     .left-container {
-        width: 30%;
+        // margin-bottom: 7px;
+        width: 33%;
         @include flex(row, center, center);
         @include for-mobile-layout {
             width: max-content;
@@ -19,9 +20,9 @@
         }
         .img-container {
             cursor: pointer;
-            height: 200px;
-            width: 200px;
-            min-width: 200px;
+            height: 172px;
+            width: 172px;
+            // min-width: 200px;
             img {
                 border-width: 6px;
             }
@@ -35,81 +36,84 @@
             }
         }
     }
-    // .user-info {
-    .user-info-header {
-        @include flex(row, center, start, $pad3, wrap);
-        h2 {
-            font-size: 23px;
-            margin-right: 20px;
-        }
-        @include for-mobile-layout {
-            gap: $pad1;
-            margin-top: 18px;
-        }
-        .btn-container {
-            @include flex(row, center, start, $pad1);
-            .follow {
-                @include blue-btn;
+    .user-info {
+        .user-info-header {
+            margin-top: 7px;
+            @include flex(row, end, start, 23px, wrap);
+            h2 {
+                font-size: 20px;
+                // margin-right: 20px;
+                font-weight: 300;
             }
-            button,
-            a,
-            .follow {
-                font-size: 16px;
+            @include for-mobile-layout {
+                gap: $pad1;
+                margin-top: 18px;
             }
+            .btn-container {
+                @include flex(row, center, start, 8px);
+                .follow {
+                    @include blue-btn;
+                }
+                button,
+                a,
+                .follow {
+                    font-size: 14px;
+                }
 
-            button:last-child img {
-                width: 20px;
-                // margin-left: 10px;
+                button:last-child img {
+                    width: 20px;
+                    // margin-left: 10px;
+                }
+
+                button.gear {
+                    margin-left: 7px;
+                    @include for-mobile-layout {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .user-info-dash-board {
+            @include flex(row, center, start, $pad3);
+            margin-top: 23px;
+            h3 {
+                font-weight: 300;
+            }
+            span {
+                font-weight: 400;
             }
 
             @include for-mobile-layout {
-                button.gear {
-                    display: none;
+                display: none;
+            }
+        }
+
+        .user-description {
+            margin-top: $pad2;
+            @include flex(column, start, start, $pad1);
+            h3 {
+                font-size: 15px;
+            }
+            pre {
+                font-size: 14px;
+                width: max-content;
+                margin: 0;
+                // font-weight: 100;
+                line-height: normal;
+            }
+
+            pre.he {
+                text-align: right;
+            }
+            h4 {
+                font-size: 13px;
+                font-weight: 400;
+                color: $clr-grey4;
+                span {
+                    font-size: 13px;
+                    color: $clr-black;
                 }
             }
         }
     }
-    .user-info-dash-board {
-        @include flex(row, center, start, $pad3);
-        margin-top: $pad3;
-        h3 {
-            font-weight: 300;
-        }
-        span {
-            font-weight: 400;
-        }
-
-        @include for-mobile-layout {
-            display: none;
-        }
-    }
-
-    .user-description {
-        margin-top: $pad2;
-        @include flex(column, start, start, $pad1);
-        h3 {
-            font-size: 16px;
-        }
-        pre {
-            font-size: 16px;
-            width: max-content;
-            margin: 0;
-            // font-weight: 100;
-            line-height: normal;
-        }
-
-        pre.he {
-            text-align: right;
-        }
-        h4 {
-            font-size: 14px;
-            font-weight: 400;
-            color: $clr-grey4;
-            span {
-                font-size: 14px;
-                color: $clr-black;
-            }
-        }
-    }
-    // }
 }
