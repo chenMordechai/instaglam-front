@@ -38,7 +38,6 @@ export function PostComments({createdAt, loggeginUserImgUrl, onToggleCommentModa
     return (
         <section className="post-comments">
             <h3>{likedBy.length} likes</h3>
-            {/* <a>{by} <span>{txt}</span></a> */}
             <Link className="" to={'/profile/' + byId + '/posts'} >
                 {by}
                 <span className={getClass(txt)}>{txt}</span>

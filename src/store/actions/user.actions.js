@@ -18,6 +18,7 @@ export async function login(credentials) {
 
     }
 }
+
 export async function signup(credentials) {
     try {
         const user = await userService.signup(credentials)
@@ -32,7 +33,6 @@ export async function signup(credentials) {
         throw err
     }
 }
-
 
 export async function loadUsers(filterBy) {
     try {
@@ -65,7 +65,6 @@ export async function logout() {
     }
 
 }
-
 
 export async function saveUser(user) {
     try {
@@ -103,6 +102,7 @@ export async function saveUserImg(user) {
 export async function addFollowing(miniUser, loggedinUser, from) {
     try {
         const addedUser = await userService.addFollowing(miniUser)
+        // if from === fromHome (nav side) i dont want to update the store 
         if (!from) store.dispatch({ type: ADD_FOLLOWING, loggedinUser })
         return addedUser
     } catch (err) {
@@ -110,7 +110,6 @@ export async function addFollowing(miniUser, loggedinUser, from) {
         throw err
     }
 }
-
 
 export async function removeFollowing(userId, loggedinUserId, from) {
     try {

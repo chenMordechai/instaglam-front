@@ -13,7 +13,7 @@ export function Search({ onToggleSearchModal, goToChat }) {
   const [innerWidth, setInnerWidth] = useState('')
   const [search, setSearch] = useState({ txt: '' })
   const [users, setUsers] = useState(null)
-  const { loggedinUser } = useSelector(storeState => storeState.userModule)
+  const  loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
 
   useEffect(() => {
     if (!search.txt) return

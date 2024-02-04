@@ -10,7 +10,7 @@ export function Media ({type ,url,style}){
     }
     return (
         <section className="media">
-             {getMediaType() === 'img'  &&  <img src={url} style={style} />}
+                {getMediaType() === 'img'  &&  <img src={url} style={style} />}
                 {getMediaType() === 'video' && 
                  <video  style={style} controls >
                 <source src={url} type="video/mp4"/>

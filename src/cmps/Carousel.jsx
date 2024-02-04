@@ -1,11 +1,14 @@
 // import { User } from "./User";
+import { useEffect, useRef, useState } from "react";
+
+import { faL } from "@fortawesome/free-solid-svg-icons";
 import arrowRight from '../assets/icons/caret-right-solid.svg'
 import arrowLeft from '../assets/icons/caret-left-solid.svg'
-import { useEffect, useRef, useState } from "react";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
+// if i want the svg like svg
+// import {ReactComponent as ReactLogo} from './logo.svg';
 
-export function Carousel({ items , Comp1 , Comp2,type,url , onSetImgFilter}) {
+export function Carousel({ items , Comp1 , Comp2 , ...restOfProps}) {
     const [isDragging, setIsDragging] = useState()
     const [startX, setStartX] = useState()
     const [startScrollLeft, setStartScrollLeft] = useState()
@@ -15,7 +18,7 @@ export function Carousel({ items , Comp1 , Comp2,type,url , onSetImgFilter}) {
 
     useEffect(() => {
         document.addEventListener('mouseup', dragStop)
-        carousel.current.addEventListener("scroll", startEndScroll)
+        carousel.current.addEventListener('scroll', startEndScroll)
 
     return ()=>{
             document.removeEventListener('mouseup', dragStop)
@@ -70,9 +73,10 @@ export function Carousel({ items , Comp1 , Comp2,type,url , onSetImgFilter}) {
                     onMouseDown={dragStart} onMouseMove={dragging}
                     onTouchStart={dragStart} onTouchMove={dragging}>
                     {items.map((item,i) => <li className="card" key={item._id || i}>
-                        <Comp1 item={item} isDragging={isDragging} type={type} url={url} onSetImgFilter={onSetImgFilter} />
+                        <Comp1 item={item} isDragging={isDragging} {...restOfProps} />
                     </li>
                     )}
+                    {/* plus at the end of the highlights */}
                  {Comp2 && <Comp2/>}
                 </ul>
                {!endOfScroll && <button onClick={() => moveCarousel('right')} className="arrow">

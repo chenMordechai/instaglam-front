@@ -55,7 +55,6 @@ async function updateImg(user) {
 
 async function login(userCred) {
     const user = await httpService.post(BASE_URL_AUTH + 'login', userCred)
-    console.log('user loginnnnnnnnn:', user)
     if (user) {
         _setLoggedinUser(user)
         return user

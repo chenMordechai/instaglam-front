@@ -2,7 +2,6 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { React } from 'react'
-import addNotification from 'react-push-notification'
 
 import { HomeHeader } from '../cmps/HomeHeader'
 import { Users } from "../cmps/Users";
@@ -15,10 +14,12 @@ import { socketService } from '../services/socket.service.js'
 
 export function Home() {
 
-    const { posts } = useSelector(storeState => storeState.postModule)
-    const { users } = useSelector(storeState => storeState.userModule)
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const  posts  = useSelector(storeState => storeState.postModule.posts)
+    const  users = useSelector(storeState => storeState.userModule.users)
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+    console.log('loggedinUser:', loggedinUser)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
+    
     const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUsers, setUpdatedUsers] = useState([])
 
@@ -30,12 +31,10 @@ export function Home() {
     }, [])
 
     async function init() {
-        if (!loggedinUser) navigate('/')
         try {
             await loadPosts()
             await loadUsers()
             await loadUser(loggedinUser._id)
-
         } catch (err) {
             console.log('err:', err)
             navigate('/')
@@ -68,18 +67,6 @@ export function Home() {
         socketService.emit('user-watch', loggedinUser._id)
         socketService.on('notification-added', (data) => {
             setNewNotifications(true)
-            console.log('data:', data)
-            const username = data.miniUser.username
-            const msg = data.action
-            const comment = data.comment || ''
-            addNotification({
-                title: 'message',
-                message: `${username} ${msg} ${comment}`,
-                // theme: 'light',
-                native: false,
-                position: 'bottom-right',
-                duration: 3000,
-            });
         })
 
         return () => {
@@ -95,45 +82,53 @@ export function Home() {
 
     }, [])
 
+    // useMemo for calaulation
     const orderedUsers = useMemo(() => {
         if (!users.length) return []
-        const currUser = users.find(user => user._id === loggedinUser._id)
-        const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
+        const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
+        // loggedinUser first then all others 
+        const orderedUsers = [loggedinUserFull, ...users.filter(user => user._id !== loggedinUser._id)]
         return orderedUsers
-    }, [users.length])
+    }, [users,loggedinUser])
 
 
     const notFollowingUsers = useMemo(() => {
+        console.log('notFollowingUsers:')
+        // find loggedinUser
         const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
-        const filteredUsers = users.filter(user => user.followers.every(f => f._id !== loggedinUser._id) && user._id !== loggedinUser._id)
-        const filteredUsersWithCommonFollowing = filteredUsers.filter(filteredUser => {
-            filteredUser.commonFollowings = []
-            return filteredUser.followers.some(user => {
+        // check every user if in his followers there's no the loggedinUser && the user is not the loggedinUser
+        const usersIdontFollow = users.filter(user => user.followers.every(f => f._id !== loggedinUser._id) && user._id !== loggedinUser._id)
+        // found users that we have common followings (we follow after the same users)
+        const usersWithCommonFollowing = usersIdontFollow.filter(userIdontFollow => {
+            // save the commonFollowings on the user
+            userIdontFollow.commonFollowings = []
+            return userIdontFollow.followers.some(user => {
                 return loggedinUserFull.following.some(u => {
+                    // compare between my followings to user followers
                     if (u._id === user._id) {
-                        filteredUser.commonFollowings.push(u.username)
+                        userIdontFollow.commonFollowings.push(u.username)
                         return true
                     }
                 })
             })
         })
-        if (!filteredUsersWithCommonFollowing.length) return filteredUsers
-        return filteredUsersWithCommonFollowing
+        if (!usersWithCommonFollowing.length) return usersIdontFollow
+        return usersWithCommonFollowing
     }, [users])
 
-
+    // useCallback for functions we dont want to redefined 
     const onAddFollowing = useCallback(async (userId) => {
         const user = users.find(user => user._id === userId)
         const { _id, username, fullname, imgUrl } = user
         const miniUser = { _id, username, fullname, imgUrl }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
         setUpdatedUsers(prev => [...prev, updatedUser])
-    }, [])
+    }, [users,loggedinUser])
 
     const onRemoveFollowing = useCallback(async (userId) => {
         await removeFollowing(userId, loggedinUser._id, 'fromHome')
         setUpdatedUsers(prev => prev.filter(u => u._id !== userId))
-    }, [])
+    }, [loggedinUser])
 
     const onLogout = useCallback(async () => {
         try {
@@ -146,9 +141,9 @@ export function Home() {
     }, [])
 
 
-    if (!loggedinUser) return ''
     return (
         <section className="home">
+            {/* HomeHeader just in mobile */}
             <HomeHeader newNotifications={newNotifications} loggedinUserId={loggedinUser._id} />
             <div className="main-content">
                 <Users users={orderedUsers} />

@@ -1,4 +1,3 @@
-import { Fragment } from "react"
 
 import gear from '../assets/icons/gear-solid.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
@@ -8,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePreferencesModal }) {
     return (
-        <Fragment>
+        <>
             {isLoggedinUserProfile && <section className="profile-header">
                 <h2>{username}
                     <button >
@@ -32,7 +31,7 @@ export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePrefere
                 <h2>{username} </h2>
                 <span></span>
             </section>}
-        </Fragment>
+        </>
     )
 
 

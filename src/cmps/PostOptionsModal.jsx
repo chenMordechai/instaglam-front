@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { Link } from "react-router-dom";
 
 export function PostOptionsModal({ userId, isFollowing, onRemovePost, onToggleOptionsModal, isLoggedinUserPost, postId }) {
@@ -17,7 +16,7 @@ export function PostOptionsModal({ userId, isFollowing, onRemovePost, onToggleOp
             <button className="doesnt-work">Copy Link</button>
             <button className="doesnt-work">Save</button>
 
-            {isLoggedinUserPost && <Fragment>
+            {isLoggedinUserPost && <>
 
                 <button className="doesnt-work">Archive</button>
                 <Link to={`/post/edit/${postId}`}>
@@ -27,7 +26,7 @@ export function PostOptionsModal({ userId, isFollowing, onRemovePost, onToggleOp
                 <button onClick={() => onRemovePost()} className="clr-red">
                     Delete
                 </button>
-            </Fragment>}
+            </>}
 
             <button onClick={onToggleOptionsModal} >Cancel</button>
 

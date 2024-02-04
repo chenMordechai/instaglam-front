@@ -8,9 +8,10 @@ export const NavSide = memo(({ loggedinUser, users, onAddFollowing, onRemoveFoll
         return (updatedUsers.find(u => u._id === userId)) ? true : false
     }
 
+    const {_id ,imgUrl ,username ,fullname} = loggedinUser
     return (
         <section className="nav-side">
-            <UserPreview userId={loggedinUser._id} imgUrl={loggedinUser.imgUrl} username={loggedinUser.username} spanContent={loggedinUser.fullname} btnContent="Logout" func={onLogout} />
+            <UserPreview userId={_id} imgUrl={imgUrl} username={username} spanContent={fullname} btnContent="Logout" func={onLogout} />
 
             <h3>Suggested for you</h3>
             <ul>

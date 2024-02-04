@@ -25,7 +25,6 @@ export function Post({ post, loggedinUser }) {
     useEffectCloseModal(isScreenOpen,[onToggleOptionsModal,onToggleCommentModal])
 
     function isLoggedinUserPost() {
-        if (!loggedinUser) return false
         return loggedinUser._id === post.by._id
     }
 

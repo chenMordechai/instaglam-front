@@ -10,7 +10,6 @@ export function User({ item, isDragging }) {
             </div>
             <Link to={`/profile/${item._id}/posts`}>
                 <span>{item.username}</span>
-                {/* {item.username} */}
             </Link>
         </section>
     )

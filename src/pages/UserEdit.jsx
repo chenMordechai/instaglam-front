@@ -32,10 +32,8 @@ export function UserEdit() {
         try {
             setUser(() => ({ ...user, imgUrl: imgUrl }))
             await saveUserImg({ ...user, imgUrl: imgUrl })
-            // showSuccessMsg('Save User: ' + savedUser._id)
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save User')
         }
     }
 
@@ -45,11 +43,9 @@ export function UserEdit() {
         ev.preventDefault()
         try {
             const savedUser = await saveUser({ ...user })
-            // showSuccessMsg('Save User')
             navigate(-1)
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Uesr')
         }
     }
 

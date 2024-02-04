@@ -25,7 +25,7 @@ export function Notification({ loggedinUserId }) {
   }
 
   function isMobile() {
-    return (window.innerWidth > 700) ? false : true
+    return !(window.innerWidth > 700)
   }
 
   function getClass() {

@@ -13,9 +13,7 @@ export function MessageHeader({ username }) {
                     <img src={angle} />
                 </button>
             </h2>
-            <span>
-
-            </span>
+            <span></span>
         </section >
     )
 }

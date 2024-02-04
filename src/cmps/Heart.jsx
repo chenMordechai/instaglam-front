@@ -10,7 +10,6 @@ export function Heart({ onUpdateLike, loggedinUser, likedBy }) {
 
     useEffect(() => {
         isLoggedinUserLikePost()
-
     }, [likedBy])
 
     function isLoggedinUserLikePost() {

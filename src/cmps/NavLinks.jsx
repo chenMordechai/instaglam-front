@@ -12,7 +12,6 @@ import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
 import house from '../assets/icons/house-solid.svg'
-// import house from '../assets/icons/home.png'
 import glass from '../assets/icons/glass-solid.svg'
 import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
@@ -27,7 +26,7 @@ import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
 import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
 
 export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDisplay }) {
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
 
     const [openNotificationModal, onToggleNotificationModal] = useToggle(false)
     const [openSearchModal, onToggleSearchModal] = useToggle(false)
@@ -51,7 +50,6 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
 
 
     useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, openSearchModal])
-
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
 
@@ -64,6 +62,9 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     return (
 
         <section className="nav-links" style={{ 'display': navLinksDisplay }}>
+             {openNotificationModal && <Notification loggedinUserId={loggedinUser._id} />}
+            {openSearchModal && <Search />}
+
             <Link to={'/home'} title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
                 <img className="logo" src={logo} />
@@ -115,10 +116,6 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={bars} />
                 <span>More</span>
             </a>
-
-
-            {openNotificationModal && <Notification loggedinUserId={loggedinUser._id} />}
-            {openSearchModal && <Search />}
         </section>
     )
 }

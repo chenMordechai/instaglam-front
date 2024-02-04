@@ -16,6 +16,8 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     posts: [],
+    // cr: lastPosts
+
     // currPost: null,
     // filterBy: postService.getDefaultFilter(),
     // sortBy: postService.getDefaultSort(),

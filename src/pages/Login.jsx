@@ -2,17 +2,20 @@
 import { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
-import { Fragment } from 'react';
 
 import logo from '../assets/icons/logo.svg'
 import facebook from '../assets/icons/facebook-logo.png'
 import { userService } from '../services/user.service.js';
 import { login, signup } from '../store/actions/user.actions.js'
+import { useForm } from '../customHooks/useForm'
 
 export function Login({ setNavLinksDisplay }) {
-    const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
+    const  loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
+
     const [isSignupState, setIsSignupState] = useState(false)
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
+  
+    const [credentials, setCredentials,handleCredentialsChange] = useForm(userService.getEmptyCredentials())
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -23,37 +26,16 @@ export function Login({ setNavLinksDisplay }) {
         }
     }, [])
 
-    function handleCredentialsChange(ev) {
-        const field = ev.target.name
-        const value = ev.target.value
-        setCredentials(credentials => ({ ...credentials, [field]: value }))
-    }
-
     async function onSubmit(ev) {
         ev.preventDefault()
-        if (isSignupState) {
+        const func = isSignupState ? signup : login
             try {
-                const user = await signup(credentials)
-                console.log('success signup', user)
+                const user = await func(credentials)
+                console.log('success signup / login', user)
                 navigate('/home')
-                // showSuccessMsg(`Welcome ${user.fullname}`)
             } catch (err) {
                 console.log('err:', err)
-                // showErrorMsg('Cannot signup')
             }
-        } else {
-            try {
-                const user = await login(credentials)
-                console.log('success login', user)
-                navigate('/home')
-                // showSuccessMsg(`Hi again ${user.fullname}`)
-            } catch (err) {
-                console.log('err:', err)
-                // showErrorMsg('Cannot login')
-            }
-
-        }
-
     }
 
     function onSetSignup() {
@@ -71,10 +53,10 @@ export function Login({ setNavLinksDisplay }) {
                 <form onSubmit={onSubmit}>
                     <input required onChange={handleCredentialsChange} value={username} type="text" placeholder="*Username" name="username" />
                     <input required onChange={handleCredentialsChange} value={password} type="text" placeholder="*Password" name="password" />
-                    {isSignupState && <Fragment>
+                    {isSignupState && <>
                         <input required onChange={handleCredentialsChange} value={fullname} type="text" placeholder="*Full Name" name="fullname" />
                         <input onChange={handleCredentialsChange} value={email} type="email" placeholder="Email" name="email" />
-                    </Fragment>}
+                    </>}
                     <button>{isSignupState ? 'Sign up' : 'Log in'}</button>
                 </form>
 
@@ -89,9 +71,9 @@ export function Login({ setNavLinksDisplay }) {
                     <h3> Log in with Facebook</h3>
                 </div>
 
-                {!isSignupState && <Fragment>
+                {!isSignupState && <>
                     <span>Forgot password?</span>
-                </Fragment>}
+                </>}
             </div>
 
             <div className="signup-container">

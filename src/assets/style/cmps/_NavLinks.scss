@@ -133,10 +133,11 @@
             color: red;
             height: 9px;
             position: absolute;
-            right: 173px;
-            top: 381px;
+            right: 187px;
+            top: 376px;
             @include for-narrow-layout {
-                right: 20px;
+                top: 378px;
+                right: 19px;
             }
         }
     }

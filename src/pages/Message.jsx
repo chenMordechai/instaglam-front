@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { MessageHeader } from '../cmps/MessageHeader'
@@ -8,8 +8,8 @@ import { Users } from "../cmps/Users";
 import { MessageList } from "../cmps/MessageList";
 
 export function Message() {
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    const { users } = useSelector(storeState => storeState.userModule)
+    const loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
+    const users  = useSelector(storeState => storeState.userModule.users)
 
     const [openSearchModal, onToggleSearchModal] = useToggle(false)
 
@@ -31,12 +31,12 @@ export function Message() {
 
     return (
         <section className="message">
-            {!openSearchModal && <Fragment>
+            {!openSearchModal && <>
                 <MessageHeader username={loggedinUser?.username} />
                 <div className="input-container">
                     <input onClick={onToggleSearchModal} type="text" placeholder="Search" />
                 </div>
-            </Fragment>}
+            </>}
             {openSearchModal && <Search onToggleSearchModal={onToggleSearchModal} goToChat={goToChat} />}
 
             {!openSearchModal && <Users users={getOrderedUsers()} />}

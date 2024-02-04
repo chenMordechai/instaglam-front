@@ -19,15 +19,16 @@ import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
 
 
 export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
+    const  user = useSelector(storeState => storeState.userModule.currUser)
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+
     const [isLoading, setIsLoading] = useState(false)
+
     const [openPreferenceModal, onTogglePreferencesModal] = useToggle(false)
     const [openChangeImgModal, onToggleChangeImgModal] = useToggle(false)
     const [openShowImgModal, onToggleShowImgModal] = useToggle(false)
     const [openFollowingModal, onToggleFollowingModal] = useToggle(false)
-
-    const { currUser: user } = useSelector(storeState => storeState.userModule)
-    const { loggedinUser } = useSelector(storeState => storeState.userModule)
-
+    
     const { userId } = useParams()
     const navigate = useNavigate()
 
@@ -38,7 +39,6 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     async function init() {
         try {
             await loadUser(userId)
-            // console.log('user', user)
         } catch (err) {
             console.log('user action -> Cannot load user', err)
             navigate('/')
@@ -46,11 +46,9 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     }
 
     useEffectToggleModal(onOpenScreen,onCloseScreen,[openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
-  
     useEffectCloseModal(isScreenOpen,[onTogglePreferencesModal,onToggleChangeImgModal,onToggleShowImgModal,onToggleFollowingModal])
 
     function isLoggedinUserProfile() {
-        if (!loggedinUser) return false
         return loggedinUser._id === user._id
     }
 
@@ -78,14 +76,10 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
         try {
             await logout()
             console.log('Success Logout')
-            // onTogglePreferencesModal()
             onCloseScreen()
             navigate('/')
-            // showSuccessMsg('Logout successfully')
-
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot logout')
         }
     }
 
@@ -95,10 +89,8 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             const media = await utilService.uploadImgToCloudinary(ev)
             await saveUserImg({ ...user, imgUrl: media.url })
             onToggleChangeImgModal()
-            // showSuccessMsg('Save Toy: ' + savedToy._id)
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Toy')
         } finally {
             setIsLoading(false)
         }
@@ -109,11 +101,8 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
         try {
             await saveUserImg({ ...user, imgUrl: defaultImgUrl })
             onToggleChangeImgModal()
-            // showSuccessMsg('Save Toy: ' + savedToy._id)
-            // navigate('/toy')
         } catch (err) {
             console.log('err:', err)
-            // showErrorMsg('Cannot Save Toy')
         }
     }
 
@@ -125,6 +114,7 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             {openChangeImgModal && <ChangeImgModal isLoading={isLoading} onChangeImg={onChangeImg} onRemoveImg={onRemoveImg} onToggleChangeImgModal={onToggleChangeImgModal} imgUrl={imgUrl} />}
             {openShowImgModal && <ShowImgModal imgUrl={imgUrl} />}
             {openFollowingModal && <FollowingModal username={username} imgUrl={imgUrl} onRemoveFollowing={onRemoveFollowing} onToggleFollowingModal={onToggleFollowingModal} />}
+           
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
             <ProfileInfo onToggleShowImgModal={onToggleShowImgModal} onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followers={followers} />
             <ProfileHighlight highlights={highlights} />

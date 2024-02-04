@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import {Navigate} from 'react-router-dom'
+import { Provider,useSelector } from 'react-redux'
 import { useState, useRef } from 'react'
 import { store } from './store/store'
 import './assets/style/main.scss'
@@ -24,11 +25,18 @@ import { useToggle } from './customHooks/useToggle'
 
 import { Notifications } from 'react-push-notification';
 
+function RouteGuard({children}){
+  const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+  if(!loggedinUser) return <Navigate to="/"/>
+  return <>{children}</>
+}
+
 export function App() {
 
   const [navLinksDisplay, setNavLinksDisplay] = useState('')
   // const [isScreenOpen, setIsScreenOpen] = useState(false)
   const [isScreenOpen, setIsScreenOpen] = useToggle(false)
+
 
   function onOpenScreen() {
     setIsScreenOpen(true)
@@ -51,8 +59,12 @@ export function App() {
             <main>
               <div className="main-container">
                 <Routes>
-                  <Route element={<Login setNavLinksDisplay={setNavLinksDisplay} />} path="/" />
-                  <Route element={<Home />} path="/home" />
+                  <Route path="/" element={<Login setNavLinksDisplay={setNavLinksDisplay} />}  />
+                  <Route path="/home" element={
+                     <RouteGuard>
+                        <Home />
+                     </RouteGuard>
+                  }  />
                   <Route element={<Profile isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />} path="/profile/:userId" >
                     <Route path="/profile/:userId/posts" element={<UserPosts />} />
                     <Route path="/profile/:userId/tagged" element={<UserTagged />} />
@@ -61,8 +73,9 @@ export function App() {
                     {/* <Route path="/profile/:userId/saved" element={} /> */}
                   </Route>
                   <Route element={<UserEdit />} path="/user/edit/:userId" />
-                  <Route element={<PostEdit />} path="/post/edit/" />
-                  <Route element={<PostEdit />} path="/post/edit/:postId" />
+                  {/* <Route element={<PostEdit />} path="/post/edit/" />
+                  <Route element={<PostEdit />} path="/post/edit/:postId" /> */}
+                  <Route element={<PostEdit />} path="/post/edit/:postId?" />
                   <Route element={<Notification />} path="/notification/:userId" />
                   <Route element={<Search />} path="/search" />
                   <Route element={<Video />} path="/video" />

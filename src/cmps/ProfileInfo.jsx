@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
 import gear from '../assets/icons/gear.png'
-// import gear from '../assets/icons/gear-solid.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
 
 import userImg from '../assets/icons/user.jpg'

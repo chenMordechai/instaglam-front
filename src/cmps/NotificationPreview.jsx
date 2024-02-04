@@ -11,15 +11,11 @@ export function NotificationPreview ({userImgUrl ,userId , username ,action,time
         return utilService.timeDifference(Date.now(), createdAt)
       }
        
-      
-
   function getStyle(postImgUrl) {
-
     return {
         backgroundImage: `url(${postImgUrl})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        // filter: postImgFilter
     }
 }
 
@@ -41,13 +37,13 @@ export function NotificationPreview ({userImgUrl ,userId , username ,action,time
             
             </div>
 
-<div className="left-container">
+          <div className="left-container">
 
            {isButton && <button className="btn">Following</button>}
 
            {postImgUrl && <div className="post-img" style={getStyle(postImgUrl)}/>}
          
-</div>
+        </div>
         </section>
     )
 

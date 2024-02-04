@@ -21,13 +21,11 @@ export function GridPosts({ posts }) {
     }
 
     function updateWidth() {
-       
         const width = square?.current?.offsetWidth
         grid.current.style.gridAutoRows = width + 'px'
     }
 
     function getStyle(postImgUrl, postImgFilter) {
-
         return {
             backgroundImage: `url(${postImgUrl})`,
             backgroundSize: 'cover',
