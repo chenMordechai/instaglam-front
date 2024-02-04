@@ -7,7 +7,7 @@ export function PostEditHeader({ pageNum, isEdit, onChangePageNum }) {
     const navigate = useNavigate()
     return (
         <section className="post-edit-header">
-            <section>
+            <section className="icons">
                 {pageNum === 1 && <button onClick={() => navigate(-1)}>
                     <img src={xmark} />
                 </button>}

@@ -2,12 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import chevron from '../assets/icons/chevron-left-solid.svg'
 
-export function SimpleHeader({ h2Content, onToggleSearchModal }) {
+export function SimpleHeader({ h2Content, onToggleModal }) {
 
     const navigate = useNavigate()
 
     function onChevronClicked() {
-        if (onToggleSearchModal) onToggleSearchModal()
+        if (onToggleModal) onToggleModal()
         else navigate(-1)
     }
     return (

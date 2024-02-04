@@ -10,8 +10,6 @@ import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
 import { UserEdit } from './pages/UserEdit'
 import { PostEdit } from './pages/PostEdit'
-import { Notification } from './pages/Notification'
-import { Search } from './pages/Search'
 import { Video } from './pages/Video'
 import { Message } from './pages/Message'
 
@@ -76,8 +74,6 @@ export function App() {
                   {/* <Route element={<PostEdit />} path="/post/edit/" />
                   <Route element={<PostEdit />} path="/post/edit/:postId" /> */}
                   <Route element={<PostEdit />} path="/post/edit/:postId?" />
-                  <Route element={<Notification />} path="/notification/:userId" />
-                  <Route element={<Search />} path="/search" />
                   <Route element={<Video />} path="/video" />
                   <Route element={<Message />} path="/message" />
                 </Routes>

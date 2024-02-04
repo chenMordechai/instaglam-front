@@ -156,8 +156,27 @@
         }
     }
 
-    div,
-    section {
+    .icons {
         @include flex(row, center, center, $pad1);
+    }
+}
+
+@mixin big-modal {
+    padding: $pad2;
+    height: 100vh;
+    width: 400px;
+    position: fixed;
+    top: 0;
+    background-color: $clr-white;
+    left: 244px;
+    overflow: auto;
+
+    @include for-narrow-layout {
+        left: 72px;
+    }
+
+    & > h3 {
+        font-weight: 500;
+        font-size: 1.5em;
     }
 }

@@ -1,4 +1,10 @@
 .notification {
+    @include big-modal;
+    @include for-mobile-layout {
+        padding: 0;
+        width: 100%;
+        left: 0;
+    }
     ul.notification-list {
         padding: $pad2;
 
@@ -13,7 +19,7 @@
 
             .content-container {
                 width: calc(100% - 140px);
-                @include flex(row, center, start, 2px, wrap);
+                @include flex(row, baseline, start, 2px, wrap);
 
                 a {
                     font-weight: 550;

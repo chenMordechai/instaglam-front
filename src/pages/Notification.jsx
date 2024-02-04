@@ -1,24 +1,23 @@
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { SimpleHeader } from '../cmps/SimpleHeader'
 import { NotificationPreview } from '../cmps/NotificationPreview'
 import { loadUser, updateNotificationSeen } from '../store/actions/user.actions.js'
 
-export function Notification({ loggedinUserId }) {
-
-  const { userId } = useParams()
+export function Notification({ loggedinUserId ,onToggleNotificationModal}) {
   const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
+  
   useEffect(() => {
     init()
   }, [])
 
   async function init() {
     try {
-      await loadUser(userId || loggedinUserId)
-      await updateNotificationSeen(userId || loggedinUserId)
+      await loadUser(loggedinUserId)
+      await updateNotificationSeen( loggedinUserId)
     } catch (err) {
       console.log('user action -> Cannot load user', err)
     }
@@ -28,13 +27,9 @@ export function Notification({ loggedinUserId }) {
     return !(window.innerWidth > 700)
   }
 
-  function getClass() {
-    return (window.innerWidth > 700) ? 'big-modal' : 'page-mobile'
-  }
-
   return (
-    <section className={'notification ' + getClass()}>
-      {isMobile() && <SimpleHeader h2Content="Notificatios" />}
+    <section className="notification">
+      {isMobile() && <SimpleHeader h2Content="Notificatios" onToggleModal={onToggleNotificationModal} />}
       {!isMobile() && <h3>Notifications</h3>}
 
       <ul className="notification-list">

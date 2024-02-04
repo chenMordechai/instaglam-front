@@ -10,7 +10,6 @@ import { SimpleHeader } from '../cmps/SimpleHeader'
 
 export function Search({ onToggleSearchModal, goToChat }) {
 
-  const [innerWidth, setInnerWidth] = useState('')
   const [search, setSearch] = useState({ txt: '' })
   const [users, setUsers] = useState(null)
   const  loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
@@ -19,19 +18,6 @@ export function Search({ onToggleSearchModal, goToChat }) {
     if (!search.txt) return
     getResult()
   }, [search])
-
-  useEffect(() => {
-    setInnerWidth(window.innerWidth)
-
-  }, [])
-
-  // function isMobile() {
-  //   return (window.innerWidth > 700) ? false : true
-  // }
-
-  // function getClass() {
-  //   return (window.innerWidth > 700) ? 'big-modal' : 'page-mobile'
-  // }
 
   async function onSubmitForm(ev) {
     ev.preventDefault()
@@ -58,15 +44,19 @@ export function Search({ onToggleSearchModal, goToChat }) {
     setUsers(prev => prev.filter(u => u._id !== userId))
   }
 
+  function isMobile() {
+    return !(window.innerWidth > 700)
+  }
+
 
   return (
-    <section className={'search ' + ((innerWidth < 700) ? 'page-mobile' : 'big-modal')}>
-      {innerWidth < 700 && <SimpleHeader h2Content="Search" onToggleSearchModal={onToggleSearchModal} />}
-      {innerWidth > 700 && <h3>Search</h3>}
+    <section className="search">
+      {isMobile() && <SimpleHeader h2Content="Search" onToggleModal={onToggleSearchModal} />}
+      {!isMobile() && <h3>Search</h3>}
 
       <div className="form-container">
         <form onSubmit={onSubmitForm}>
-          <input onChange={onChangeInput} type="text" name="txt" value={search.txt} placeholder="Search" />
+          <input autoComplete="off" onChange={onChangeInput} type="text" name="txt" value={search.txt} placeholder="Search" />
           <img onClick={() => setSearch({ txt: '' })} src={xmark} />
         </form>
       </div>

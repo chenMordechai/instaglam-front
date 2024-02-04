@@ -49,7 +49,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     }, [openNotificationModal])
 
 
-    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, openSearchModal])
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile()&& openSearchModal ])
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
 
@@ -62,8 +62,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     return (
 
         <section className="nav-links" style={{ 'display': navLinksDisplay }}>
-             {openNotificationModal && <Notification loggedinUserId={loggedinUser._id} />}
-            {openSearchModal && <Search />}
+             
 
             <Link to={'/home'} title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
@@ -73,16 +72,13 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={house} />
                 <span>Home</span>
             </NavLink>
-            {isMobile() && <NavLink to="search" title="Search" >
-                <img src={glass} />
-                <span>Search</span>
-            </NavLink>}
-            {!isMobile() && <a onClick={onToggleSearchModal} title="Search" >
+    
+             <a onClick={onToggleSearchModal} title="Search" >
                 {/* <FontAwesomeIcon icon={faHeart} /> */}
                 {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
                 <img src={glass} />
                 <span>Search</span>
-            </a>}
+            </a>
             <a className="disable not-mobile" title="Explore" >
                 <img src={compass} />
                 <span>Explore</span>
@@ -99,7 +95,6 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 {!openNotificationModal && <img src={heart} />}
                 {openNotificationModal && <FontAwesomeIcon icon={faHeart} />}
                 {newNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
-
                 <span>Notifications</span>
             </a>
             <NavLink to={'/post/edit'} title="New Post">
@@ -116,6 +111,9 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={bars} />
                 <span>More</span>
             </a>
+
+            {openNotificationModal && <Notification loggedinUserId={loggedinUser._id} />}
+            {openSearchModal && <Search onToggleSearchModal={onToggleSearchModal} />}
         </section>
     )
 }

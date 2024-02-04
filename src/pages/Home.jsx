@@ -17,7 +17,6 @@ export function Home() {
     const  posts  = useSelector(storeState => storeState.postModule.posts)
     const  users = useSelector(storeState => storeState.userModule.users)
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
-    console.log('loggedinUser:', loggedinUser)
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     
     const [newNotifications, setNewNotifications] = useState(false)
@@ -93,7 +92,6 @@ export function Home() {
 
 
     const notFollowingUsers = useMemo(() => {
-        console.log('notFollowingUsers:')
         // find loggedinUser
         const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
         // check every user if in his followers there's no the loggedinUser && the user is not the loggedinUser

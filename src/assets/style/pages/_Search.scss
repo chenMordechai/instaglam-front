@@ -1,4 +1,11 @@
 .search {
+    @include big-modal;
+    @include for-mobile-layout {
+        height: calc(100vh - 55px);
+        padding: 0;
+        width: 100%;
+        left: 0;
+    }
     .form-container {
         padding: $pad1 0;
         border-bottom: 1px solid $clr-grey2;
