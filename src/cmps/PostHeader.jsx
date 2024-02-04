@@ -10,6 +10,10 @@ export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal
     function getRelativeDate() {
         return utilService.timeDifference(Date.now(), createdAt)
     }
+    function isMobile() {
+        return (window.innerWidth > 700) ? false : true
+    }
+
 
     return (
         <section className="post-header">
@@ -21,8 +25,11 @@ export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal
                     <Link to={'/profile/' + byId + '/posts'} >
                         {by}
                     </Link>
+                   
+                  { !isMobile() && <span> 
                     <img src={circle} />
-                    <span>{getRelativeDate()}</span>
+                    {getRelativeDate()}
+                    </span>}
                 </div>
             </div>
             <button onClick={onToggleOptionsModal} className="ellipsis">

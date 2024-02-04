@@ -1,8 +1,9 @@
 .users {
     // padding-top: 40px;
 
-    // @include for-mobile-layout {
-    //     padding-top: 0px;
-    //     grid-auto-columns: calc((100% / 4) - 10px);
-    // }
+    @include for-mobile-layout {
+        margin-top: 3px;
+        //     padding-top: 0px;
+        //     grid-auto-columns: calc((100% / 4) - 10px);
+    }
 }

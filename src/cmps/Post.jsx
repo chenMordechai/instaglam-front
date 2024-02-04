@@ -60,7 +60,7 @@ export function Post({ post, loggedinUser }) {
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia type={post.type} url={post.url} filter={post.imgFilter} />
             <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} />
-            <PostComments loggeginUserImgUrl={loggedinUser.imgUrl} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
+            <PostComments createdAt={post.createdAt}  loggeginUserImgUrl={loggedinUser.imgUrl} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
         </section>
     )
 }

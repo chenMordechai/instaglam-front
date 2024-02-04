@@ -11,6 +11,10 @@
         div.img-container {
             height: 40px;
             width: 40px;
+            @include for-mobile-layout {
+                height: 31px;
+                width: 31px;
+            }
         }
 
         div.text-container {
@@ -18,18 +22,24 @@
             // div.name-comtainer {
             @include flex(row, center, start, 7px);
             // height: 10px;
-            img {
-                height: 4px;
-                width: 4px;
-                filter: contrast(0);
-            }
+            margin-top: 3px;
+            // @include for-mobile-layout {
+            // }
 
             a {
                 font-weight: 450;
+                font-size: 15px;
             }
 
             span {
+                @include flex(row, center, start, 7px);
                 color: $clr-grey3;
+                font-size: 15px;
+                img {
+                    height: 4px;
+                    width: 4px;
+                    filter: contrast(0);
+                }
             }
             // }
             span.more-info {

@@ -9,15 +9,29 @@
         height: 64px;
         width: 64px;
     }
+
+    @include for-mobile-layout {
+        gap: 2px;
+        width: 74px;
+        div.img-container {
+            height: 75px;
+            width: 75px;
+        }
+    }
     a {
         width: 107%;
 
         span {
-            font-size: 12px;
+            font-size: 11px;
             white-space: nowrap;
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            @include for-mobile-layout {
+                font-weight: 450;
+                font-size: 13px;
+            }
         }
     }
 }

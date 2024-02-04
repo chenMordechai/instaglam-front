@@ -2,7 +2,8 @@ import { NavLink, Link } from "react-router-dom";
 
 import ellipsis from '../assets/icons/ellipsis-solid.svg'
 import user from '../assets/icons/user-plus-solid.svg'
-import gear from '../assets/icons/gear-solid.svg'
+import gear from '../assets/icons/gear.png'
+// import gear from '../assets/icons/gear-solid.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
 
 import userImg from '../assets/icons/user.jpg'
@@ -47,7 +48,8 @@ export function ProfileInfo({ onToggleShowImgModal, onToggleFollowingModal, onAd
                             Follow
                         </button>}
                         <button className="btn">Message</button>
-                        <button className="btn"><img src={user} /></button>
+                        <button className="btn user"><img src={user} /></button>
+                        <button className="ellipsis"><img src={ellipsis} /></button>
 
                     </div>}
                     {isLoggedinUserProfile && <div className="btn-container">

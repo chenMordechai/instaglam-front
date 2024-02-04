@@ -47,7 +47,7 @@ export function App() {
           <section className={'main-layout ' + (isScreenOpen ? 'screen-open' : '')}>
             <Notifications />
             <section className="screen" onClick={onCloseScreen}></section>
-            <NavLinks navLinksDisplay={navLinksDisplay} />
+            <NavLinks isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} navLinksDisplay={navLinksDisplay} />
             <main>
               <div className="main-container">
                 <Routes>

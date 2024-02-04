@@ -1,6 +1,6 @@
 .profile-info {
     // padding: $pad1;
-    @include flex(row, center, start, 17px);
+    @include flex(row, center, start, 30px);
     @include for-mobile-layout {
         position: relative;
         @include flex(column, start, start);
@@ -12,7 +12,7 @@
     }
     .left-container {
         // margin-bottom: 7px;
-        width: 33%;
+        width: 31%;
         @include flex(row, center, center);
         @include for-mobile-layout {
             width: max-content;
@@ -51,8 +51,23 @@
             }
             .btn-container {
                 @include flex(row, center, start, 8px);
+                .btn {
+                    padding: 9px 17px 7px;
+                    &.user {
+                        width: 35px;
+                        padding: 0px;
+                        @include flex(row, center, center);
+                        height: 33px;
+                        img {
+                            width: 15px;
+                        }
+                    }
+                }
                 .follow {
                     @include blue-btn;
+                }
+                .ellipsis {
+                    margin-left: 10px;
                 }
                 button,
                 a,
@@ -74,8 +89,8 @@
             }
         }
         .user-info-dash-board {
-            @include flex(row, center, start, $pad3);
-            margin-top: 23px;
+            @include flex(row, center, start, 50px);
+            margin-top: 28px;
             h3 {
                 font-weight: 300;
             }
@@ -90,22 +105,24 @@
 
         .user-description {
             margin-top: $pad2;
-            @include flex(column, start, start, $pad1);
+            @include flex(column, start, start);
             h3 {
                 font-size: 15px;
             }
             pre {
+                margin-top: -2px;
+                line-height: 18px;
                 font-size: 14px;
                 width: max-content;
                 margin: 0;
-                // font-weight: 100;
-                line-height: normal;
+                font-weight: 400;
             }
 
             pre.he {
                 text-align: right;
             }
             h4 {
+                margin-top: 13px;
                 font-size: 13px;
                 font-weight: 400;
                 color: $clr-grey4;

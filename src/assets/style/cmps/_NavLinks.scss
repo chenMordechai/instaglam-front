@@ -1,27 +1,30 @@
 .nav-links {
     // background-color: red;
-
     width: 244px;
     position: sticky;
     top: 0;
     height: 100vh;
-    @include flex(column, end, space-between);
-    padding: $pad2;
+    @include flex(column, end, start, 7px);
+    padding: 15px 15px 22px;
     border-right: 1px solid $clr-grey2;
-    z-index: 1;
+    z-index: 10;
+    background-color: white;
 
     @include for-narrow-layout {
-        @include flex(column, center, space-between);
+        // @include flex(column, end, start, 7px);
         span {
             display: none;
         }
-        width: 80px;
+        width: 72px;
     }
 
     @include for-mobile-layout {
+        padding: 15px 25px;
         grid-area: nav;
         // position: fixed;
         flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         background-color: $clr-white;
         height: 55px;
@@ -34,7 +37,7 @@
         width: 100%;
         padding: 10px;
         padding-bottom: 9px;
-        margin: 3px 0px;
+        // margin: 3px 0px;
         color: $clr-black;
         border-radius: 5px;
         transition: 0.3s;
@@ -46,6 +49,8 @@
         }
 
         @include for-mobile-layout {
+            height: auto;
+            width: auto;
             padding: 0;
             &.not-mobile {
                 display: none;
@@ -58,12 +63,16 @@
             }
         }
 
+        span {
+            font-size: 16px;
+        }
+
         &.disable {
             cursor: not-allowed;
         }
 
         &:first-child {
-            margin: 6px 0px 41px;
+            margin: 6px 0px 37px;
             height: 40px;
             img.icon {
                 display: none;
@@ -106,13 +115,13 @@
         }
 
         &.active {
-            background-color: $clr-grey1;
+            // background-color: $clr-grey1;
             font-weight: 700;
         }
 
         .img-container {
-            width: em(23px);
-            height: em(23px);
+            width: 23px;
+            height: 23px;
             img {
                 outline: 1px solid $clr-grey2;
                 border: none;

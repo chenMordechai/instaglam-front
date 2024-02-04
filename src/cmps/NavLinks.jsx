@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 import instagram from '../assets/icons/instagram.svg'
@@ -12,6 +12,7 @@ import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
 import house from '../assets/icons/house-solid.svg'
+// import house from '../assets/icons/home.png'
 import glass from '../assets/icons/glass-solid.svg'
 import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
@@ -21,11 +22,15 @@ import { Notification } from '../pages/Notification'
 import { Search } from '../pages/Search'
 import { Img } from './Img'
 import { socketService } from '../services/socket.service.js'
+import { useToggle } from '../customHooks/useToggle'
+import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
+import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
 
-export function NavLinks({ navLinksDisplay }) {
+export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDisplay }) {
     const { loggedinUser } = useSelector(storeState => storeState.userModule)
-    const [openNotificationModal, setOpenNotificationModal] = useState(false)
-    const [openSearchModal, setOpenSearchModal] = useState(false)
+
+    const [openNotificationModal, onToggleNotificationModal] = useToggle(false)
+    const [openSearchModal, onToggleSearchModal] = useToggle(false)
 
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     const [newNotifications, setNewNotifications] = useState(false)
@@ -44,15 +49,11 @@ export function NavLinks({ navLinksDisplay }) {
         }
     }, [openNotificationModal])
 
-    function onToggleNotificationModal() {
-        if (openSearchModal) onToggleSearchModal()
-        setOpenNotificationModal(prev => !prev)
-    }
 
-    function onToggleSearchModal() {
-        if (openNotificationModal) onToggleNotificationModal()
-        setOpenSearchModal(prev => !prev)
-    }
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, openSearchModal])
+
+    useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
+
 
     function isMobile() {
         return (window.innerWidth > 700) ? false : true
@@ -76,6 +77,8 @@ export function NavLinks({ navLinksDisplay }) {
                 <span>Search</span>
             </NavLink>}
             {!isMobile() && <a onClick={onToggleSearchModal} title="Search" >
+                {/* <FontAwesomeIcon icon={faHeart} /> */}
+                {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
                 <img src={glass} />
                 <span>Search</span>
             </a>}

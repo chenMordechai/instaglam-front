@@ -111,11 +111,11 @@
 @mixin btn($type: regular) {
     display: inline-flex;
     align-items: center;
-    gap: $pad1;
+    gap: 4px;
     text-decoration: none;
     background-color: $clr-grey1;
     // padding: $pad1;
-    padding: 9px 16px 7px;
+    // padding: $padding;
 
     border-radius: 10px;
 }
@@ -132,13 +132,18 @@
     z-index: 1;
 
     img {
-        height: 22px;
         height: em(25px);
-        margin-right: 10px;
+        margin-right: 9px;
 
         &.logo {
             height: em(35px);
             margin-left: $pad1;
+        }
+        @include for-mobile-layout {
+            height: 21px;
+            &.logo {
+                height: 28px;
+            }
         }
     }
     h2 {
