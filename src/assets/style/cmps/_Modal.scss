@@ -3,7 +3,7 @@
     bottom: 50%;
     left: 50%;
     translate: -50% 50%;
-    z-index: 10;
+    z-index: 20;
 
     @include flex(column, stretch, start);
     width: 400px;

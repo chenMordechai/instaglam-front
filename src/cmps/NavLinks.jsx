@@ -57,11 +57,17 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
         return (window.innerWidth > 700) ? false : true
     }
 
+    function getStyle(){
+        const style = {'display': navLinksDisplay}
+        if(openSearchModal) style['zIndex'] = 10
+        return style
+               
+    }
 
     if (!loggedinUser) return ''
     return (
 
-        <section className="nav-links" style={{ 'display': navLinksDisplay }}>
+        <section className="nav-links" style={getStyle()}>
              
 
             <Link to={'/home'} title="Instaglam" className="not-mobile">

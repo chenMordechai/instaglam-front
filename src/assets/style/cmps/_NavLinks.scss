@@ -7,7 +7,7 @@
     @include flex(column, end, start, 7px);
     padding: 15px 15px 22px;
     border-right: 1px solid $clr-grey2;
-    z-index: 10;
+    z-index: 9;
     background-color: white;
 
     @include for-narrow-layout {
