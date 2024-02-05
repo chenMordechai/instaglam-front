@@ -1,9 +1,10 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link  } from "react-router-dom";
+import { useLocation  } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faMagnifyingGlass,faCommentDots,faHouse,faHouseChimney } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 import instagram from '../assets/icons/instagram.svg'
@@ -11,7 +12,10 @@ import compass from '../assets/icons/compass-regular.svg'
 import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
-import house from '../assets/icons/house-solid.svg'
+// import house from '../assets/icons/house-solid.svg'
+// import house from '../assets/icons/home3.png'
+import homeBorder from '../assets/icons/house.png'
+import homeFull from '../assets/icons/house-full.png'
 import glass from '../assets/icons/glass-solid.svg'
 import film from '../assets/icons/film-solid.svg'
 import bars from '../assets/icons/bars-solid.svg'
@@ -64,18 +68,36 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                
     }
 
+    function isMessagePage(){
+        const location = useLocation();
+        return location.pathname ==='/message'
+    }
+    
+    function isHomePage(){
+        const location = useLocation();
+        return location.pathname ==='/home'
+    }
+
+    function isProfilePage(){
+        const location = useLocation();
+        return location.pathname.includes('/profile')
+    }
+
     if (!loggedinUser) return ''
     return (
 
         <section className="nav-links" style={getStyle()}>
              
-
             <Link to={'/home'} title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
                 <img className="logo" src={logo} />
             </Link>
             <NavLink to={'/home'} title="Home" >
-                <img src={house} />
+                {/* <img src={homeFull} /> */}
+                {/* <FontAwesomeIcon icon={faHouse} />
+                <FontAwesomeIcon icon={faHouseChimney} /> */}
+               {!isHomePage() && <img src={homeBorder}/>}
+               {isHomePage() && <img src={homeFull}/>}
                 <span>Home</span>
             </NavLink>
     
@@ -93,8 +115,9 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={film} />
                 <span>Reels</span>
             </NavLink>
-            <NavLink to="message" className="disable not-mobile" title="Messages"  >
-                <img src={message} />
+            <NavLink to="message" className="not-mobile" title="Messages"  >
+                {!isMessagePage() &&<img src={message} />}
+              {isMessagePage()&&  <FontAwesomeIcon icon={faCommentDots} />}
                 <span>Messages</span>
             </NavLink>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
@@ -108,7 +131,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <span >Create</span>
             </NavLink>
             <NavLink to={`/profile/${loggedinUser._id}/posts`} title="Profile">
-                <div className="img-container">
+                <div className="img-container" style={ isProfilePage()?{'outline':'2px solid black'}:{}}>
                     <Img imgUrl={loggedinUser.imgUrl} className="regular" />
                 </div>
                 <span>Profile</span>

@@ -1,7 +1,7 @@
 
 import msg from '../assets/icons/comment-regular.svg'
 import arrow from '../assets/icons/arrow-up-right.svg'
-import share from '../assets/icons/share.png'
+import share from '../assets/icons/message.png'
 // import share from '../assets/icons/share-icon.png'
 import bookmark from '../assets/icons/bookmark-regular.png'
 import { Heart } from './Heart'

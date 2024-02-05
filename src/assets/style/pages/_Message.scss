@@ -1,4 +1,22 @@
 .message {
+    @include flex(row, start, center);
+
+    .left-side {
+        width: 50%;
+    }
+    .right-side {
+        width: 50%;
+    }
+
+    @include for-mobile-layout {
+        flex-direction: column;
+
+        .left-side,
+        .right-side {
+            width: 100%;
+        }
+    }
+
     .input-container {
         @include flex(row, center, center);
         padding: 25px 15px;
