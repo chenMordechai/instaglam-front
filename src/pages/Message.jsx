@@ -11,6 +11,8 @@ import { UserPreview } from "../cmps/UserPreview";
 import { Chat } from "../cmps/Chat";
 import message from '../assets/icons/message2.png'
 import { useForm } from '../customHooks/useForm'
+import pen from '../assets/icons/pen-to-square-regular.svg'
+import camera from '../assets/icons/camera.png'
 
 
 export function Message() {
@@ -50,26 +52,32 @@ export function Message() {
     return (
         <section className="message">
             <section className="left-side">
-                {!isMobile() && <>
-                    <MessageHeader username={loggedinUser.username} />
-                    <ul>
-                        {usersToShow?.map(user => <li key={user._id}
-                            onClick={() => setUserToChat(user)}
-                            style={{ 'backgroundColor': (userToChat?._id === user._id) ? '#efefef' : 'white' }}>
-                            <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.fullname} spanContent={`Active`} />
-                        </li>)}
-                    </ul>
-                </>}
 
+                {!isMobile() && <MessageHeader username={loggedinUser.username} />}
                 {isMobile() && <>
+                    <SimpleHeader h2Content={loggedinUser.username} spanContent={<img className="pen" src={pen} />} />
                     <div className="input-container">
-                        <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
+                        <form>
+                            <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
+                        </form>
                     </div>
                     <Users users={getOrderedUsers()} />
+                    <section className="sub-header">
+                        <h3>Messages</h3>
+                        <button className="clr-blue" >Requests</button>
+                    </section>
                 </>}
+                <ul>
+                    {usersToShow?.map(user => <li key={user._id}
+                        onClick={() => setUserToChat(user)}
+                        style={{ 'backgroundColor': (userToChat?._id === user._id) ? '#efefef' : 'white' }}>
+                        <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.fullname} spanContent={`Active`} btnContent={ isMobile() && <img src={camera}/>} />
+                    </li>)}
+                </ul>
+
 
             </section>
-            <section className="right-side">
+          { !isMobile() && <section className="right-side">
                 {/* <MessageList /> */}
 
                 {!userToChat && <div className="content-container">
@@ -81,7 +89,7 @@ export function Message() {
                 </div>}
 
                 {userToChat && <Chat />}
-            </section>
+            </section>}
 
         </section>
     )

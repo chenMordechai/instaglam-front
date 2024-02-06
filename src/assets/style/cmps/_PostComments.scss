@@ -11,15 +11,30 @@
     }
     h3.new-comment {
         width: 100%;
-        @include flex(row, center, start, 5px);
-        margin-bottom: 8px;
+        @include flex(row, baseline, start, 5px);
+        margin-bottom: 3px;
         margin-top: 2px;
+        span {
+            font-size: 14px;
+            font-weight: 400;
+        }
         span:not(.rtl) {
             font-weight: 300;
         }
         span.icon {
             margin-left: auto;
-            width: 13px;
+            margin-right: 5px;
+            a {
+                margin-top: 0;
+                img {
+                    width: 13px;
+                    height: 13px;
+                    filter: opacity(0.5);
+                }
+                svg {
+                    filter: opacity(1);
+                }
+            }
         }
 
         // @include for-mobile-layout {
@@ -31,7 +46,7 @@
     }
     a {
         // margin-top: 1px;
-        margin-top: 3px;
+        margin-top: 6px;
         gap: 5px;
         display: flex;
         align-items: baseline;
@@ -116,21 +131,21 @@
         // input {
         //     font-size: 1rem;
         // }
-    }
-    span.icon {
-        margin-right: 5px;
-        margin-top: 2px;
-        font-size: 14px;
-        width: 13px;
-        filter: opacity(0.5);
-    }
+        span.icon {
+            margin-right: 5px;
+            margin-top: 2px;
+            font-size: 14px;
+            width: 13px;
+            filter: opacity(0.5);
+        }
 
-    button.post,
-    span.post {
-        width: 29px;
-        border: none;
-        padding: 0;
-        font-size: 14px;
-        font-weight: 450;
+        button.post,
+        span.post {
+            width: 29px;
+            border: none;
+            padding: 0;
+            font-size: 14px;
+            font-weight: 450;
+        }
     }
 }

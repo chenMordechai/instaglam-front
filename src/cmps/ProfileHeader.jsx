@@ -14,7 +14,7 @@ export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePrefere
                         <img src={arrow} />
                     </button>
                 </h2>
-                <div>
+                <div className="icons">
                     <Link to="/post/edit">
                         <img src={plus} />
                     </Link>

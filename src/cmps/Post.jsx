@@ -20,9 +20,9 @@ export function Post({ post, loggedinUser }) {
 
     const { isScreenOpen, onOpenScreen, onCloseScreen, } = useContext(ScreenOpenContext)
 
-    useEffectToggleModal(onOpenScreen,onCloseScreen,[openOptionsModal,openCommentModal])
-  
-    useEffectCloseModal(isScreenOpen,[onToggleOptionsModal,onToggleCommentModal])
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openOptionsModal, openCommentModal])
+
+    useEffectCloseModal(isScreenOpen, [onToggleOptionsModal, onToggleCommentModal])
 
     function isLoggedinUserPost() {
         return loggedinUser._id === post.by._id
@@ -34,6 +34,8 @@ export function Post({ post, loggedinUser }) {
     }
 
     function onUpdateLikeComment(isLike, comment) {
+        console.log('onUpdateLikeComment')
+        console.log('isLike, comment:', isLike, comment)
         if (isLike) addLikeByCommentOptimistic(post._id, comment, loggedinUser)
         else removeLikeByCommentOptimistic(post._id, comment._id, loggedinUser)
     }
@@ -53,13 +55,13 @@ export function Post({ post, loggedinUser }) {
 
     return (
         <section className="post">
-            {openOptionsModal && <PostOptionsModal userId={post.by._id}  onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
+            {openOptionsModal && <PostOptionsModal userId={post.by._id} onRemovePost={onRemovePost} postId={post._id} onToggleOptionsModal={onToggleOptionsModal} isLoggedinUserPost={isLoggedinUserPost()} />}
             {openCommentModal && <PostCommentModal onUpdateLikeComment={onUpdateLikeComment} comments={post.comments} loggedinUser={loggedinUser} username={post.by.username} onAddCommentToPost={onAddCommentToPost} onToggleCommentModal={onToggleCommentModal} onRemoveCommentFromPost={onRemoveCommentFromPost} />}
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia type={post.type} url={post.url} filter={post.imgFilter} />
             <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} />
-            <PostComments createdAt={post.createdAt}  loggeginUserImgUrl={loggedinUser.imgUrl} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
+            <PostComments onUpdateLikeComment={onUpdateLikeComment} createdAt={post.createdAt} loggedinUser={loggedinUser} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
         </section>
     )
 }

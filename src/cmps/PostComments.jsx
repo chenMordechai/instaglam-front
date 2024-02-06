@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 
 import { postService } from '../services/post.service'
 import { Img } from './Img'
+import { Heart } from './Heart'
 import { utilService } from '../services/util.service'
 import { useForm } from '../customHooks/useForm'
 import smile from '../assets/icons/face-smile-regular.svg'
@@ -11,11 +12,12 @@ import circle from '../assets/icons/circle-solid.svg'
 
 
 
-export function PostComments({createdAt, loggeginUserImgUrl, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
+export function PostComments({ onUpdateLikeComment, createdAt, loggedinUser, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
     const [comment, setComment, handleChange] = useForm(postService.getEmptyComment())
 
     function onSubmitForm(ev) {
         ev.preventDefault()
+        console.log('comment:', comment)
         onAddCommentToPost(comment)
         setComment(postService.getEmptyComment())
     }
@@ -35,6 +37,12 @@ export function PostComments({createdAt, loggeginUserImgUrl, onToggleCommentModa
         return (window.innerWidth > 700) ? false : true
     }
 
+
+    function onUpdateLike(isLike) {
+        console.log('myNewComment:', myNewComment)
+        onUpdateLikeComment(isLike, myNewComment)
+    }
+
     return (
         <section className="post-comments">
             <h3>{likedBy.length} likes</h3>
@@ -43,26 +51,28 @@ export function PostComments({createdAt, loggeginUserImgUrl, onToggleCommentModa
                 <span className={getClass(txt)}>{txt}</span>
             </Link>
 
-            <h4> 
-                {isMobile() && <span>{getRelativeDate()} <img src={circle}/></span>  }
+            <h4>
+                {isMobile() && <span>{getRelativeDate()} <img src={circle} /></span>}
                 See translation
             </h4>
-            
+
             <button onClick={onToggleCommentModal} className="clr-grey">View all {comments.length} comments</button>
             {myNewComment && <h3 className="new-comment">
                 {myNewComment.by.username} <span className={getClass(myNewComment.txt)}>{myNewComment.txt}</span>
-                <span className="icon"> <img src={heart} /></span>
+                <span className="icon">
+                    <Heart onUpdateLike={onUpdateLike} loggedinUser={loggedinUser} likedBy={myNewComment.likedBy} />
+                </span>
             </h3>}
             <form onSubmit={onSubmitForm}>
                 <div className="img-container">
-                    <Img imgUrl={loggeginUserImgUrl} className="none" />
+                    <Img imgUrl={loggedinUser.imgUrl} className="none" />
                 </div>
 
                 <input className={getClass(comment.txt)} onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
                 {/* if input have value add button post */}
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
-                {!isMobile() &&<span className="icon"><img src={smile} /></span>}
+                {!isMobile() && <span className="icon"><img src={smile} /></span>}
             </form>
         </section>
     )

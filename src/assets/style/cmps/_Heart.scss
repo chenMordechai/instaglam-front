@@ -8,6 +8,7 @@ a.heart {
         left: 0px;
         position: absolute;
         display: none;
+        filter: opacity(1);
     }
 
     &.red-heart svg {

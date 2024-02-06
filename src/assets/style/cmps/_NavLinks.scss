@@ -121,6 +121,11 @@
             width: 23px;
             height: 23px;
             border-radius: 50%;
+
+            @include for-mobile-layout {
+                width: 25px;
+                height: 25px;
+            }
             img {
                 outline: 1px solid $clr-grey2;
                 border: none;
@@ -136,7 +141,7 @@
             top: 376px;
             @include for-narrow-layout {
                 top: 378px;
-                right: 19px;
+                right: 16px;
             }
         }
     }

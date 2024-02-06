@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import chevron from '../assets/icons/chevron-left-solid.svg'
 
-export function SimpleHeader({ h2Content, onToggleModal }) {
+export function SimpleHeader({ h2Content, onToggleModal, spanContent }) {
 
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export function SimpleHeader({ h2Content, onToggleModal }) {
                 <img src={chevron} />
             </button>
             <h2>{h2Content}</h2>
-            <span></span>
+            <span>{spanContent}</span>
         </section>
     )
 }
