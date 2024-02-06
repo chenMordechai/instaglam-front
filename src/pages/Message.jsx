@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { MessageHeader } from '../cmps/MessageHeader'
@@ -8,55 +8,72 @@ import { useToggle } from '../customHooks/useToggle'
 import { Users } from "../cmps/Users";
 import { MessageList } from "../cmps/MessageList";
 import { UserPreview } from "../cmps/UserPreview";
+import { Chat } from "../cmps/Chat";
+import message from '../assets/icons/message2.png'
+import { useForm } from '../customHooks/useForm'
+
 
 export function Message() {
     const loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
     const users  = useSelector(storeState => storeState.userModule.users)
 
+    const [usersToShow, setUsersToShow] = useState(null)
+    const [userToChat, setUserToChat] = useState(null)
     const [openSearchModal, onToggleSearchModal] = useToggle(false)
 
+    const [search, setSearch , handleChange] = useForm({ name: '' })
+
+    useEffect(()=>{
+        if(!search.name) setUsersToShow(users)
+        else{
+        const filteredUsers = users.filter(u=>u.fullname.includes(search.name) || u.username.includes(search.name))
+        setUsersToShow(filteredUsers)
+        } 
+    },[search,users])
 
     function goToChat(userId) {
         onToggleSearchModal()
         console.log('go to chat', userId)
-
     }
 
     function getOrderedUsers() {
-        if (!users.length) return []
-        const currUser = users.find(user => user._id === loggedinUser._id)
-        const orderedUsers = [currUser, ...users.filter(user => user._id !== loggedinUser._id)]
-        return orderedUsers
+        return usersToShow?.filter(user => user._id !== loggedinUser._id)
     }
 
     function isMobile() {
         return !(window.innerWidth > 700)
       }
 
+      if(!usersToShow) return <></>
     return (
         <section className="message">
             <section className="left-side">
 
-            {!openSearchModal && <>
-                {/* <MessageHeader username={loggedinUser?.username} /> */}
                 <SimpleHeader h2Content={loggedinUser?.username}/>
                 <div className="input-container">
-                    <input onClick={onToggleSearchModal} type="text" placeholder="Search" />
+                    <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
                 </div>
-            </>}
-            {openSearchModal && <Search onToggleSearchModal={onToggleSearchModal} goToChat={goToChat} />}
-
-            {!openSearchModal  && isMobile() && <Users users={getOrderedUsers()} />}
-            { !openSearchModal && !isMobile() &&<ul>
-                {/* {users.map(user => <li key={user._id}>
-                    <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.username} spanContent={`Followed by ${user.commonFollowings[0]}`} btnContent={(isFollowing(user._id)) ? 'Following' : 'Follow'} func={(isFollowing(user._id)) ? onRemoveFollowing : onAddFollowing} />
-                </li>)} */}
+            { !isMobile() &&<ul>
+                {usersToShow?.map(user => <li key={user._id} onClick={()=>setUserToChat(user._id)}>
+                    <UserPreview  userId={user._id} imgUrl={user.imgUrl} username={user.username} spanContent={`Active`}  />
+                </li>)}
             </ul>}
+
+            {isMobile() && <Users users={getOrderedUsers()} />}
 
             </section>
             <section className="right-side">
-            <MessageList />
+                {/* <MessageList /> */}
 
+                  {!userToChat &&  <div className="content-container">
+
+                <img src={message}/>
+                <h2>Your messages</h2>
+                <span>Send private photos and messages to a friend or group</span>
+                <button>Send message</button>
+                    </div>}
+
+                 { userToChat && <Chat/>}
             </section>
 
         </section>

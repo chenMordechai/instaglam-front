@@ -6,13 +6,14 @@ import xmark2 from '../assets/icons/xmark-solid.svg'
 import { userService } from '../services/user.service.js'
 import { UserPreview } from '../cmps/UserPreview.jsx'
 import { SimpleHeader } from '../cmps/SimpleHeader'
+import { useForm } from '../customHooks/useForm'
 
 
 export function Search({ onToggleSearchModal, goToChat }) {
 
-  const [search, setSearch] = useState({ txt: '' })
   const [users, setUsers] = useState(null)
   const  loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
+  const [search, setSearch , handleChange] = useForm({ txt: '' })
 
   useEffect(() => {
     if (!search.txt) return
@@ -27,11 +28,6 @@ export function Search({ onToggleSearchModal, goToChat }) {
   async function getResult() {
     const users = await userService.query(search)
     setUsers(users)
-  }
-
-  function onChangeInput(ev) {
-    const { name, value } = ev.target
-    setSearch(prev => ({ ...prev, [name]: value }))
   }
 
   function isFollowing(userFollowers) {
@@ -56,7 +52,7 @@ export function Search({ onToggleSearchModal, goToChat }) {
 
       <div className="form-container">
         <form onSubmit={onSubmitForm}>
-          <input autoComplete="off" onChange={onChangeInput} type="text" name="txt" value={search.txt} placeholder="Search" />
+          <input autoComplete="off" onChange={handleChange} type="text" name="txt" value={search.txt} placeholder="Search" />
           <img onClick={() => setSearch({ txt: '' })} src={xmark} />
         </form>
       </div>

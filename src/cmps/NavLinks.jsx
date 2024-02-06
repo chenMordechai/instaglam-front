@@ -63,7 +63,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
 
     function getStyle(){
         const style = {'display': navLinksDisplay}
-        if(openSearchModal) style['zIndex'] = 10
+        if(openSearchModal || openNotificationModal) style['zIndex'] = 10
         return style
                
     }
