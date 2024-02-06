@@ -12,8 +12,8 @@ import { useForm } from '../customHooks/useForm'
 export function Search({ onToggleSearchModal, goToChat }) {
 
   const [users, setUsers] = useState(null)
-  const  loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
-  const [search, setSearch , handleChange] = useForm({ txt: '' })
+  const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+  const [search, setSearch, handleChange] = useForm({ txt: '' })
 
   useEffect(() => {
     if (!search.txt) return

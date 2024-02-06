@@ -3,5 +3,8 @@
     @include for-mobile-layout {
         @include header;
         border-bottom: 1px solid $clr-grey2;
+        div {
+            display: flex;
+        }
     }
 }

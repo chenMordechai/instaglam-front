@@ -1,19 +1,19 @@
 
-import arrow from '../assets/icons/arrow-left-long-solid.svg'
-import angle from '../assets/icons/angle-down-solid.svg'
+import arrow from '../assets/icons/angle-down-solid.svg'
+import pen from '../assets/icons/pen-to-square-regular.svg'
 
 export function MessageHeader({ username }) {
     return (
         <section className="message-header">
-            <button>
-                <img src={arrow} />
-            </button>
-            <h2>{username}
-                <button >
-                    <img src={angle} />
-                </button>
-            </h2>
-            <span></span>
-        </section >
+            <div>
+                <h2>{username}
+                    <img src={arrow} />
+                </h2>
+                <img className="pen" src={pen} />
+
+            </div>
+
+            <h3>Messages</h3>
+        </section>
     )
 }

@@ -1,10 +1,10 @@
-import { NavLink, Link  } from "react-router-dom";
-import { useLocation  } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faMagnifyingGlass,faCommentDots,faHouse,faHouseChimney } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faMagnifyingGlass, faCommentDots, faHouse, faHouseChimney } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 import instagram from '../assets/icons/instagram.svg'
@@ -53,7 +53,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     }, [openNotificationModal])
 
 
-    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile()&& openSearchModal ])
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile() && openSearchModal])
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
 
@@ -61,24 +61,28 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
         return (window.innerWidth > 700) ? false : true
     }
 
-    function getStyle(){
-        const style = {'display': navLinksDisplay}
-        if(openSearchModal || openNotificationModal) style['zIndex'] = 10
+    function getStyle() {
+        const style = { 'display': navLinksDisplay }
+        if (openSearchModal || openNotificationModal) style['zIndex'] = 10
         return style
-               
     }
 
-    function isMessagePage(){
-        const location = useLocation();
-        return location.pathname ==='/message'
-    }
-    
-    function isHomePage(){
-        const location = useLocation();
-        return location.pathname ==='/home'
+    function getClass() {
+        if (openSearchModal || openNotificationModal) return 'close-nav'
+        else return ''
     }
 
-    function isProfilePage(){
+    function isMessagePage() {
+        const location = useLocation();
+        return location.pathname === '/message'
+    }
+
+    function isHomePage() {
+        const location = useLocation();
+        return location.pathname === '/home'
+    }
+
+    function isProfilePage() {
         const location = useLocation();
         return location.pathname.includes('/profile')
     }
@@ -86,8 +90,8 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     if (!loggedinUser) return ''
     return (
 
-        <section className="nav-links" style={getStyle()}>
-             
+        <section className={`nav-links ${getClass()}`} style={getStyle()}>
+
             <Link to={'/home'} title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
                 <img className="logo" src={logo} />
@@ -96,12 +100,12 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 {/* <img src={homeFull} /> */}
                 {/* <FontAwesomeIcon icon={faHouse} />
                 <FontAwesomeIcon icon={faHouseChimney} /> */}
-               {!isHomePage() && <img src={homeBorder}/>}
-               {isHomePage() && <img src={homeFull}/>}
+                {!isHomePage() && <img src={homeBorder} />}
+                {isHomePage() && <img src={homeFull} />}
                 <span>Home</span>
             </NavLink>
-    
-             <a onClick={onToggleSearchModal} title="Search" >
+
+            <a onClick={onToggleSearchModal} title="Search" >
                 {/* <FontAwesomeIcon icon={faHeart} /> */}
                 {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
                 <img src={glass} />
@@ -116,8 +120,8 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <span>Reels</span>
             </NavLink>
             <NavLink to="message" className="not-mobile" title="Messages"  >
-                {!isMessagePage() &&<img src={message} />}
-              {isMessagePage()&&  <FontAwesomeIcon icon={faCommentDots} />}
+                {!isMessagePage() && <img src={message} />}
+                {isMessagePage() && <FontAwesomeIcon icon={faCommentDots} />}
                 <span>Messages</span>
             </NavLink>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
@@ -131,7 +135,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <span >Create</span>
             </NavLink>
             <NavLink to={`/profile/${loggedinUser._id}/posts`} title="Profile">
-                <div className="img-container" style={ isProfilePage()?{'outline':'2px solid black'}:{}}>
+                <div className="img-container" style={isProfilePage() ? { 'outline': '2px solid black' } : {}}>
                     <Img imgUrl={loggedinUser.imgUrl} className="regular" />
                 </div>
                 <span>Profile</span>

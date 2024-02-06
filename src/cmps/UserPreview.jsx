@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 
 import { Img } from "./Img"
 export function UserPreview({ goToChat, userId, imgUrl, username, spanContent, btnContent, func }) {
     const navigate = useNavigate()
 
     function getRandomClass() {
+        const location = useLocation();
+        if(location.pathname.includes('/message')) return 'none'
         return (Math.random() > 0.5) ? 'gradient' : 'none'
     }
 

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { MessageHeader } from '../cmps/MessageHeader'
@@ -14,23 +14,25 @@ import { useForm } from '../customHooks/useForm'
 
 
 export function Message() {
-    const loggedinUser  = useSelector(storeState => storeState.userModule.loggedinUser)
-    const users  = useSelector(storeState => storeState.userModule.users)
-
+    const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+    const users = useSelector(storeState => storeState.userModule.users)
     const [usersToShow, setUsersToShow] = useState(null)
     const [userToChat, setUserToChat] = useState(null)
     const [openSearchModal, onToggleSearchModal] = useToggle(false)
+    const [search, setSearch, handleChange] = useForm({ name: '' })
 
-    const [search, setSearch , handleChange] = useForm({ name: '' })
+    useEffect(() => {
+        if (!search.name) setUsersToShow(users)
+        else {
+            const filteredUsers = users.filter(u => u.fullname.includes(search.name) || u.username.includes(search.name))
+            setUsersToShow(filteredUsers)
+        }
+    }, [search, users])
 
-    useEffect(()=>{
-        if(!search.name) setUsersToShow(users)
-        else{
-        const filteredUsers = users.filter(u=>u.fullname.includes(search.name) || u.username.includes(search.name))
-        setUsersToShow(filteredUsers)
-        } 
-    },[search,users])
 
+    useEffect(() => {
+        console.log('userToChat:', userToChat)
+    }, [userToChat])
     function goToChat(userId) {
         onToggleSearchModal()
         console.log('go to chat', userId)
@@ -42,38 +44,43 @@ export function Message() {
 
     function isMobile() {
         return !(window.innerWidth > 700)
-      }
+    }
 
-      if(!usersToShow) return <></>
+    if (!usersToShow) return <></>
     return (
         <section className="message">
             <section className="left-side">
+                {!isMobile() && <>
+                    <MessageHeader username={loggedinUser.username} />
+                    <ul>
+                        {usersToShow?.map(user => <li key={user._id}
+                            onClick={() => setUserToChat(user)}
+                            style={{ 'backgroundColor': (userToChat?._id === user._id) ? '#efefef' : 'white' }}>
+                            <UserPreview userId={user._id} imgUrl={user.imgUrl} username={user.fullname} spanContent={`Active`} />
+                        </li>)}
+                    </ul>
+                </>}
 
-                <SimpleHeader h2Content={loggedinUser?.username}/>
-                <div className="input-container">
-                    <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
-                </div>
-            { !isMobile() &&<ul>
-                {usersToShow?.map(user => <li key={user._id} onClick={()=>setUserToChat(user._id)}>
-                    <UserPreview  userId={user._id} imgUrl={user.imgUrl} username={user.username} spanContent={`Active`}  />
-                </li>)}
-            </ul>}
-
-            {isMobile() && <Users users={getOrderedUsers()} />}
+                {isMobile() && <>
+                    <div className="input-container">
+                        <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
+                    </div>
+                    <Users users={getOrderedUsers()} />
+                </>}
 
             </section>
             <section className="right-side">
                 {/* <MessageList /> */}
 
-                  {!userToChat &&  <div className="content-container">
+                {!userToChat && <div className="content-container">
 
-                <img src={message}/>
-                <h2>Your messages</h2>
-                <span>Send private photos and messages to a friend or group</span>
-                <button>Send message</button>
-                    </div>}
+                    <img src={message} />
+                    <h2>Your messages</h2>
+                    <span>Send private photos and messages to a friend or group</span>
+                    <button>Send message</button>
+                </div>}
 
-                 { userToChat && <Chat/>}
+                {userToChat && <Chat />}
             </section>
 
         </section>

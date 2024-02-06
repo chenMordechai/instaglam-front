@@ -1,7 +1,32 @@
 .message-header {
-    display: none;
-    @include for-mobile-layout {
+    padding-top: 27px;
+    padding-right: 15px;
+    padding-left: 24px;
+    padding-bottom: 7px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+
+    div {
         @include header;
-        border-bottom: 1px solid $clr-grey2;
+        position: static;
+        padding: 0;
+
+        h2 {
+            font-size: 21px;
+            font-weight: 700;
+            gap: 11px;
+        }
+        img.pen {
+            margin: 0px;
+            height: 24px;
+            margin-bottom: 7px;
+            // margin-right: 9px;
+        }
+    }
+
+    h3 {
+        font-weight: 700;
+        margin-top: 12px;
     }
 }

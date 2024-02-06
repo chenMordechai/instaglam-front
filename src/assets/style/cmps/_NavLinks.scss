@@ -21,15 +21,12 @@
     @include for-mobile-layout {
         padding: 15px 25px;
         grid-area: nav;
-        // position: fixed;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         background-color: $clr-white;
         height: 55px;
-        // top: calc(100dvh - 55px);
-        // top: calc(100dvh - 55px);
         bottom: 0;
     }
 
@@ -37,14 +34,13 @@
         width: 100%;
         padding: 10px;
         padding-bottom: 9px;
-        // margin: 3px 0px;
         color: $clr-black;
         border-radius: 5px;
         transition: 0.3s;
 
         @include for-narrow-layout {
             height: em(48px);
-            width: em(48px);
+            // width: em(48px);
             justify-content: center;
         }
 
@@ -77,6 +73,8 @@
             img.icon {
                 display: none;
                 @include for-narrow-layout {
+                    height: 26px;
+                    width: 26px;
                     display: inline-block;
                 }
             }
