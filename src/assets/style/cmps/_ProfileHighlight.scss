@@ -3,18 +3,24 @@
     margin-bottom: 51px;
     margin-left: 37px;
 
+    @include for-mobile-layout {
+        margin: 0;
+        padding: 10px 0 6px 6px;
+        margin-top: 7px;
+    }
+
     ul {
         display: flex;
         li {
             // margin-right: 34px;
             // width: 66px;
             .img-container {
-                height: 84px;
-                width: 84px;
+                height: 85px;
+                width: 85px;
 
                 @include for-mobile-layout {
-                    height: 65px;
-                    width: 65px;
+                    height: 66px;
+                    width: 66px;
                 }
             }
         }

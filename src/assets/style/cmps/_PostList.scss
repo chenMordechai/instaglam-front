@@ -1,27 +1,43 @@
 .post-list {
     @include flex(column, center, center);
     border-top: 1px solid $clr-grey2;
+    @include for-mobile-layout {
+        border: none;
+    }
+
     nav {
         @include flex(row, center, center, 26%);
         width: 250px;
         @include for-mobile-layout {
             width: 100%;
+            gap: 0px;
         }
         a {
             @include flex(row, baseline, center);
             width: 23%;
             padding: 16px 0px;
             gap: 6px;
+            @include for-mobile-layout {
+                width: 50%;
+                padding: 16px 0px 11px;
+            }
             &.active {
                 border-top: 1px solid $clr-grey4;
                 @include for-mobile-layout {
+                    border-top: none;
+                    border-bottom: 2px solid black;
                     img {
-                        filter: brightness(3);
+                        // filter: brightness(3);
+                        filter: none;
                     }
                 }
             }
             img {
                 height: 11px;
+                @include for-mobile-layout {
+                    height: 21px;
+                    filter: contrast(0.1);
+                }
             }
             span {
                 font-size: 13px;
@@ -37,5 +53,6 @@
     }
     section {
         width: 100%;
+        margin-top: 2px;
     }
 }

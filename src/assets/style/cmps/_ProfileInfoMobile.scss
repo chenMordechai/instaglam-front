@@ -1,0 +1,103 @@
+.profile-info-mobile {
+    display: none;
+
+    @include for-mobile-layout {
+        display: block;
+        // padding: 7px 15px;
+
+        .info-header {
+            @include flex(row, center, space-between);
+            padding: 7px 15px 0;
+
+            .img-container {
+                height: 87px;
+                width: 87px;
+                min-width: 80px;
+                img {
+                    border-width: em(3px);
+                }
+            }
+
+            .user-info-dash-board {
+                @include flex(row, center, space-between);
+
+                margin-right: 12px;
+                margin-top: 7px;
+                width: 62%;
+
+                & > div {
+                    @include flex(column, center, space-between);
+                    height: 51px;
+
+                    span {
+                        font-size: 15px;
+                        height: 50%;
+                    }
+                    span:first-child {
+                        font-weight: 900;
+                        font-size: 19px;
+                    }
+                }
+            }
+        }
+        .user-description {
+            padding: 0px 15px;
+            h3 {
+                font-size: 15px;
+                margin-top: 1px;
+                // height: 19px;
+            }
+            pre {
+                text-align: left;
+                margin: 0;
+                font-size: 15px;
+                line-height: 20px;
+                font-weight: 400;
+            }
+            h4 {
+                font-size: 14px;
+                margin: 8px 0;
+                font-weight: 350;
+
+                span {
+                    font-size: inherit;
+                    font-weight: 500;
+                }
+            }
+        }
+        .btn-container {
+            padding: 0px 12px;
+            @include flex(row, center, space-between);
+            margin-top: 10px;
+
+            button,
+            a {
+                @include flex(row, center, center);
+                font-weight: 450;
+            }
+            button {
+                padding: 7px 5px 5px;
+                gap: 4px;
+                img {
+                    height: 10px;
+                }
+            }
+
+            button:nth-of-type(1),
+            button:nth-of-type(2) {
+                width: 44%;
+                a {
+                    width: 100%;
+                }
+            }
+            button:nth-of-type(3) {
+                width: 8%;
+                padding: 9.65px 6px;
+                border-radius: 5px;
+                img {
+                    height: 12px;
+                }
+            }
+        }
+    }
+}

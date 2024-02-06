@@ -19,7 +19,7 @@
     }
 
     @include for-mobile-layout {
-        padding: 15px 25px;
+        padding: 0px 25px;
         grid-area: nav;
         flex-direction: row;
         justify-content: space-between;

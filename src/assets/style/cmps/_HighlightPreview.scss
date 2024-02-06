@@ -1,6 +1,10 @@
 .highlight-preview {
     margin-right: 34px;
     @include flex(column, center, start, 9px);
+    @include for-mobile-layout {
+        margin-right: 5px;
+        gap: 0;
+    }
     .img-container {
         height: 50px;
     }

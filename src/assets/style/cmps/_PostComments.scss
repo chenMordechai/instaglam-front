@@ -91,6 +91,7 @@
         font-size: 14px;
         @include for-mobile-layout {
             margin: 0;
+            font-weight: 400;
         }
     }
     form {

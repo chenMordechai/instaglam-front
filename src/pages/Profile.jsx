@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import { ProfileHeader } from "../cmps/ProfileHeader";
 import { ProfileInfo } from "../cmps/ProfileInfo";
+import { ProfileInfoMobile } from "../cmps/ProfileInfoMobile";
 import { ProfileHighlight } from "../cmps/ProfileHighlight";
 import { ProfileDashBoard } from "../cmps/ProfileDashBoard";
 import { PostList } from "../cmps/PostList";
@@ -29,6 +30,9 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
     const [openShowImgModal, onToggleShowImgModal] = useToggle(false)
     const [openFollowingModal, onToggleFollowingModal] = useToggle(false)
     
+    useEffectToggleModal(onOpenScreen,onCloseScreen,[openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
+    useEffectCloseModal(isScreenOpen,[onTogglePreferencesModal,onToggleChangeImgModal,onToggleShowImgModal,onToggleFollowingModal])
+   
     const { userId } = useParams()
     const navigate = useNavigate()
 
@@ -44,9 +48,6 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
             navigate('/')
         }
     }
-
-    useEffectToggleModal(onOpenScreen,onCloseScreen,[openPreferenceModal, openChangeImgModal, openFollowingModal, openShowImgModal])
-    useEffectCloseModal(isScreenOpen,[onTogglePreferencesModal,onToggleChangeImgModal,onToggleShowImgModal,onToggleFollowingModal])
 
     function isLoggedinUserProfile() {
         return loggedinUser._id === user._id
@@ -117,8 +118,9 @@ export function Profile({ isScreenOpen, onOpenScreen, onCloseScreen }) {
            
             <ProfileHeader isLoggedinUserProfile={isLoggedinUserProfile()} onTogglePreferencesModal={onTogglePreferencesModal} username={username} />
             <ProfileInfo onToggleShowImgModal={onToggleShowImgModal} onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followers={followers} />
+            <ProfileInfoMobile onToggleShowImgModal={onToggleShowImgModal} onToggleFollowingModal={onToggleFollowingModal} onAddFollowing={onAddFollowing} isFollowing={isFollowing()} userId={_id} isLoggedinUserProfile={isLoggedinUserProfile()} onToggleChangeImgModal={onToggleChangeImgModal} onTogglePreferencesModal={onTogglePreferencesModal} username={username} fullname={fullname} imgUrl={imgUrl} bio={bio} postsLength={postsMini.length} followingLength={following.length} followers={followers} />
             <ProfileHighlight highlights={highlights} />
-            <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} />
+            {/* <ProfileDashBoard postsLength={postsMini.length} followingLength={following.length} followersLength={followers.length} /> */}
             <PostList isLoggedinUserProfile={isLoggedinUserProfile()} userId={userId} postsMini={postsMini} />
 
         </section>
