@@ -1,5 +1,5 @@
-import { NavLink, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
@@ -38,6 +38,9 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     const [newNotifications, setNewNotifications] = useState(false)
 
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile() && openSearchModal])
+    useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
+
     useEffect(() => {
         socketService.emit('user-watch', loggedinUser?._id)
         socketService.on('notification-added', () => {
@@ -52,10 +55,19 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
         }
     }, [openNotificationModal])
 
+    const location = useLocation();
 
-    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile() && openSearchModal])
-    useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
+    function isMessagePage() {
+        return location.pathname === '/message'
+    }
 
+    function isHomePage() {
+        return location.pathname === '/home'
+    }
+
+    function isProfilePage() {
+        return location.pathname.includes('/profile')
+    }
 
     function isMobile() {
         return (window.innerWidth > 700) ? false : true
@@ -72,20 +84,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
         else return ''
     }
 
-    function isMessagePage() {
-        const location = useLocation();
-        return location.pathname === '/message'
-    }
-
-    function isHomePage() {
-        const location = useLocation();
-        return location.pathname === '/home'
-    }
-
-    function isProfilePage() {
-        const location = useLocation();
-        return location.pathname.includes('/profile')
-    }
+  
 
     if (!loggedinUser) return ''
     return (

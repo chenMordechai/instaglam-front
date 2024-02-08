@@ -51,6 +51,10 @@
         @include flex(row, center, center);
         width: 10%;
         padding-top: 3px;
+
+        svg {
+            height: 16px;
+        }
     }
     &:hover img.allow.trash {
         display: inline-block;

@@ -9,7 +9,7 @@ import userImg from '../assets/icons/user.jpg'
 import { Img } from './Img'
 import { utilService } from '../services/util.service'
 
-export function ProfileInfoMobile ({ onToggleShowImgModal, onToggleFollowingModal, onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, onTogglePreferencesModal, username, fullname, imgUrl, bio, postsLength, followers, followingLength }){
+export function ProfileInfoMobile ({ onToggleShowImgModal, onToggleFollowingModal, onAddFollowing, isFollowing, userId, isLoggedinUserProfile, onToggleChangeImgModal, username, fullname, imgUrl, bio, postsLength, followers, followingLength }){
     
     function getClass() {
         if (!bio) return ''

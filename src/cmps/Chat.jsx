@@ -1,9 +1,17 @@
 
-export function Chat (){
+import { ChatHeader } from "./ChatHeader";
+import { ChatMessages } from "./ChatMessages";
+import { ChatInput } from "./ChatInput";
 
+export function Chat ({userToChat}){
+
+    const {imgUrl , fullname} = userToChat
     return (
         <section className="chat">
-            <h1>Chat</h1>
+            <ChatHeader imgUrl={imgUrl} fullname={fullname}/>
+            <ChatMessages/>
+            <ChatInput/>
+
         </section>
     )
 }

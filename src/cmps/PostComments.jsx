@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import { NavLink, Link } from "react-router-dom";
 
 import { postService } from '../services/post.service'
@@ -9,11 +9,15 @@ import { useForm } from '../customHooks/useForm'
 import smile from '../assets/icons/face-smile-regular.svg'
 import heart from '../assets/icons/heart-regular.svg'
 import circle from '../assets/icons/circle-solid.svg'
+import { useToggle } from '../customHooks/useToggle'
 
+import Picker from '@emoji-mart/react'
+import data from '@emoji-mart/data'
 
-
-export function PostComments({ onUpdateLikeComment, createdAt, loggedinUser, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
+export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeComment, createdAt, loggedinUser, onToggleCommentModal, comments, myNewComment, onAddCommentToPost, by, byId, likedBy, txt }) {
     const [comment, setComment, handleChange] = useForm(postService.getEmptyComment())
+
+    const inputTxt = useRef()
 
     function onSubmitForm(ev) {
         ev.preventDefault()
@@ -37,10 +41,17 @@ export function PostComments({ onUpdateLikeComment, createdAt, loggedinUser, onT
         return (window.innerWidth > 700) ? false : true
     }
 
-
     function onUpdateLike(isLike) {
         console.log('myNewComment:', myNewComment)
         onUpdateLikeComment(isLike, myNewComment)
+    }
+
+    function onAddEmojiToComment(ev) {
+        console.log('ev.native:', ev.native)
+        const newTxt = comment.txt + ev.native
+        setComment(prevComment => ({ ...prevComment, txt: newTxt }))
+        onToggleEmojiModal(false)
+        inputTxt.current.focus()
     }
 
     return (
@@ -68,11 +79,13 @@ export function PostComments({ onUpdateLikeComment, createdAt, loggedinUser, onT
                     <Img imgUrl={loggedinUser.imgUrl} className="none" />
                 </div>
 
-                <input className={getClass(comment.txt)} onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
+                <input ref={inputTxt} className={getClass(comment.txt)} onChange={handleChange} id="comment" type="text" value={comment.txt} name="txt" placeholder="Add a comment..." />
                 {/* if input have value add button post */}
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
-                {!isMobile() && <span className="icon"><img src={smile} /></span>}
+                {!isMobile() && <span onClick={onToggleEmojiModal} className="icon"><img src={smile} /></span>}
+                {openEmojiModal && <Picker data={data} previewPosition="none" onEmojiSelect={onAddEmojiToComment} />}
+
             </form>
         </section>
     )

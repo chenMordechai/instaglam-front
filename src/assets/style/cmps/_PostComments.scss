@@ -96,6 +96,7 @@
     }
     form {
         width: 100%;
+        position: relative;
         // margin-top: -1px;
         // margin-top: 2px;
         @include flex(row, baseline, space-between);
@@ -135,9 +136,10 @@
         span.icon {
             margin-right: 5px;
             margin-top: 2px;
-            font-size: 14px;
+            font-size: 13px;
             width: 13px;
             filter: opacity(0.5);
+            cursor: pointer;
         }
 
         button.post,
@@ -147,6 +149,13 @@
             padding: 0;
             font-size: 14px;
             font-weight: 450;
+        }
+
+        div:last-of-type {
+            position: absolute;
+            top: 38px;
+            left: 48px;
+            z-index: 11;
         }
     }
 }

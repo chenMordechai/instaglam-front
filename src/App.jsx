@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import {Navigate} from 'react-router-dom'
-import { Provider,useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import { Provider, useSelector } from 'react-redux'
 import { useState, useRef } from 'react'
 import { store } from './store/store'
 import './assets/style/main.scss'
@@ -21,11 +21,10 @@ import { scrollService } from './services/scroll.service'
 import { ScreenOpenContext } from './contexts/ScreenOpenConext'
 import { useToggle } from './customHooks/useToggle'
 
-import { Notifications } from 'react-push-notification';
 
-function RouteGuard({children}){
+function RouteGuard({ children }) {
   const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
-  if(!loggedinUser) return <Navigate to="/"/>
+  if (!loggedinUser) return <Navigate to="/" />
   return <>{children}</>
 }
 
@@ -51,18 +50,17 @@ export function App() {
       <Router>
         <ScreenOpenContext.Provider value={{ isScreenOpen, onOpenScreen, onCloseScreen }}>
           <section className={'main-layout ' + (isScreenOpen ? 'screen-open' : '')}>
-            <Notifications />
             <section className="screen" onClick={onCloseScreen}></section>
             <NavLinks isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} navLinksDisplay={navLinksDisplay} />
             <main>
               <div className="main-container">
                 <Routes>
-                  <Route path="/" element={<Login setNavLinksDisplay={setNavLinksDisplay} />}  />
+                  <Route path="/" element={<Login setNavLinksDisplay={setNavLinksDisplay} />} />
                   <Route path="/home" element={
-                     <RouteGuard>
-                        <Home />
-                     </RouteGuard>
-                  }  />
+                    <RouteGuard>
+                      <Home />
+                    </RouteGuard>
+                  } />
                   <Route element={<Profile isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />} path="/profile/:userId" >
                     <Route path="/profile/:userId/posts" element={<UserPosts />} />
                     <Route path="/profile/:userId/tagged" element={<UserTagged />} />

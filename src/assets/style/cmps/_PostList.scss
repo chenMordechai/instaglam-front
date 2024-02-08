@@ -11,6 +11,7 @@
         @include for-mobile-layout {
             width: 100%;
             gap: 0px;
+            border-bottom: 1px solid $clr-grey2;
         }
         a {
             @include flex(row, baseline, center);

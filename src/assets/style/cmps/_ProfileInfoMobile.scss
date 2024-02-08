@@ -10,6 +10,7 @@
             padding: 7px 15px 0;
 
             .img-container {
+                cursor: pointer;
                 height: 87px;
                 width: 87px;
                 min-width: 80px;
@@ -32,6 +33,7 @@
                     span {
                         font-size: 15px;
                         height: 50%;
+                        font-weight: 400;
                     }
                     span:first-child {
                         font-weight: 900;
@@ -92,11 +94,14 @@
             }
             button:nth-of-type(3) {
                 width: 8%;
-                padding: 9.65px 6px;
+                padding: 9.67px 6px;
                 border-radius: 5px;
                 img {
                     height: 12px;
                 }
+            }
+            .follow {
+                @include blue-btn;
             }
         }
     }

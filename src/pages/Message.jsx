@@ -77,18 +77,18 @@ export function Message() {
 
 
             </section>
-          { !isMobile() && <section className="right-side">
-                {/* <MessageList /> */}
+             { !isMobile() && <section className="right-side">
 
                 {!userToChat && <div className="content-container">
-
-                    <img src={message} />
+                    <div className="img-container">
+                         <img src={message} />
+                    </div>
                     <h2>Your messages</h2>
                     <span>Send private photos and messages to a friend or group</span>
-                    <button>Send message</button>
+                    <button className="btn">Send message</button>
                 </div>}
 
-                {userToChat && <Chat />}
+                {userToChat && <Chat userToChat={userToChat} />}
             </section>}
 
         </section>

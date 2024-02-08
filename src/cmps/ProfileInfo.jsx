@@ -31,7 +31,7 @@ export function ProfileInfo({ onToggleShowImgModal, onToggleFollowingModal, onAd
         <section className="profile-info">
             <div className="left-container">
                 <div onClick={onClickImg} className="img-container">
-                    <Img imgUrl={imgUrl} className="" />
+                    <Img imgUrl={imgUrl} />
                 </div>
             </div>
             <div className="user-info">

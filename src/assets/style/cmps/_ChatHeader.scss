@@ -1,0 +1,28 @@
+.chat-header {
+    position: sticky;
+    top: 0;
+    height: 75px;
+    border-bottom: 1px solid $clr-grey2;
+    padding: 10px;
+
+    @include flex(row, center, space-between, 7px);
+
+    .img-container {
+        height: 54px;
+        width: 54px;
+    }
+
+    h2 {
+        margin-right: auto;
+        margin-top: 5px;
+        font-weight: 500;
+        font-size: 17px;
+    }
+
+    .icons {
+        @include flex(row, center, center, 13px);
+        img {
+            height: 25px;
+        }
+    }
+}
