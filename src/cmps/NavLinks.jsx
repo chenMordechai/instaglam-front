@@ -70,7 +70,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     }
 
     function isMobile() {
-        return (window.innerWidth > 700) ? false : true
+        return !(window.innerWidth > 700)
     }
 
     function getStyle() {

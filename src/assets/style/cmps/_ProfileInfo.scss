@@ -1,58 +1,36 @@
 .profile-info {
     // padding: $pad1;
-    @include flex(row, center, start, 30px);
-    @include for-mobile-layout {
-        position: relative;
-        @include flex(column, start, start);
-        .user-info-header {
-            position: absolute;
-            top: 0;
-            left: 130px;
-        }
-    }
+    @include flex(row, center, start, 31px);
+
     .left-container {
         // margin-bottom: 7px;
         width: 31%;
         @include flex(row, center, center);
-        @include for-mobile-layout {
-            width: max-content;
-            display: block;
-        }
+
         .img-container {
             cursor: pointer;
-            height: 172px;
-            width: 172px;
+            height: 164px;
+            width: 164px;
             // min-width: 200px;
             img {
-                border-width: 6px;
-            }
-            @include for-mobile-layout {
-                height: 100px;
-                width: 100px;
-                min-width: 100px;
-                img {
-                    border-width: em(3px);
-                }
+                border-width: 5px;
             }
         }
     }
     .user-info {
         .user-info-header {
-            margin-top: 7px;
+            margin-top: 15px;
             @include flex(row, end, start, 23px, wrap);
             h2 {
                 font-size: 20px;
                 // margin-right: 20px;
                 font-weight: 300;
             }
-            @include for-mobile-layout {
-                gap: $pad1;
-                margin-top: 18px;
-            }
+
             .btn-container {
-                @include flex(row, center, start, 8px);
+                @include flex(row, center, start, 9px);
                 .btn {
-                    padding: 9px 17px 7px;
+                    padding: 10px 16px 6px;
                     &.user {
                         width: 35px;
                         padding: 0px;
@@ -76,30 +54,26 @@
                 }
 
                 button:last-child img {
-                    width: 20px;
+                    width: 22px;
                     // margin-left: 10px;
+                    margin-top: 2px;
                 }
 
                 button.gear {
-                    margin-left: 7px;
-                    @include for-mobile-layout {
-                        display: none;
-                    }
+                    margin-left: 4px;
                 }
             }
         }
         .user-info-dash-board {
-            @include flex(row, center, start, 50px);
-            margin-top: 28px;
+            @include flex(row, center, start, 49px);
+            margin-top: 23px;
             h3 {
                 font-weight: 300;
+                font-size: 17px;
             }
             span {
-                font-weight: 400;
-            }
-
-            @include for-mobile-layout {
-                display: none;
+                font-weight: 450;
+                font-size: inherit;
             }
         }
 
@@ -114,8 +88,9 @@
                 line-height: 18px;
                 font-size: 14px;
                 width: max-content;
-                margin: 0;
+                // margin: 0;
                 font-weight: 400;
+                margin-left: -3px;
             }
 
             pre.he {

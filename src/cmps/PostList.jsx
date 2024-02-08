@@ -1,9 +1,13 @@
 import { Outlet, NavLink } from 'react-router-dom'
 import grid from '../assets/icons/table-cells-solid.svg'
 import image from '../assets/icons/image-regular.svg'
-import bookmark from '../assets/icons/bookmark-regular.svg'
+// import bookmark from '../assets/icons/bookmark-regular.svg'
+import bookmark from '../assets/icons/bookmark-regular.png'
 
 export function PostList({ isLoggedinUserProfile, userId, postsMini }) {
+    function isMobile() {
+        return !(window.innerWidth > 700)
+      }
     return (
         <section className="post-list">
             <nav>
@@ -11,11 +15,11 @@ export function PostList({ isLoggedinUserProfile, userId, postsMini }) {
                     <img src={grid} />
                     <span>Posts</span>
                 </NavLink>
-                {/* {isLoggedinUserProfile && 
+                {isLoggedinUserProfile && !isMobile() &&
                 <NavLink to={`/profile/${userId}/saved`}>
                     <img src={bookmark} />
                     <span>Saved</span>
-                </NavLink>} */}
+                </NavLink>}
                 <NavLink to={`/profile/${userId}/tagged`}>
                     <img src={image} />
                     <span>Tagged</span>

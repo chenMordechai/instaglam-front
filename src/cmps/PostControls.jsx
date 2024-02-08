@@ -4,6 +4,7 @@ import arrow from '../assets/icons/arrow-up-right.svg'
 import share from '../assets/icons/message.png'
 // import share from '../assets/icons/share-icon.png'
 import bookmark from '../assets/icons/bookmark-regular.png'
+// import bookmark from '../assets/icons/bookmark.png'
 import { Heart } from './Heart'
 
 export function PostControls({ onUpdateLikePost, loggedinUser, likedBy }) {

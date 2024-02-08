@@ -11,7 +11,7 @@ export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal
         return utilService.timeDifference(Date.now(), createdAt)
     }
     function isMobile() {
-        return (window.innerWidth > 700) ? false : true
+        return !(window.innerWidth > 700)
     }
 
 

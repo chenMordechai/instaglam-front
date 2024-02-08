@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(3, calc(100% / 3 - 3.2px));
     // grid-auto-rows: 200px; // from js
-    gap: 5px;
+    gap: 4px;
 
     li {
         @include flex(row, center, center);

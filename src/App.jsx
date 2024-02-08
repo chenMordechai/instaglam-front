@@ -64,7 +64,7 @@ export function App() {
                   <Route element={<Profile isScreenOpen={isScreenOpen} onOpenScreen={onOpenScreen} onCloseScreen={onCloseScreen} />} path="/profile/:userId" >
                     <Route path="/profile/:userId/posts" element={<UserPosts />} />
                     <Route path="/profile/:userId/tagged" element={<UserTagged />} />
-                    {/* <Route path="/profile/:userId/saved" element={<UserSaved />} /> */}
+                    <Route path="/profile/:userId/saved" element={<UserSaved />} />
                     {/* <Route path="/profile/:userId/reals" element={} /> */}
                     {/* <Route path="/profile/:userId/saved" element={} /> */}
                   </Route>

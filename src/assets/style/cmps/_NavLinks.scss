@@ -39,6 +39,10 @@
         border-radius: 5px;
         transition: 0.3s;
 
+        &:last-child {
+            margin-top: 5px;
+        }
+
         @include for-narrow-layout {
             height: em(48px);
             // width: em(48px);
@@ -81,7 +85,7 @@
             }
             img.logo {
                 display: inline-block;
-                width: 110px;
+                width: 101px;
                 height: 40px;
                 @include for-narrow-layout {
                     display: none;

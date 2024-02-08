@@ -38,7 +38,7 @@ export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeCom
     }
 
     function isMobile() {
-        return (window.innerWidth > 700) ? false : true
+        return !(window.innerWidth > 700)
     }
 
     function onUpdateLike(isLike) {
