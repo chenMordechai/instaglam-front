@@ -30,7 +30,7 @@ export function ProfileInfoMobile ({ onToggleShowImgModal, onToggleFollowingModa
         <section className="profile-info-mobile">
             <div className="info-header">
                 <div onClick={onClickImg} className="img-container">
-                    <Img imgUrl={imgUrl} className="" />
+                    <Img imgUrl={imgUrl} className="grey" />
                 </div>
                 <div className="user-info-dash-board">
                     <div><span>{postsLength}</span><span> posts</span></div>

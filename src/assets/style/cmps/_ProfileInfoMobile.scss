@@ -6,8 +6,9 @@
         // padding: 7px 15px;
 
         .info-header {
-            @include flex(row, center, space-between);
-            padding: 7px 15px 0;
+            @include flex(row, start, space-between);
+            padding: 7px 16px 0;
+            margin-top: 24px;
 
             .img-container {
                 cursor: pointer;
@@ -23,12 +24,16 @@
                 @include flex(row, center, space-between);
 
                 margin-right: 12px;
-                margin-top: 7px;
-                width: 62%;
+                margin-top: 9.5px;
+                width: 63%;
 
                 & > div {
                     @include flex(column, center, space-between);
-                    height: 51px;
+                    height: 52px;
+
+                    &:nth-child(2) {
+                        margin-left: 13px;
+                    }
 
                     span {
                         font-size: 15px;
@@ -46,14 +51,14 @@
             padding: 0px 15px;
             h3 {
                 font-size: 15px;
-                margin-top: 1px;
+                margin-top: 2px;
                 // height: 19px;
             }
             pre {
                 text-align: left;
                 margin: 0;
                 font-size: 15px;
-                line-height: 20px;
+                line-height: 22px;
                 font-weight: 400;
             }
             h4 {
@@ -75,7 +80,8 @@
             button,
             a {
                 @include flex(row, center, center);
-                font-weight: 450;
+                font-weight: 400;
+                font-size: 14px;
             }
             button {
                 padding: 7px 5px 5px;

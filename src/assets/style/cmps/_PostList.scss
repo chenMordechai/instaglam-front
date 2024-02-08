@@ -20,7 +20,7 @@
             gap: 6px;
             @include for-mobile-layout {
                 width: 50%;
-                padding: 16px 0px 11px;
+                padding: 14px 0px 10px;
             }
             &.active {
                 border-top: 1px solid $clr-grey4;
@@ -36,7 +36,7 @@
             img {
                 height: 11px;
                 @include for-mobile-layout {
-                    height: 21px;
+                    height: 23px;
                     filter: contrast(0.1);
                 }
             }

@@ -6,6 +6,8 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import logo from '../assets/icons/logo.svg'
 import heart from '../assets/icons/heart-regular.svg'
 import message from '../assets/icons/message-regular.svg'
+import arrow from '../assets/icons/angle-down-solid.svg'
+
 import { Notification } from '../pages/Notification'
 import { useToggle } from '../customHooks/useToggle'
 
@@ -15,8 +17,9 @@ export const HomeHeader = memo(({ newNotifications, loggedinUserId }) => {
     return (
         <section className="home-header">
             {openNotificationModal && <Notification loggedinUserId={loggedinUserId} onToggleNotificationModal={onToggleNotificationModal} />}
-            {!openNotificationModal && <><button>
-                <img className="logo" src={logo} />
+            {!openNotificationModal && <><button className="logo">
+                <img  src={logo} />
+                <img src={arrow} />
             </button>
 
             <section className="icons">

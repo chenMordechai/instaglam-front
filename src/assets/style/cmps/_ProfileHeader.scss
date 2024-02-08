@@ -3,5 +3,18 @@
     @include for-mobile-layout {
         @include header;
         // border-bottom: 1px solid $clr-grey2;
+        padding: 15px;
+
+        h2 {
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+        // .icons {
+        //     gap: 18px;
+        //     img {
+        //         margin-right: 7px;
+        //         height: 23px;
+        //     }
+        // }
     }
 }

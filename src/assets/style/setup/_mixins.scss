@@ -134,15 +134,21 @@
     img {
         height: em(25px);
         margin-right: 9px;
+    }
 
-        &.logo {
-            height: em(35px);
-            margin-left: $pad1;
-        }
-        @include for-mobile-layout {
-            height: 21px;
-            &.logo {
-                height: 28px;
+    @include for-mobile-layout {
+        .logo {
+            margin-top: 7px;
+            img {
+                height: em(35px);
+                margin-left: $pad1;
+                height: 31px;
+                margin-left: 8px;
+            }
+            img:last-of-type {
+                height: 14px;
+                margin: 0;
+                margin-top: 2px;
             }
         }
     }
@@ -158,6 +164,13 @@
 
     .icons {
         @include flex(row, center, center, $pad1);
+        @include for-mobile-layout {
+            gap: 17px;
+            img {
+                margin-right: 7px;
+                height: 23px;
+            }
+        }
     }
 
     span {

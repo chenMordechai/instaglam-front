@@ -1,5 +1,6 @@
 
-import gear from '../assets/icons/gear-solid.svg'
+import bars from '../assets/icons/bars-solid.svg'
+// import gear from '../assets/icons/gear-solid.svg'
 import plus from '../assets/icons/square-plus-regular.svg'
 import arrow from '../assets/icons/angle-down-solid.svg'
 import chevron from '../assets/icons/chevron-left-solid.svg'
@@ -19,7 +20,7 @@ export function ProfileHeader({ isLoggedinUserProfile, username, onTogglePrefere
                         <img src={plus} />
                     </Link>
                     <button onClick={onTogglePreferencesModal}>
-                        <img src={gear} />
+                        <img src={bars} />
                     </button>
                 </div>
             </section>}

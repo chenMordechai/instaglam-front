@@ -6,11 +6,15 @@
     @include for-mobile-layout {
         margin: 0;
         padding: 10px 0 6px 6px;
-        margin-top: 7px;
+        margin-top: 8px;
     }
 
-    ul {
+    ul.carousel {
         display: flex;
+
+        @include for-mobile-layout {
+            gap: 13px;
+        }
         li {
             // margin-right: 34px;
             // width: 66px;
@@ -19,8 +23,8 @@
                 width: 85px;
 
                 @include for-mobile-layout {
-                    height: 66px;
-                    width: 66px;
+                    height: 67px;
+                    width: 67px;
                 }
             }
         }
