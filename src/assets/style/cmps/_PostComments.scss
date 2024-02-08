@@ -1,6 +1,6 @@
 .post-comments {
     @include for-mobile-layout {
-        padding: 0 12px;
+        padding: 0 14px;
     }
     @include flex(column, start, start);
     font-size: 16.5;
@@ -8,6 +8,9 @@
     a {
         font-weight: 500;
         font-size: 14px;
+        @include for-mobile-layout {
+            font-size: 15.5px;
+        }
     }
     h3.new-comment {
         width: 100%;
@@ -52,7 +55,7 @@
         align-items: baseline;
 
         @include for-mobile-layout {
-            margin-top: -4px;
+            margin-top: -5px;
         }
         span {
             font-size: inherit;
@@ -67,12 +70,14 @@
         font-size: 12px;
         @include for-mobile-layout {
             order: 1;
-            // margin-top: 3px;
+            margin-top: 4px;
+            font-weight: 450;
             @include flex(row, center, start, 7px);
 
+            font-size: 13.5px;
             span {
                 @include flex(row, center, start, 7px);
-                font-size: 12px;
+                font-size: 13.5px;
                 color: #737373;
                 font-weight: 400;
 
@@ -92,6 +97,8 @@
         @include for-mobile-layout {
             margin: 0;
             font-weight: 400;
+            font-size: 15.5px;
+            margin-top: 2px;
         }
     }
     form {
@@ -110,8 +117,8 @@
             // order: 2;
             .img-container {
                 display: block;
-                height: 26px;
-                width: 26px;
+                height: 28px;
+                width: 28px;
                 // margin-right: 10px;
             }
         }
@@ -124,8 +131,8 @@
             font-size: 14px;
             font-weight: 300;
             @include for-mobile-layout {
-                width: calc(100% - 67px);
-                font-size: 13px;
+                width: calc(100% - 72px);
+                font-size: 14.5px;
                 font-weight: 400;
             }
         }
@@ -151,10 +158,10 @@
             font-weight: 450;
         }
 
-        div:last-of-type {
+        div.picker {
             position: absolute;
-            top: 38px;
-            left: 48px;
+            top: 37px;
+            left: 113px;
             z-index: 11;
         }
     }

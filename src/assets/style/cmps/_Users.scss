@@ -2,8 +2,15 @@
     // padding-top: 40px;
 
     @include for-mobile-layout {
-        margin-top: 3px;
+        margin-top: 8px;
+        margin-bottom: 3px;
         //     padding-top: 0px;
         //     grid-auto-columns: calc((100% / 4) - 10px);
+
+        .wrapper .carousel {
+            padding: 0px 10px;
+            padding: 0 10px;
+            gap: 12px;
+        }
     }
 }

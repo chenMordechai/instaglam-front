@@ -84,8 +84,9 @@ export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeCom
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
                 {!isMobile() && <span onClick={onToggleEmojiModal} className="icon"><img src={smile} /></span>}
-                {openEmojiModal && <Picker data={data} previewPosition="none" onEmojiSelect={onAddEmojiToComment} />}
-
+                {openEmojiModal &&<div className="picker">
+                    <Picker data={data} previewPosition="none" onEmojiSelect={onAddEmojiToComment} />
+                    </div>}
             </form>
         </section>
     )

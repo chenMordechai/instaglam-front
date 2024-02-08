@@ -10,16 +10,19 @@
             @include flex(row, center, center);
             a {
                 margin-right: 15px;
+                @include for-mobile-layout {
+                    margin-right: 19px;
+                }
             }
         }
     }
     @include for-mobile-layout {
-        padding: 0 15px;
+        padding: 0 16px;
         .icons-container {
-            margin: 0px 0px 10px;
+            margin: 2px 0px 9px;
             img,
             svg {
-                height: em(21px);
+                height: 24px;
             }
         }
     }

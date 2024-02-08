@@ -12,10 +12,10 @@
 
     @include for-mobile-layout {
         gap: 2px;
-        width: 74px;
+        width: 83px;
         div.img-container {
-            height: 75px;
-            width: 75px;
+            height: 82px;
+            width: 82px;
         }
     }
     a {
@@ -29,8 +29,8 @@
             text-overflow: ellipsis;
 
             @include for-mobile-layout {
-                font-weight: 450;
-                font-size: 13px;
+                font-weight: 350;
+                font-size: 14px;
             }
         }
     }
