@@ -1,7 +1,7 @@
 .user-preview {
     @include flex(row, center, space-between);
     width: 100%;
-    margin-bottom: 11px;
+    margin-bottom: 12px;
 
     .img-container {
         height: 48px;
@@ -10,7 +10,8 @@
 
     .name-container {
         height: 36px;
-        width: calc(100% - 123px);
+        width: calc(100% - 120px);
+        margin-top: 3px;
         @include flex(column, start, center);
         h3 {
             height: 50%;
@@ -30,8 +31,9 @@
     button {
         min-width: 52px;
         justify-self: end;
-        font-size: 0.8rem;
+        font-size: 0.76rem;
         justify-content: end;
+        margin-bottom: -5px;
 
         img {
             height: 23px;

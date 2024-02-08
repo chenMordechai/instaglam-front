@@ -24,7 +24,6 @@
                 margin-right: 59px;
             }
             img {
-                filter: opacity(0.7);
             }
             @include for-mobile-layout {
                 &:first-child {
@@ -43,7 +42,7 @@
                 }
                 @include for-mobile-layout {
                     border-top: none;
-                    border-bottom: 2px solid black;
+                    border-bottom: 1.5px solid black;
                     img {
                         // filter: brightness(3);
                         filter: none;
@@ -53,9 +52,10 @@
             img {
                 height: 12px;
                 margin-top: 3px;
+                filter: opacity(0.6);
                 @include for-mobile-layout {
+                    filter: opacity(0.4);
                     height: 23px;
-                    filter: contrast(0.1);
                     margin: 0;
                 }
             }

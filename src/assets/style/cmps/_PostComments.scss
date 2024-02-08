@@ -55,7 +55,7 @@
         align-items: baseline;
 
         @include for-mobile-layout {
-            margin-top: -5px;
+            margin-top: -3px;
         }
         span {
             font-size: inherit;
@@ -70,7 +70,7 @@
         font-size: 12px;
         @include for-mobile-layout {
             order: 1;
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 450;
             @include flex(row, center, start, 7px);
 
@@ -98,7 +98,7 @@
             margin: 0;
             font-weight: 400;
             font-size: 15.5px;
-            margin-top: 2px;
+            margin-top: 1px;
         }
     }
     form {

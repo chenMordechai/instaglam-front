@@ -2,6 +2,7 @@
     display: none;
     @include for-mobile-layout {
         @include header;
+        position: static;
     }
 
     .have-notification {
