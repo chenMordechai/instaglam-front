@@ -1,0 +1,33 @@
+.chat-msgs {
+    padding: 10px;
+    ul {
+        @include flex(column, start, start, 5px);
+        li {
+            width: max-content;
+            border-radius: 15px;
+            padding: 4px 10px;
+
+            &.loggedin-user {
+                background-color: #3797f0;
+                color: white;
+                align-self: end;
+            }
+
+            &.some-user {
+                background-color: #efefef;
+                color: black;
+            }
+
+            &.start {
+                border-bottom-right-radius: 3px;
+            }
+            &.middle {
+                border-bottom-right-radius: 3px;
+                border-top-right-radius: 3px;
+            }
+            &.end {
+                border-top-right-radius: 3px;
+            }
+        }
+    }
+}

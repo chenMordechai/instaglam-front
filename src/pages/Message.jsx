@@ -27,8 +27,11 @@ export function Message() {
     const [search, setSearch, handleChange] = useForm({ name: '' })
 
     const [msgInfo, setMsgInfo] = useState(null)
-    const [newMsg, setNewMsg, handleNewMsgChange] = useForm({ txt: 'h' })
+
+    const [newMsg, setNewMsg, handleNewMsgChange] = useForm({ txt: '' })
     const [typingUser, setTypingUser] = useState(null)
+
+    const [msgsToShow, setMsgsToShow] = useState(null)
 
     const timeoutId = useRef()
 
@@ -64,6 +67,15 @@ export function Message() {
             clearTimeout(timeoutId.current)
         }
     }, [userToChat, msgInfo?._id])
+
+    useEffect(()=>{
+        console.log('useEffect')
+        console.log('msgInfo:', msgInfo)
+        if(!msgInfo?.history) return
+        console.log('msgsToShow:', msgsToShow)
+        setMsgsToShow(getMsgsOrder(msgInfo?.history))
+
+    },[msgInfo?.history])
 
     function goToChat(userId) {
         onToggleSearchModal()
@@ -131,6 +143,25 @@ export function Message() {
         handleNewMsgChange(ev)
     }
 
+    
+    function getMsgsOrder(msgs){
+        if(!msgs) return
+        let userId ;
+        const copy = [...msgs]
+        copy.forEach((msg,idx) => {
+            if(msg.userId === userId){
+                msg.className =  'middle'
+                if(copy[idx+1]?.userId !== msg.userId || !copy[idx+1] )  msg.className = 'end'
+            }else{
+                userId = msg.userId
+                if(copy[idx+1]?.userId === msg.userId)  msg.className = 'start'
+                else msg.className =''
+            }
+        });
+        return copy
+    }
+
+
 
     if (!usersToShow) return <></>
     return (
@@ -171,7 +202,7 @@ export function Message() {
                     <button className="btn">Send message</button>
                 </div>}
 
-                {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgInfo?.history} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} />}
+                {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} />}
             </section>}
 
         </section>

@@ -19,7 +19,7 @@
     // background-color: pink;
     // @include flex(row, start, center);
     @include for-narrow-layout {
-      width: calc(100% - 80px);
+      width: calc(100% - 72px);
     }
 
     @include for-mobile-layout {

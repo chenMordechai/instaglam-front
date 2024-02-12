@@ -4,6 +4,7 @@
     height: 75px;
     border-bottom: 1px solid $clr-grey2;
     padding: 10px;
+    background-color: #fff;
 
     @include flex(row, center, space-between, 7px);
 
