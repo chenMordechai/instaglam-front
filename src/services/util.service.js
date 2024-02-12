@@ -13,7 +13,8 @@ export const utilService = {
     uploadImgToCloudinary,
     timeDifference,
     timeDifferenceLong,
-    isHebrew
+    isHebrew,
+    isMobile,
 }
 
 function makeId(length = 6) {
@@ -173,4 +174,8 @@ function isHebrew(txt){
    const hebrewLeters = 'אבגדהוזחטיכלמנסעפצקרשת'
    const parts = txt.split('')
    return parts.some(letter => hebrewLeters.includes(letter))
+}
+
+function isMobile() {
+    return !(window.innerWidth > 700)
 }

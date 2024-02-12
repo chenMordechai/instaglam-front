@@ -3,14 +3,16 @@ import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 
-export function Chat ({userToChat}){
+// import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC ,SOCKET_EVENT_TYPING,SOCKET_EVENT_STOP_TYPING,SOCKET_EMIT_TYPING,SOCKET_EMIT_STOP_TYPING} from '../services/socket.service'
 
-    const {imgUrl , fullname} = userToChat
+export function Chat({ userToChat, topic, msgs, loggedinUser, typingUser, ...restOfProps }) {
+
+    const { imgUrl, fullname } = userToChat
     return (
         <section className="chat">
-            <ChatHeader imgUrl={imgUrl} fullname={fullname}/>
-            <ChatMessages/>
-            <ChatInput/>
+            <ChatHeader imgUrl={imgUrl} fullname={fullname} />
+            {msgs && <ChatMessages msgs={msgs} loggedinUser={loggedinUser} typingUser={typingUser} />}
+            <ChatInput {...restOfProps} />
 
         </section>
     )

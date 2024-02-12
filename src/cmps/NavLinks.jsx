@@ -25,6 +25,7 @@ import { Notification } from '../pages/Notification'
 import { Search } from '../pages/Search'
 import { Img } from './Img'
 import { socketService } from '../services/socket.service.js'
+import { utilService } from '../services/util.service.js'
 import { useToggle } from '../customHooks/useToggle'
 import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
 import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
@@ -38,7 +39,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     const [newNotifications, setNewNotifications] = useState(false)
 
-    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !isMobile() && openSearchModal])
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !utilService.isMobile() && openSearchModal])
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
     useEffect(() => {
@@ -67,10 +68,6 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
 
     function isProfilePage() {
         return location.pathname.includes('/profile')
-    }
-
-    function isMobile() {
-        return !(window.innerWidth > 700)
     }
 
     function getStyle() {

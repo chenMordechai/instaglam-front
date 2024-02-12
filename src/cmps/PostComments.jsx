@@ -37,10 +37,6 @@ export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeCom
         return utilService.timeDifferenceLong(Date.now(), createdAt)
     }
 
-    function isMobile() {
-        return !(window.innerWidth > 700)
-    }
-
     function onUpdateLike(isLike) {
         console.log('myNewComment:', myNewComment)
         onUpdateLikeComment(isLike, myNewComment)
@@ -63,7 +59,7 @@ export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeCom
             </Link>
 
             <h4>
-                {isMobile() && <span>{getRelativeDate()} <img src={circle} /></span>}
+                {utilService.isMobile() && <span>{getRelativeDate()} <img src={circle} /></span>}
                 See translation
             </h4>
 
@@ -83,7 +79,7 @@ export function PostComments({ openEmojiModal,onToggleEmojiModal,onUpdateLikeCom
                 {/* if input have value add button post */}
                 {comment.txt && <button className="clr-blue bold post">Post</button>}
                 {!comment.txt && <span className="post"></span>}
-                {!isMobile() && <span onClick={onToggleEmojiModal} className="icon"><img src={smile} /></span>}
+                {!utilService.isMobile() && <span onClick={onToggleEmojiModal} className="icon"><img src={smile} /></span>}
                 {openEmojiModal &&<div className="picker">
                     <Picker data={data} previewPosition="none" onEmojiSelect={onAddEmojiToComment} />
                     </div>}

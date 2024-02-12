@@ -1,7 +1,11 @@
 .posts {
     // margin-top: 10px;
     // margin-bottom: 50px;
-    border-top: 1px solid $clr-grey2;
+    border: none;
+
+    @include for-mobile-layout {
+        border-top: 1px solid $clr-grey2;
+    }
     ul.posts-container {
         margin-top: 16px;
         width: 100%;

@@ -10,10 +10,6 @@ export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal
     function getRelativeDate() {
         return utilService.timeDifference(Date.now(), createdAt)
     }
-    function isMobile() {
-        return !(window.innerWidth > 700)
-    }
-
 
     return (
         <section className="post-header">
@@ -26,7 +22,7 @@ export function PostHeader({ byId, by, byImgUrl, createdAt, onToggleOptionsModal
                         {by}
                     </Link>
                    
-                  { !isMobile() && <span> 
+                  { !utilService.isMobile() && <span> 
                     <img src={circle} />
                     {getRelativeDate()}
                     </span>}

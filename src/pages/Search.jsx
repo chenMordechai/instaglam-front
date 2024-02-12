@@ -7,7 +7,7 @@ import { userService } from '../services/user.service.js'
 import { UserPreview } from '../cmps/UserPreview.jsx'
 import { SimpleHeader } from '../cmps/SimpleHeader'
 import { useForm } from '../customHooks/useForm'
-
+import { utilService } from '../services/util.service.js'
 
 export function Search({ onToggleSearchModal, goToChat }) {
 
@@ -40,15 +40,10 @@ export function Search({ onToggleSearchModal, goToChat }) {
     setUsers(prev => prev.filter(u => u._id !== userId))
   }
 
-  function isMobile() {
-    return !(window.innerWidth > 700)
-  }
-
-
   return (
     <section className="search">
-      {isMobile() && <SimpleHeader h2Content="Search" onToggleModal={onToggleSearchModal} />}
-      {!isMobile() && <h3>Search</h3>}
+      {utilService.isMobile() && <SimpleHeader h2Content="Search" onToggleModal={onToggleSearchModal} />}
+      {!utilService.isMobile() && <h3>Search</h3>}
 
       <div className="form-container">
         <form onSubmit={onSubmitForm}>

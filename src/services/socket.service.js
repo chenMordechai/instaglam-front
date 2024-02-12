@@ -13,12 +13,6 @@ export const SOCKET_EVENT_STOP_TYPING = 'chat-remove-typing'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 export const SOCKET_EVENT_ADD_MSG = 'chat-add-msg'
 
-export const SOCKET_EVENT_TOY_UPDATE = 'toy-updated'
-export const SOCKET_EVENT_TOY_ADDED = 'toy-added'
-export const SOCKET_EVENT_TOY_REMOVED = 'toy-removed'
-
-// export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
-// export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
