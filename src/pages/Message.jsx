@@ -50,7 +50,8 @@ export function Message() {
     }, [userToChat])
 
     useEffect(() => {
-        if (!userToChat) return
+        if (!userToChat ) 
+        console.log('msgInfo:', msgInfo)
         // Join room
         socketService.emit('chat-set-topic', msgInfo?._id)
         // Add listeners
@@ -69,12 +70,8 @@ export function Message() {
     }, [userToChat, msgInfo?._id])
 
     useEffect(()=>{
-        console.log('useEffect')
-        console.log('msgInfo:', msgInfo)
         if(!msgInfo?.history) return
-        console.log('msgsToShow:', msgsToShow)
         setMsgsToShow(getMsgsOrder(msgInfo?.history))
-
     },[msgInfo?.history])
 
     function goToChat(userId) {
@@ -93,17 +90,16 @@ export function Message() {
                 return id1 === id2
             })
         })
-        const msgInfo = await msgService.getById(msgId)
-        setMsgInfo(msgInfo)
-    }
-
-    function showTyping(fullname) {
-        console.log(fullname, 'is typing')
-        setTypingUser(fullname)
-    }
-    function removeTypingUser() {
-        console.log('removeTyping user')
-        setTypingUser(null)
+        if( msgId){
+            const msgInfo = await msgService.getById(msgId)
+            setMsgInfo(msgInfo)
+        }else{
+            const {username ,fullname ,_id ,imgUrl} = userToChat
+            const miniUserToChat = {username ,fullname ,_id ,imgUrl}
+            const msgInfo = await msgService.save(miniUserToChat)
+            console.log('msgInfo else:', msgInfo)
+            setMsgInfo(msgInfo)
+        }
     }
 
     function addMsg(newMsg) {
@@ -115,14 +111,26 @@ export function Message() {
         ev.preventDefault()
         const userId = loggedinUser._id
         const msgToSend = { userId, txt: newMsg.txt }
+        // the socket update the backend
         socketService.emit('chat-send-msg', msgToSend)
 
+        // stop typing
         socketService.emit('chat-stop-typing', userId)
         clearTimeout(timeoutId.current)
         timeoutId.current = null
 
         setNewMsg({ txt: '' })
 
+    }
+
+    
+    function showTyping(fullname) {
+        console.log(fullname, 'is typing')
+        setTypingUser(fullname)
+    }
+    function removeTypingUser() {
+        console.log('removeTyping user')
+        setTypingUser(null)
     }
 
 
@@ -161,7 +169,11 @@ export function Message() {
         return copy
     }
 
-
+    function updateScroll(){
+        var element = document.querySelector(".right-side");
+        if(!element) return
+        element.scrollTop = element.scrollHeight + 20;
+    }
 
     if (!usersToShow) return <></>
     return (
@@ -202,7 +214,7 @@ export function Message() {
                     <button className="btn">Send message</button>
                 </div>}
 
-                {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} />}
+                {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} updateScroll={updateScroll}/>}
             </section>}
 
         </section>

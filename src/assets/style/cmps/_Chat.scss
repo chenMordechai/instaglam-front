@@ -1,4 +1,9 @@
 .chat {
     // position: sticky;
     // overflow: auto;
+    display: grid;
+    grid-template-areas:
+        "header"
+        "msgs"
+        "input";
 }

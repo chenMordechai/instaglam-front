@@ -12,6 +12,6 @@ async function getById(msgId) {
     return httpService.get(BASE_URL + msgId)
 }
 
-async function save(post) {
-    return httpService.post(BASE_URL, post)
+async function save(userToChat) {
+    return httpService.post(BASE_URL, userToChat)
 }

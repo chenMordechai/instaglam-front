@@ -1,7 +1,42 @@
 .chat-input {
-    background-color: grey;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
+    grid-area: input;
+    background-color: #fff;
+
+    .form-container {
+        padding: 10px 15px;
+        border: 1px solid $clr-grey2;
+        border-radius: 555px;
+        @include flex(row, center, space-between);
+
+        .side1,
+        .side2 {
+            @include flex(row, center, space-between);
+        }
+
+        .side2 {
+            width: 100px;
+        }
+
+        .side1 {
+            width: calc(100% - 100px);
+            form {
+                width: 90%;
+                input {
+                    width: 100%;
+                    font-size: 16px;
+                    &::placeholder {
+                        color: $clr-grey3;
+                    }
+                }
+            }
+        }
+        img {
+            height: 25px;
+            filter: grayscale(1);
+        }
+    }
 }
