@@ -94,9 +94,25 @@ export async function saveUserImg(user) {
     } catch (err) {
         console.log('user action -> Cannot save user', err)
         throw err
-
     }
 }
+
+// export async function saveUserImg(user,ev) {
+//     try {
+//         store.dispatch({ type: SET_IS_LOADING, isLoading: true })
+//         const media = await utilService.uploadImgToCloudinary(ev)
+//         const userToSave = await userService.updateImg({ ...user, imgUrl: media.url })
+//         store.dispatch({ type: SET_USER, userToSave })
+//         store.dispatch({ type: SET_LOGGEDIN_USER_IMG, imgUrl: userToSave.imgUrl })
+//         return userToSave
+//     } catch (err) {
+//         console.log('user action -> Cannot save user', err)
+//         throw err
+//     } finally {
+//         store.dispatch({ type: SET_IS_LOADING, isLoading: false })
+//     }
+
+// }
 
 // from profile after we have currUser
 export async function addFollowing(miniUser, loggedinUser, from) {

@@ -11,6 +11,7 @@ import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getA
 import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { socketService } from '../services/socket.service.js'
 
+import instagram from '../assets/icons/instaglam.svg'
 
 export function Home() {
 
@@ -22,6 +23,8 @@ export function Home() {
     const [newNotifications, setNewNotifications] = useState(false)
     const [updatedUsers, setUpdatedUsers] = useState([])
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -31,12 +34,15 @@ export function Home() {
 
     async function init() {
         try {
+            setIsLoading(true)
             await loadPosts()
             await loadUsers()
             await loadUser(loggedinUser._id)
         } catch (err) {
             console.log('err:', err)
             navigate('/')
+        }finally{
+            setIsLoading(false)
         }
     }
 
@@ -139,6 +145,7 @@ export function Home() {
     }, [])
 
 
+    if(isLoading)  return <section className="loader-container"><img src={instagram} /></section>
     return (
         <section className="home">
             {/* HomeHeader just in mobile */}
