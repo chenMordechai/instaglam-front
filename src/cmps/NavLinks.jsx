@@ -29,6 +29,7 @@ import { utilService } from '../services/util.service.js'
 import { useToggle } from '../customHooks/useToggle'
 import { useEffectToggleModal } from '../customHooks/useEffectToggleModal'
 import { useEffectCloseModal } from '../customHooks/useEffectCloseModal'
+import { eventBusService } from '../services/event-bus.service.js'
 
 export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDisplay }) {
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
@@ -37,22 +38,37 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     const [openSearchModal, onToggleSearchModal] = useToggle(false)
 
     const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-    const [newNotifications, setNewNotifications] = useState(false)
+    const [isIsNewNotifications, setIsNewNotifications] = useState(false)
+    const [isNewMsg, setIsNewMsg] = useState(false)
 
     useEffectToggleModal(onOpenScreen, onCloseScreen, [openNotificationModal, !utilService.isMobile() && openSearchModal])
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
     useEffect(() => {
+        console.log('navlinks')
         socketService.emit('user-watch', loggedinUser?._id)
-        socketService.on('notification-added', () => {
-            setNewNotifications(true)
-        })
 
-    }, [notifications])
+        if(!utilService.isMobile()){
+            socketService.on('notification-added', () => {
+                console.log('notification-added navlinks')
+                setIsNewNotifications(true)
+            })
+            socketService.on('user-get-msg', () => {
+                console.log('user-get-msg!!!! navLinks')
+                setIsNewMsg(true)
+            })
+        }
+      
+        return () => {
+            socketService.off('notification-added')
+            socketService.off('user-get-msg')
+        }
+
+    }, [])
 
     useEffect(() => {
         if (openNotificationModal) {
-            setNewNotifications(false)
+            setIsNewNotifications(false)
         }
     }, [openNotificationModal])
 
@@ -118,12 +134,13 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
             <NavLink to="message" className="not-mobile" title="Messages"  >
                 {!isMessagePage() && <img src={message} />}
                 {isMessagePage() && <FontAwesomeIcon icon={faCommentDots} />}
+                {isNewMsg && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 <span>Messages</span>
             </NavLink>
             <a onClick={onToggleNotificationModal} className="not-mobile" title="Notifications" >
                 {!openNotificationModal && <img src={heart} />}
                 {openNotificationModal && <FontAwesomeIcon icon={faHeart} />}
-                {newNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
+                {isIsNewNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 <span>Notifications</span>
             </a>
             <NavLink to={'/post/edit'} title="New Post">

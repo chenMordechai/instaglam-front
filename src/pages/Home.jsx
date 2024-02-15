@@ -18,9 +18,11 @@ export function Home() {
     const  posts  = useSelector(storeState => storeState.postModule.posts)
     const  users = useSelector(storeState => storeState.userModule.users)
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
-    const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
+    // const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
     
-    const [newNotifications, setNewNotifications] = useState(false)
+    const [isNewNotifications, setIsNewNotifications] = useState(false)
+    const [isNewMsg, setIsNewMsg] = useState(false)
+
     const [updatedUsers, setUpdatedUsers] = useState([])
 
     const [isLoading, setIsLoading] = useState(false)
@@ -47,6 +49,7 @@ export function Home() {
     }
 
     useEffect(() => {
+        console.log('useEffect home')
         socketService.on('post-added', post => {
             dispatch(getActionAddPost(post))
         })
@@ -70,8 +73,14 @@ export function Home() {
         })
 
         socketService.emit('user-watch', loggedinUser._id)
-        socketService.on('notification-added', (data) => {
-            setNewNotifications(true)
+
+        socketService.on('notification-added', () => {
+            console.log('notification-added!! home')
+            setIsNewNotifications(true)
+        })
+        socketService.on('user-get-msg', () => {
+            console.log('user-get-msg!!!! home')
+            setIsNewMsg(true)
         })
 
         return () => {
@@ -149,7 +158,7 @@ export function Home() {
     return (
         <section className="home">
             {/* HomeHeader just in mobile */}
-            <HomeHeader newNotifications={newNotifications} loggedinUserId={loggedinUser._id} />
+            <HomeHeader isNewMsg={isNewMsg} isNewNotifications={isNewNotifications} loggedinUserId={loggedinUser._id} />
             <div className="main-content">
                 <Users users={orderedUsers} />
                 <Posts posts={posts} loggedinUser={loggedinUser} />

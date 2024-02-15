@@ -15,6 +15,7 @@ import pen from '../assets/icons/pen-to-square-regular.svg'
 import camera from '../assets/icons/camera.png'
 import { utilService } from '../services/util.service.js'
 import { msgService } from '../services/msg.service.js'
+import { eventBusService } from '../services/event-bus.service.js'
 import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_TYPING, SOCKET_EVENT_STOP_TYPING, SOCKET_EMIT_TYPING, SOCKET_EMIT_STOP_TYPING } from '../services/socket.service'
 
 
@@ -32,6 +33,8 @@ export function Message() {
     const [typingUser, setTypingUser] = useState(null)
 
     const [msgsToShow, setMsgsToShow] = useState(null)
+
+    const [isNewMsg, setIsNewMsg] = useState(false)
 
     const timeoutId = useRef()
 
@@ -55,7 +58,12 @@ export function Message() {
         // Join room
         socketService.emit('chat-set-topic', msgInfo?._id)
         // Add listeners
-        socketService.on('chat-add-msg', addMsg)
+        socketService.on('chat-add-msg',addMsg )
+
+        socketService.on('user-got-msg', (data) => {
+            console.log('user-got-msg!!!!')
+        })
+
         socketService.on('chat-add-typing', showTyping)
         socketService.on('chat-remove-typing', removeTypingUser)
 
@@ -104,7 +112,9 @@ export function Message() {
 
     function addMsg(newMsg) {
         setMsgInfo(prevMsgInfo => ({ ...prevMsgInfo, history: [...prevMsgInfo.history, newMsg] }))
+    
     }
+
 
     function sendMsg(ev) {
         console.log('sendMsg')
@@ -113,7 +123,9 @@ export function Message() {
         const msgToSend = { userId, txt: newMsg.txt }
         // the socket update the backend
         socketService.emit('chat-send-msg', msgToSend)
-
+        const toUser = msgInfo.users.find(user=>user._id !== userId)
+        // update the user who got msg
+        socketService.emit('user-got-msg', toUser._id)
         // stop typing
         socketService.emit('chat-stop-typing', userId)
         clearTimeout(timeoutId.current)
@@ -143,7 +155,6 @@ export function Message() {
         if (timeoutId.current) clearTimeout(timeoutId.current)
 
         timeoutId.current = setTimeout(() => {
-            console.log('settimeout')
             socketService.emit('chat-stop-typing', user)
             timeoutId.current = null
         }, 2000);

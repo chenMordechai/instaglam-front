@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo ,useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
@@ -10,10 +10,14 @@ import arrow from '../assets/icons/angle-down-solid.svg'
 
 import { Notification } from '../pages/Notification'
 import { useToggle } from '../customHooks/useToggle'
+import { socketService } from '../services/socket.service.js'
 
-export const HomeHeader = memo(({ newNotifications, loggedinUserId }) => {
+export const HomeHeader = memo(({isNewMsg, isNewNotifications, loggedinUserId }) => {
+   console.log('isNewNotifications:', isNewNotifications)
+   console.log('isNewMsg:', isNewMsg)
     const [openNotificationModal, onToggleNotificationModal] = useToggle(false)
 
+   
     return (
         <section className="home-header">
             {openNotificationModal && <Notification loggedinUserId={loggedinUserId} onToggleNotificationModal={onToggleNotificationModal} />}
@@ -25,10 +29,11 @@ export const HomeHeader = memo(({ newNotifications, loggedinUserId }) => {
             <section className="icons">
                 <a onClick={onToggleNotificationModal} title="Notifications" >
                     <img src={heart} />
-                    {newNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
+                    {isNewNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 </a>
                 <Link to="/message" className="disable" title="Messages"  >
                     <img src={message} />
+                    {isNewMsg && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 </Link>
             </section></>}
         </section>

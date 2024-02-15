@@ -4,12 +4,13 @@
         @include header;
         position: static;
     }
-
-    .have-notification {
-        color: red;
-        height: 9px;
-        position: absolute;
-        top: 13px;
-        right: 58px;
+    a {
+        position: relative;
+        .have-notification {
+            color: red;
+            height: 9px;
+            position: absolute;
+            right: 5px;
+        }
     }
 }
