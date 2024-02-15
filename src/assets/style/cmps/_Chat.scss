@@ -6,4 +6,14 @@
         "header"
         "msgs"
         "input";
+
+    @include for-mobile-layout {
+        position: fixed;
+        top: 0;
+        background-color: #fff;
+        height: 100vh;
+        width: 100%;
+        z-index: 20;
+        overflow: auto;
+    }
 }

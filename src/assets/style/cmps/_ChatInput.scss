@@ -6,6 +6,10 @@
     grid-area: input;
     background-color: #fff;
 
+    @include for-mobile-layout {
+        position: fixed;
+    }
+
     .form-container {
         padding: 10px 15px;
         border: 1px solid $clr-grey2;

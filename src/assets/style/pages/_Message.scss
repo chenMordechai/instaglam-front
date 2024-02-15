@@ -124,6 +124,9 @@
                 display: none;
             }
         }
+        @include for-mobile-layout {
+            z-index: 10;
+        }
     }
 
     @include for-mobile-layout {

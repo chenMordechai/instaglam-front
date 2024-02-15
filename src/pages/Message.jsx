@@ -39,7 +39,7 @@ export function Message() {
     const timeoutId = useRef()
 
     useEffect(() => {
-        if (!search.name) setUsersToShow(users)
+        if (!search.name) setUsersToShow(users.filter(u=>u._id !==loggedinUser._id))
         else {
             // search user
             const filteredUsers = users.filter(u => u.fullname.includes(search.name) || u.username.includes(search.name))
@@ -214,7 +214,7 @@ export function Message() {
                 </ul>
 
             </section>
-            {!utilService.isMobile() && <section className="right-side">
+           <section className="right-side">
 
                 {!userToChat && <div className="content-container">
                     <div className="img-container">
@@ -226,7 +226,7 @@ export function Message() {
                 </div>}
 
                 {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} updateScroll={updateScroll}/>}
-            </section>}
+            </section>
 
         </section>
     )
