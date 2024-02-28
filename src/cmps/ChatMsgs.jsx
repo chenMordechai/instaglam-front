@@ -1,7 +1,8 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
-export function ChatMsgs({ msgs, loggedinUser, typingUser ,updateScroll}) {
-    setTimeout( updateScroll,1)
+export function ChatMsgs({ msgs, loggedinUser, typingUser, updateScroll }) {
+    setTimeout(updateScroll, 1)
+
     function getClassName(userId) {
         return (userId === loggedinUser._id) ? 'loggedin-user' : 'some-user'
     }

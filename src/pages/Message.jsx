@@ -181,7 +181,8 @@ export function Message() {
     }
 
     function updateScroll() {
-        var element = document.querySelector(".right-side");
+        console.log('updateScroll')
+        var element = (utilService.isMobile()) ? document.querySelector(".chat") : document.querySelector(".right-side")
         if (!element) return
         element.scrollTop = element.scrollHeight + 20;
     }
