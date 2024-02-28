@@ -19,13 +19,58 @@
 
     border-radius: 10px;
 
-    & > button,
+    .header {
+        border-radius: 20px 20px 0px 0px;
+        @include flex(column, center, center, 10px);
+        width: 100%;
+        border-bottom: 1px solid $clr-grey2;
+        position: static;
+        padding: 0px;
+        padding-bottom: 10px;
+        height: max-content;
+
+        img.line {
+            height: 30px;
+            cursor: pointer;
+            margin: 0;
+        }
+        h3 {
+            border: none;
+        }
+
+        .actions-container {
+            @include flex(row, center, space-between);
+            width: 100%;
+            padding: 0 30px;
+
+            .action {
+                width: 120px;
+                @include flex(column, center, center);
+
+                .img-container {
+                    @include flex(column, center, center);
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    border: 1px solid;
+
+                    img {
+                        margin: 0;
+                        height: 22px;
+                        width: 22px;
+                    }
+                }
+            }
+        }
+    }
+
+    & > button:not(.option-container),
     & > h3,
-    & > a {
+    & > a:not(.option-container) {
         @include flex(column, center, center);
         border-bottom: 1px solid $clr-grey2;
         padding: 15px;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 18px;
         border-radius: 0;
         position: relative;
@@ -57,7 +102,7 @@
         }
     }
     a {
-        font-weight: 300;
+        font-weight: 400;
         font-size: 18px;
     }
 }

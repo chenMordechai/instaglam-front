@@ -1,25 +1,7 @@
 .modal.comment-modal {
     // height: 70%;
     transition: 1s;
-    .header {
-        border-radius: 20px 20px 0px 0px;
-        @include flex(column, center, center, 10px);
-        width: 100%;
-        border-bottom: 1px solid $clr-grey2;
-        position: static;
-        padding: 0px;
-        padding-bottom: 10px;
-        height: max-content;
 
-        img.line {
-            height: 30px;
-            cursor: pointer;
-            margin: 0;
-        }
-        h3 {
-            border: none;
-        }
-    }
     ul {
         overflow-y: auto;
         height: 63%;
