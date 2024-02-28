@@ -88,12 +88,11 @@ export function Message() {
     }
 
     async function getOrderedUsers(users) {
-        console.log('getMsgs');
         try {
             const filterBy = { userId: loggedinUser._id }
             const msgs = await msgService.query(filterBy)
             // sort the user msgs by date
-            msgs.sort((m1, m2) => m2.history[m2.history.length - 1].createdAt - m1.history[m1.history.length - 1].createdAt)
+            msgs.sort((m1, m2) => m2.history[m2.history.length - 1]?.createdAt - m1.history[m1.history.length - 1]?.createdAt)
             // find the users that have msgs with loggedinUser
             const userIds = msgs.map(m => m.users.find(u => u._id !== loggedinUser._id)._id)
             const orderedUsers = []
@@ -106,8 +105,6 @@ export function Message() {
             orderedUsers.push(...users.filter(u => u._id !== loggedinUser._id &&
                 userIds.every(userId => userId !== u._id)))
 
-            console.log('orderedUsers:', orderedUsers)
-            // return orderedUsers
             setUsersToShow(orderedUsers)
         } catch (err) {
             console.log('err:', err)
