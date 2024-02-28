@@ -19,7 +19,9 @@
 
         img.logo {
             height: 55px;
-            // margin: $pad3;
+            @include for-mobile-layout {
+                height: 59px;
+            }
             margin-top: 40px;
             margin-bottom: 32px;
         }
@@ -31,6 +33,11 @@
             input {
                 height: 37px;
                 width: 269px;
+                @include for-mobile-layout {
+                    height: 43px;
+                    width: 297px;
+                    font-size: 15px;
+                }
                 padding: $pad1 8px;
                 border-radius: 3px;
                 border: 1px solid $clr-grey2;
@@ -44,6 +51,9 @@
         .or-container {
             @include flex(row, center, center, 18px);
             padding: 10px 39px;
+            @include for-mobile-layout {
+                padding: 13px 26px;
+            }
             div.line {
                 border-top: 1px solid $clr-grey2;
                 display: inline-block;
@@ -53,6 +63,9 @@
             h3 {
                 color: $clr-grey4;
                 font-size: 14px;
+                @include for-mobile-layout {
+                    font-size: 15px;
+                }
             }
         }
         .fb-container {
@@ -62,27 +75,41 @@
             img.fb {
                 height: 16px;
                 margin-bottom: 2px;
+                @include for-mobile-layout {
+                    height: 18px;
+                }
                 // margin-top: 1px;
             }
             h3 {
                 color: #395185;
                 cursor: pointer;
                 font-size: 14px;
+                @include for-mobile-layout {
+                    font-size: 16px;
+                }
             }
         }
         span {
             font-size: 12px;
             font-weight: 100;
             cursor: pointer;
+            @include for-mobile-layout {
+                font-size: 13px;
+            }
         }
     }
     .signup-container {
         margin-top: 10px;
         padding-top: 23px;
         padding-bottom: 19px;
+        @include for-mobile-layout {
+            margin-top: 19px;
+        }
         h2 {
             font-weight: 300;
-            font-size: 14px;
+            @include for-mobile-layout {
+                font-size: 15px;
+            }
             button {
                 color: $clr-blue;
                 font-weight: 400;

@@ -22,9 +22,9 @@ export function Post({ post, loggedinUser }) {
 
     const { isScreenOpen, onOpenScreen, onCloseScreen, } = useContext(ScreenOpenContext)
 
-    useEffectToggleModal(onOpenScreen, onCloseScreen, [openOptionsModal, openCommentModal,openEmojiModal])
+    useEffectToggleModal(onOpenScreen, onCloseScreen, [openOptionsModal, openCommentModal, openEmojiModal])
 
-    useEffectCloseModal(isScreenOpen, [onToggleOptionsModal, onToggleCommentModal,onToggleEmojiModal])
+    useEffectCloseModal(isScreenOpen, [onToggleOptionsModal, onToggleCommentModal, onToggleEmojiModal])
 
     function isLoggedinUserPost() {
         return loggedinUser._id === post.by._id
@@ -62,7 +62,7 @@ export function Post({ post, loggedinUser }) {
 
             <PostHeader onToggleOptionsModal={onToggleOptionsModal} byId={post.by._id} by={post.by.username} byImgUrl={post.by.imgUrl} createdAt={post.createdAt} />
             <PostMedia type={post.type} url={post.url} filter={post.imgFilter} />
-            <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} />
+            <PostControls onUpdateLikePost={onUpdateLikePost} likedBy={post.likedBy} loggedinUser={loggedinUser} onToggleCommentModal={onToggleCommentModal} />
             <PostComments openEmojiModal={openEmojiModal} onToggleEmojiModal={onToggleEmojiModal} onUpdateLikeComment={onUpdateLikeComment} createdAt={post.createdAt} loggedinUser={loggedinUser} onToggleCommentModal={onToggleCommentModal} comments={post.comments} myNewComment={newComment} onAddCommentToPost={onAddCommentToPost} likedBy={post.likedBy} by={post.by.username} byId={post.by._id} txt={post.txt} />
         </section>
     )

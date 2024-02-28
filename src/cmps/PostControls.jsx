@@ -7,19 +7,15 @@ import bookmark from '../assets/icons/bookmark-regular.png'
 // import bookmark from '../assets/icons/bookmark.png'
 import { Heart } from './Heart'
 
-export function PostControls({ onUpdateLikePost, loggedinUser, likedBy }) {
+export function PostControls({ onUpdateLikePost, loggedinUser, likedBy, onToggleCommentModal }) {
 
     return (
         <section className="post-controls">
             <div className="icons-container">
                 <div>
                     <Heart onUpdateLike={onUpdateLikePost} loggedinUser={loggedinUser} likedBy={likedBy} />
-                    {/* <a onClick={onLikePost} className={isLiked ? 'red-heart' : ''}>
-                        <img src={heart} />
-                        <FontAwesomeIcon className={isLiked ? 'animate__heartBeat' : ''} icon={faHeart} />
-                    </a> */}
                     <a>
-                        <img src={msg} />
+                        <img src={msg} onClick={onToggleCommentModal} />
                     </a>
                     <a>
                         <img src={share} />
