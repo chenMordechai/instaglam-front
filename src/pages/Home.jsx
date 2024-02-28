@@ -74,10 +74,12 @@ export function Home() {
         socketService.emit('user-watch', loggedinUser._id)
 
         if (utilService.isMobile()) {
+            console.log('utilService.isMobile')
             socketService.on('notification-added', () => {
                 setIsNewNotifications(true)
             })
             socketService.on('user-get-msg', () => {
+                console.log('user-get-msg')
                 setIsNewMsg(true)
             })
         }

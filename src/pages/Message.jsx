@@ -39,13 +39,13 @@ export function Message() {
     const timeoutId = useRef()
 
     useEffect(() => {
-        if (!search.name) setUsersToShow(users.filter(u => u._id !== loggedinUser._id))
+        if (!search.name) getOrderedUsers(users)
         else {
             // search user
             const filteredUsers = users.filter(u => u.fullname.includes(search.name) || u.username.includes(search.name))
-            setUsersToShow(filteredUsers)
+            getOrderedUsers(filteredUsers)
         }
-    }, [search, users])
+    }, [search, users, userToChat])
 
     useEffect(() => {
         if (userToChat) loadHistory()
@@ -87,8 +87,31 @@ export function Message() {
         console.log('go to chat', userId)
     }
 
-    function getOrderedUsers() {
-        return usersToShow?.filter(user => user._id !== loggedinUser._id)
+    async function getOrderedUsers(users) {
+        console.log('getMsgs');
+        try {
+            const filterBy = { userId: loggedinUser._id }
+            const msgs = await msgService.query(filterBy)
+            // sort the user msgs by date
+            msgs.sort((m1, m2) => m2.history[m2.history.length - 1].createdAt - m1.history[m1.history.length - 1].createdAt)
+            // find the users that have msgs with loggedinUser
+            const userIds = msgs.map(m => m.users.find(u => u._id !== loggedinUser._id)._id)
+            const orderedUsers = []
+            // push the users that have msgs with loggedinUser
+            userIds.forEach(id => {
+                const userById = users.find(u => u._id === id)
+                orderedUsers.push(userById)
+            })
+            // push all other users
+            orderedUsers.push(...users.filter(u => u._id !== loggedinUser._id &&
+                userIds.every(userId => userId !== u._id)))
+
+            console.log('orderedUsers:', orderedUsers)
+            // return orderedUsers
+            setUsersToShow(orderedUsers)
+        } catch (err) {
+            console.log('err:', err)
+        }
     }
 
     async function loadHistory() {
@@ -112,12 +135,9 @@ export function Message() {
 
     function addMsg(newMsg) {
         setMsgInfo(prevMsgInfo => ({ ...prevMsgInfo, history: [...prevMsgInfo.history, newMsg] }))
-
     }
 
-
     function sendMsg(ev) {
-        console.log('sendMsg')
         ev.preventDefault()
         const userId = loggedinUser._id
         const msgToSend = { userId, txt: newMsg.txt }
@@ -132,19 +152,17 @@ export function Message() {
         timeoutId.current = null
 
         setNewMsg({ txt: '' })
-
     }
-
 
     function showTyping(fullname) {
         console.log(fullname, 'is typing')
         setTypingUser(fullname)
     }
+
     function removeTypingUser() {
         console.log('removeTyping user')
         setTypingUser(null)
     }
-
 
     function handleFormChange(ev) {
         const user = {
@@ -161,7 +179,6 @@ export function Message() {
 
         handleNewMsgChange(ev)
     }
-
 
     function getMsgsOrder(msgs) {
         if (!msgs) return
@@ -181,7 +198,6 @@ export function Message() {
     }
 
     function updateScroll() {
-        console.log('updateScroll')
         var element = (utilService.isMobile()) ? document.querySelector(".chat") : document.querySelector(".right-side")
         if (!element) return
         element.scrollTop = element.scrollHeight + 20;
@@ -200,7 +216,7 @@ export function Message() {
                             <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
                         </form>
                     </div>
-                    <Users users={getOrderedUsers()} setUserToChat={setUserToChat} />
+                    <Users users={usersToShow} setUserToChat={setUserToChat} />
                     <section className="sub-header">
                         <h3>Messages</h3>
                         <button className="clr-blue" >Requests</button>
