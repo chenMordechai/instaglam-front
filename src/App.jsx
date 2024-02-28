@@ -12,6 +12,7 @@ import { UserEdit } from './pages/UserEdit'
 import { PostEdit } from './pages/PostEdit'
 import { Video } from './pages/Video'
 import { Message } from './pages/Message'
+import { Explore } from './pages/Explore'
 
 import { NavLinks } from './cmps/NavLinks'
 import { UserPosts } from './cmps/UserPosts'
@@ -74,6 +75,7 @@ export function App() {
                   <Route element={<PostEdit />} path="/post/edit/:postId?" />
                   <Route element={<Video />} path="/video" />
                   <Route element={<Message />} path="/message" />
+                  <Route element={<Explore />} path="/explore" />
                 </Routes>
               </div>
             </main>

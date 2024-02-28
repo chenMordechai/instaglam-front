@@ -8,7 +8,7 @@ import arrowLeft from '../assets/icons/caret-left-solid.svg'
 // if i want the svg like svg
 // import {ReactComponent as ReactLogo} from './logo.svg';
 
-export function Carousel({ items , Comp1 , Comp2 , ...restOfProps}) {
+export function Carousel({ items, Comp1, Comp2, ...restOfProps }) {
     const [isDragging, setIsDragging] = useState()
     const [startX, setStartX] = useState()
     const [startScrollLeft, setStartScrollLeft] = useState()
@@ -20,25 +20,25 @@ export function Carousel({ items , Comp1 , Comp2 , ...restOfProps}) {
         document.addEventListener('mouseup', dragStop)
         carousel.current.addEventListener('scroll', startEndScroll)
 
-    return ()=>{
+        return () => {
             document.removeEventListener('mouseup', dragStop)
         }
     }, [])
 
     useEffect(() => {
-        if(!carousel) return
-        checkIfHasScroll()       
+        if (!carousel) return
+        checkIfHasScroll()
     }, [carousel?.current?.scrollWidth])
 
-    function startEndScroll(){
+    function startEndScroll() {
         setStartOfScroll(carousel.current.scrollLeft === 0)
         setEndOfScroll(Math.abs(carousel.current.scrollWidth - carousel.current.scrollLeft - carousel.current.clientWidth) < 1)
-        }
+    }
 
-    function checkIfHasScroll(){
-        if(carousel.current.scrollWidth === carousel.current.clientWidth){
+    function checkIfHasScroll() {
+        if (carousel.current.scrollWidth === carousel.current.clientWidth) {
             setEndOfScroll(true)
-        }else{
+        } else {
             setEndOfScroll(false)
         }
     }
@@ -63,25 +63,25 @@ export function Carousel({ items , Comp1 , Comp2 , ...restOfProps}) {
         carousel.current.scrollLeft += (direction === 'left') ? -firstCardWidth : firstCardWidth
     }
 
-    if(!items) return ''
+    if (!items) return ''
     return (
-            <div className="wrapper">
-               {!startOfScroll && <button onClick={() => moveCarousel('left')} className="arrow">
-                    <img src={arrowLeft} />
-                </button>}
-                <ul ref={carousel} className={`carousel ${isDragging ? 'dragging' : ''}`}
-                    onMouseDown={dragStart} onMouseMove={dragging}
-                    onTouchStart={dragStart} onTouchMove={dragging}>
-                    {items.map((item,i) => <li className="card" key={item._id || i}>
-                        <Comp1 item={item} isDragging={isDragging} {...restOfProps} />
-                    </li>
-                    )}
-                    {/* plus at the end of the highlights */}
-                 {Comp2 && <Comp2/>}
-                </ul>
-               {!endOfScroll && <button onClick={() => moveCarousel('right')} className="arrow">
-                    <img src={arrowRight} />
-                </button  >}
-            </div>
+        <div className="wrapper">
+            {!startOfScroll && <button onClick={() => moveCarousel('left')} className="arrow">
+                <img src={arrowLeft} />
+            </button>}
+            <ul ref={carousel} className={`carousel ${isDragging ? 'dragging' : ''}`}
+                onMouseDown={dragStart} onMouseMove={dragging}
+                onTouchStart={dragStart} onTouchMove={dragging}>
+                {items.map((item, i) => <li className="card" key={item._id || i}>
+                    <Comp1 item={item} isDragging={isDragging} {...restOfProps} />
+                </li>
+                )}
+                {/* plus at the end of the highlights */}
+                {Comp2 && <Comp2 />}
+            </ul>
+            {!endOfScroll && <button onClick={() => moveCarousel('right')} className="arrow">
+                <img src={arrowRight} />
+            </button  >}
+        </div>
     )
 }

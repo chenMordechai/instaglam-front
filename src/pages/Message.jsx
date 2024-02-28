@@ -39,7 +39,7 @@ export function Message() {
     const timeoutId = useRef()
 
     useEffect(() => {
-        if (!search.name) setUsersToShow(users.filter(u=>u._id !==loggedinUser._id))
+        if (!search.name) setUsersToShow(users.filter(u => u._id !== loggedinUser._id))
         else {
             // search user
             const filteredUsers = users.filter(u => u.fullname.includes(search.name) || u.username.includes(search.name))
@@ -53,12 +53,12 @@ export function Message() {
     }, [userToChat])
 
     useEffect(() => {
-        if (!userToChat ) 
-        console.log('msgInfo:', msgInfo)
+        if (!userToChat)
+            console.log('msgInfo:', msgInfo)
         // Join room
         socketService.emit('chat-set-topic', msgInfo?._id)
         // Add listeners
-        socketService.on('chat-add-msg',addMsg )
+        socketService.on('chat-add-msg', addMsg)
 
         socketService.on('user-got-msg', (data) => {
             console.log('user-got-msg!!!!')
@@ -77,10 +77,10 @@ export function Message() {
         }
     }, [userToChat, msgInfo?._id])
 
-    useEffect(()=>{
-        if(!msgInfo?.history) return
+    useEffect(() => {
+        if (!msgInfo?.history) return
         setMsgsToShow(getMsgsOrder(msgInfo?.history))
-    },[msgInfo?.history])
+    }, [msgInfo?.history])
 
     function goToChat(userId) {
         onToggleSearchModal()
@@ -98,12 +98,12 @@ export function Message() {
                 return id1 === id2
             })
         })
-        if( msgId){
+        if (msgId) {
             const msgInfo = await msgService.getById(msgId)
             setMsgInfo(msgInfo)
-        }else{
-            const {username ,fullname ,_id ,imgUrl} = userToChat
-            const miniUserToChat = {username ,fullname ,_id ,imgUrl}
+        } else {
+            const { username, fullname, _id, imgUrl } = userToChat
+            const miniUserToChat = { username, fullname, _id, imgUrl }
             const msgInfo = await msgService.save(miniUserToChat)
             console.log('msgInfo else:', msgInfo)
             setMsgInfo(msgInfo)
@@ -112,7 +112,7 @@ export function Message() {
 
     function addMsg(newMsg) {
         setMsgInfo(prevMsgInfo => ({ ...prevMsgInfo, history: [...prevMsgInfo.history, newMsg] }))
-    
+
     }
 
 
@@ -123,7 +123,7 @@ export function Message() {
         const msgToSend = { userId, txt: newMsg.txt }
         // the socket update the backend
         socketService.emit('chat-send-msg', msgToSend)
-        const toUser = msgInfo.users.find(user=>user._id !== userId)
+        const toUser = msgInfo.users.find(user => user._id !== userId)
         // update the user who got msg
         socketService.emit('user-got-msg', toUser._id)
         // stop typing
@@ -135,7 +135,7 @@ export function Message() {
 
     }
 
-    
+
     function showTyping(fullname) {
         console.log(fullname, 'is typing')
         setTypingUser(fullname)
@@ -162,27 +162,27 @@ export function Message() {
         handleNewMsgChange(ev)
     }
 
-    
-    function getMsgsOrder(msgs){
-        if(!msgs) return
-        let userId ;
+
+    function getMsgsOrder(msgs) {
+        if (!msgs) return
+        let userId;
         const copy = [...msgs]
-        copy.forEach((msg,idx) => {
-            if(msg.userId === userId){
-                msg.className =  'middle'
-                if(copy[idx+1]?.userId !== msg.userId || !copy[idx+1] )  msg.className = 'end'
-            }else{
+        copy.forEach((msg, idx) => {
+            if (msg.userId === userId) {
+                msg.className = 'middle'
+                if (copy[idx + 1]?.userId !== msg.userId || !copy[idx + 1]) msg.className = 'end'
+            } else {
                 userId = msg.userId
-                if(copy[idx+1]?.userId === msg.userId)  msg.className = 'start'
-                else msg.className =''
+                if (copy[idx + 1]?.userId === msg.userId) msg.className = 'start'
+                else msg.className = ''
             }
         });
         return copy
     }
 
-    function updateScroll(){
+    function updateScroll() {
         var element = document.querySelector(".right-side");
-        if(!element) return
+        if (!element) return
         element.scrollTop = element.scrollHeight + 20;
     }
 
@@ -199,7 +199,7 @@ export function Message() {
                             <input onChange={handleChange} type="text" name="name" value={search.name} placeholder="Search" />
                         </form>
                     </div>
-                    <Users users={getOrderedUsers()} />
+                    <Users users={getOrderedUsers()} setUserToChat={setUserToChat} />
                     <section className="sub-header">
                         <h3>Messages</h3>
                         <button className="clr-blue" >Requests</button>
@@ -214,7 +214,7 @@ export function Message() {
                 </ul>
 
             </section>
-           <section className="right-side">
+            <section className="right-side">
 
                 {!userToChat && <div className="content-container">
                     <div className="img-container">
@@ -225,7 +225,7 @@ export function Message() {
                     <button className="btn">Send message</button>
                 </div>}
 
-                {userToChat && <Chat userToChat={userToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} updateScroll={updateScroll}/>}
+                {userToChat && <Chat userToChat={userToChat} setUserToChat={setUserToChat} topic={msgInfo?._id} msgs={msgsToShow} loggedinUser={loggedinUser} typingUser={typingUser} sendMsg={sendMsg} handleFormChange={handleFormChange} newMsg={newMsg} updateScroll={updateScroll} />}
             </section>
 
         </section>

@@ -45,20 +45,17 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
     useEffectCloseModal(isScreenOpen, [onToggleNotificationModal, onToggleSearchModal])
 
     useEffect(() => {
-        console.log('navlinks')
         socketService.emit('user-watch', loggedinUser?._id)
 
-        if(!utilService.isMobile()){
+        if (!utilService.isMobile()) {
             socketService.on('notification-added', () => {
-                console.log('notification-added navlinks')
                 setIsNewNotifications(true)
             })
             socketService.on('user-get-msg', () => {
-                console.log('user-get-msg!!!! navLinks')
                 setIsNewMsg(true)
             })
         }
-      
+
         return () => {
             socketService.off('notification-added')
             socketService.off('user-get-msg')
@@ -97,18 +94,18 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
         else return ''
     }
 
-  
+
 
     if (!loggedinUser) return ''
     return (
 
         <section className={`nav-links ${getClass()}`} style={getStyle()}>
 
-            <Link to={'/home'} title="Instaglam" className="not-mobile">
+            <Link to="/home" title="Instaglam" className="not-mobile">
                 <img className="icon" src={instagram} />
                 <img className="logo" src={logo} />
             </Link>
-            <NavLink to={'/home'} title="Home" >
+            <NavLink to="/home" title="Home" >
                 {/* <img src={homeFull} /> */}
                 {/* <FontAwesomeIcon icon={faHouse} />
                 <FontAwesomeIcon icon={faHouseChimney} /> */}
@@ -123,15 +120,15 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={glass} />
                 <span>Search</span>
             </a>
-            <a className="disable not-mobile" title="Explore" >
+            {/* <NavLink to="/explore" className="not-mobile" title="Explore" >
                 <img src={compass} />
                 <span>Explore</span>
-            </a>
-            <NavLink to="video" title="Reels" >
+            </NavLink> */}
+            <NavLink to="/video" title="Reels" >
                 <img src={film} />
                 <span>Reels</span>
             </NavLink>
-            <NavLink to="message" className="not-mobile" title="Messages"  >
+            <NavLink to="/message" className="not-mobile" title="Messages"  >
                 {!isMessagePage() && <img src={message} />}
                 {isMessagePage() && <FontAwesomeIcon icon={faCommentDots} />}
                 {isNewMsg && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
@@ -143,7 +140,7 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 {isIsNewNotifications && <FontAwesomeIcon className="have-notification" icon={faCircle} />}
                 <span>Notifications</span>
             </a>
-            <NavLink to={'/post/edit'} title="New Post">
+            <NavLink to="/post/edit" title="New Post">
                 <img src={plus} />
                 <span >Create</span>
             </NavLink>

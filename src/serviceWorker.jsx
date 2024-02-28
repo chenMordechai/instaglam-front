@@ -11,7 +11,7 @@
 // opt-in, read https://bit.ly/CRA-PWA
 
 
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import InfoIcon from "./assets/icons/angle-down-solid.svg"
 
 
@@ -155,7 +155,7 @@ function registerValidSW(swUrl, config) {
 function checkValidServiceWorker(swUrl, config) {
     // Check if the service worker can be found. If it can't reload the page.
     fetch(swUrl, {
-        headers: {'Service-Worker': 'script'},
+        headers: { 'Service-Worker': 'script' },
     })
         .then(response => {
             // Ensure service worker exists, and that we really are getting a JS file.

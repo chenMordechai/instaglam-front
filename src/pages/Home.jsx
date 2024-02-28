@@ -10,16 +10,16 @@ import { NavSide } from '../cmps/NavSide'
 import { getActionCommentAdd, getActionCommentRemove, getActionLikePostAdd, getActionLikePostRemove, loadPosts, getActionAddPost, getActionUpdatePost, getActionRemovePost } from '../store/actions/post.actions.js'
 import { addFollowing, removeFollowing, logout, loadUsers, loadUser } from '../store/actions/user.actions.js'
 import { socketService } from '../services/socket.service.js'
+import { utilService } from '../services/util.service.js'
 
 import instagram from '../assets/icons/instaglam.svg'
 
 export function Home() {
-
-    const  posts  = useSelector(storeState => storeState.postModule.posts)
-    const  users = useSelector(storeState => storeState.userModule.users)
+    const posts = useSelector(storeState => storeState.postModule.posts)
+    const users = useSelector(storeState => storeState.userModule.users)
     const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
     // const notifications = useSelector(storeState => storeState.userModule.currUser?.notifications)
-    
+
     const [isNewNotifications, setIsNewNotifications] = useState(false)
     const [isNewMsg, setIsNewMsg] = useState(false)
 
@@ -43,13 +43,12 @@ export function Home() {
         } catch (err) {
             console.log('err:', err)
             navigate('/')
-        }finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
     useEffect(() => {
-        console.log('useEffect home')
         socketService.on('post-added', post => {
             dispatch(getActionAddPost(post))
         })
@@ -74,14 +73,14 @@ export function Home() {
 
         socketService.emit('user-watch', loggedinUser._id)
 
-        socketService.on('notification-added', () => {
-            console.log('notification-added!! home')
-            setIsNewNotifications(true)
-        })
-        socketService.on('user-get-msg', () => {
-            console.log('user-get-msg!!!! home')
-            setIsNewMsg(true)
-        })
+        if (utilService.isMobile()) {
+            socketService.on('notification-added', () => {
+                setIsNewNotifications(true)
+            })
+            socketService.on('user-get-msg', () => {
+                setIsNewMsg(true)
+            })
+        }
 
         return () => {
             socketService.off('post-added')
@@ -103,7 +102,7 @@ export function Home() {
         // loggedinUser first then all others 
         const orderedUsers = [loggedinUserFull, ...users.filter(user => user._id !== loggedinUser._id)]
         return orderedUsers
-    }, [users,loggedinUser])
+    }, [users, loggedinUser])
 
 
     const notFollowingUsers = useMemo(() => {
@@ -136,7 +135,7 @@ export function Home() {
         const miniUser = { _id, username, fullname, imgUrl }
         const updatedUser = await addFollowing(miniUser, loggedinUser, 'fromHome')
         setUpdatedUsers(prev => [...prev, updatedUser])
-    }, [users,loggedinUser])
+    }, [users, loggedinUser])
 
     const onRemoveFollowing = useCallback(async (userId) => {
         await removeFollowing(userId, loggedinUser._id, 'fromHome')
@@ -154,7 +153,7 @@ export function Home() {
     }, [])
 
 
-    if(isLoading)  return <section className="loader-container"><img src={instagram} /></section>
+    if (isLoading) return <section className="loader-container"><img src={instagram} /></section>
     return (
         <section className="home">
             {/* HomeHeader just in mobile */}

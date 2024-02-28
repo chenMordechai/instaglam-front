@@ -13,8 +13,6 @@ import { useToggle } from '../customHooks/useToggle'
 import { socketService } from '../services/socket.service.js'
 
 export const HomeHeader = memo(({isNewMsg, isNewNotifications, loggedinUserId }) => {
-   console.log('isNewNotifications:', isNewNotifications)
-   console.log('isNewMsg:', isNewMsg)
     const [openNotificationModal, onToggleNotificationModal] = useToggle(false)
 
    
