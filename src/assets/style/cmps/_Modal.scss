@@ -4,6 +4,7 @@
     left: 50%;
     translate: -50% 50%;
     z-index: 20;
+    padding-bottom: 15px;
 
     @include flex(column, stretch, start);
     width: 400px;
@@ -19,15 +20,17 @@
 
     border-radius: 10px;
 
-    .header {
+    .modal-header {
         border-radius: 20px 20px 0px 0px;
         @include flex(column, center, center, 10px);
         width: 100%;
-        border-bottom: 1px solid $clr-grey2;
         position: static;
         padding: 0px;
         padding-bottom: 10px;
         height: max-content;
+        &:not(.no-border) {
+            border-bottom: 1px solid $clr-grey2;
+        }
 
         img.line {
             height: 30px;
@@ -64,6 +67,18 @@
         }
     }
 
+    a.option-container,
+    button.option-container {
+        @include flex(row, end, start, 10px);
+        padding: 15px;
+        font-size: 16px;
+
+        img {
+            // border: none;
+            height: 22px;
+            width: 22px;
+        }
+    }
     & > button:not(.option-container),
     & > h3,
     & > a:not(.option-container) {
@@ -101,6 +116,7 @@
             font-weight: 500;
         }
     }
+
     a {
         font-weight: 400;
         font-size: 18px;

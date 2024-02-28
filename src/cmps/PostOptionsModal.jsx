@@ -14,7 +14,7 @@ export function PostOptionsModal({ userId, isFollowing, onRemovePost, onToggleOp
 
     return (
         <section className="modal post-options-modal">
-            <div className="header">
+            <div className="modal-header">
                 <img onClick={onToggleOptionsModal} className="line" src={line} />
                 <div className="actions-container">
                     <div className="action">

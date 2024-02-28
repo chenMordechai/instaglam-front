@@ -37,7 +37,7 @@ export function PostCommentModal({ onUpdateLikeComment, comments, loggedinUser, 
     return (
         <section className="modal comment-modal" style={{ height: height + '%' }}
             onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd}>
-            <div className="header">
+            <div className="modal-header">
                 <img onClick={onToggleCommentModal} className="line" src={line} />
                 <h3> Comments</h3>
             </div>
