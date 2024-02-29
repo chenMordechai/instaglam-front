@@ -17,6 +17,8 @@ import { utilService } from '../services/util.service.js'
 import { msgService } from '../services/msg.service.js'
 import { eventBusService } from '../services/event-bus.service.js'
 import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_TYPING, SOCKET_EVENT_STOP_TYPING, SOCKET_EMIT_TYPING, SOCKET_EMIT_STOP_TYPING } from '../services/socket.service'
+import { userService } from '../services/user.service'
+import { updateUsersMsgId} from '../store/actions/user.actions.js'
 
 
 export function Message() {
@@ -104,7 +106,6 @@ export function Message() {
             // push all other users
             orderedUsers.push(...users.filter(u => u._id !== loggedinUser._id &&
                 userIds.every(userId => userId !== u._id)))
-
             setUsersToShow(orderedUsers)
         } catch (err) {
             console.log('err:', err)
@@ -112,9 +113,10 @@ export function Message() {
     }
 
     async function loadHistory() {
-        const loggedinUserFull = users.find(user => user._id === loggedinUser._id)
+    const loggedinUserFull = await userService.getById(loggedinUser._id)
+    const userToChatFull = await userService.getById(userToChat._id)
         const msgId = loggedinUserFull.msgsIds.find(id1 => {
-            return userToChat.msgsIds.find(id2 => {
+            return userToChatFull.msgsIds.find(id2 => {
                 return id1 === id2
             })
         })
@@ -124,8 +126,7 @@ export function Message() {
         } else {
             const { username, fullname, _id, imgUrl } = userToChat
             const miniUserToChat = { username, fullname, _id, imgUrl }
-            const msgInfo = await msgService.save(miniUserToChat)
-            console.log('msgInfo else:', msgInfo)
+           const msgInfo=await updateUsersMsgId(miniUserToChat)
             setMsgInfo(msgInfo)
         }
     }

@@ -18,5 +18,6 @@ async function getById(msgId) {
 }
 
 async function save(userToChat) {
+    console.log('save')
     return httpService.post(BASE_URL, userToChat)
 }

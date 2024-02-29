@@ -1,6 +1,7 @@
 import { userService } from "../../services/user.service.js";
+import { msgService } from "../../services/msg.service.js";
 import { socketService } from "../../services/socket.service.js";
-import { SET_USERS, SET_USER, SET_LOGGEDIN_USER, UPDATE_USER_NOTIFICATIONS, SET_LOGGEDIN_USER_IMG, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING, ADD_FOLLOWING, REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
+import {UPDATE_USER_MSG_ID, SET_USERS, SET_USER, SET_LOGGEDIN_USER, UPDATE_USER_NOTIFICATIONS, SET_LOGGEDIN_USER_IMG, UPDATE_USER_IMG, UPDATE_USER, ADD_USER, REMOVE_USER, SET_IS_LOADING, ADD_FOLLOWING, REMOVE_FOLLOWING } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 
 
@@ -146,6 +147,24 @@ export async function updateNotificationSeen(userId) {
         return userToSave
     } catch (err) {
         console.log('user action -> Cannot save user', err)
+        throw err
+
+    }
+}
+
+export async function updateUsersMsgId(miniUserToChat) {
+    console.log('updateUsersMsgId')
+    try {
+        // update the DB
+        const msgInfo = await msgService.save(miniUserToChat)
+        const user1Id = msgInfo.users[0]._id
+        const user2Id = msgInfo.users[1]._id
+       // update the store 
+        store.dispatch({ type: UPDATE_USER_MSG_ID ,userId:user1Id ,msgId:msgInfo._id})
+        store.dispatch({ type: UPDATE_USER_MSG_ID ,userId:user2Id ,msgId:msgInfo._id})
+        return msgInfo
+    } catch (err) {
+        console.log('user action -> Cannot save user msg id', err)
         throw err
 
     }

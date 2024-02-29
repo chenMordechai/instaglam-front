@@ -12,6 +12,7 @@ export const ADD_FOLLOWING = 'ADD_FOLLOWING'
 export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING'
 export const SET_LOGGEDIN_USER_IMG = 'SET_LOGGEDIN_USER_IMG'
 export const UPDATE_USER_NOTIFICATIONS = 'UPDATE_USER_NOTIFICATIONS'
+export const UPDATE_USER_MSG_ID = 'UPDATE_USER_MSG_ID'
 
 const initialState = {
     loggedinUser: userService.getLoggedinUser(),
@@ -41,9 +42,10 @@ export function userReducer(state = initialState, action = {}) {
                 }
             }
         // return { ...state }
-        // case UPDATE_USER_IMG:
-        //     users = state.users.map(user => user._id === action.user._id ? { ...user, ...action.user } : user)
-        //     return { ...state, users }
+        case UPDATE_USER_MSG_ID:
+            users = state.users.map(user => user._id === action.userId ? { ...user, msgsIds:[...user.msgsIds,action.msgId] } : user)
+           console.log('UPDATE_USER_MSG_ID users:', users)
+            return { ...state, users }
 
         case SET_LOGGEDIN_USER_IMG:
             return { ...state, loggedinUser: { ...state.loggedinUser, imgUrl: action.imgUrl } }
