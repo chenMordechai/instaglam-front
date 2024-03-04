@@ -1,10 +1,6 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './App.jsx'
-// import './index.css'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-
-// import swDev from './swDev.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
@@ -17,5 +13,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
 serviceWorkerRegistration.register();
-
-// swDev()
