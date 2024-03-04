@@ -123,10 +123,12 @@ export function Message() {
         if (msgId) {
             const msgInfo = await msgService.getById(msgId)
             setMsgInfo(msgInfo)
+            console.log('if msgInfo:', msgInfo)
         } else {
             const { username, fullname, _id, imgUrl } = userToChat
             const miniUserToChat = { username, fullname, _id, imgUrl }
            const msgInfo=await updateUsersMsgId(miniUserToChat)
+           console.log('else msgInfo:', msgInfo)
             setMsgInfo(msgInfo)
         }
     }

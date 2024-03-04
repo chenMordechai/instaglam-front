@@ -11,7 +11,7 @@ export function Chat({ userToChat, setUserToChat, topic, msgs, loggedinUser, typ
     return (
         <section className="chat">
             <ChatHeader imgUrl={imgUrl} fullname={fullname} setUserToChat={setUserToChat} />
-            {msgs && <ChatMsgs msgs={msgs} loggedinUser={loggedinUser} typingUser={typingUser} updateScroll={updateScroll} />}
+            <ChatMsgs msgs={msgs} loggedinUser={loggedinUser} typingUser={typingUser} updateScroll={updateScroll} />
             <ChatInput {...restOfProps} />
 
         </section>
