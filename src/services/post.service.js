@@ -33,7 +33,7 @@ export const postService = {
 
 async function query(filterBy = {}, sortBy = {}) {
     // filterBy = { ...filterBy, ...sortBy }
-    return httpService.get(BASE_URL, filterBy)
+    return httpService.get(BASE_URL, filterBy) // params => query
 }
 
 // async function queryOLD(filterBy = {}, sortBy = {}) {
@@ -88,16 +88,16 @@ async function query(filterBy = {}, sortBy = {}) {
 // }
 
 async function getById(postId) {
-    return httpService.get(BASE_URL + postId)
+    return httpService.get(BASE_URL + postId) // params
 }
 
 async function remove(postId) {
-    return httpService.delete(BASE_URL + postId)
+    return httpService.delete(BASE_URL + postId) // params
 }
 
 async function save(post) {
     if (post._id) {
-        return httpService.put(BASE_URL + post._id, post)
+        return httpService.put(BASE_URL + post._id, post) // params + body
     } else {
         return httpService.post(BASE_URL, post)
     }
@@ -130,8 +130,8 @@ async function removeLikeComment(postId, commentId, likeById) {
 function getEmptyPost() {
     return {
         txt: '',
-        type:'',
-        url:'',
+        type: '',
+        url: '',
         createdAt: '',
         by: null,
         loc: null,

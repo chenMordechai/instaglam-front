@@ -74,7 +74,6 @@ export function Home() {
         socketService.emit('user-watch', loggedinUser._id)
 
         if (utilService.isMobile()) {
-            console.log('utilService.isMobile')
             socketService.on('notification-added', () => {
                 setIsNewNotifications(true)
             })
