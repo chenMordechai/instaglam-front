@@ -120,10 +120,10 @@ export function NavLinks({ isScreenOpen, onOpenScreen, onCloseScreen, navLinksDi
                 <img src={glass} />
                 <span>Search</span>
             </a>
-            {/* <NavLink to="/explore" className="not-mobile" title="Explore" >
+            <NavLink to="/explore" className="not-mobile" title="Explore" >
                 <img src={compass} />
                 <span>Explore</span>
-            </NavLink> */}
+            </NavLink>
             <NavLink to="/video" title="Reels" >
                 <img src={film} />
                 <span>Reels</span>

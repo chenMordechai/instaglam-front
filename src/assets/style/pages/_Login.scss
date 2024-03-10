@@ -3,6 +3,9 @@
     width: 100vw;
 
     @include flex(column, center, start);
+    @include for-mobile-layout {
+        justify-content: center;
+    }
 
     .login-container,
     .signup-container {
@@ -15,6 +18,7 @@
         border: 1px solid $clr-grey2;
         @include for-mobile-layout {
             border-color: white;
+            margin-top: 0;
         }
 
         img.logo {
