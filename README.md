@@ -3,7 +3,7 @@
  Instaglam (Instagram clone)
 
 Full Stack Developing - End to end application – used React framework
-with MVC & React hooks, Redux state management, Node.js.
+with MVC & React hooks, Redux state management, PWA, Node.js.
 REST API, MongoDB, websockets with Socket.io, deployment with Render.
 Responsive design using SASS, complete CRUD.
 
