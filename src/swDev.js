@@ -20,14 +20,17 @@ export default async function swDev() {
     if (permission !== 'granted') {
         throw new Error('Notification permission not granted')
     } else {
-        new Notification('Example', {
-            body: "More text"
-        })
+        // work
+        // new Notification('Example', {
+        //     body: "More text"
+        // })
     }
 
     // push notification
-    // registration.showNotification('Hello World')
-    return registration
+    registration.showNotification('Hello World')
+    console.log('registration.showNotification')
+    // return registration
+
 
 }
 
